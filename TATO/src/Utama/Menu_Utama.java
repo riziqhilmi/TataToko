@@ -47,6 +47,7 @@ private Transaksi transaksiPanel;
         Dasar = new javax.swing.JPanel();
         Navbar = new javax.swing.JPanel();
         Btn_Logout = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -124,13 +125,19 @@ private Transaksi transaksiPanel;
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("OWNER");
+
         javax.swing.GroupLayout NavbarLayout = new javax.swing.GroupLayout(Navbar);
         Navbar.setLayout(NavbarLayout);
         NavbarLayout.setHorizontalGroup(
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
-                .addGap(1809, 1809, 1809)
-                .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addGap(1754, 1754, 1754)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
         NavbarLayout.setVerticalGroup(
@@ -139,6 +146,10 @@ private Transaksi transaksiPanel;
                 .addContainerGap()
                 .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(NavbarLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(Navbar, java.awt.BorderLayout.PAGE_START);
@@ -204,6 +215,7 @@ private Transaksi transaksiPanel;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel Sidebar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
