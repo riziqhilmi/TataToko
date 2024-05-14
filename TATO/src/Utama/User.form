@@ -58,7 +58,7 @@
                       <Component id="Lb_User" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
                       <Component id="pn_Konten_User" alignment="0" min="-2" pref="1570" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="94" max="32767" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -74,7 +74,7 @@
                   </Group>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="pn_Konten_User" min="-2" pref="704" max="-2" attributes="0"/>
-                  <EmptySpace pref="85" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -97,6 +97,7 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Btn_Daftar_UserMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_Daftar_UserActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="Btn_Tambah_User">
@@ -315,14 +316,23 @@
                                       <Component id="Lb_Data_Karyawan_No_Telepon" alignment="1" min="-2" max="-2" attributes="0"/>
                                       <Component id="Lb_Data_Karyawan_Status" alignment="1" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="Field_Data_Karyawan_No_Telepon" max="32767" attributes="0"/>
-                                      <Component id="Field_Data_Karyawan_Jenis_Kelamin" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Field_Data_Karyawan_Nama_Lengkap" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Field_Data_Karyawan_No_Identitas" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Field_Data_Karyawan_Tanggal_Lahir" max="32767" attributes="0"/>
-                                      <Component id="Field_Data_Karyawan_Status" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="Field_Data_Karyawan_No_Telepon" max="32767" attributes="0"/>
+                                                  <Component id="Field_Data_Karyawan_Nama_Lengkap" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="Field_Data_Karyawan_No_Identitas" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="Field_Data_Karyawan_Status" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="Field_Daftar_Tanggal_Lahir" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                          <Component id="Field_Data_Karyawan_Jenis_Kelamin" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -332,7 +342,7 @@
                                   <Component id="Field_Data_Karyawan_Email" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="595" max="32767" attributes="0"/>
+                          <EmptySpace pref="597" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -372,23 +382,26 @@
                                       <Component id="Lb_Data_Karyawan_Tanggal_Mulai" min="-2" max="-2" attributes="0"/>
                                       <Component id="Lb_Data_Karyawan_Gaji" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="Field_Data_Karyawan_Tanggal_Mulai" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="Field_Data_Karyawan_Gaji" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="Field_Daftar_Tanggal_Mulai" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Component id="Lb_Data_Karyawan_No_Rek" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="Field_Data_Karyawan_No_Rek" min="-2" pref="200" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                  <Component id="Lb_Data_Karyawan_Alamat" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" min="-2" pref="307" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Lb_Data_Karyawan_No_Rek" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="Field_Data_Karyawan_No_Rek" min="-2" pref="200" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="Lb_Data_Karyawan_Alamat" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jScrollPane2" min="-2" pref="307" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
@@ -418,36 +431,30 @@
                                   </Group>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="Field_Data_Karyawan_No_Identitas" pref="37" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                          <Component id="Field_Data_Karyawan_No_Identitas" pref="44" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="Field_Data_Karyawan_Jenis_Kelamin" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                                               <Component id="Lb_Data_Karyawan_Jenis_Kelamin" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                              <Component id="Field_Data_Karyawan_Jenis_Kelamin" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="Field_Data_Karyawan_Tanggal_Lahir" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                                      <Component id="Lb_Data_Karyawan_Tanggal_Lahir" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="3" attributes="0">
-                                                      <Component id="Field_Data_Karyawan_No_Telepon" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                                      <Component id="Lb_Data_Karyawan_No_Telepon" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                                              </Group>
+                                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="Field_Data_Karyawan_No_Telepon" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                              <Component id="Lb_Data_Karyawan_No_Telepon" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                                           </Group>
+                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="Lb_Data_Karyawan_Tanggal_Lahir" pref="34" max="32767" attributes="0"/>
+                                              <Component id="Field_Daftar_Tanggal_Lahir" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="Field_Data_Karyawan_Email" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                               <Component id="Lb_Data_Karyawan_Email" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="Field_Data_Karyawan_Status" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                              <Component id="Field_Data_Karyawan_Status" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                                               <Component id="Lb_Data_Karyawan_Status" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="Btn_Tambah_User_Simpan" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                                           </Group>
@@ -479,9 +486,18 @@
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="Lb_Data_Karyawan_Tanggal_Mulai" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="Field_Daftar_Tanggal_Mulai" min="-2" pref="34" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="Field_Data_Karyawan_Gaji" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Component id="Lb_Data_Karyawan_Gaji" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="Field_Data_Karyawan_No_Rek" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                               <Component id="Lb_Data_Karyawan_No_Rek" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -493,17 +509,6 @@
                                                   <Component id="jScrollPane2" min="-2" pref="133" max="-2" attributes="0"/>
                                               </Group>
                                               <Component id="Lb_Data_Karyawan_Alamat" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="Field_Data_Karyawan_Tanggal_Mulai" pref="35" max="32767" attributes="0"/>
-                                              <Component id="Lb_Data_Karyawan_Tanggal_Mulai" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="Field_Data_Karyawan_Gaji" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                              <Component id="Lb_Data_Karyawan_Gaji" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -587,10 +592,9 @@
                       <Font name="Segoe UI" size="17" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
+                      <StringArray count="2">
                         <StringItem index="0" value="Admin"/>
                         <StringItem index="1" value="Karyawan"/>
-                        <StringItem index="2" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -632,13 +636,6 @@
                     <Property name="text" type="java.lang.String" value="Jenis Kelamin :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="Field_Data_Karyawan_Jenis_Kelamin">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="0"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Data_Karyawan_No_Telepon">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -662,13 +659,6 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="Tanggal Lahir :"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="Field_Data_Karyawan_Tanggal_Lahir">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="0"/>
-                    </Property>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Data_Karyawan_Status">
@@ -718,11 +708,10 @@
                       <Font name="Segoe UI" size="17" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
+                      <StringArray count="3">
                         <StringItem index="0" value="Kontrak"/>
                         <StringItem index="1" value="Paruh Waktu"/>
                         <StringItem index="2" value="Penuh Waktu"/>
-                        <StringItem index="3" value=" "/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -776,13 +765,6 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JTextField" name="Field_Data_Karyawan_Tanggal_Mulai">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="17" style="0"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Data_Karyawan_Tanggal_Mulai">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -819,6 +801,36 @@
                       <Font name="Segoe UI" size="17" style="0"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="Field_Daftar_Tanggal_Mulai">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="18" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="Field_Daftar_Tanggal_Lahir">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="18" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="Field_Data_Karyawan_Jenis_Kelamin">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="2">
+                        <StringItem index="0" value="Laki - Laki"/>
+                        <StringItem index="1" value="Perempuan"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

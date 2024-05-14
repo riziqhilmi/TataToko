@@ -4,9 +4,12 @@
  */
 package Utama;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,6 +17,11 @@ import javax.swing.table.DefaultTableModel;
  * @author acer
  */
 public class User extends javax.swing.JPanel {
+    Connection con;
+    private final String driver = "com.mysql.cj.jdbc.Driver";
+    private final String url = "jdbc:mysql://localhost:3306/tatatoko";
+    private final String user = "root";
+    private final String pwd = "";
     koneksi db = new koneksi();
     DefaultTableModel model = new DefaultTableModel();
 
@@ -25,24 +33,25 @@ public class User extends javax.swing.JPanel {
         
         getColumnD();
         getDataD();
+        tanggal();
     }
     
     public void getColumnD() {
         model.addColumn("ID");
         model.addColumn("Nama User");
         model.addColumn("Password ");
-        model.addColumn("Akses");
+        model.addColumn("Email");
         model.addColumn("Nama Lengkap");
         model.addColumn("No Identitas");
         model.addColumn("Jenis Kelamin");
         model.addColumn("No Telepon");
         model.addColumn("Tanggal Lahir");
-        model.addColumn("Email");
         model.addColumn("Status");
         model.addColumn("Tanggal Mulai");
         model.addColumn("Gaji");
         model.addColumn("No Rek");
         model.addColumn("Alamat");
+        model.addColumn("Akses");
         Tbl_Daftar_User.setModel(model);
 
     }
@@ -53,19 +62,25 @@ public class User extends javax.swing.JPanel {
         try {
             while (hasil.next()) {
                 model.addRow(new Object[]{hasil.getString("id_username"),
-                    hasil.getString("username"),hasil.getString("password"), 
-                    hasil.getString("Akses"),hasil.getString("Nama_Lengkap"),
+                    hasil.getString("username"),hasil.getString("password"),hasil.getString("email"),
+                    hasil.getString("Nama_Lengkap"),
                     hasil.getString("No_Identitas"), hasil.getString("Jenis_Kelamin"),
                     hasil.getString("No_Telepon"), hasil.getString("Tanggal_Lahir"),
-                    hasil.getString("email"), hasil.getString("Status_Karyawan"),
+                    hasil.getString("Status_Karyawan"),
                     hasil.getString("Tanggal_Mulai"), hasil.getString("Gaji"),
-                    hasil.getString("No_Rekening"),hasil.getString("Alamat")});
+                    hasil.getString("No_Rekening"),hasil.getString("Alamat"),hasil.getString("akses")});
             }
             Tbl_Daftar_User.setModel(model);
             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void tanggal() {
+        Date now = new Date();
+        Field_Daftar_Tanggal_Mulai.setDateFormatString(driver);
+        Field_Daftar_Tanggal_Lahir.setDateFormatString(driver);
     }
 
     /**
@@ -100,11 +115,9 @@ public class User extends javax.swing.JPanel {
         Lb_Data_Karyawan_Nama_Lengkap = new javax.swing.JLabel();
         Field_Data_Karyawan_Nama_Lengkap = new javax.swing.JTextField();
         Lb_Data_Karyawan_Jenis_Kelamin = new javax.swing.JLabel();
-        Field_Data_Karyawan_Jenis_Kelamin = new javax.swing.JTextField();
         Lb_Data_Karyawan_No_Telepon = new javax.swing.JLabel();
         Field_Data_Karyawan_No_Telepon = new javax.swing.JTextField();
         Lb_Data_Karyawan_Tanggal_Lahir = new javax.swing.JLabel();
-        Field_Data_Karyawan_Tanggal_Lahir = new javax.swing.JTextField();
         Lb_Data_Karyawan_Status = new javax.swing.JLabel();
         Lb_Data_Karyawan_Gaji = new javax.swing.JLabel();
         Field_Data_Karyawan_Gaji = new javax.swing.JTextField();
@@ -116,11 +129,13 @@ public class User extends javax.swing.JPanel {
         Lb_Data_Karyawan_Alamat = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Field_Data_Karyawan_Alamat = new javax.swing.JTextArea();
-        Field_Data_Karyawan_Tanggal_Mulai = new javax.swing.JTextField();
         Lb_Data_Karyawan_Tanggal_Mulai = new javax.swing.JLabel();
         Btn_Tambah_User_Simpan = new javax.swing.JButton();
         Lb_Data_Karyawan_Email = new javax.swing.JLabel();
         Field_Data_Karyawan_Email = new javax.swing.JTextField();
+        Field_Daftar_Tanggal_Mulai = new com.toedter.calendar.JDateChooser();
+        Field_Daftar_Tanggal_Lahir = new com.toedter.calendar.JDateChooser();
+        Field_Data_Karyawan_Jenis_Kelamin = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1182, 686));
 
@@ -135,6 +150,11 @@ public class User extends javax.swing.JPanel {
         Btn_Daftar_User.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_Daftar_UserMouseClicked(evt);
+            }
+        });
+        Btn_Daftar_User.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Daftar_UserActionPerformed(evt);
             }
         });
 
@@ -230,7 +250,7 @@ public class User extends javax.swing.JPanel {
         Field_Tambah_User_Nama.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
         FIeld_Tambah_User_Akses.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        FIeld_Tambah_User_Akses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Karyawan", " " }));
+        FIeld_Tambah_User_Akses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Karyawan" }));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -246,8 +266,6 @@ public class User extends javax.swing.JPanel {
         Lb_Data_Karyawan_Jenis_Kelamin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Data_Karyawan_Jenis_Kelamin.setText("Jenis Kelamin :");
 
-        Field_Data_Karyawan_Jenis_Kelamin.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-
         Lb_Data_Karyawan_No_Telepon.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Data_Karyawan_No_Telepon.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Data_Karyawan_No_Telepon.setText("No Telepon :");
@@ -257,8 +275,6 @@ public class User extends javax.swing.JPanel {
         Lb_Data_Karyawan_Tanggal_Lahir.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Data_Karyawan_Tanggal_Lahir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Data_Karyawan_Tanggal_Lahir.setText("Tanggal Lahir :");
-
-        Field_Data_Karyawan_Tanggal_Lahir.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
         Lb_Data_Karyawan_Status.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Data_Karyawan_Status.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -277,7 +293,7 @@ public class User extends javax.swing.JPanel {
         Field_Data_Karyawan_No_Rek.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
         Field_Data_Karyawan_Status.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        Field_Data_Karyawan_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kontrak", "Paruh Waktu", "Penuh Waktu", " " }));
+        Field_Data_Karyawan_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kontrak", "Paruh Waktu", "Penuh Waktu" }));
         Field_Data_Karyawan_Status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Field_Data_Karyawan_StatusActionPerformed(evt);
@@ -298,8 +314,6 @@ public class User extends javax.swing.JPanel {
         Field_Data_Karyawan_Alamat.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Field_Data_Karyawan_Alamat.setRows(5);
         jScrollPane2.setViewportView(Field_Data_Karyawan_Alamat);
-
-        Field_Data_Karyawan_Tanggal_Mulai.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
 
         Lb_Data_Karyawan_Tanggal_Mulai.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Data_Karyawan_Tanggal_Mulai.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -323,6 +337,13 @@ public class User extends javax.swing.JPanel {
         Lb_Data_Karyawan_Email.setText("Email :");
 
         Field_Data_Karyawan_Email.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+
+        Field_Daftar_Tanggal_Mulai.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        Field_Daftar_Tanggal_Lahir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        Field_Data_Karyawan_Jenis_Kelamin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Field_Data_Karyawan_Jenis_Kelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki - Laki", "Perempuan" }));
 
         javax.swing.GroupLayout pn_Tambah_Daftar_UserLayout = new javax.swing.GroupLayout(pn_Tambah_Daftar_User);
         pn_Tambah_Daftar_User.setLayout(pn_Tambah_Daftar_UserLayout);
@@ -348,20 +369,25 @@ public class User extends javax.swing.JPanel {
                             .addComponent(Lb_Data_Karyawan_Nama_Lengkap, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Lb_Data_Karyawan_No_Telepon, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Lb_Data_Karyawan_Status, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Field_Data_Karyawan_No_Telepon)
-                            .addComponent(Field_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Field_Data_Karyawan_Nama_Lengkap, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Field_Data_Karyawan_No_Identitas, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Field_Data_Karyawan_Tanggal_Lahir)
-                            .addComponent(Field_Data_Karyawan_Status, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(Field_Data_Karyawan_No_Telepon)
+                                        .addComponent(Field_Data_Karyawan_Nama_Lengkap, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Field_Data_Karyawan_No_Identitas, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Field_Data_Karyawan_Status, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Field_Daftar_Tanggal_Lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tambah_Daftar_UserLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(Field_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(Lb_Data_Karyawan_Email)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Field_Data_Karyawan_Email)))
-                .addContainerGap(595, Short.MAX_VALUE))
+                .addContainerGap(597, Short.MAX_VALUE))
             .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Lb_Tambah_User)
@@ -393,19 +419,20 @@ public class User extends javax.swing.JPanel {
                             .addComponent(Lb_Data_Karyawan_Tanggal_Mulai)
                             .addComponent(Lb_Data_Karyawan_Gaji))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Field_Data_Karyawan_Tanggal_Mulai)
-                            .addComponent(Field_Data_Karyawan_Gaji, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Field_Data_Karyawan_Gaji, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Daftar_Tanggal_Mulai, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
-                        .addComponent(Lb_Data_Karyawan_No_Rek)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Field_Data_Karyawan_No_Rek, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(Lb_Data_Karyawan_Alamat)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
+                                .addComponent(Lb_Data_Karyawan_No_Rek)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Field_Data_Karyawan_No_Rek, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
+                                .addComponent(Lb_Data_Karyawan_Alamat)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(38, 38, 38))
         );
         pn_Tambah_Daftar_UserLayout.setVerticalGroup(
@@ -427,29 +454,26 @@ public class User extends javax.swing.JPanel {
                                 .addGap(31, 31, 31)))
                         .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_Tambah_Daftar_UserLayout.createSequentialGroup()
-                                .addComponent(Field_Data_Karyawan_No_Identitas, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                                .addGap(29, 29, 29)
+                                .addComponent(Field_Data_Karyawan_No_Identitas, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                                .addGap(24, 24, 24)
                                 .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Field_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(29, 29, 29)
-                                .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tambah_Daftar_UserLayout.createSequentialGroup()
-                                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Data_Karyawan_Tanggal_Lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Data_Karyawan_Tanggal_Lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(27, 27, 27))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tambah_Daftar_UserLayout.createSequentialGroup()
-                                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Data_Karyawan_No_Telepon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Data_Karyawan_No_Telepon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(87, 87, 87)))
+                                    .addComponent(Lb_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Field_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(21, 21, 21)
+                                .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Data_Karyawan_No_Telepon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Data_Karyawan_No_Telepon, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Lb_Data_Karyawan_Tanggal_Lahir, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                                    .addComponent(Field_Daftar_Tanggal_Lahir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(27, 27, 27)
                                 .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(Field_Data_Karyawan_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Lb_Data_Karyawan_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(26, 26, 26)
                                 .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Field_Data_Karyawan_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Field_Data_Karyawan_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Lb_Data_Karyawan_Status)
                                     .addComponent(Btn_Tambah_User_Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(190, 190, 190))
@@ -472,9 +496,16 @@ public class User extends javax.swing.JPanel {
                             .addComponent(Lb_Tambah_User_Akses))
                         .addContainerGap())
                     .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
+                        .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Lb_Data_Karyawan_Tanggal_Mulai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Daftar_Tanggal_Mulai, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
                         .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
-                                .addGap(129, 129, 129)
+                            .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Field_Data_Karyawan_Gaji, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Lb_Data_Karyawan_Gaji))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tambah_Daftar_UserLayout.createSequentialGroup()
+                                .addGap(75, 75, 75)
                                 .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(Field_Data_Karyawan_No_Rek, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Lb_Data_Karyawan_No_Rek))
@@ -483,15 +514,7 @@ public class User extends javax.swing.JPanel {
                                     .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Lb_Data_Karyawan_Alamat)))
-                            .addGroup(pn_Tambah_Daftar_UserLayout.createSequentialGroup()
-                                .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Field_Data_Karyawan_Tanggal_Mulai, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                                    .addComponent(Lb_Data_Karyawan_Tanggal_Mulai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(31, 31, 31)
-                                .addGroup(pn_Tambah_Daftar_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Field_Data_Karyawan_Gaji, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Data_Karyawan_Gaji))))
+                                    .addComponent(Lb_Data_Karyawan_Alamat))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -510,7 +533,7 @@ public class User extends javax.swing.JPanel {
                         .addComponent(Btn_Tambah_User, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Lb_User, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pn_Konten_User, javax.swing.GroupLayout.PREFERRED_SIZE, 1570, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
         pn_UserLayout.setVerticalGroup(
             pn_UserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +546,7 @@ public class User extends javax.swing.JPanel {
                     .addComponent(Btn_Tambah_User, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(pn_Konten_User, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -575,10 +598,12 @@ public class User extends javax.swing.JPanel {
         String email = Field_Data_Karyawan_Email.getText();
         String Nama_Lengkap = Field_Data_Karyawan_Nama_Lengkap.getText();
         String No_Identitas = Field_Data_Karyawan_No_Identitas.getText();
-        String Jenis_Kelamin = Field_Data_Karyawan_Jenis_Kelamin.getText();
+        String Jenis_Kelamin = String.valueOf(Field_Data_Karyawan_Jenis_Kelamin.getSelectedItem());
         String No_Telepon = Field_Data_Karyawan_No_Telepon.getText();
-        String Tanggal_Lahir = Field_Data_Karyawan_Tanggal_Lahir.getText();
-        String Tanggal_Mulai = Field_Data_Karyawan_Tanggal_Mulai.getText();
+        
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        String Tanggal_Lahir = date.format(Field_Daftar_Tanggal_Lahir.getDate());
+        String Tanggal_Mulai = date.format(Field_Daftar_Tanggal_Mulai.getDate());
         String Gaji = Field_Data_Karyawan_Gaji.getText();
         String No_Rekening = Field_Data_Karyawan_No_Rek.getText();
         String Alamat = Field_Data_Karyawan_Alamat.getText();
@@ -587,12 +612,25 @@ public class User extends javax.swing.JPanel {
         String Status_Karyawan = String.valueOf(Field_Data_Karyawan_Status.getSelectedItem());
 
 
-        db.aksi("INSERT INTO pengguna VALUES ('" + id_username +"','"+ username + "','" + password + "','" + email + "','" + Akses + "','" + Nama_Lengkap + "','" + No_Identitas + "','" + Jenis_Kelamin + "','" + No_Telepon + "','" + Tanggal_Lahir + "','" + Status_Karyawan + "','" + Tanggal_Mulai + "','" + Gaji + "','" + No_Rekening + "','" + Alamat + "')");
+        db.aksi("INSERT INTO pengguna VALUES (NULL,'"+ username + "','" + password + "','" + email + "','" + Nama_Lengkap + "','" + No_Identitas + "','" + Jenis_Kelamin + "','" + No_Telepon + "','" + Tanggal_Lahir + "','" + Status_Karyawan + "','" + Tanggal_Mulai + "','" + Gaji + "','" + No_Rekening + "','" + Alamat + "','" + Akses + "')");
         model.setRowCount(0);
         Tbl_Daftar_User.setModel(model);
-        getColumnD();
+        JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan!","Berhasil" , HEIGHT);
+        
         getDataD();
+        
+        pn_Konten_User.removeAll();
+        pn_Konten_User.repaint();
+        pn_Konten_User.revalidate();
+        
+        pn_Konten_User.add(pn_Daftar_User);
+        pn_Konten_User.repaint();
+        pn_Konten_User.revalidate();
     }//GEN-LAST:event_Btn_Tambah_User_SimpanActionPerformed
+
+    private void Btn_Daftar_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Daftar_UserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Daftar_UserActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -600,17 +638,17 @@ public class User extends javax.swing.JPanel {
     private javax.swing.JButton Btn_Tambah_User;
     private javax.swing.JButton Btn_Tambah_User_Simpan;
     private javax.swing.JComboBox<String> FIeld_Tambah_User_Akses;
+    private com.toedter.calendar.JDateChooser Field_Daftar_Tanggal_Lahir;
+    private com.toedter.calendar.JDateChooser Field_Daftar_Tanggal_Mulai;
     private javax.swing.JTextArea Field_Data_Karyawan_Alamat;
     private javax.swing.JTextField Field_Data_Karyawan_Email;
     private javax.swing.JTextField Field_Data_Karyawan_Gaji;
-    private javax.swing.JTextField Field_Data_Karyawan_Jenis_Kelamin;
+    private javax.swing.JComboBox<String> Field_Data_Karyawan_Jenis_Kelamin;
     private javax.swing.JTextField Field_Data_Karyawan_Nama_Lengkap;
     private javax.swing.JTextField Field_Data_Karyawan_No_Identitas;
     private javax.swing.JTextField Field_Data_Karyawan_No_Rek;
     private javax.swing.JTextField Field_Data_Karyawan_No_Telepon;
     private javax.swing.JComboBox<String> Field_Data_Karyawan_Status;
-    private javax.swing.JTextField Field_Data_Karyawan_Tanggal_Lahir;
-    private javax.swing.JTextField Field_Data_Karyawan_Tanggal_Mulai;
     private javax.swing.JTextField Field_Tambah_User_ID;
     private javax.swing.JTextField Field_Tambah_User_Nama;
     private javax.swing.JTextField Field_Tambah_User_Password;

@@ -51,18 +51,18 @@ public class Beranda extends javax.swing.JPanel {
         model4.addColumn("ID");
         model4.addColumn("Nama User");
         model4.addColumn("Password ");
-        model4.addColumn("Akses");
+        model4.addColumn("Email");
         model4.addColumn("Nama Lengkap");
         model4.addColumn("No Identitas");
         model4.addColumn("Jenis Kelamin");
         model4.addColumn("No Telepon");
         model4.addColumn("Tanggal Lahir");
-        model4.addColumn("Email");
         model4.addColumn("Status");
         model4.addColumn("Tanggal Mulai");
         model4.addColumn("Gaji");
         model4.addColumn("No Rek");
         model4.addColumn("Alamat");
+        model4.addColumn("Akses");
         getDataK();
     }
     
@@ -164,13 +164,13 @@ public class Beranda extends javax.swing.JPanel {
         try {
             while (hasil.next()) {
                 model4.addRow(new Object[]{hasil.getString("id_username"),
-                    hasil.getString("username"),hasil.getString("password"), 
-                    hasil.getString("Akses"),hasil.getString("Nama_Lengkap"),
+                    hasil.getString("username"),hasil.getString("password"),hasil.getString("email"),
+                    hasil.getString("Nama_Lengkap"),
                     hasil.getString("No_Identitas"), hasil.getString("Jenis_Kelamin"),
                     hasil.getString("No_Telepon"), hasil.getString("Tanggal_Lahir"),
-                    hasil.getString("email"), hasil.getString("Status_Karyawan"),
+                    hasil.getString("Status_Karyawan"),
                     hasil.getString("Tanggal_Mulai"), hasil.getString("Gaji"),
-                    hasil.getString("No_Rekening"),hasil.getString("Alamat")});
+                    hasil.getString("No_Rekening"),hasil.getString("Alamat"),hasil.getString("akses")});
             }
             Tbl_Beranda_Karyawan.setModel(model4);
             

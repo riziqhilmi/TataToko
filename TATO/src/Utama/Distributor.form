@@ -538,16 +538,18 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Field_Tambah_Kode_Pos_Distributor" alignment="3" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="3" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="Lb_Tambah_Kode_Pos_Distributor" alignment="3" max="32767" attributes="0"/>
                                               <Component id="Field_Tambah_Fax_Distributor" alignment="3" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Component id="Lb_Tambah_Fax_Distributor" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="Field_Tambah_Kode_Pos_Distributor" alignment="3" max="32767" attributes="0"/>
+                                          <Component id="Lb_Tambah_Fax_Distributor" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="254" max="-2" attributes="0"/>
                               </Group>
@@ -1135,11 +1137,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Lb_Detail_Rekening_Distributor" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Field_Detail_Rekening_Distributor" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="Field_Detail_Kode_Distributor" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="Lb_Detail_Kode_Distributor" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="Lb_Detail_Rekening_Distributor" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Field_Detail_Rekening_Distributor" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="Field_Detail_Kode_Distributor" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">

@@ -19,7 +19,7 @@ public class koneksi {
     }
     Connection con;
     private final String driver = "com.mysql.cj.jdbc.Driver";
-    private final String url = "jdbc:mysql://localhost:3306/tatatoko";
+    private final String url = "jdbc:mysql://localhost:3306/tatatoko2";
     private final String user = "root";
     private final String pwd = "";
     

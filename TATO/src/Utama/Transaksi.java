@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.management.remote.JMXConnectorFactory.connect;
@@ -118,6 +119,38 @@ public class Transaksi extends javax.swing.JPanel {
             ex.printStackTrace();
         }
 
+    }
+    
+    private void refresh(){
+        model.setRowCount(0);
+    
+    // Ambil data stok barang dari database
+    try {
+        Class.forName(driver);
+        con = DriverManager.getConnection(url, user, pwd);
+
+        String queryGetData = "SELECT * FROM barang";
+        PreparedStatement psGetData = con.prepareStatement(queryGetData);
+        ResultSet rsGetData = psGetData.executeQuery();
+
+        // Isi model tabel dengan data dari database
+        while (rsGetData.next()) {
+            String idBarang = rsGetData.getString("id_barang");
+            String namaBarang = rsGetData.getString("nama_barang");
+            String jenis = rsGetData.getString("jenis");
+            int jumlah = rsGetData.getInt("jumlah");
+            int harga  = rsGetData.getInt("harga_jual");
+            String satuan = rsGetData.getString("satuan");
+            String status = rsGetData.getString("status");
+            
+            // Tambahkan baris baru ke model tabel
+            model.addRow(new Object[]{idBarang, namaBarang,jenis, jumlah, harga, satuan, status});
+        }
+
+        con.close();
+    } catch (ClassNotFoundException | SQLException ex) {
+        System.out.println(ex);
+    }
     }
 
     private void totalnya() {
@@ -1080,35 +1113,51 @@ public void autoInN() {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         int i = tb_keranjang.getSelectedRow();
-        
         String kode = table.getValueAt(i, 0).toString();
-        
-        
+
         try {
             Class.forName(driver);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             con = DriverManager.getConnection(url, user, pwd);
-        } catch (SQLException ex) {
-            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        String query = "DELETE FROM `keranjang` WHERE `keranjang`.`id_transaksi` = '"+kode+"' ";
-        try{
-            PreparedStatement ps = (PreparedStatement) con.prepareStatement(query);
-            ps.execute();
-        }catch(SQLException | HeadlessException e){
-            System.out.println(e);
-            JOptionPane.showMessageDialog(null, "Data Gagal Dihapus");
-        }finally{
+
+            // Ambil data barang yang akan dihapus dari tabel "keranjang"
+            String queryGetData = "SELECT id_barang, jumlah FROM keranjang WHERE id_transaksi = ?";
+            PreparedStatement psGetData = con.prepareStatement(queryGetData);
+            psGetData.setString(1, kode);
+            ResultSet rsGetData = psGetData.executeQuery();
+
+            if (rsGetData.next()) {
+                String idBarang = rsGetData.getString("id_barang");
+                int jumlahDihapus = rsGetData.getInt("jumlah");
+
+                // Hapus data dari tabel "keranjang"
+                String queryDelete = "DELETE FROM keranjang WHERE id_transaksi = ?";
+                PreparedStatement psDelete = con.prepareStatement(queryDelete);
+                psDelete.setString(1, kode);
+                psDelete.executeUpdate();
+
+                // Perbarui stok barang di tabel "barang"
+                String queryUpdateStock = "UPDATE barang SET jumlah = jumlah + ? WHERE id_barang = ?";
+                PreparedStatement psUpdateStock = con.prepareStatement(queryUpdateStock);
+                psUpdateStock.setInt(1, jumlahDihapus);
+                psUpdateStock.setString(2, idBarang);
+                psUpdateStock.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
+            } else {
+                JOptionPane.showMessageDialog(null, "Data tidak ditemukan");
+            }
+
+            con.close();
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data");
+        } finally {
             tampilData();
             TotalHarga();
             clear();
         }
         totalnya();
-        
+
         txt_uang.setText(null);
         txt_kembalian.setText(null);
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1118,12 +1167,39 @@ public void autoInN() {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
 
-            String query = "TRUNCATE `keranjang`";
-            PreparedStatement st = con.prepareStatement(query);
-            st.executeUpdate(); // Menggunakan executeUpdate() untuk TRUNCATE
+            // Simpan stok barang sebelum mengosongkan tabel "keranjang"
+            Map<String, Integer> stokSebelumnya = new HashMap<>();
+
+            // Ambil data barang dari tabel "keranjang"
+            String queryGetData = "SELECT id_barang, jumlah FROM keranjang";
+            PreparedStatement psGetData = con.prepareStatement(queryGetData);
+            ResultSet rsGetData = psGetData.executeQuery();
+            while (rsGetData.next()) {
+                String idBarang = rsGetData.getString("id_barang");
+                int jumlah = rsGetData.getInt("jumlah");
+                stokSebelumnya.put(idBarang, jumlah);
+            }
+
+            // Kosongkan tabel "keranjang"
+            String queryTruncate = "TRUNCATE keranjang";
+            PreparedStatement st = con.prepareStatement(queryTruncate);
+            st.executeUpdate();
+
+            // Pemulihan stok barang setelah mengosongkan tabel "keranjang"
+            for (Map.Entry<String, Integer> entry : stokSebelumnya.entrySet()) {
+                String idBarang = entry.getKey();
+                int jumlahSebelumnya = entry.getValue();
+                String queryUpdateStock = "UPDATE barang SET jumlah = jumlah + ? WHERE id_barang = ?";
+                PreparedStatement psUpdateStock = con.prepareStatement(queryUpdateStock);
+                psUpdateStock.setInt(1, jumlahSebelumnya);
+                psUpdateStock.setString(2, idBarang);
+                psUpdateStock.executeUpdate();
+            }
 
             // Setelah menghapus data, hitung kembali total harga
             TotalHarga();
+
+            con.close();
         } catch (Exception e) {
             System.out.println(e);
         } finally {
@@ -1216,7 +1292,7 @@ public void autoInN() {
 
     private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
         // TODO add your handling code here:
-        tampilData();
+        refresh();
     }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
         
 
