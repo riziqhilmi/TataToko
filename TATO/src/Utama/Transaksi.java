@@ -1112,7 +1112,7 @@ public void autoInN() {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        int i = tb_keranjang.getSelectedRow();
+       int i = tb_keranjang.getSelectedRow();
         String kode = table.getValueAt(i, 0).toString();
 
         try {
