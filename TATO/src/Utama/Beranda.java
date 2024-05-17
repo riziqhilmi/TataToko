@@ -8,7 +8,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -30,6 +35,7 @@ public class Beranda extends javax.swing.JPanel {
      */
     public Beranda() {
         initComponents();
+        SearchB();
         getColumn();
         getData();
         
@@ -200,6 +206,120 @@ public class Beranda extends javax.swing.JPanel {
         ex.printStackTrace();
     }
 }
+    
+private void SearchB(){
+        Field_Cari_Beranda_Barang.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Barang.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Barang.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Barang.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(Tbl_Beranda_Barang.getModel());
+                Tbl_Beranda_Barang.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+        
+        Field_Cari_Beranda_Distributor.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Distributor.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Distributor.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Distributor.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(Tbl_Beranda_Distributor.getModel());
+                Tbl_Beranda_Distributor.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+        
+        Field_Cari_Beranda_Transaksi.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Transaksi.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Transaksi.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Transaksi.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(Tbl_Beranda_Transaksi.getModel());
+                Tbl_Beranda_Transaksi.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+        
+        Field_Cari_Beranda_Karyawan.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Karyawan.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Karyawan.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Beranda_Karyawan.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(Tbl_Beranda_Karyawan.getModel());
+                Tbl_Beranda_Karyawan.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -931,7 +1051,7 @@ public class Beranda extends javax.swing.JPanel {
 
     private void Btn_Cari_Beranda_BarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Cari_Beranda_BarangActionPerformed
         // TODO add your handling code here:
-        search();
+        
     }//GEN-LAST:event_Btn_Cari_Beranda_BarangActionPerformed
 
     private void Btn_Cari_Beranda_DistributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Cari_Beranda_DistributorActionPerformed

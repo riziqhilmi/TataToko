@@ -44,34 +44,9 @@ public class Barang extends javax.swing.JPanel {
         getData();
         autoIn();
         tanggal();
-
-        Field_Tambah_Barcode.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                filterData(Field_Tambah_Barcode.getText());
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                filterData(Field_Tambah_Barcode.getText()); // Call filterData on removeUpdate
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                filterData(Field_Tambah_Barcode.getText()); // Call filterData on changedUpdate
-            }
-
-            private void filterData(String keyword) {
-                TableRowSorter<TableModel> sorter = new TableRowSorter<>(Tbl_Barang_Detail_Barang.getModel());
-                Tbl_Barang_Detail_Barang.setRowSorter(sorter);
-
-                if (keyword.trim().length() == 0) {
-                    sorter.setRowFilter(null);
-                } else {
-                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
-                }
-            }
-        });
+        distributor();
+        search();
+        
     }
 
     public void autoIn() {
@@ -222,24 +197,78 @@ public class Barang extends javax.swing.JPanel {
     }
 
     public void search() {
-        String cari = Cari_BarangDetail.getText();
-        ResultSet hasil = db.ambilData("SELECT * FROM barang WHERE nama_barang LIKE '%" + cari + "%' LIMIT 1");
-        try {
-            model.setRowCount(0); // Menghapus semua baris yang ada di model sebelum menambahkan baris baru
-            if (hasil.next()) {
-                model.addRow(new Object[]{hasil.getString("id_barang"),
-                    hasil.getString("nama_barang"), hasil.getString("jenis"),
-                    hasil.getString("jumlah"), hasil.getString("harga_beli"),
-                    hasil.getString("harga_jual"), hasil.getString("tanggal"),
-                    hasil.getString("expired"), hasil.getString("satuan"),
-                    hasil.getString("status"), hasil.getString("catatan")});
-                Tbl_Barang_Detail_Barang.setModel(model);
-            } else {
-                JOptionPane.showMessageDialog(null, "Tidak ada data yang valid");
+        Cari_BarangDetail.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Cari_BarangDetail.getText());
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Cari_BarangDetail.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Cari_BarangDetail.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(Tbl_Barang_Detail_Barang.getModel());
+                Tbl_Barang_Detail_Barang.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+        
+        Field_Barang_Update_Cari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Field_Barang_Update_Cari.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Field_Barang_Update_Cari.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Field_Barang_Update_Cari.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable3.getModel());
+                jTable3.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+    }
+    
+    public void distributor() {
+        ResultSet hasil = db.ambilData("SELECT * FROM distributor");
+        try {
+            while (hasil.next()) {
+                // Ambil nilai dari kolom "nama" dan tambahkan ke dalam JComboBox
+                Field_Tambah_Kode_Distributor.addItem(hasil.getString("nama"));
+                Field_Update_Kode_Distributor.addItem(hasil.getString("nama"));
+                
+                
+            
+            }
+        } catch (Exception e) {
+            System.out.println("Tidak Dapat Mengambil Data");
         }
+
     }
 
     /**
@@ -317,7 +346,7 @@ public class Barang extends javax.swing.JPanel {
         Lb_Informasi_Terjual_Jumlah = new javax.swing.JLabel();
         Lb_Informasi_Dibeli_Jumlah = new javax.swing.JLabel();
         Lb_Informasi_Stok_Jumlah = new javax.swing.JLabel();
-        Lb_Informasi_Kadaluwarsa_Jumlah = new javax.swing.JLabel();
+        Lb_Informasi_exp = new javax.swing.JLabel();
         Btn_Barang_Detail_Update = new rojerusan.RSMaterialButtonRectangle();
         Lb_Informasi_Tanggal_Masuk_Detail = new javax.swing.JLabel();
         FIeld_Informasi_Tanggal_Masuk_Detail = new javax.swing.JTextField();
@@ -510,7 +539,7 @@ public class Barang extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tbl_BarangLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pn_Tbl_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Tbl_Detail, javax.swing.GroupLayout.DEFAULT_SIZE, 2721, Short.MAX_VALUE)
+                    .addComponent(Tbl_Detail)
                     .addComponent(pn_ctrl_Detail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_Tbl_BarangLayout.createSequentialGroup()
                         .addComponent(Lb_Barang)
@@ -531,7 +560,7 @@ public class Barang extends javax.swing.JPanel {
                 .addGap(97, 97, 97)
                 .addComponent(Lb_Tbl_Detail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Tbl_Detail, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                .addComponent(Tbl_Detail, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addGap(208, 208, 208))
         );
 
@@ -844,7 +873,7 @@ public class Barang extends javax.swing.JPanel {
                     .addGroup(pn_Tbl_Barang_TambahLayout.createSequentialGroup()
                         .addGap(781, 781, 781)
                         .addComponent(Lb_Data_Barang_Tambah)))
-                .addContainerGap(1151, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_Tbl_Barang_TambahLayout.setVerticalGroup(
             pn_Tbl_Barang_TambahLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -882,10 +911,10 @@ public class Barang extends javax.swing.JPanel {
         pn_Informasi_Barang_Detail.setBackground(new java.awt.Color(255, 255, 255));
         pn_Informasi_Barang_Detail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        Lb_Informasi_Nama_Barang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Lb_Informasi_Nama_Barang.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         Lb_Informasi_Nama_Barang.setText("Nama Barang");
 
-        Lb_Informasi_Kode_Barang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Lb_Informasi_Kode_Barang.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Lb_Informasi_Kode_Barang.setText("Kode Barang");
 
         Lb_Informasi_Terjual.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -898,7 +927,7 @@ public class Barang extends javax.swing.JPanel {
         Lb_Informasi_Stok.setText("Stok");
 
         Lb_Informasi_Kadaluwarsa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        Lb_Informasi_Kadaluwarsa.setText("Kadaluwarsa/Rusak");
+        Lb_Informasi_Kadaluwarsa.setText("Expired");
 
         Lb_Informasi_Terjual_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         Lb_Informasi_Terjual_Jumlah.setForeground(new java.awt.Color(51, 153, 255));
@@ -912,9 +941,9 @@ public class Barang extends javax.swing.JPanel {
         Lb_Informasi_Stok_Jumlah.setForeground(new java.awt.Color(51, 153, 255));
         Lb_Informasi_Stok_Jumlah.setText("#");
 
-        Lb_Informasi_Kadaluwarsa_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Lb_Informasi_Kadaluwarsa_Jumlah.setForeground(new java.awt.Color(51, 153, 255));
-        Lb_Informasi_Kadaluwarsa_Jumlah.setText("#");
+        Lb_Informasi_exp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lb_Informasi_exp.setForeground(new java.awt.Color(51, 153, 255));
+        Lb_Informasi_exp.setText("#");
 
         javax.swing.GroupLayout pn_Informasi_Barang_DetailLayout = new javax.swing.GroupLayout(pn_Informasi_Barang_Detail);
         pn_Informasi_Barang_Detail.setLayout(pn_Informasi_Barang_DetailLayout);
@@ -934,26 +963,26 @@ public class Barang extends javax.swing.JPanel {
                                 .addGap(1, 1, 1)))
                         .addGap(194, 194, 194))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Informasi_Barang_DetailLayout.createSequentialGroup()
-                        .addComponent(Lb_Informasi_Kadaluwarsa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Lb_Informasi_Kadaluwarsa, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                         .addGap(105, 105, 105)))
                 .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Lb_Informasi_Terjual_Jumlah)
                     .addComponent(Lb_Informasi_Dibeli_Jumlah, javax.swing.GroupLayout.DEFAULT_SIZE, 13, Short.MAX_VALUE)
                     .addComponent(Lb_Informasi_Stok_Jumlah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lb_Informasi_Kadaluwarsa_Jumlah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Informasi_Barang_DetailLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Lb_Informasi_exp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
+            .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
+                .addGap(120, 120, 120)
                 .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lb_Informasi_Nama_Barang)
                     .addComponent(Lb_Informasi_Kode_Barang))
-                .addGap(121, 121, 121))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_Informasi_Barang_DetailLayout.setVerticalGroup(
             pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(Lb_Informasi_Kode_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(Lb_Informasi_Kode_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Lb_Informasi_Nama_Barang)
                 .addGap(58, 58, 58)
@@ -971,7 +1000,7 @@ public class Barang extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lb_Informasi_Kadaluwarsa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lb_Informasi_Kadaluwarsa_Jumlah))
+                    .addComponent(Lb_Informasi_exp))
                 .addGap(68, 68, 68))
         );
 
@@ -1097,7 +1126,7 @@ public class Barang extends javax.swing.JPanel {
                 .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pn_Informasi_Barang_Detail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Btn_Barang_Detail_Update, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
                         .addComponent(Field_Informasi_Cari_Barang_Detail, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1248,7 +1277,7 @@ public class Barang extends javax.swing.JPanel {
                         .addComponent(Lb_Barang_Detail6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(65, 65, 65)
                 .addComponent(pn_Konten_Barang_Detail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
+                .addContainerGap())
         );
 
         pn_Konten_Barang.add(pn_Tbl_Barang_Detail, "card2");
@@ -1586,7 +1615,7 @@ public class Barang extends javax.swing.JPanel {
                         .addComponent(Lb_Barang_Update3))
                     .addComponent(jScrollPane3)
                     .addComponent(pn_Konten_Barang_Detail1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(1163, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_Tbl_Barang_UpdateLayout.setVerticalGroup(
             pn_Tbl_Barang_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1631,11 +1660,21 @@ public class Barang extends javax.swing.JPanel {
                 String idBarang = String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 0)); // Misalnya, indeks kolom ID adalah 0
 
                 // Mengambil data merk berdasarkan ID barang
-                ResultSet rs = db.ambilData("SELECT merk FROM barang WHERE id_barang = '" + idBarang + "'");
+                ResultSet rs = db.ambilData("SELECT * FROM barang WHERE id_barang = '" + idBarang + "'");
                 if (rs.next()) {
                     // Menampilkan nilai merk di JTextField "FIeld_Informasi_Brand_Merk_Detail"
                     String merk = rs.getString("merk");
                     FIeld_Informasi_Brand_Merk_Detail.setText(merk);
+                    String id = rs.getString("id_barang");
+                    Lb_Informasi_Kode_Barang.setText(id);
+                    String stok = rs.getString("jumlah");
+                    Lb_Informasi_Stok_Jumlah.setText(stok);
+                    String nama = rs.getString("nama_barang");
+                    Lb_Informasi_Nama_Barang.setText(nama);
+                    String exp = rs.getString("expired");
+                    Lb_Informasi_exp.setText(exp);
+                    String ds = rs.getString("id_distributor");
+                    FIeld_Informasi_Kode_Distributor_Detail.setText(ds);
                 } else {
                     FIeld_Informasi_Brand_Merk_Detail.setText("Merk tidak tersedia");
                 }
@@ -1724,6 +1763,7 @@ public class Barang extends javax.swing.JPanel {
         pn_Konten_Barang.add(pn_Tbl_Barang);
         pn_Konten_Barang.repaint();
         pn_Konten_Barang.revalidate();
+        resetFormUpdate();
     }//GEN-LAST:event_Btn_Update_KembaliMouseClicked
 
     private void Btn_Barang_UpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Barang_UpdateMouseClicked
@@ -1747,6 +1787,7 @@ public class Barang extends javax.swing.JPanel {
         pn_Konten_Barang.add(pn_Tbl_Barang);
         pn_Konten_Barang.repaint();
         pn_Konten_Barang.revalidate();
+        resetForm();
     }//GEN-LAST:event_Btn_Tambah_KembaliActionPerformed
 
     private void Btn_Informasi_Cari_BarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Informasi_Cari_BarangActionPerformed
@@ -1821,6 +1862,7 @@ public class Barang extends javax.swing.JPanel {
         Field_Update_Satuan.setSelectedItem(String.valueOf(jTable3.getValueAt(selectedRow, 8)));
         Field_Update_Status.setSelectedItem(String.valueOf(jTable3.getValueAt(selectedRow, 9)));
         Field_Update_Catatan.setText(String.valueOf(jTable3.getValueAt(selectedRow, 10)));
+        Field_Barang_Update_Cari.setText(null);
     }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
 
     private void Btn_Update_SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Update_SimpanActionPerformed
@@ -1831,6 +1873,7 @@ public class Barang extends javax.swing.JPanel {
                 + "',harga_beli = '" + Field_Update_Harga_Beli.getText() + "',harga_jual = '" + Field_Update_Harga_Jual.getText() + "',tanggal = '" + Field_Update_Tanggal_Masuk.getDateFormatString()
                 + "',expired = '" + Field_Update_Kadaluwarsa.getDateFormatString() + "',satuan = '" + Field_Update_Satuan.getSelectedItem() + "',status = '" + Field_Update_Status.getSelectedItem()
                 + "',catatan = '" + Field_Update_Catatan.getText()
+                + "',id_distributor = '" + Field_Update_Kode_Distributor.getSelectedItem()
                 + "' WHERE id_barang = '" + Field_Update_Kode_Barang.getText() + "'");
         model.setRowCount(0);
         jTable3.setModel(model);
@@ -1943,7 +1986,6 @@ public class Barang extends javax.swing.JPanel {
     private javax.swing.JLabel Lb_Informasi_Harga_Beli_Detail;
     private javax.swing.JLabel Lb_Informasi_Harga_Jual_Detail;
     private javax.swing.JLabel Lb_Informasi_Kadaluwarsa;
-    private javax.swing.JLabel Lb_Informasi_Kadaluwarsa_Jumlah;
     private javax.swing.JLabel Lb_Informasi_Kategori_Detail;
     private javax.swing.JLabel Lb_Informasi_Kode_Barang;
     private javax.swing.JLabel Lb_Informasi_Kode_Distributor_Detail;
@@ -1955,6 +1997,7 @@ public class Barang extends javax.swing.JPanel {
     private javax.swing.JLabel Lb_Informasi_Tanggal_Masuk_Detail;
     private javax.swing.JLabel Lb_Informasi_Terjual;
     private javax.swing.JLabel Lb_Informasi_Terjual_Jumlah;
+    private javax.swing.JLabel Lb_Informasi_exp;
     private javax.swing.JLabel Lb_Tambah_Barcode;
     private javax.swing.JLabel Lb_Tambah_Barcode1;
     private javax.swing.JLabel Lb_Tambah_Harga_Beli;

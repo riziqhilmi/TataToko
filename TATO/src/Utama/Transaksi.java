@@ -20,7 +20,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.management.remote.JMXConnectorFactory.connect;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -52,6 +57,7 @@ public class Transaksi extends javax.swing.JPanel {
         
         totalnya();
         tanggal();
+        Barcode();
 
         tb_keranjang.setModel(table);
         table.addColumn("ID");
@@ -71,6 +77,8 @@ public class Transaksi extends javax.swing.JPanel {
         table_barang.setModel(model);
         tampilDataS();
         tampilData();
+        
+        
     }
 
     public void tanggal() {
@@ -413,6 +421,36 @@ public void autoInN() {
         }
         totalnya();
     }
+    
+    private void Barcode(){
+        Field_Cari_Stok.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Stok.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Stok.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Stok.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(table_barang.getModel());
+                table_barang.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -460,7 +498,7 @@ public void autoInN() {
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
-        jTextField1 = new javax.swing.JTextField();
+        Field_Cari_Stok = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_barang = new javax.swing.JTable();
         rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
@@ -910,7 +948,7 @@ public void autoInN() {
         rSMaterialButtonRectangle1.setText("Cari");
         rSMaterialButtonRectangle1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
 
-        jTextField1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        Field_Cari_Stok.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
 
         table_barang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         table_barang.setModel(new javax.swing.table.DefaultTableModel(
@@ -960,7 +998,7 @@ public void autoInN() {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(Panel_StokLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Field_Cari_Stok, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -981,7 +1019,7 @@ public void autoInN() {
                 .addGroup(Panel_StokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Panel_StokLayout.createSequentialGroup()
                         .addGroup(Panel_StokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Cari_Stok, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(75, 75, 75)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1297,6 +1335,7 @@ public void autoInN() {
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Field_Cari_Stok;
     public javax.swing.JTextField Field_Keranjang_ID;
     public javax.swing.JTextField Field_Kode_Barang_Transaksi;
     private javax.swing.JComboBox<String> Field_Metode;
@@ -1327,7 +1366,6 @@ public void autoInN() {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
