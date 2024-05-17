@@ -36,6 +36,7 @@ public class Beranda extends javax.swing.JPanel {
     public Beranda() {
         initComponents();
         SearchB();
+        Count();
         getColumn();
         getData();
         
@@ -321,6 +322,45 @@ private void SearchB(){
         });
     }
 
+    private void Count() {
+    try {
+        // Count total items in barang table
+        ResultSet rsBarang = db.ambilData("SELECT COUNT(*) AS total_barang FROM barang");
+        if (rsBarang.next()) {
+            int totalBarang = rsBarang.getInt("total_barang");
+            // Update the JLabel with the count for barang
+            Lb_Jumlah_Barang.setText(String.valueOf(totalBarang));
+        }
+
+        // Count total items in distributor table
+        ResultSet rsDistributor = db.ambilData("SELECT COUNT(*) AS total_distributor FROM distributor");
+        if (rsDistributor.next()) {
+            int totalDistributor = rsDistributor.getInt("total_distributor");
+            // Update the JLabel with the count for distributor
+            Lb_Jumlah_Distributor.setText(String.valueOf(totalDistributor));
+        }
+
+        // Count total items in transaksi table
+        ResultSet rsTransaksi = db.ambilData("SELECT COUNT(*) AS total_transaksi FROM transaksi");
+        if (rsTransaksi.next()) {
+            int totalTransaksi = rsTransaksi.getInt("total_transaksi");
+            // Update the JLabel with the count for transaksi
+            Lb_Jumlah_Transaksi.setText(String.valueOf(totalTransaksi));
+        }
+
+        // Count total items in pengguna table
+        ResultSet rsPengguna = db.ambilData("SELECT COUNT(*) AS total_karyawan FROM pengguna");
+        if (rsPengguna.next()) {
+            int totalPengguna = rsPengguna.getInt("total_karyawan");
+            // Update the JLabel with the count for pengguna
+            Lb_Jumlah_Karyawan.setText(String.valueOf(totalPengguna));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -402,7 +442,7 @@ private void SearchB(){
 
         Lb_Logo_Barang.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Logo_Barang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lb_Logo_Barang.setText("Logo");
+        Lb_Logo_Barang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Barang.png"))); // NOI18N
 
         javax.swing.GroupLayout pn_Lg_BarangLayout = new javax.swing.GroupLayout(pn_Lg_Barang);
         pn_Lg_Barang.setLayout(pn_Lg_BarangLayout);
@@ -410,14 +450,14 @@ private void SearchB(){
             pn_Lg_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Lg_BarangLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Lb_Logo_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(Lb_Logo_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pn_Lg_BarangLayout.setVerticalGroup(
             pn_Lg_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Lg_BarangLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(Lb_Logo_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Lb_Logo_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -461,7 +501,7 @@ private void SearchB(){
 
         Lb_Logo_Distributor.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Logo_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lb_Logo_Distributor.setText("Logo");
+        Lb_Logo_Distributor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Distributor.png"))); // NOI18N
 
         javax.swing.GroupLayout pn_Lg_DistributorLayout = new javax.swing.GroupLayout(pn_Lg_Distributor);
         pn_Lg_Distributor.setLayout(pn_Lg_DistributorLayout);
@@ -507,8 +547,9 @@ private void SearchB(){
             .addGroup(pn_Card_DistributorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Lb_Distributor)
-                .addGap(18, 18, 18)
-                .addComponent(Lb_Jumlah_Distributor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Lb_Jumlah_Distributor)
+                .addContainerGap())
         );
 
         pn_Card_Transaksi.setBackground(new java.awt.Color(255, 255, 255));
@@ -522,7 +563,7 @@ private void SearchB(){
 
         Lb_Logo_Distributor2.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Logo_Distributor2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lb_Logo_Distributor2.setText("Logo");
+        Lb_Logo_Distributor2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Kasir.png"))); // NOI18N
 
         javax.swing.GroupLayout pn_Lg_TransaksiLayout = new javax.swing.GroupLayout(pn_Lg_Transaksi);
         pn_Lg_Transaksi.setLayout(pn_Lg_TransaksiLayout);
@@ -584,7 +625,7 @@ private void SearchB(){
 
         Lb_Logo_Barang1.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Logo_Barang1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lb_Logo_Barang1.setText("Logo");
+        Lb_Logo_Barang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Karyawan.png"))); // NOI18N
 
         javax.swing.GroupLayout pn_Lg_KaryawanLayout = new javax.swing.GroupLayout(pn_Lg_Karyawan);
         pn_Lg_Karyawan.setLayout(pn_Lg_KaryawanLayout);
@@ -976,7 +1017,7 @@ private void SearchB(){
                 .addGap(45, 45, 45)
                 .addGroup(pn_Konten_BerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Konten_BerandaLayout.createSequentialGroup()
-                        .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(17, 17, 17))
                     .addGroup(pn_Konten_BerandaLayout.createSequentialGroup()
                         .addComponent(pn_Card_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
