@@ -1083,11 +1083,10 @@ public void autoInN() {
     }//GEN-LAST:event_txt_harga2ActionPerformed
 
     private void txt_uangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_uangActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txt_uangActionPerformed
 
     private void txt_uangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_uangKeyPressed
-        // TODO add your handling code here:
 
     }//GEN-LAST:event_txt_uangKeyPressed
 
@@ -1096,7 +1095,7 @@ public void autoInN() {
     }//GEN-LAST:event_txt_uangKeyReleased
 
     private void txt_uangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_uangKeyTyped
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_txt_uangKeyTyped
 
     private void txt_kembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_kembalianActionPerformed

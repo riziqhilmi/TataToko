@@ -20,12 +20,19 @@ public class Menu_Utama extends javax.swing.JFrame {
 private Transaksi transaksiPanel;
     int xx, xy;
     
-    public Menu_Utama() {
+    public Menu_Utama(String nama, String Akses) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         
-        execute();
+        Lb_Nama.setText(nama);
+        Lb_Akses.setText(Akses);
+        
+        execute(Akses);
+    }
+
+    Menu_Utama() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 
@@ -139,7 +146,7 @@ private Transaksi transaksiPanel;
             }
         });
 
-        Lb_Akses.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        Lb_Akses.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Akses.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Akses.setText("Akses");
 
@@ -148,10 +155,10 @@ private Transaksi transaksiPanel;
         NavbarLayout.setHorizontalGroup(
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
-                .addGap(1754, 1754, 1754)
+                .addGap(1740, 1740, 1740)
                 .addComponent(Lb_Akses)
-                .addGap(18, 18, 18)
-                .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
         NavbarLayout.setVerticalGroup(
@@ -160,10 +167,10 @@ private Transaksi transaksiPanel;
                 .addContainerGap()
                 .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(NavbarLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavbarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Lb_Akses)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         getContentPane().add(Navbar, java.awt.BorderLayout.PAGE_START);
@@ -216,7 +223,7 @@ private Transaksi transaksiPanel;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu_Utama().setVisible(true);
+                new Menu_Utama("nama", "Akses").setVisible(true);
             }
         });
     }
@@ -235,7 +242,7 @@ private Transaksi transaksiPanel;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-private void execute() {
+private void execute(String Akses) {
     ImageIcon iconBeranda = new ImageIcon(getClass().getResource("/Gambar/icon_Beranda.png"));
     ImageIcon iconMaster = new ImageIcon(getClass().getResource("/Gambar/icon_Master.png"));
     ImageIcon iconSubMasterBarang = new ImageIcon(getClass().getResource("/Gambar/icon_Barang.png"));
@@ -384,7 +391,15 @@ private void execute() {
     MenuItem menuKaryawan = new MenuItem(iconKaryawan, false, null, "Karyawan", null, KarUser, KarAkses);
     MenuItem menuLaporan = new MenuItem(iconLaporan, false, null, "Laporan", null, LapMaster, LapTransaksi);
     
-    addMenu(menuBeranda, menuMaster, menuKasir, menuLayanan, menuKaryawan, menuLaporan);
+    
+    
+    
+    if(Akses.equals("Karyawan")){
+        addMenu(menuBeranda, menuKasir,  menuLayanan,  menuLaporan);
+    }else{
+        addMenu(menuBeranda, menuMaster, menuKasir, menuLayanan, menuKaryawan, menuLaporan);
+    }
+            
     
 }
 

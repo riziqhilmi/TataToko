@@ -141,9 +141,9 @@ public class Laporan_Master extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Field_Laporan_Barang_Distributor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Field_Laporan_Barang_Dari_Tanggal)
                     .addComponent(Field_Laporan_Barang_Dari_Item, 0, 196, Short.MAX_VALUE)
-                    .addComponent(Field_Laporan_Barang_Urutkan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Field_Laporan_Barang_Urutkan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Field_Laporan_Barang_Dari_Tanggal))
                 .addGap(118, 118, 118)
                 .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lb_Laporan_Barang_Sampai_Item)
@@ -164,12 +164,13 @@ public class Laporan_Master extends javax.swing.JPanel {
                     .addComponent(Lb_Laporan_Barang_Sampai_Tanggal)
                     .addComponent(Field_Laporan_Barang_Sampai_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Barang_Dari_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Barang_Dari_Item)
+                .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Lb_Laporan_Barang_Sampai_Item)
-                        .addComponent(Field_Laporan_Barang_Sampai_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Field_Laporan_Barang_Sampai_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Field_Laporan_Barang_Dari_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Lb_Laporan_Barang_Dari_Item)))
                 .addGap(27, 27, 27)
                 .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Field_Laporan_Barang_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,7 +219,7 @@ public class Laporan_Master extends javax.swing.JPanel {
                         .addGroup(pn_Laporan_Utama_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Lg_Laporan_Barang_Masuk, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                             .addComponent(Lg_Laporan_Barang_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pn_Laporan_Utama_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(RB_Laporan_Barang_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                             .addComponent(RB_Laporan_Barang_Masuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -237,8 +238,8 @@ public class Laporan_Master extends javax.swing.JPanel {
                     .addComponent(RB_Laporan_Barang_Masuk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(pn_Laporan_Utama_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Barang_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Barang_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(RB_Laporan_Barang_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Lg_Laporan_Barang_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -265,9 +266,9 @@ public class Laporan_Master extends javax.swing.JPanel {
                         .addGap(74, 74, 74)
                         .addGroup(pn_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pn_Laporan_BarangLayout.createSequentialGroup()
-                                .addComponent(Btn_Print_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(Btn_Tambah_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Btn_Print_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(Btn_Tambah_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pn_Laporan_Utama_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pn_Laporan_BarangLayout.createSequentialGroup()
                         .addContainerGap()
@@ -288,7 +289,7 @@ public class Laporan_Master extends javax.swing.JPanel {
                             .addComponent(Btn_Print_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Btn_Tambah_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(pn_Ctrl_Laporan_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pn_Konten_Laporan_Master.add(pn_Laporan_Barang, "card2");
@@ -428,12 +429,12 @@ public class Laporan_Master extends javax.swing.JPanel {
                             .addComponent(Btn_Print_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Btn_Tambah_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(pn_Ctrl_Laporan_Distributor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pn_Konten_Laporan_Master.add(pn_Laporan_Distributor, "card2");
 
-        Btn_Laporan_Barang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Btn_Laporan_Barang.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         Btn_Laporan_Barang.setText("Barang");
         Btn_Laporan_Barang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -441,7 +442,7 @@ public class Laporan_Master extends javax.swing.JPanel {
             }
         });
 
-        Btn_Laporan_Distributor.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Btn_Laporan_Distributor.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         Btn_Laporan_Distributor.setText("Distributor");
         Btn_Laporan_Distributor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -458,7 +459,7 @@ public class Laporan_Master extends javax.swing.JPanel {
                 .addGroup(pn_Laporan_MasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Laporan_MasterLayout.createSequentialGroup()
                         .addComponent(Btn_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addGap(30, 30, 30)
                         .addComponent(Btn_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Lb_Laporan_Master)
                     .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.PREFERRED_SIZE, 1516, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -474,8 +475,8 @@ public class Laporan_Master extends javax.swing.JPanel {
                     .addComponent(Btn_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -486,7 +487,7 @@ public class Laporan_Master extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_Laporan_Master, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+            .addComponent(pn_Laporan_Master, javax.swing.GroupLayout.DEFAULT_SIZE, 933, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

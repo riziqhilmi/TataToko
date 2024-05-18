@@ -231,6 +231,7 @@ public class Login extends javax.swing.JFrame {
     private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
         String user = "";
         String pw  = "";
+        String nama = "";
         String Akses ="";
         
          boolean k = false;
@@ -239,10 +240,12 @@ public class Login extends javax.swing.JFrame {
             while (rs.next()) {
                 user = rs.getString("username");
                 pw = rs.getString("password");
+                Akses = rs.getString("akses");
+                nama = rs.getString("Nama_Lengkap");
                 if (t_user.getText().equals(user) && t_pw.getText().equals(pw)) {
                     k = true;
                     this.setVisible(false);
-                    new Menu_Utama().setVisible(true);
+                    new Menu_Utama(nama, Akses).setVisible(true);
                 }
             }
             if (!k) {
