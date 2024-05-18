@@ -565,10 +565,7 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="Btn_Cari_Beranda_Barang" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="Lb_Beranda_Barang" min="-2" pref="83" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="Lb_Beranda_Barang" min="-2" pref="83" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">

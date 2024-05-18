@@ -4,6 +4,7 @@
  */
 package Utama;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,6 +43,7 @@ public class Beranda extends javax.swing.JPanel {
         
         getColumnD();
         getDataD();
+        
         
         
         model3.addColumn("Tanggal");
@@ -744,9 +746,7 @@ private void SearchB(){
                                 .addComponent(Field_Cari_Beranda_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Btn_Cari_Beranda_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pn_Tbl_Beranda_BarangLayout.createSequentialGroup()
-                                .addComponent(Lb_Beranda_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(Lb_Beranda_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pn_Tbl_Beranda_BarangLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane7)))
