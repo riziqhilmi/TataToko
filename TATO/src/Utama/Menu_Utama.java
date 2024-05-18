@@ -49,6 +49,7 @@ private Transaksi transaksiPanel;
         Navbar = new javax.swing.JPanel();
         Btn_Logout = new javax.swing.JButton();
         Lb_Akses = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -143,15 +144,20 @@ private Transaksi transaksiPanel;
         Lb_Akses.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Akses.setText("Akses");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout NavbarLayout = new javax.swing.GroupLayout(Navbar);
         Navbar.setLayout(NavbarLayout);
         NavbarLayout.setHorizontalGroup(
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
-                .addGap(1754, 1754, 1754)
+                .addGap(534, 534, 534)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1128, 1128, 1128)
                 .addComponent(Lb_Akses)
                 .addGap(18, 18, 18)
-                .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
         NavbarLayout.setVerticalGroup(
@@ -162,7 +168,9 @@ private Transaksi transaksiPanel;
                 .addContainerGap())
             .addGroup(NavbarLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(Lb_Akses)
+                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lb_Akses)
+                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -231,6 +239,7 @@ private Transaksi transaksiPanel;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel Sidebar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
