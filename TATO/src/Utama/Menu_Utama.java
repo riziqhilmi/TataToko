@@ -43,11 +43,12 @@ private Transaksi transaksiPanel;
         Menus = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        Lb_Nama = new javax.swing.JLabel();
         Konten = new javax.swing.JPanel();
         Dasar = new javax.swing.JPanel();
         Navbar = new javax.swing.JPanel();
         Btn_Logout = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        Lb_Akses = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -69,23 +70,35 @@ private Transaksi transaksiPanel;
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ini Logo");
+
+        Lb_Nama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Lb_Nama.setForeground(new java.awt.Color(255, 255, 255));
+        Lb_Nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lb_Nama.setText("Nama");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                .addGap(55, 55, 55))
+                .addContainerGap()
+                .addComponent(Lb_Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                .addGap(73, 73, 73))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                .addGap(32, 32, 32))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Lb_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
@@ -98,9 +111,10 @@ private Transaksi transaksiPanel;
         SidebarLayout.setVerticalGroup(
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(Sidebar, java.awt.BorderLayout.LINE_START);
@@ -125,9 +139,9 @@ private Transaksi transaksiPanel;
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("OWNER");
+        Lb_Akses.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        Lb_Akses.setForeground(new java.awt.Color(255, 255, 255));
+        Lb_Akses.setText("Akses");
 
         javax.swing.GroupLayout NavbarLayout = new javax.swing.GroupLayout(Navbar);
         Navbar.setLayout(NavbarLayout);
@@ -135,7 +149,7 @@ private Transaksi transaksiPanel;
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
                 .addGap(1754, 1754, 1754)
-                .addComponent(jLabel2)
+                .addComponent(Lb_Akses)
                 .addGap(18, 18, 18)
                 .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
@@ -148,7 +162,7 @@ private Transaksi transaksiPanel;
                 .addContainerGap())
             .addGroup(NavbarLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel2)
+                .addComponent(Lb_Akses)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -211,11 +225,12 @@ private Transaksi transaksiPanel;
     private javax.swing.JButton Btn_Logout;
     private javax.swing.JPanel Dasar;
     private javax.swing.JPanel Konten;
+    private javax.swing.JLabel Lb_Akses;
+    private javax.swing.JLabel Lb_Nama;
     private javax.swing.JPanel Menus;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel Sidebar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

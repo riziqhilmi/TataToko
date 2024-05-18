@@ -231,6 +231,7 @@ public class Login extends javax.swing.JFrame {
     private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
         String user = "";
         String pw  = "";
+        String Akses ="";
         
          boolean k = false;
         try {
