@@ -12,8 +12,11 @@ import com.google.zxing.common.BitMatrix;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -58,22 +61,45 @@ public class Barang extends javax.swing.JPanel {
         distributor();
         search();
         ViewBarcode();
+        //tampilkan();
         
+        Field_Tambah_Kategori.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                // Pastikan hanya menangani event saat item dipilih (bukan saat dibatalkan)
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    autoIn();
+                }
+            }
+        });
+
     }
-    
-    
-    
-    
+
+    private void ensureDirectoryExists(String path) {
+        File directory = new File(path);
+        if (!directory.exists()) {
+            directory.mkdirs(); // Buat direktori beserta subdirektori jika belum ada
+        }
+    }
+
     public void ViewBarcode() {
         String barcodeImg = Field_Tambah_Kode_Barang.getText(); // ambil nilai dari kode barang
-        BufferedImage barcode = generateBarcode(barcodeImg);
-        ImageIcon icon = new ImageIcon(barcode);
-        Field_Tambah_Barcode.setIcon(icon);
-    }    
-    
-    
-    
-    public void getBarcodeImage(int width, int height, JLabel label, String path) {        
+        String barcodeFilePath = generateBarcode(barcodeImg, "D:/barcodes/");
+
+        if (barcodeFilePath != null) {
+            try {
+                BufferedImage barcode = ImageIO.read(new File(barcodeFilePath));
+                ImageIcon icon = new ImageIcon(barcode);
+                Field_Tambah_Barcode.setIcon(icon);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Gagal membuat atau memuat barcode");
+        }
+    }
+
+    public void getBarcodeImage(int width, int height, JLabel label, String path) {
         try {
             File file = new File("D:/" + path + ".png");
             BufferedImage bi = ImageIO.read(file);
@@ -85,27 +111,35 @@ public class Barang extends javax.swing.JPanel {
         }
     }
 
-    private BufferedImage generateBarcode(String barcodeIMG) {
-        int width = 290;
-        int height = 100;
+    private String generateBarcode(String barcodeIMG, String savePath) {
+        int lebar = 290;
+        int tinggi = 100;
+        String filePath = barcodeIMG;
+
+        // Pastikan direktori ada
+        ensureDirectoryExists(savePath);
 
         try {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(
                     barcodeIMG,
                     BarcodeFormat.CODE_128,
-                    width,
-                    height
+                    lebar,
+                    tinggi
             );
 
-            BufferedImage barcode = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
+            BufferedImage barcode = new BufferedImage(lebar, tinggi, BufferedImage.TYPE_INT_RGB);
+            for (int x = 0; x < lebar; x++) {
+                for (int y = 0; y < tinggi; y++) {
                     barcode.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
                 }
             }
 
-            return barcode;
-        } catch (WriterException e) {
+            // Simpan gambar barcode ke file
+            File outputfile = new File(filePath);
+            ImageIO.write(barcode, "png", outputfile);
+
+            return filePath;
+        } catch (WriterException | IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -114,15 +148,14 @@ public class Barang extends javax.swing.JPanel {
     private void showBarcode(java.awt.event.ActionEvent evt) {
         showBarcode();
     }
-    
-    
 
     public void autoIn() {
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
 
-            String sqlquery = "SELECT MAX(RIGHT(id_barang,4)) AS no_auto FROM barang";
+            // Query untuk mendapatkan nomor urut terbesar dari id_barang di tabel barang
+            String sqlquery = "SELECT MAX(RIGHT(id_barang, 4)) AS no_auto FROM barang";
             PreparedStatement st = con.prepareStatement(sqlquery);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -139,30 +172,26 @@ public class Barang extends javax.swing.JPanel {
                 String prefix = ""; // Inisialisasi awalan kode barang
 
                 if (selectedCategory != null) {
-                    switch (selectedCategory) {
-                        case "Sembako":
-                            prefix = "ST";
-                            break;
-                        case "Daging":
-                            prefix = "DG";
-                            break;
-                        case "Sayuran":
-                            prefix = "SV";
-                            break;
-                        case "Sosis&Nugget":
-                            prefix = "NS";
-                            break;
-                        // Tambahkan case untuk kategori lainnya jika diperlukan
-                        default:
-                            prefix = ""; // Jika tidak ada kategori yang cocok, awalan menjadi kosong
-                            break;
+                    // Query untuk mendapatkan kode unik dari tabel kategori
+                    String categoryQuery = "SELECT kode_unik FROM kategori WHERE nama = ?";
+                    PreparedStatement categoryStmt = con.prepareStatement(categoryQuery);
+                    categoryStmt.setString(1, selectedCategory);
+                    ResultSet categoryRs = categoryStmt.executeQuery();
+                    if (categoryRs.next()) {
+                        prefix = categoryRs.getString("kode_unik");
+                    } else {
+                        prefix = "D"; // Jika kategori tidak ditemukan, awalan menjadi kosong
                     }
+                    categoryRs.close();
+                    categoryStmt.close();
                 }
 
                 // Mengganti bagian pengisian kode barang sesuai dengan kategori yang dipilih
                 Field_Tambah_Kode_Barang.setText(prefix + no_p + no_a);
             }
 
+            rs.close();
+            st.close();
         } catch (Exception e) {
             Field_Tambah_Kode_Barang.setText("ST0001"); // Jika terjadi kesalahan, isi dengan kode default
             e.printStackTrace();
@@ -216,8 +245,7 @@ public class Barang extends javax.swing.JPanel {
                 // Ambil nilai dari kolom "nama" dan tambahkan ke dalam JComboBox
                 Field_Tambah_Kategori.addItem(hasil.getString("nama"));
                 Field_Update_Kategori.addItem(hasil.getString("nama"));
-                
-            
+
             }
         } catch (Exception e) {
             System.out.println("Tidak Dapat Mengambil Data");
@@ -232,8 +260,7 @@ public class Barang extends javax.swing.JPanel {
                 // Ambil nilai dari kolom "nama" dan tambahkan ke dalam JComboBox
                 Field_Tambah_Satuan.addItem(hasil.getString("nama"));
                 Field_Update_Satuan.addItem(hasil.getString("nama"));
-                
-            
+
             }
         } catch (Exception e) {
             System.out.println("Tidak Dapat Mengambil Data");
@@ -292,7 +319,7 @@ public class Barang extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         Field_Barang_Update_Cari.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -321,7 +348,7 @@ public class Barang extends javax.swing.JPanel {
             }
         });
     }
-    
+
     public void distributor() {
         ResultSet hasil = db.ambilData("SELECT * FROM distributor");
         try {
@@ -329,9 +356,7 @@ public class Barang extends javax.swing.JPanel {
                 // Ambil nilai dari kolom "nama" dan tambahkan ke dalam JComboBox
                 Field_Tambah_Kode_Distributor.addItem(hasil.getString("nama"));
                 Field_Update_Kode_Distributor.addItem(hasil.getString("nama"));
-                
-                
-            
+
             }
         } catch (Exception e) {
             System.out.println("Tidak Dapat Mengambil Data");
@@ -975,7 +1000,7 @@ public class Barang extends javax.swing.JPanel {
                 .addComponent(Lb_Data_Barang_Tambah)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Scrl_Tambah_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pn_Konten_Barang.add(pn_Tbl_Barang_Tambah, "card2");
@@ -1775,7 +1800,7 @@ public class Barang extends javax.swing.JPanel {
         FIeld_Informasi_Harga_Beli_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 4)));
         FIeld_Informasi_Harga_Jual_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 5)));
         FIeld_Informasi_Tanggal_Masuk_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 6)));
-        FIeld_Informasi_Barcode_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 7)));
+        //FIeld_Informasi_Barcode_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 7)));
         FIeld_Informasi_Satuan_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 8)));
         FIeld_Informasi_Status_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 9)));
         FIeld_Informasi_Catatan_Detail.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 10)));
@@ -1900,16 +1925,25 @@ public class Barang extends javax.swing.JPanel {
         String status = String.valueOf(Field_Tambah_Status.getSelectedItem());
         String catatan = Field_Tambah_Catatan.getText();
         String kategori = String.valueOf(Field_Tambah_Kategori.getSelectedItem());
-        String barcode = Field_Tambah_Barcode.getText();
         String distributor = String.valueOf(Field_Tambah_Kode_Distributor.getSelectedItem());
 
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         String tanggal = date.format(Field_Tambah_Tanggal_Masuk.getDate());
         String kadaluwarsa = date.format(Field_Tambah_Kadaluwarsa.getDate());
 
-        db.aksi("INSERT INTO barang VALUES ('" + id + "','" + nama + "','" + kategori + "','" + jumlah + "','" + harga_beli + "','" + harga_jual + "','" + tanggal + "','" + kadaluwarsa + "','" + satuan + "','" + status + "','" + catatan + "','" + barcode + "','" + merk + "','" + distributor + "')");
-        model.setRowCount(0);
-        Tbl_Barang_Tambah.setModel(model);
+        // Buat barcode dan dapatkan path file-nya
+        String barcodeImg = Field_Tambah_Kode_Barang.getText(); // Asumsikan barcode berdasarkan ID barang
+        String barcodeFilePath = generateBarcode(barcodeImg, "D:/barcodes/");
+
+        if (barcodeFilePath != null) {
+            // Sisipkan data ke dalam database termasuk path file barcode
+            db.aksi("INSERT INTO barang VALUES ('" + id + "','" + nama + "','" + kategori + "','" + jumlah + "','" + harga_beli + "','" + harga_jual + "','" + tanggal + "','" + kadaluwarsa + "','" + satuan + "','" + status + "','" + catatan + "','" + barcodeFilePath + "','" + merk + "','" + distributor + "')");
+            model.setRowCount(0);
+            Tbl_Barang_Tambah.setModel(model);
+        } else {
+            // Tangani kasus kesalahan di mana pembuatan barcode gagal
+            System.out.println("Gagal membuat barcode");
+        }
         resetForm();
         getData();
         autoIn();
@@ -1997,7 +2031,7 @@ public class Barang extends javax.swing.JPanel {
     }//GEN-LAST:event_Field_Update_StatusActionPerformed
 
     private void Btn_Tambah_BarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_BarcodeActionPerformed
-    try {
+        try {
             Linear barcode = new Linear();
             barcode.setType(Linear.CODE128B);
             barcode.setData(Field_Tambah_Kode_Barang.getText());

@@ -1105,10 +1105,6 @@ public void autoInN() {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
             
-            String queryTruncate = "TRUNCATE keranjang";
-            PreparedStatement st = con.prepareStatement(queryTruncate);
-            st.executeUpdate();
-            
             String file = "/Report/nota.jasper";
             
             Class.forName(driver);

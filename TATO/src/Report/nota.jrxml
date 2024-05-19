@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="430" columnWidth="186" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eae3826-a4aa-4a6e-85e0-0daa517cab65">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="88"/>
 	<parameter name="total_semua" class="java.lang.String"/>
 	<parameter name="uang" class="java.lang.String"/>
 	<parameter name="kembali" class="java.lang.String"/>
@@ -57,7 +57,7 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="53" splitType="Stretch">
+		<band height="52" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="57" height="17" uuid="9462be6c-e43e-482e-b64b-b9eb0a7bb794"/>
 				<textElement verticalAlignment="Middle">
@@ -110,7 +110,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20">
+		<band height="29">
 			<textField>
 				<reportElement x="0" y="0" width="82" height="20" uuid="0d9f0aa5-569b-4a9a-ab7d-172cd40b6802"/>
 				<textElement verticalAlignment="Middle">
