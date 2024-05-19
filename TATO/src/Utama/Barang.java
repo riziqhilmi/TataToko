@@ -4,8 +4,16 @@
  */
 package Utama;
 
+import com.barcodelib.barcode.Linear;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,6 +25,9 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -46,8 +57,65 @@ public class Barang extends javax.swing.JPanel {
         tanggal();
         distributor();
         search();
+        ViewBarcode();
         
     }
+    
+    
+    
+    
+    public void ViewBarcode() {
+        String barcodeImg = Field_Tambah_Kode_Barang.getText(); // ambil nilai dari kode barang
+        BufferedImage barcode = generateBarcode(barcodeImg);
+        ImageIcon icon = new ImageIcon(barcode);
+        Field_Tambah_Barcode.setIcon(icon);
+    }    
+    
+    
+    
+    public void getBarcodeImage(int width, int height, JLabel label, String path) {        
+        try {
+            File file = new File("D:/" + path + ".png");
+            BufferedImage bi = ImageIO.read(file);
+            Image i = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            ImageIcon ii = new ImageIcon(i);
+            label.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private BufferedImage generateBarcode(String barcodeIMG) {
+        int width = 290;
+        int height = 100;
+
+        try {
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(
+                    barcodeIMG,
+                    BarcodeFormat.CODE_128,
+                    width,
+                    height
+            );
+
+            BufferedImage barcode = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    barcode.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
+                }
+            }
+
+            return barcode;
+        } catch (WriterException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void showBarcode(java.awt.event.ActionEvent evt) {
+        showBarcode();
+    }
+    
+    
 
     public void autoIn() {
         try {
@@ -327,9 +395,10 @@ public class Barang extends javax.swing.JPanel {
         Field_Tambah_Catatan = new javax.swing.JTextArea();
         Btn_Tambah_Simpan = new rojerusan.RSMaterialButtonRectangle();
         Btn_Tambah_Kembali = new rojerusan.RSMaterialButtonRectangle();
-        Field_Tambah_Barcode = new javax.swing.JTextField();
         Field_Tambah_Tanggal_Masuk = new com.toedter.calendar.JDateChooser();
         Field_Tambah_Kadaluwarsa = new com.toedter.calendar.JDateChooser();
+        Field_Tambah_Barcode = new javax.swing.JLabel();
+        Btn_Tambah_Barcode = new rojerusan.RSMaterialButtonRectangle();
         Lb_Data_Barang_Tambah = new javax.swing.JLabel();
         pn_Tbl_Barang_Detail = new javax.swing.JPanel();
         Lb_Barang_Detail4 = new javax.swing.JLabel();
@@ -714,12 +783,20 @@ public class Barang extends javax.swing.JPanel {
             }
         });
 
-        Field_Tambah_Barcode.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         Field_Tambah_Tanggal_Masuk.setEnabled(false);
         Field_Tambah_Tanggal_Masuk.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         Field_Tambah_Kadaluwarsa.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        Btn_Tambah_Barcode.setBackground(new java.awt.Color(51, 153, 255));
+        Btn_Tambah_Barcode.setForeground(new java.awt.Color(0, 0, 0));
+        Btn_Tambah_Barcode.setText("Cetak Barcode");
+        Btn_Tambah_Barcode.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        Btn_Tambah_Barcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Tambah_BarcodeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_Tambah_BarangLayout = new javax.swing.GroupLayout(pn_Tambah_Barang);
         pn_Tambah_Barang.setLayout(pn_Tambah_BarangLayout);
@@ -727,127 +804,136 @@ public class Barang extends javax.swing.JPanel {
             pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
                 .addGap(85, 85, 85)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lb_Tambah_Harga_Jual, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Tambah_Kode_Barang)
-                    .addComponent(Lb_Tambah_Harga_Beli)
-                    .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(Field_Tambah_Harga_Jual, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Field_Tambah_Harga_Beli, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Field_Tambah_Tanggal_Masuk, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                        .addComponent(Lb_Tambah_Tanggal_Masuk, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Field_Tambah_Kode_Barang, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(82, 82, 82)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lb_Tambah_Nama_Barang)
-                    .addComponent(Lb_Tambah_Kadaluwarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Field_Tambah_Nama_Barang)
-                        .addComponent(Field_Tambah_Kadaluwarsa, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                        .addComponent(Lb_Tambah_Merk)
-                        .addComponent(Field_Tambah_Merk)
-                        .addComponent(Lb_Tambah_Jumlah)
-                        .addComponent(Field_Tambah_Jumlah, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addGap(103, 103, 103)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lb_Tambah_Kode_Distributor)
-                    .addComponent(Field_Tambah_Kode_Distributor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lb_Tambah_Kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Tambah_Kategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lb_Tambah_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Tambah_Satuan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lb_Tambah_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Tambah_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(164, 164, 164)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                        .addComponent(Lb_Tambah_Barcode1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(316, 316, 316))
+                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
                         .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Lb_Tambah_Barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Tambah_Barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lb_Tambah_Harga_Jual, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lb_Tambah_Kode_Barang)
+                            .addComponent(Lb_Tambah_Harga_Beli)
                             .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane_Tambah_Catatan, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                                    .addComponent(Btn_Tambah_Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Btn_Tambah_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(Field_Tambah_Harga_Jual, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Field_Tambah_Harga_Beli, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Field_Tambah_Tanggal_Masuk, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                                .addComponent(Lb_Tambah_Tanggal_Masuk, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Field_Tambah_Kode_Barang, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(82, 82, 82)
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lb_Tambah_Nama_Barang)
+                            .addComponent(Lb_Tambah_Kadaluwarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(Field_Tambah_Nama_Barang)
+                                .addComponent(Field_Tambah_Kadaluwarsa, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                                .addComponent(Lb_Tambah_Merk)
+                                .addComponent(Field_Tambah_Merk)
+                                .addComponent(Lb_Tambah_Jumlah)
+                                .addComponent(Field_Tambah_Jumlah, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(103, 103, 103)
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Lb_Tambah_Kode_Distributor)
+                            .addComponent(Field_Tambah_Kode_Distributor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lb_Tambah_Kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Tambah_Kategori, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lb_Tambah_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Tambah_Satuan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Lb_Tambah_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Tambah_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(164, 164, 164)
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Lb_Tambah_Barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                .addComponent(Lb_Tambah_Barcode1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(243, 243, 243))
+                            .addComponent(jScrollPane_Tambah_Catatan)
+                            .addComponent(Btn_Tambah_Barcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Tambah_Barcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                        .addComponent(Btn_Tambah_Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Btn_Tambah_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         pn_Tambah_BarangLayout.setVerticalGroup(
             pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lb_Tambah_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tambah_BarangLayout.createSequentialGroup()
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Lb_Tambah_Nama_Barang)
+                                .addComponent(Lb_Tambah_Kode_Barang))
+                            .addComponent(Lb_Tambah_Barcode))
                         .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                                .addGap(101, 101, 101)
-                                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Lb_Tambah_Kategori)
-                                    .addComponent(Lb_Tambah_Barcode1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(Field_Tambah_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                                    .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Lb_Tambah_Nama_Barang)
-                                            .addComponent(Lb_Tambah_Kode_Barang))
-                                        .addComponent(Lb_Tambah_Barcode))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Field_Tambah_Nama_Barang)
-                                        .addComponent(Field_Tambah_Kode_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                        .addComponent(Field_Tambah_Barcode)))))
-                        .addGap(6, 6, 6)
+                                .addGap(6, 6, 6)
+                                .addComponent(Field_Tambah_Kode_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Field_Tambah_Barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(26, 26, 26))
+                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Field_Tambah_Nama_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                .addComponent(Lb_Tambah_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Field_Tambah_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31)
                         .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Field_Tambah_Kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane_Tambah_Catatan))))
-                .addGap(44, 44, 44)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Btn_Tambah_Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Tambah_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(219, 219, 219))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tambah_BarangLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                        .addComponent(Lb_Tambah_Tanggal_Masuk)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Field_Tambah_Tanggal_Masuk, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                        .addComponent(Lb_Tambah_Kadaluwarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(Field_Tambah_Kadaluwarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)))
-                .addGap(32, 32, 32)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Tambah_Harga_Beli)
-                    .addComponent(Lb_Tambah_Merk, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Tambah_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Field_Tambah_Merk, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Field_Tambah_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Field_Tambah_Harga_Beli, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Tambah_Harga_Jual, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Tambah_Jumlah)
-                    .addComponent(Lb_Tambah_Status))
+                            .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                .addComponent(Lb_Tambah_Kategori)
+                                .addGap(6, 6, 6)
+                                .addComponent(Field_Tambah_Kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                    .addComponent(Lb_Tambah_Tanggal_Masuk)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(Field_Tambah_Tanggal_Masuk, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                    .addComponent(Lb_Tambah_Kadaluwarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(5, 5, 5)
+                                    .addComponent(Field_Tambah_Kadaluwarsa, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(1, 1, 1))))))
                 .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Field_Tambah_Harga_Jual, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(41, 41, 41)
                         .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Field_Tambah_Jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Tambah_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(201, 201, 201))
+                            .addComponent(Lb_Tambah_Harga_Beli)
+                            .addComponent(Lb_Tambah_Merk, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lb_Tambah_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Field_Tambah_Merk, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Field_Tambah_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Field_Tambah_Harga_Beli, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lb_Tambah_Harga_Jual, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lb_Tambah_Jumlah)
+                            .addComponent(Lb_Tambah_Status))
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Field_Tambah_Harga_Jual, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Tambah_Jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Field_Tambah_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(201, 201, 201))
+                    .addGroup(pn_Tambah_BarangLayout.createSequentialGroup()
+                        .addComponent(Lb_Tambah_Barcode1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane_Tambah_Catatan)
+                        .addGap(47, 47, 47)
+                        .addComponent(Btn_Tambah_Barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pn_Tambah_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Btn_Tambah_Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_Tambah_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(114, 114, 114))))
         );
 
         Lb_Data_Barang_Tambah.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -884,12 +970,12 @@ public class Barang extends javax.swing.JPanel {
                     .addComponent(Lb_Barang_Tambah2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lb_Barang_Tambah3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84)
-                .addComponent(pn_Tambah_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(Lb_Data_Barang_Tambah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pn_Tambah_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Lb_Data_Barang_Tambah)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Scrl_Tambah_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         pn_Konten_Barang.add(pn_Tbl_Barang_Tambah, "card2");
@@ -1910,6 +1996,22 @@ public class Barang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Field_Update_StatusActionPerformed
 
+    private void Btn_Tambah_BarcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_BarcodeActionPerformed
+    try {
+            Linear barcode = new Linear();
+            barcode.setType(Linear.CODE128B);
+            barcode.setData(Field_Tambah_Kode_Barang.getText());
+            barcode.setI(11.0f);
+            String path = Field_Tambah_Barcode.getText();
+            barcode.renderBarcode("D:\\" + path + ".png");
+            //int width = 290;
+            //int height = 10;
+            getBarcodeImage(290, 100, Field_Tambah_Barcode, path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_Btn_Tambah_BarcodeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSMaterialButtonRectangle Btn_Barang_Detail;
@@ -1921,6 +2023,7 @@ public class Barang extends javax.swing.JPanel {
     private rojerusan.RSMaterialButtonRectangle Btn_Detail_Barang_Cetak_Barcode;
     private javax.swing.JButton Btn_Informasi_Cari_Barang;
     private javax.swing.JButton Btn_Informasi_Ok;
+    private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Barcode;
     private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Kembali;
     private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Simpan;
     private rojerusan.RSMaterialButtonRectangle Btn_Update_Hapus;
@@ -1940,7 +2043,7 @@ public class Barang extends javax.swing.JPanel {
     private javax.swing.JTextField FIeld_Informasi_Tanggal_Masuk_Detail;
     private javax.swing.JTextField Field_Barang_Update_Cari;
     private javax.swing.JTextField Field_Informasi_Cari_Barang_Detail;
-    private javax.swing.JTextField Field_Tambah_Barcode;
+    private javax.swing.JLabel Field_Tambah_Barcode;
     private javax.swing.JTextArea Field_Tambah_Catatan;
     private javax.swing.JTextField Field_Tambah_Harga_Beli;
     private javax.swing.JTextField Field_Tambah_Harga_Jual;
@@ -2075,5 +2178,9 @@ public class Barang extends javax.swing.JPanel {
         Field_Update_Satuan.setName("--default--");
         Field_Update_Status.setName("--default--");
         Field_Update_Catatan.setText("");
+    }
+
+    private void showBarcode() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
