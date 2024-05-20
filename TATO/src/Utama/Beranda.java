@@ -31,6 +31,7 @@ public class Beranda extends javax.swing.JPanel {
     DefaultTableModel model2 = new DefaultTableModel();
     DefaultTableModel model3 = new DefaultTableModel();
     DefaultTableModel model4 = new DefaultTableModel();
+    
     /**
      * Creates new form Beranda
      */
@@ -43,6 +44,10 @@ public class Beranda extends javax.swing.JPanel {
         
         getColumnD();
         getDataD();
+        
+        Tbl_Beranda_Barang.getTableHeader().setOpaque(false);
+        Tbl_Beranda_Barang.getTableHeader().setBackground(new Color(20, 50, 30));
+        Tbl_Beranda_Barang.setRowHeight(28);
         
         
         
@@ -448,7 +453,7 @@ private void SearchB(){
 
         Lb_Logo_Barang.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Logo_Barang.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lb_Logo_Barang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Barang.png"))); // NOI18N
+        Lb_Logo_Barang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/ikkon.png"))); // NOI18N
 
         javax.swing.GroupLayout pn_Lg_BarangLayout = new javax.swing.GroupLayout(pn_Lg_Barang);
         pn_Lg_Barang.setLayout(pn_Lg_BarangLayout);
@@ -478,12 +483,12 @@ private void SearchB(){
         pn_Card_BarangLayout.setHorizontalGroup(
             pn_Card_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Card_BarangLayout.createSequentialGroup()
-                .addComponent(pn_Lg_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pn_Lg_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_Card_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lb_Jumlah_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lb_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(93, 93, 93))
         );
         pn_Card_BarangLayout.setVerticalGroup(
             pn_Card_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,7 +542,7 @@ private void SearchB(){
         pn_Card_DistributorLayout.setHorizontalGroup(
             pn_Card_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Card_DistributorLayout.createSequentialGroup()
-                .addComponent(pn_Lg_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pn_Lg_Distributor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_Card_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Card_DistributorLayout.createSequentialGroup()
@@ -599,7 +604,7 @@ private void SearchB(){
         pn_Card_TransaksiLayout.setHorizontalGroup(
             pn_Card_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Card_TransaksiLayout.createSequentialGroup()
-                .addComponent(pn_Lg_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pn_Lg_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_Card_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Card_TransaksiLayout.createSequentialGroup()
@@ -607,7 +612,7 @@ private void SearchB(){
                         .addGap(63, 63, 63))
                     .addGroup(pn_Card_TransaksiLayout.createSequentialGroup()
                         .addComponent(Lb_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(48, Short.MAX_VALUE))))
+                        .addContainerGap(51, Short.MAX_VALUE))))
         );
         pn_Card_TransaksiLayout.setVerticalGroup(
             pn_Card_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -631,7 +636,7 @@ private void SearchB(){
 
         Lb_Logo_Barang1.setForeground(new java.awt.Color(255, 255, 255));
         Lb_Logo_Barang1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Lb_Logo_Barang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Karyawan.png"))); // NOI18N
+        Lb_Logo_Barang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/logokaryawan.png"))); // NOI18N
 
         javax.swing.GroupLayout pn_Lg_KaryawanLayout = new javax.swing.GroupLayout(pn_Lg_Karyawan);
         pn_Lg_Karyawan.setLayout(pn_Lg_KaryawanLayout);
@@ -661,7 +666,7 @@ private void SearchB(){
         pn_Card_KaryawanLayout.setHorizontalGroup(
             pn_Card_KaryawanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Card_KaryawanLayout.createSequentialGroup()
-                .addComponent(pn_Lg_Karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pn_Lg_Karyawan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pn_Card_KaryawanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Card_KaryawanLayout.createSequentialGroup()
@@ -740,7 +745,7 @@ private void SearchB(){
                         .addContainerGap()
                         .addGroup(pn_Tbl_Beranda_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tbl_Beranda_BarangLayout.createSequentialGroup()
-                                .addGap(0, 567, Short.MAX_VALUE)
+                                .addGap(0, 570, Short.MAX_VALUE)
                                 .addComponent(Lb_Tbl_Data_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(474, 474, 474)
                                 .addComponent(Field_Cari_Beranda_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -902,7 +907,7 @@ private void SearchB(){
                         .addGap(787, 787, 787)
                         .addComponent(Lb_Tbl_Data_Transaksi)
                         .addGap(310, 310, 310)
-                        .addComponent(Field_Cari_Beranda_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                        .addComponent(Field_Cari_Beranda_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Btn_Cari_Beranda_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pn_Tbl_Beranda_TransaksiLayout.createSequentialGroup()
@@ -987,12 +992,12 @@ private void SearchB(){
                         .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 1408, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pn_Tbl_Beranda_KaryawanLayout.createSequentialGroup()
                         .addGap(446, 446, 446)
-                        .addComponent(Lb_Tbl_Data_Karyawan, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                        .addComponent(Lb_Tbl_Data_Karyawan, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                         .addGap(493, 493, 493)
                         .addComponent(Field_Cari_Beranda_Karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Btn_Cari_Beranda_Karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         pn_Tbl_Beranda_KaryawanLayout.setVerticalGroup(
             pn_Tbl_Beranda_KaryawanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1026,9 +1031,9 @@ private void SearchB(){
                         .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(17, 17, 17))
                     .addGroup(pn_Konten_BerandaLayout.createSequentialGroup()
-                        .addComponent(pn_Card_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pn_Card_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(90, 90, 90)
-                        .addComponent(pn_Card_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pn_Card_Distributor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(90, 90, 90)
                         .addComponent(pn_Card_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(90, 90, 90)
@@ -1038,13 +1043,13 @@ private void SearchB(){
         pn_Konten_BerandaLayout.setVerticalGroup(
             pn_Konten_BerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Konten_BerandaLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(pn_Konten_BerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pn_Card_Karyawan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pn_Card_Transaksi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pn_Card_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pn_Card_Distributor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(126, 126, 126)
+                .addGap(101, 101, 101)
                 .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1057,15 +1062,15 @@ private void SearchB(){
                 .addGap(50, 50, 50)
                 .addGroup(pn_BerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lb_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pn_Konten_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(pn_Konten_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
         pn_BerandaLayout.setVerticalGroup(
             pn_BerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_BerandaLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(Lb_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pn_Konten_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(93, 93, 93))
         );
@@ -1081,7 +1086,7 @@ private void SearchB(){
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pn_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, 1027, Short.MAX_VALUE)
+                .addComponent(pn_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents

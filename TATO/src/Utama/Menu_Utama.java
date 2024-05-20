@@ -78,7 +78,7 @@ private Transaksi transaksiPanel;
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Ini Logo");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/elkon (1) (1).png"))); // NOI18N
 
         Lb_Nama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Lb_Nama.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,19 +91,19 @@ private Transaksi transaksiPanel;
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Lb_Nama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Lb_Nama, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                .addGap(73, 73, 73))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Lb_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -252,7 +252,7 @@ private void execute(String Akses) {
     ImageIcon iconLayanan = new ImageIcon(getClass().getResource("/Gambar/icon_Layanan.png"));
     ImageIcon iconSubLayananRetur = new ImageIcon(getClass().getResource("/Gambar/icon_Retur.png"));
     ImageIcon iconSubLayananHutang = new ImageIcon(getClass().getResource("/Gambar/icon_Hutang.png"));
-    ImageIcon iconKaryawan = new ImageIcon(getClass().getResource("/Gambar/icon_Karyawan.png"));
+    ImageIcon iconKaryawan = new ImageIcon(getClass().getResource("/Gambar/logokaryawan.png"));
     ImageIcon iconSubKaryawanUser = new ImageIcon(getClass().getResource("/Gambar/icon_User.png"));
     ImageIcon iconSubKaryawanAkses = new ImageIcon(getClass().getResource("/Gambar/icon_Akses.png"));
     ImageIcon iconLaporan = new ImageIcon(getClass().getResource("/Gambar/icon_Laporan.png"));

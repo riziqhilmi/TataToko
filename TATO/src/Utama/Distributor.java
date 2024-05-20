@@ -352,7 +352,7 @@ public class Distributor extends javax.swing.JPanel {
         jScrollPane1.setViewportView(Tbl_Daftar_Distributor);
 
         Lb_Daftar_Distributor.setBackground(new java.awt.Color(255, 255, 255));
-        Lb_Daftar_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Daftar_Distributor.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Lb_Daftar_Distributor.setText("Daftar Distributor");
 
         Field_Cari_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
