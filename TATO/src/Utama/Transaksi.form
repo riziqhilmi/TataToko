@@ -307,7 +307,6 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton3MouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
               </Events>
             </Component>
@@ -633,14 +632,14 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="1261" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="rSMaterialButtonRectangle2" pref="231" max="32767" attributes="0"/>
                           <Component id="rSMaterialButtonRectangle3" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="188" max="32767" attributes="0"/>
+                      <EmptySpace pref="65" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -655,8 +654,9 @@
                                   <Component id="Field_Cari_Stok" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                                   <Component id="rSMaterialButtonRectangle1" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="401" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="rSMaterialButtonRectangle2" min="-2" max="-2" attributes="0"/>
@@ -721,6 +721,9 @@
                   <Font name="Segoe UI" size="16" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="Field_Cari_Stok">
               <Properties>

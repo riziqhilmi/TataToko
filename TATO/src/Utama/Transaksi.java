@@ -572,11 +572,6 @@ public void autoInN() {
         jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton3.setText("  SEARCH DATA");
         jButton3.setToolTipText("");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -947,6 +942,11 @@ public void autoInN() {
 
         rSMaterialButtonRectangle1.setText("Cari");
         rSMaterialButtonRectangle1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rSMaterialButtonRectangle1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle1ActionPerformed(evt);
+            }
+        });
 
         Field_Cari_Stok.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
 
@@ -1003,13 +1003,13 @@ public void autoInN() {
                 .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(Panel_StokLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(125, 125, 125)
+                .addGap(124, 124, 124)
                 .addGroup(Panel_StokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                     .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         Panel_StokLayout.setVerticalGroup(
             Panel_StokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1021,8 +1021,9 @@ public void autoInN() {
                         .addGroup(Panel_StokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Field_Cari_Stok, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(75, 75, 75)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(67, 67, 67)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
                     .addGroup(Panel_StokLayout.createSequentialGroup()
                         .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
@@ -1059,13 +1060,6 @@ public void autoInN() {
         //        JOptionPane.showMessageDialog(null, "Transaksi Berhasil !");
         //        new struk.struk().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:
-        new Barang().setVisible(true);
-        //        this.setVisible(false);
-        //dispose();
-    }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -1334,6 +1328,10 @@ public void autoInN() {
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
+
+    private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

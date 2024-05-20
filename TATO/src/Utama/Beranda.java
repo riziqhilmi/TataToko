@@ -475,7 +475,7 @@ private void SearchB(){
         Lb_Barang.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
         Lb_Barang.setText("Barang");
 
-        Lb_Jumlah_Barang.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        Lb_Jumlah_Barang.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Lb_Jumlah_Barang.setText("0");
 
         javax.swing.GroupLayout pn_Card_BarangLayout = new javax.swing.GroupLayout(pn_Card_Barang);
@@ -534,7 +534,7 @@ private void SearchB(){
         Lb_Distributor.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
         Lb_Distributor.setText("Distributor");
 
-        Lb_Jumlah_Distributor.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        Lb_Jumlah_Distributor.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Lb_Jumlah_Distributor.setText("0");
 
         javax.swing.GroupLayout pn_Card_DistributorLayout = new javax.swing.GroupLayout(pn_Card_Distributor);
@@ -596,7 +596,7 @@ private void SearchB(){
         Lb_Transaksi.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
         Lb_Transaksi.setText("Transaksi");
 
-        Lb_Jumlah_Transaksi.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        Lb_Jumlah_Transaksi.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Lb_Jumlah_Transaksi.setText("0");
 
         javax.swing.GroupLayout pn_Card_TransaksiLayout = new javax.swing.GroupLayout(pn_Card_Transaksi);
@@ -658,7 +658,7 @@ private void SearchB(){
         Lb_Karyawan.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
         Lb_Karyawan.setText("Karyawan");
 
-        Lb_Jumlah_Karyawan.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        Lb_Jumlah_Karyawan.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Lb_Jumlah_Karyawan.setText("0");
 
         javax.swing.GroupLayout pn_Card_KaryawanLayout = new javax.swing.GroupLayout(pn_Card_Karyawan);
@@ -1086,7 +1086,7 @@ private void SearchB(){
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pn_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
+                .addComponent(pn_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
