@@ -39,6 +39,7 @@ public class Transaksi extends javax.swing.JPanel {
 
     DefaultTableModel table = new DefaultTableModel();
     DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel model2 = new DefaultTableModel();
 
     koneksi db = new koneksi();
     java.sql.Connection con;
@@ -79,6 +80,19 @@ public class Transaksi extends javax.swing.JPanel {
         tampilData();
         
         
+        
+        model2.addColumn("Tanggal");
+        model2.addColumn("ID Transaksi");
+        model2.addColumn("ID Barang");
+        model2.addColumn("Nama Barang");
+        model2.addColumn("Harga");
+        model2.addColumn("Jumlah");
+        model2.addColumn("Total");
+        model2.addColumn("Metode Pembayaran");
+        table_Riwayat.setModel(model2);
+        getDataT();
+        
+        
     }
 
     public void tanggal() {
@@ -103,6 +117,29 @@ public class Transaksi extends javax.swing.JPanel {
         }
 
     }
+    
+    
+    
+    public void getDataT(){
+        
+        ResultSet hasil = db.ambilData("SELECT * FROM transaksi");
+        try {
+            while (hasil.next()) {
+                model2.addRow(new Object[]{hasil.getString("tgl_transaksi"),
+                    hasil.getString("id_transaksi"), hasil.getString("id_barang"),
+                    hasil.getString("nama_barang"),
+                    hasil.getString("harga"), hasil.getString("jumlah_barang"),
+                    hasil.getString("total_harga"), hasil.getString("metode")});
+            }
+            table_Riwayat.setModel(model2);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+       
+    }
+    
+    
+    
 
     private void tampilData() {
         //untuk mengahapus baris setelah input
@@ -494,6 +531,7 @@ public void autoInN() {
         jLabel12 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txt_jumlah3 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
         Panel_Stok = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -503,6 +541,15 @@ public void autoInN() {
         table_barang = new javax.swing.JTable();
         rSMaterialButtonRectangle2 = new rojerusan.RSMaterialButtonRectangle();
         rSMaterialButtonRectangle3 = new rojerusan.RSMaterialButtonRectangle();
+        Panel_Detail_Riwayat = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        rSMaterialButtonRectangle4 = new rojerusan.RSMaterialButtonRectangle();
+        Field_Cari_Transaksi = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        table_Riwayat = new javax.swing.JTable();
+        rSMaterialButtonRectangle5 = new rojerusan.RSMaterialButtonRectangle();
+        rSMaterialButtonRectangle6 = new rojerusan.RSMaterialButtonRectangle();
 
         setLayout(new java.awt.CardLayout());
 
@@ -767,6 +814,14 @@ public void autoInN() {
             }
         });
 
+        jButton8.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jButton8.setText("RIwayat");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout Panel_TransaksiLayout = new javax.swing.GroupLayout(Panel_Transaksi);
         Panel_Transaksi.setLayout(Panel_TransaksiLayout);
         Panel_TransaksiLayout.setHorizontalGroup(
@@ -834,7 +889,8 @@ public void autoInN() {
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
                 .addGap(156, 156, 156))
         );
         Panel_TransaksiLayout.setVerticalGroup(
@@ -868,11 +924,13 @@ public void autoInN() {
                             .addComponent(Field_Kode_Barang_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(65, 65, 65)
-                        .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(Panel_TransaksiLayout.createSequentialGroup()
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1032,6 +1090,124 @@ public void autoInN() {
         );
 
         Panel_Utama.add(Panel_Stok, "card2");
+
+        Panel_Detail_Riwayat.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel6.setBackground(new java.awt.Color(0, 51, 153));
+        jPanel6.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Riwayat Transaksi");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        rSMaterialButtonRectangle4.setText("Cari");
+        rSMaterialButtonRectangle4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rSMaterialButtonRectangle4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle4ActionPerformed(evt);
+            }
+        });
+
+        Field_Cari_Transaksi.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+
+        table_Riwayat.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        table_Riwayat.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        table_Riwayat.setRowHeight(35);
+        table_Riwayat.setSelectionBackground(new java.awt.Color(0, 51, 153));
+        table_Riwayat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_RiwayatMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(table_Riwayat);
+
+        rSMaterialButtonRectangle5.setBackground(new java.awt.Color(255, 255, 51));
+        rSMaterialButtonRectangle5.setForeground(new java.awt.Color(0, 0, 0));
+        rSMaterialButtonRectangle5.setText("Print");
+        rSMaterialButtonRectangle5.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rSMaterialButtonRectangle5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle5ActionPerformed(evt);
+            }
+        });
+
+        rSMaterialButtonRectangle6.setBackground(new java.awt.Color(255, 153, 0));
+        rSMaterialButtonRectangle6.setForeground(new java.awt.Color(0, 0, 0));
+        rSMaterialButtonRectangle6.setText("Kembali");
+        rSMaterialButtonRectangle6.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rSMaterialButtonRectangle6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonRectangle6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Panel_Detail_RiwayatLayout = new javax.swing.GroupLayout(Panel_Detail_Riwayat);
+        Panel_Detail_Riwayat.setLayout(Panel_Detail_RiwayatLayout);
+        Panel_Detail_RiwayatLayout.setHorizontalGroup(
+            Panel_Detail_RiwayatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(Panel_Detail_RiwayatLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(Field_Cari_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rSMaterialButtonRectangle4, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(Panel_Detail_RiwayatLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(124, 124, 124)
+                .addGroup(Panel_Detail_RiwayatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rSMaterialButtonRectangle5, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                    .addComponent(rSMaterialButtonRectangle6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
+        );
+        Panel_Detail_RiwayatLayout.setVerticalGroup(
+            Panel_Detail_RiwayatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_Detail_RiwayatLayout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addGroup(Panel_Detail_RiwayatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(Panel_Detail_RiwayatLayout.createSequentialGroup()
+                        .addGroup(Panel_Detail_RiwayatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Field_Cari_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rSMaterialButtonRectangle4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(67, 67, 67)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(Panel_Detail_RiwayatLayout.createSequentialGroup()
+                        .addComponent(rSMaterialButtonRectangle5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(rSMaterialButtonRectangle6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(281, Short.MAX_VALUE))
+        );
+
+        Panel_Utama.add(Panel_Detail_Riwayat, "card2");
 
         add(Panel_Utama, "card4");
     }// </editor-fold>//GEN-END:initComponents
@@ -1332,16 +1508,50 @@ public void autoInN() {
     private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
+
+    private void rSMaterialButtonRectangle4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSMaterialButtonRectangle4ActionPerformed
+
+    private void table_RiwayatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_RiwayatMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table_RiwayatMouseClicked
+
+    private void rSMaterialButtonRectangle5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSMaterialButtonRectangle5ActionPerformed
+
+    private void rSMaterialButtonRectangle6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle6ActionPerformed
+        Panel_Utama.removeAll();
+        Panel_Utama.repaint();
+        Panel_Utama.revalidate();
+
+        Panel_Utama.add(Panel_Transaksi);
+        Panel_Utama.repaint();
+        Panel_Utama.revalidate();
+    }//GEN-LAST:event_rSMaterialButtonRectangle6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        Panel_Utama.removeAll();
+        Panel_Utama.repaint();
+        Panel_Utama.revalidate();
+
+        Panel_Utama.add(Panel_Detail_Riwayat);
+        Panel_Utama.repaint();
+        Panel_Utama.revalidate();
+    }//GEN-LAST:event_jButton8ActionPerformed
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Field_Cari_Stok;
+    private javax.swing.JTextField Field_Cari_Transaksi;
     public javax.swing.JTextField Field_Keranjang_ID;
     public javax.swing.JTextField Field_Kode_Barang_Transaksi;
     private javax.swing.JComboBox<String> Field_Metode;
     public static javax.swing.JTextField Field_Total_Semua;
     public javax.swing.JTextField Field__Transaksi_Barang;
     public javax.swing.JTextField Field__Transaksi_ID;
+    private javax.swing.JPanel Panel_Detail_Riwayat;
     private javax.swing.JPanel Panel_Stok;
     private javax.swing.JPanel Panel_Transaksi;
     private javax.swing.JPanel Panel_Utama;
@@ -1351,10 +1561,12 @@ public void autoInN() {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1364,11 +1576,17 @@ public void autoInN() {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle2;
     private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle3;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle4;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle5;
+    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle6;
+    private javax.swing.JTable table_Riwayat;
     private javax.swing.JTable table_barang;
     private javax.swing.JTable tb_keranjang;
     private com.toedter.calendar.JDateChooser tgl_transaksi;

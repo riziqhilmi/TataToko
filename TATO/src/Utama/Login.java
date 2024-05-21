@@ -5,8 +5,13 @@
 package Utama;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+
+import static Utama.koneksi.getConnection;
+import java.sql.SQLException;
 
 
 
@@ -25,6 +30,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        
+        
     }
 
     /**
@@ -208,7 +215,6 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void t_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_userActionPerformed
-        // TODO add your handling code here:
         
     }//GEN-LAST:event_t_userActionPerformed
 
