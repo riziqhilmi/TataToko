@@ -486,6 +486,7 @@ public void autoInN() {
                     sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
                 }
             }
+            
         });
     }
 
@@ -1007,6 +1008,11 @@ public void autoInN() {
         });
 
         Field_Cari_Stok.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        Field_Cari_Stok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Field_Cari_StokActionPerformed(evt);
+            }
+        });
 
         table_barang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         table_barang.setModel(new javax.swing.table.DefaultTableModel(
@@ -1540,6 +1546,36 @@ public void autoInN() {
         Panel_Utama.repaint();
         Panel_Utama.revalidate();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void Field_Cari_StokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Cari_StokActionPerformed
+        Panel_Utama.removeAll();
+        Panel_Utama.repaint();
+        Panel_Utama.revalidate();
+
+        Panel_Utama.add(Panel_Transaksi);
+        Panel_Utama.repaint();
+        Panel_Utama.revalidate();
+        
+        String id_barang = Field_Cari_Stok.getText();
+        
+        // Cari baris yang sesuai dalam table_barang
+        for (int i = 0; i < table_barang.getRowCount(); i++) {
+            if (id_barang.equals(String.valueOf(table_barang.getValueAt(i, 0)))) { // Menggunakan kolom pertama sebagai kolom ID barang, ganti dengan indeks kolom yang sesuai
+                // Jika baris yang sesuai ditemukan, isi field-field dengan nilai-nilai yang ditemukan
+                Field_Kode_Barang_Transaksi.setText(String.valueOf(table_barang.getValueAt(i, 0))); // Contoh: mengambil nilai dari kolom pertama
+                Field__Transaksi_Barang.setText(String.valueOf(table_barang.getValueAt(i, 1))); // Contoh: mengambil nilai dari kolom kedua
+                txt_harga2.setText("Rp. " + String.valueOf(table_barang.getValueAt(i, 4))); // Contoh: mengambil nilai dari kolom kelima
+                return; // Keluar dari loop setelah menemukan baris yang sesuai
+            }
+        }
+        
+        // Jika baris yang sesuai tidak ditemukan, lakukan sesuai kebutuhan, misalnya kosongkan field-field
+        Field_Kode_Barang_Transaksi.setText("");
+        Field__Transaksi_Barang.setText("");
+        txt_harga2.setText("");
+    
+    
+    }//GEN-LAST:event_Field_Cari_StokActionPerformed
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1596,5 +1632,10 @@ public void autoInN() {
     public javax.swing.JTextField txt_totalharga;
     public static javax.swing.JTextField txt_uang;
     // End of variables declaration//GEN-END:variables
+
+    private void pencarianData() {
+        
+
+}
 
 }

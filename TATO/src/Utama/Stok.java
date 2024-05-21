@@ -9,12 +9,14 @@ import java.sql.SQLException;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JDialog;
+import java.awt.Dialog;
 
 /**
  *
  * @author user
  */
-public class Stok extends javax.swing.JFrame {
+public class Stok extends javax.swing.JDialog {
     private Transaksi tr;
     DefaultTableModel model = new DefaultTableModel();
     koneksi db  = new koneksi();
@@ -23,7 +25,7 @@ public class Stok extends javax.swing.JFrame {
      */
     public Stok() {
         initComponents();
-        
+        setModalityType(ModalityType.APPLICATION_MODAL);
         model.addColumn("ID");
         model.addColumn("Nama Barang");
         model.addColumn("Jenis Barang");

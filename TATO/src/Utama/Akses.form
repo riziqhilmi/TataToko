@@ -23,7 +23,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pn_Akses" pref="1712" max="32767" attributes="0"/>
+              <Component id="pn_Akses" pref="1693" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,7 +57,7 @@
                       <Component id="Lb_Akses" min="-2" max="-2" attributes="0"/>
                       <Component id="pn_Konten_Akses" min="-2" pref="1637" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -212,7 +212,7 @@
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="Lb_Akses_User_ID" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                              <Component id="Btn_Akses_Cari_User_ID" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                              <Component id="Btn_Akses_Cari_User_ID" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                               <Component id="Field_Akses_User_ID" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -597,6 +597,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cari"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_Akses_Cari_User_IDActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="Btn_Akses_Cari_Nama_User">
                   <Properties>

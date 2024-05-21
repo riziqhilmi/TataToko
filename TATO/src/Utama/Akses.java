@@ -9,7 +9,7 @@ package Utama;
  * @author acer
  */
 public class Akses extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form Beranda
      */
@@ -187,6 +187,11 @@ public class Akses extends javax.swing.JPanel {
         Btn_Akses_Cari_User_ID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Btn_Akses_Cari_User_ID.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Akses_Cari_User_ID.setText("Cari");
+        Btn_Akses_Cari_User_ID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Akses_Cari_User_IDActionPerformed(evt);
+            }
+        });
 
         Btn_Akses_Cari_Nama_User.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Akses_Cari_Nama_User.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -289,7 +294,7 @@ public class Akses extends javax.swing.JPanel {
                             .addGroup(pn_Update_AksesLayout.createSequentialGroup()
                                 .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(Lb_Akses_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Btn_Akses_Cari_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Btn_Akses_Cari_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Field_Akses_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(40, 40, 40)
                                 .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +365,7 @@ public class Akses extends javax.swing.JPanel {
                 .addGroup(pn_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lb_Akses)
                     .addComponent(pn_Konten_Akses, javax.swing.GroupLayout.PREFERRED_SIZE, 1637, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_AksesLayout.setVerticalGroup(
             pn_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,7 +383,7 @@ public class Akses extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pn_Akses, javax.swing.GroupLayout.DEFAULT_SIZE, 1712, Short.MAX_VALUE))
+                .addComponent(pn_Akses, javax.swing.GroupLayout.DEFAULT_SIZE, 1693, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,6 +401,12 @@ public class Akses extends javax.swing.JPanel {
     private void Btn_Akses_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_UpdateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_Akses_UpdateActionPerformed
+
+    private void Btn_Akses_Cari_User_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Cari_User_IDActionPerformed
+        // TODO add your handling code here:
+        new Stok().setVisible(true);
+        
+    }//GEN-LAST:event_Btn_Akses_Cari_User_IDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
