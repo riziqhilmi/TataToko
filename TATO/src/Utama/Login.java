@@ -235,17 +235,18 @@ public class Login extends javax.swing.JFrame {
 
     Class.forName(driver);
     try (Connection con = DriverManager.getConnection(url, user, pwd)) {
-        String queryGetData = "SELECT username, akses FROM pengguna WHERE username = ?";
+        String queryGetData = "SELECT username, akses, Nama_Lengkap FROM pengguna WHERE username = ?";
         try (PreparedStatement psGetData = con.prepareStatement(queryGetData)) {
             psGetData.setString(1, username);
             try (ResultSet rsGetData = psGetData.executeQuery()) {
                 if (rsGetData.next()) {
                     t_user.setText("");
-                    String nama = rsGetData.getString("username");
+                    String usr = rsGetData.getString("username");
                     String akses = rsGetData.getString("akses");
+                    String nama = rsGetData.getString("Nama_Lengkap");
                     int asn = JOptionPane.showConfirmDialog(null, "Apakah Anda Akan Login sebagai '" + nama + "'?");
                     if (asn == JOptionPane.YES_OPTION) {
-                        Menu_Utama menus = new Menu_Utama(nama, akses);
+                        Menu_Utama menus = new Menu_Utama(nama, akses, usr);
                         menus.setVisible(true);
                         // Assuming this refers to the current JFrame, dispose it
                         JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(t_user);
@@ -301,7 +302,7 @@ public class Login extends javax.swing.JFrame {
                 if (t_user.getText().equals(user) && t_pw.getText().equals(pw)) {
                     k = true;
                     this.setVisible(false);
-                    new Menu_Utama(nama, Akses).setVisible(true);
+                    new Menu_Utama(nama, Akses, user).setVisible(true);
                 }
             }
             if (!k) {

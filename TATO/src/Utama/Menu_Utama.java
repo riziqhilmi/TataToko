@@ -20,7 +20,7 @@ public class Menu_Utama extends javax.swing.JFrame {
 private Transaksi transaksiPanel;
     int xx, xy;
     
-    public Menu_Utama(String nama, String Akses) {
+    public Menu_Utama(String nama, String Akses, String usr) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         
@@ -223,7 +223,7 @@ private Transaksi transaksiPanel;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu_Utama("nama", "Akses").setVisible(true);
+                new Menu_Utama("usr","nama", "Akses").setVisible(true);
             }
         });
     }
