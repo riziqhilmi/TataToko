@@ -130,7 +130,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="rSMaterialButtonRectangle1" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="Btn_Login" min="-2" pref="180" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                           </Group>
@@ -148,7 +148,7 @@
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="t_pw" min="-2" pref="77" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="rSMaterialButtonRectangle1" min="-2" pref="53" max="-2" attributes="0"/>
+                      <Component id="Btn_Login" min="-2" pref="53" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -186,6 +186,7 @@
               <Events>
                 <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="t_pwFocusGained"/>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="t_pwFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="t_pwActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -196,12 +197,12 @@
                 <Property name="text" type="java.lang.String" value="LOGIN"/>
               </Properties>
             </Component>
-            <Component class="rojerusan.RSMaterialButtonRectangle" name="rSMaterialButtonRectangle1">
+            <Component class="rojerusan.RSMaterialButtonRectangle" name="Btn_Login">
               <Properties>
                 <Property name="text" type="java.lang.String" value="LOGIN"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSMaterialButtonRectangle1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_LoginActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">

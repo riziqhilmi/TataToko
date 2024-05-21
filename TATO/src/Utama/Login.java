@@ -4,16 +4,18 @@
  */
 package Utama;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 import static Utama.koneksi.getConnection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -21,17 +23,20 @@ import java.sql.SQLException;
  */
 public class Login extends javax.swing.JFrame {
 
-   koneksi db = new koneksi();
-  
+    koneksi db = new koneksi();
     
-    
+    Connection con;
+    private final String driver = "com.mysql.cj.jdbc.Driver";
+    private final String url = "jdbc:mysql://localhost:3306/tatatoko";
+    private final String user = "root";
+    private final String pwd = "";
+
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
-        
-        
+
     }
 
     /**
@@ -49,7 +54,7 @@ public class Login extends javax.swing.JFrame {
         t_user = new javax.swing.JTextField();
         t_pw = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
-        rSMaterialButtonRectangle1 = new rojerusan.RSMaterialButtonRectangle();
+        Btn_Login = new rojerusan.RSMaterialButtonRectangle();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -92,14 +97,19 @@ public class Login extends javax.swing.JFrame {
                 t_pwFocusLost(evt);
             }
         });
+        t_pw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                t_pwActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel2.setText("LOGIN");
 
-        rSMaterialButtonRectangle1.setText("LOGIN");
-        rSMaterialButtonRectangle1.addActionListener(new java.awt.event.ActionListener() {
+        Btn_Login.setText("LOGIN");
+        Btn_Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSMaterialButtonRectangle1ActionPerformed(evt);
+                Btn_LoginActionPerformed(evt);
             }
         });
 
@@ -135,7 +145,7 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5))
-                            .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Btn_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(149, 149, 149))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -148,7 +158,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(t_pw, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(rSMaterialButtonRectangle1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Btn_Login, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -215,13 +225,53 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void t_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_userActionPerformed
-        
+
+        try {
+    String username = t_user.getText();
+    if (username == null || username.trim().isEmpty()) {
+        t_user.requestFocus();
+        return;
+    }
+
+    Class.forName(driver);
+    try (Connection con = DriverManager.getConnection(url, user, pwd)) {
+        String queryGetData = "SELECT username, akses FROM pengguna WHERE username = ?";
+        try (PreparedStatement psGetData = con.prepareStatement(queryGetData)) {
+            psGetData.setString(1, username);
+            try (ResultSet rsGetData = psGetData.executeQuery()) {
+                if (rsGetData.next()) {
+                    t_user.setText("");
+                    String nama = rsGetData.getString("username");
+                    String akses = rsGetData.getString("akses");
+                    int asn = JOptionPane.showConfirmDialog(null, "Apakah Anda Akan Login sebagai '" + nama + "'?");
+                    if (asn == JOptionPane.YES_OPTION) {
+                        Menu_Utama menus = new Menu_Utama(nama, akses);
+                        menus.setVisible(true);
+                        // Assuming this refers to the current JFrame, dispose it
+                        JFrame currentFrame = (JFrame) SwingUtilities.getWindowAncestor(t_user);
+                        if (currentFrame != null) {
+                            currentFrame.dispose();
+                        }
+                    }
+                } else {
+                    t_user.setText("");
+                    t_user.requestFocus();
+                }
+            }
+        }
+    }
+} catch (SQLException | ClassNotFoundException e) {
+    e.printStackTrace();
+} catch (RuntimeException e) {
+    e.printStackTrace();
+}
+
     }//GEN-LAST:event_t_userActionPerformed
 
     private void t_userFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_userFocusGained
         // TODO add your handling code here:
         String user = t_user.getText();
-        if (user.equals("Username")){
+        if (user.equals("Username")) {
             t_user.setText("");
         }
     }//GEN-LAST:event_t_userFocusGained
@@ -229,18 +279,18 @@ public class Login extends javax.swing.JFrame {
     private void t_userFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_userFocusLost
         // TODO add your handling code here:
         String user = t_user.getText();
-        if (user.equals("")||user.equals("Username")){
+        if (user.equals("") || user.equals("Username")) {
             t_user.setText("Username");
         }
     }//GEN-LAST:event_t_userFocusLost
 
-    private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
+    private void Btn_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_LoginActionPerformed
         String user = "";
-        String pw  = "";
+        String pw = "";
         String nama = "";
-        String Akses ="";
-        
-         boolean k = false;
+        String Akses = "";
+
+        boolean k = false;
         try {
             ResultSet rs = db.ambilData("SELECT * FROM pengguna");
             while (rs.next()) {
@@ -259,20 +309,25 @@ public class Login extends javax.swing.JFrame {
             }
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
+    }//GEN-LAST:event_Btn_LoginActionPerformed
 
     private void t_pwFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_pwFocusGained
         String pw = t_pw.getText();
-        if (pw.equals("Password")){
+        if (pw.equals("Password")) {
             t_pw.setText("");
     }//GEN-LAST:event_t_pwFocusGained
     }
     private void t_pwFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_pwFocusLost
         String pw = t_pw.getText();
-        if (pw.equals("")||pw.equals("Password")){
-            t_pw.setText("Password");
+        if (pw.equals("") || pw.equals("Password")) {
+            t_pw.setText("Password");}
     }//GEN-LAST:event_t_pwFocusLost
-    }
+
+    private void t_pwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_pwActionPerformed
+        Btn_Login.requestFocus();
+    }//GEN-LAST:event_t_pwActionPerformed
+    
+
     /**
      * @param args the command line arguments
      */
@@ -316,6 +371,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rojerusan.RSMaterialButtonRectangle Btn_Login;
     private org.jdesktop.core.animation.timing.evaluators.EvaluatorDouble evaluatorDouble1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -324,7 +380,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private rojerusan.RSMaterialButtonRectangle rSMaterialButtonRectangle1;
     private javax.swing.JPasswordField t_pw;
     private javax.swing.JTextField t_user;
     // End of variables declaration//GEN-END:variables
