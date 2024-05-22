@@ -404,7 +404,7 @@ public class Akses extends javax.swing.JPanel {
 
     private void Btn_Akses_Cari_User_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Cari_User_IDActionPerformed
         // TODO add your handling code here:
-        new Stok().setVisible(true);
+       
         
     }//GEN-LAST:event_Btn_Akses_Cari_User_IDActionPerformed
 

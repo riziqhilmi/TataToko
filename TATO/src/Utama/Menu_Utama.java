@@ -18,12 +18,13 @@ import javax.swing.JFrame;
  */
 public class Menu_Utama extends javax.swing.JFrame {
 private Transaksi transaksiPanel;
+private String nama;
     int xx, xy;
     
     public Menu_Utama(String nama, String Akses, String usr) {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        this.nama = nama;
         
         Lb_Nama.setText(nama);
         Lb_Akses.setText(Akses);
@@ -382,7 +383,7 @@ private void execute(String Akses) {
         @Override
         public void actionPerformed(ActionEvent e) {
             Dasar.removeAll();
-            Dasar.add(new Transaksi());
+            Dasar.add(new Transaksi(nama));
             Dasar.repaint();
             Dasar.revalidate();
         }
@@ -419,7 +420,7 @@ private void execute(String Akses) {
 
     public Transaksi getTransaksiPanel() {
         if (transaksiPanel == null) {
-            transaksiPanel = new Transaksi(); // Inisialisasi panel jika belum ada
+            transaksiPanel = new Transaksi(nama); // Inisialisasi panel jika belum ada
         }
         return transaksiPanel;
     }

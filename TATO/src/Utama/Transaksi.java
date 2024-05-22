@@ -40,7 +40,7 @@ public class Transaksi extends javax.swing.JPanel {
     DefaultTableModel table = new DefaultTableModel();
     DefaultTableModel model = new DefaultTableModel();
     DefaultTableModel model2 = new DefaultTableModel();
-
+    
     koneksi db = new koneksi();
     java.sql.Connection con;
     private final String driver = "com.mysql.cj.jdbc.Driver";
@@ -53,7 +53,7 @@ public class Transaksi extends javax.swing.JPanel {
     /**
      * Creates new form Transaksi
      */
-    public Transaksi() {
+    public Transaksi(String nama) {
         initComponents();
         
         totalnya();
@@ -92,7 +92,7 @@ public class Transaksi extends javax.swing.JPanel {
         table_Riwayat.setModel(model2);
         getDataT();
         
-        
+        Lb_Nama_Kasir.setText(nama);
     }
 
     public void tanggal() {
@@ -533,6 +533,7 @@ public void autoInN() {
         jLabel10 = new javax.swing.JLabel();
         txt_jumlah3 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        Lb_Nama_Kasir = new javax.swing.JLabel();
         Panel_Stok = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -823,6 +824,9 @@ public void autoInN() {
             }
         });
 
+        Lb_Nama_Kasir.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        Lb_Nama_Kasir.setText("Nama");
+
         javax.swing.GroupLayout Panel_TransaksiLayout = new javax.swing.GroupLayout(Panel_Transaksi);
         Panel_Transaksi.setLayout(Panel_TransaksiLayout);
         Panel_TransaksiLayout.setHorizontalGroup(
@@ -836,6 +840,8 @@ public void autoInN() {
                             .addGroup(Panel_TransaksiLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Lb_Nama_Kasir, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
                                 .addComponent(tgl_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(Panel_TransaksiLayout.createSequentialGroup()
                                 .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -902,9 +908,16 @@ public void autoInN() {
                     .addGroup(Panel_TransaksiLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(jLabel6))
+                    .addGroup(Panel_TransaksiLayout.createSequentialGroup()
+                        .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tgl_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lb_Nama_Kasir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_TransaksiLayout.createSequentialGroup()
                         .addComponent(Field__Transaksi_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10)
@@ -919,8 +932,6 @@ public void autoInN() {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_harga2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Panel_TransaksiLayout.createSequentialGroup()
-                        .addComponent(tgl_transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Field_Kode_Barang_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1252,6 +1263,8 @@ public void autoInN() {
         Panel_Utama.add(Panel_Stok);
         Panel_Utama.repaint();
         Panel_Utama.revalidate();
+        
+        Field_Cari_Stok.setText(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txt_harga2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_harga2ActionPerformed
@@ -1294,6 +1307,7 @@ public void autoInN() {
             param.put("uang",txt_uang.getText());
             param.put("kembali",txt_kembalian.getText());
             param.put("id", Field_Keranjang_ID.getText());
+            param.put("kasir",Lb_Nama_Kasir.getText());
             
             JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file),param,con);
             JasperViewer.viewReport(print, false);
@@ -1569,10 +1583,7 @@ public void autoInN() {
             }
         }
         
-        // Jika baris yang sesuai tidak ditemukan, lakukan sesuai kebutuhan, misalnya kosongkan field-field
-        Field_Kode_Barang_Transaksi.setText("");
-        Field__Transaksi_Barang.setText("");
-        txt_harga2.setText("");
+        
     
     
     }//GEN-LAST:event_Field_Cari_StokActionPerformed
@@ -1587,6 +1598,7 @@ public void autoInN() {
     public static javax.swing.JTextField Field_Total_Semua;
     public javax.swing.JTextField Field__Transaksi_Barang;
     public javax.swing.JTextField Field__Transaksi_ID;
+    private javax.swing.JLabel Lb_Nama_Kasir;
     private javax.swing.JPanel Panel_Detail_Riwayat;
     private javax.swing.JPanel Panel_Stok;
     private javax.swing.JPanel Panel_Transaksi;

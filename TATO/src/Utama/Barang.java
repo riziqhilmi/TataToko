@@ -217,7 +217,7 @@ public class Barang extends javax.swing.JPanel {
     }
 
     public void getData() {
-        Transaksi tr = new Transaksi();
+        
         ResultSet hasil = db.ambilData("SELECT * FROM barang");
         try {
             while (hasil.next()) {
