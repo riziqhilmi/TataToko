@@ -56,6 +56,7 @@ public class Beranda extends javax.swing.JPanel {
         model3.addColumn("ID Transaksi");
         model3.addColumn("Total Harga");
         model3.addColumn("Total Bayar");
+        model3.addColumn("Nama Pelanggan");
         model3.addColumn("Metode Pembayaran");
         Tbl_Beranda_Transaksi.setModel(model3);
         getDataT();
@@ -76,6 +77,18 @@ public class Beranda extends javax.swing.JPanel {
         model4.addColumn("Alamat");
         model4.addColumn("Akses");
         getDataK();
+
+        Tbl_Beranda_Transaksi.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selectedRow = Tbl_Beranda_Transaksi.getSelectedRow();
+                if (selectedRow != -1) {
+                    // Ambil id_transaksi dari baris yang dipilih
+                    String id_transaksi = Tbl_Beranda_Transaksi.getValueAt(selectedRow, 1).toString();
+                    // Panggil fungsi untuk memuat detail transaksi berdasarkan id_transaksi
+                    loadDetailTransaksi(id_transaksi);
+                }
+            }
+        });
     }
 
     Beranda(String string) {
@@ -158,7 +171,7 @@ public class Beranda extends javax.swing.JPanel {
             while (hasil.next()) {
                 model3.addRow(new Object[]{hasil.getString("tgl_transaksi"),
                     hasil.getString("id_transaksi"), hasil.getString("total_bayar"),
-                    hasil.getString("bayar"), hasil.getString("metode")});
+                    hasil.getString("bayar"),hasil.getString("pelanggan"), hasil.getString("metode")});
             }
             Tbl_Beranda_Transaksi.setModel(model3);
         } catch (SQLException ex) {
@@ -213,7 +226,7 @@ public class Beranda extends javax.swing.JPanel {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         String idTransaksi = Tbl_Beranda_Transaksi.getValueAt(row, 0).toString();
-            ResultSet rs = db.ambilData("SELECT * FROM detail_transaksi dt INNER JOIN barang sb ON dt.id_barang = sb.id_barang WHERE dt.id_transaksi = '" + Tbl_Beranda_Transaksi.getValueAt(row, 0) + "'");
+        ResultSet rs = db.ambilData("SELECT * FROM detail_transaksi dt INNER JOIN barang sb ON dt.id_barang = sb.id_barang WHERE dt.id_transaksi = '" + Tbl_Beranda_Transaksi.getValueAt(row, 0) + "'");
 
         panel.setBounds(0, 0, 300, 300);
         StringBuilder labelText = new StringBuilder("<html><body>");
@@ -233,32 +246,30 @@ public class Beranda extends javax.swing.JPanel {
         panel.add(label);
         return panel;
     }
-    
-    public void showPopupWithKeranjangData(String idTransaksi) {
-        
-        try {
-            ResultSet hasil = db.ambilData("SELECT detail_transaksi.nama_barang, detail_transaksi.jumlah, detail_transaksi.harga, detail_transaksi.total " +
-                       "FROM detail_transaksi " +
-                       "INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi " +
-                       "WHERE transaksi.id_transaksi = '"+idTransaksi+"'");
-            
-            StringBuilder data = new StringBuilder();
-            while (hasil.next()) {
-                String namaBarang = hasil.getString("nama_barang");
-                int jumlah = hasil.getInt("jumlah");
-                int harga = hasil.getInt("harga");
-                int total = hasil.getInt("total");
-                data.append("Nama Barang: ").append(namaBarang)
-                    .append(", Jumlah: ").append(jumlah)
-                    .append(", Harga: ").append(harga)
-                    .append(", Total: ").append(total)
-                    .append("\n");
-            }
-            
-            JOptionPane.showMessageDialog(null, data.toString(), "Detail Keranjang", JOptionPane.INFORMATION_MESSAGE);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+
+    private void loadDetailTransaksi(String id_transaksi) {
+        // Bersihkan tabel detail transaksi sebelum memuat data baru
+        //DefaultTableModel modelDetail = (DefaultTableModel) Tbl_Beranda_Detail_Transaksi.getModel();
+        //modelDetail.setRowCount(0);
+
+        // Ambil data dari tabel detail_transaksi berdasarkan id_transaksi
+        //ResultSet hasilDetail = db.ambilData("SELECT * FROM detail_transaksi WHERE id_transaksi = '" + id_transaksi + "'");
+        //try {
+          //  while (hasilDetail.next()) {
+            //    modelDetail.addRow(new Object[]{
+              //      hasilDetail.getString("id_transaksi"),
+                //    hasilDetail.getString("id_barang"),
+                  //  hasilDetail.getString("nama_barang"),
+                    //hasilDetail.getString("tanggal"),
+                    //hasilDetail.getString("harga"),
+                    //hasilDetail.getString("jumlah"),
+                    //hasilDetail.getString("total")
+                //});
+            //}
+            //Tbl_Beranda_Detail_Transaksi.setModel(modelDetail);
+        //} catch (SQLException ex) {
+          //  ex.printStackTrace();
+        //}
     }
 
     private void SearchB() {
@@ -951,13 +962,13 @@ public class Beranda extends javax.swing.JPanel {
                         .addComponent(Field_Cari_Beranda_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Btn_Cari_Beranda_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_Tbl_Beranda_TransaksiLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jScrollPane9))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_Tbl_Beranda_TransaksiLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Lb_Beranda_Transaksi)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pn_Tbl_Beranda_TransaksiLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 1508, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45))
         );
         pn_Tbl_Beranda_TransaksiLayout.setVerticalGroup(
@@ -976,8 +987,8 @@ public class Beranda extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Btn_Cari_Beranda_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                .addGap(28, 28, 28))
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
 
         pn_Konten_Tbl_Beranda.add(pn_Tbl_Beranda_Transaksi, "card2");
@@ -1074,7 +1085,7 @@ public class Beranda extends javax.swing.JPanel {
                 .addGap(45, 45, 45)
                 .addGroup(pn_Konten_BerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Konten_BerandaLayout.createSequentialGroup()
-                        .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                         .addGap(17, 17, 17))
                     .addGroup(pn_Konten_BerandaLayout.createSequentialGroup()
                         .addComponent(pn_Card_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1196,10 +1207,10 @@ public class Beranda extends javax.swing.JPanel {
 
     private void Tbl_Beranda_KaryawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_Beranda_KaryawanMouseClicked
         // TODO add your handling code here:
-        if(Integer.parseInt(String.valueOf(Tbl_Beranda_Transaksi.getSelectedRow())) != -1) {
+        if (Integer.parseInt(String.valueOf(Tbl_Beranda_Transaksi.getSelectedRow())) != -1) {
             JOptionPane.showMessageDialog(this, thePanel(Integer.parseInt(String.valueOf(Tbl_Beranda_Transaksi.getSelectedRow()))), "Info", JOptionPane.INFORMATION_MESSAGE);
         }
-            
+
     }//GEN-LAST:event_Tbl_Beranda_KaryawanMouseClicked
 
 
