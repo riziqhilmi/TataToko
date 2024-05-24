@@ -8,7 +8,9 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -21,6 +23,7 @@ import javax.swing.table.TableRowSorter;
  * @author acer
  */
 public class Beranda extends javax.swing.JPanel {
+
     Connection con;
     private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/tatatoko";
@@ -31,7 +34,7 @@ public class Beranda extends javax.swing.JPanel {
     DefaultTableModel model2 = new DefaultTableModel();
     DefaultTableModel model3 = new DefaultTableModel();
     DefaultTableModel model4 = new DefaultTableModel();
-    
+
     /**
      * Creates new form Beranda
      */
@@ -41,27 +44,22 @@ public class Beranda extends javax.swing.JPanel {
         Count();
         getColumn();
         getData();
-        
+
         getColumnD();
         getDataD();
-        
+
         Tbl_Beranda_Barang.getTableHeader().setOpaque(false);
         Tbl_Beranda_Barang.getTableHeader().setBackground(new Color(20, 50, 30));
         Tbl_Beranda_Barang.setRowHeight(28);
-        
-        
-        
+
         model3.addColumn("Tanggal");
         model3.addColumn("ID Transaksi");
-        model3.addColumn("ID Barang");
-        model3.addColumn("Nama Barang");
-        model3.addColumn("Harga");
-        model3.addColumn("Jumlah");
-        model3.addColumn("Total");
+        model3.addColumn("Total Harga");
+        model3.addColumn("Total Bayar");
         model3.addColumn("Metode Pembayaran");
         Tbl_Beranda_Transaksi.setModel(model3);
         getDataT();
-        
+
         model4.addColumn("ID");
         model4.addColumn("Nama User");
         model4.addColumn("Password ");
@@ -83,8 +81,8 @@ public class Beranda extends javax.swing.JPanel {
     Beranda(String string) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    public void getColumn(){
+
+    public void getColumn() {
         model.addColumn("ID");
         model.addColumn("Nama Barang");
         model.addColumn("Jenis Barang");
@@ -97,28 +95,28 @@ public class Beranda extends javax.swing.JPanel {
         model.addColumn("Status");
         model.addColumn("Catatan");
         Tbl_Beranda_Barang.setModel(model);
-        
-        
+
     }
-    public void getData(){
-        
+
+    public void getData() {
+
         ResultSet hasil = db.ambilData("SELECT * FROM barang");
         try {
-            while(hasil.next()) {
+            while (hasil.next()) {
                 model.addRow(new Object[]{hasil.getString("id_barang"),
-                    hasil.getString("nama_barang"),hasil.getString("jenis"),
-                    hasil.getString("jumlah"),hasil.getString("harga_beli"),
-                    hasil.getString("harga_jual"),hasil.getString("tanggal"),
-                    hasil.getString("expired"),hasil.getString("satuan"),
-                    hasil.getString("status"),hasil.getString("catatan"),
-                    hasil.getString("barcode"),hasil.getString("merk")});
+                    hasil.getString("nama_barang"), hasil.getString("jenis"),
+                    hasil.getString("jumlah"), hasil.getString("harga_beli"),
+                    hasil.getString("harga_jual"), hasil.getString("tanggal"),
+                    hasil.getString("expired"), hasil.getString("satuan"),
+                    hasil.getString("status"), hasil.getString("catatan"),
+                    hasil.getString("barcode"), hasil.getString("merk")});
             }
-             Tbl_Beranda_Barang.setModel(model);
+            Tbl_Beranda_Barang.setModel(model);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
+
     public void getColumnD() {
         model2.addColumn("ID");
         model2.addColumn("Nama ");
@@ -132,7 +130,6 @@ public class Beranda extends javax.swing.JPanel {
         model2.addColumn("Ket");
         model2.addColumn("Status");
         Tbl_Beranda_Distributor.setModel(model2);
-        
 
     }
 
@@ -153,73 +150,94 @@ public class Beranda extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
-    
-    
-    
-    
-    public void getDataT(){
-        
+
+    public void getDataT() {
+
         ResultSet hasil = db.ambilData("SELECT * FROM transaksi");
         try {
             while (hasil.next()) {
                 model3.addRow(new Object[]{hasil.getString("tgl_transaksi"),
-                    hasil.getString("id_transaksi"), hasil.getString("id_barang"),
-                    hasil.getString("nama_barang"),
-                    hasil.getString("harga"), hasil.getString("jumlah_barang"),
+                    hasil.getString("id_transaksi"), hasil.getString("jumlah_barang"),
                     hasil.getString("total_harga"), hasil.getString("metode")});
             }
             Tbl_Beranda_Transaksi.setModel(model3);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-       
+
     }
-    
-    
+
     public void getDataK() {
 
         ResultSet hasil = db.ambilData("SELECT * FROM pengguna");
         try {
             while (hasil.next()) {
                 model4.addRow(new Object[]{hasil.getString("id_username"),
-                    hasil.getString("username"),hasil.getString("password"),hasil.getString("email"),
+                    hasil.getString("username"), hasil.getString("password"), hasil.getString("email"),
                     hasil.getString("Nama_Lengkap"),
                     hasil.getString("No_Identitas"), hasil.getString("Jenis_Kelamin"),
                     hasil.getString("No_Telepon"), hasil.getString("Tanggal_Lahir"),
                     hasil.getString("Status_Karyawan"),
                     hasil.getString("Tanggal_Mulai"), hasil.getString("Gaji"),
-                    hasil.getString("No_Rekening"),hasil.getString("Alamat"),hasil.getString("akses")});
+                    hasil.getString("No_Rekening"), hasil.getString("Alamat"), hasil.getString("akses")});
             }
             Tbl_Beranda_Karyawan.setModel(model4);
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
-    
+
     public void search() {
-    String cari = Field_Cari_Beranda_Barang.getText();
-    ResultSet hasil = db.ambilData("SELECT * FROM barang WHERE nama_barang LIKE '%" + cari + "%' LIMIT 1");
-    try {
-        model.setRowCount(0); // Menghapus semua baris yang ada di model sebelum menambahkan baris baru
-        if (hasil.next()) {
-            model.addRow(new Object[]{hasil.getString("id_barang"),
-                hasil.getString("nama_barang"),hasil.getString("jenis"),
-                hasil.getString("jumlah"),hasil.getString("harga_beli"),
-                hasil.getString("harga_jual"),hasil.getString("tanggal"),
-                hasil.getString("expired"),hasil.getString("satuan"),
-                hasil.getString("status"),hasil.getString("catatan")});
-            Tbl_Beranda_Barang.setModel(model);
-        } else {
-            JOptionPane.showMessageDialog(null, "Tidak ada data yang valid");
+        String cari = Field_Cari_Beranda_Barang.getText();
+        ResultSet hasil = db.ambilData("SELECT * FROM barang WHERE nama_barang LIKE '%" + cari + "%' LIMIT 1");
+        try {
+            model.setRowCount(0); // Menghapus semua baris yang ada di model sebelum menambahkan baris baru
+            if (hasil.next()) {
+                model.addRow(new Object[]{hasil.getString("id_barang"),
+                    hasil.getString("nama_barang"), hasil.getString("jenis"),
+                    hasil.getString("jumlah"), hasil.getString("harga_beli"),
+                    hasil.getString("harga_jual"), hasil.getString("tanggal"),
+                    hasil.getString("expired"), hasil.getString("satuan"),
+                    hasil.getString("status"), hasil.getString("catatan")});
+                Tbl_Beranda_Barang.setModel(model);
+            } else {
+                JOptionPane.showMessageDialog(null, "Tidak ada data yang valid");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
     }
-}
-    
-private void SearchB(){
+
+    public JPanel thePanel(int row) {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
+        String idTransaksi = Tbl_Beranda_Transaksi.getValueAt(row, 0).toString();
+        ResultSet rs = db.ambilData("SELECT transaksi.id_transaksi, transaksi.tgl_transaksi, keranjang.nama_barang, " +
+                   "transaksi.harga, transaksi.jumlah_barang, transaksi.total_harga, transaksi.metode, keranjang.total " +
+                   "FROM transaksi " +
+                   "INNER JOIN keranjang ON transaksi.id_transaksi = keranjang.'" + idTransaksi + "'");
+
+        panel.setBounds(0, 0, 300, 300);
+        StringBuilder labelText = new StringBuilder("<html><body>");
+        labelText.append("Detail barang pada transaksi nomor '").append(idTransaksi).append("', berikut:<br/>");
+
+        try {
+            while (rs.next()) {
+                String namaBarang = rs.getString("nama_barang");
+                int jumlahBarang = rs.getInt("jumlah_barang");
+                labelText.append(namaBarang).append(" : ").append(jumlahBarang).append("<br/>");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        labelText.append("</body></html>");
+        label.setText(labelText.toString());
+        panel.add(label);
+        return panel;
+    }
+
+    private void SearchB() {
         Field_Cari_Beranda_Barang.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -247,7 +265,7 @@ private void SearchB(){
                 }
             }
         });
-        
+
         Field_Cari_Beranda_Distributor.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -275,7 +293,7 @@ private void SearchB(){
                 }
             }
         });
-        
+
         Field_Cari_Beranda_Transaksi.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -303,7 +321,7 @@ private void SearchB(){
                 }
             }
         });
-        
+
         Field_Cari_Beranda_Karyawan.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -334,43 +352,42 @@ private void SearchB(){
     }
 
     private void Count() {
-    try {
-        // Count total items in barang table
-        ResultSet rsBarang = db.ambilData("SELECT COUNT(*) AS total_barang FROM barang");
-        if (rsBarang.next()) {
-            int totalBarang = rsBarang.getInt("total_barang");
-            // Update the JLabel with the count for barang
-            Lb_Jumlah_Barang.setText(String.valueOf(totalBarang));
-        }
+        try {
+            // Count total items in barang table
+            ResultSet rsBarang = db.ambilData("SELECT COUNT(*) AS total_barang FROM barang");
+            if (rsBarang.next()) {
+                int totalBarang = rsBarang.getInt("total_barang");
+                // Update the JLabel with the count for barang
+                Lb_Jumlah_Barang.setText(String.valueOf(totalBarang));
+            }
 
-        // Count total items in distributor table
-        ResultSet rsDistributor = db.ambilData("SELECT COUNT(*) AS total_distributor FROM distributor");
-        if (rsDistributor.next()) {
-            int totalDistributor = rsDistributor.getInt("total_distributor");
-            // Update the JLabel with the count for distributor
-            Lb_Jumlah_Distributor.setText(String.valueOf(totalDistributor));
-        }
+            // Count total items in distributor table
+            ResultSet rsDistributor = db.ambilData("SELECT COUNT(*) AS total_distributor FROM distributor");
+            if (rsDistributor.next()) {
+                int totalDistributor = rsDistributor.getInt("total_distributor");
+                // Update the JLabel with the count for distributor
+                Lb_Jumlah_Distributor.setText(String.valueOf(totalDistributor));
+            }
 
-        // Count total items in transaksi table
-        ResultSet rsTransaksi = db.ambilData("SELECT COUNT(*) AS total_transaksi FROM transaksi");
-        if (rsTransaksi.next()) {
-            int totalTransaksi = rsTransaksi.getInt("total_transaksi");
-            // Update the JLabel with the count for transaksi
-            Lb_Jumlah_Transaksi.setText(String.valueOf(totalTransaksi));
-        }
+            // Count total items in transaksi table
+            ResultSet rsTransaksi = db.ambilData("SELECT COUNT(*) AS total_transaksi FROM transaksi");
+            if (rsTransaksi.next()) {
+                int totalTransaksi = rsTransaksi.getInt("total_transaksi");
+                // Update the JLabel with the count for transaksi
+                Lb_Jumlah_Transaksi.setText(String.valueOf(totalTransaksi));
+            }
 
-        // Count total items in pengguna table
-        ResultSet rsPengguna = db.ambilData("SELECT COUNT(*) AS total_karyawan FROM pengguna");
-        if (rsPengguna.next()) {
-            int totalPengguna = rsPengguna.getInt("total_karyawan");
-            // Update the JLabel with the count for pengguna
-            Lb_Jumlah_Karyawan.setText(String.valueOf(totalPengguna));
+            // Count total items in pengguna table
+            ResultSet rsPengguna = db.ambilData("SELECT COUNT(*) AS total_karyawan FROM pengguna");
+            if (rsPengguna.next()) {
+                int totalPengguna = rsPengguna.getInt("total_karyawan");
+                // Update the JLabel with the count for pengguna
+                Lb_Jumlah_Karyawan.setText(String.valueOf(totalPengguna));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
     }
-}
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1095,7 +1112,7 @@ private void SearchB(){
         pn_Konten_Tbl_Beranda.removeAll();
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
-        
+
         pn_Konten_Tbl_Beranda.add(pn_Tbl_Beranda_Barang);
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
@@ -1103,7 +1120,7 @@ private void SearchB(){
 
     private void Btn_Cari_Beranda_BarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Cari_Beranda_BarangActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_Btn_Cari_Beranda_BarangActionPerformed
 
     private void Btn_Cari_Beranda_DistributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Cari_Beranda_DistributorActionPerformed
@@ -1122,27 +1139,27 @@ private void SearchB(){
         pn_Konten_Tbl_Beranda.removeAll();
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
-        
+
         pn_Konten_Tbl_Beranda.add(pn_Tbl_Beranda_Distributor);
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
     }//GEN-LAST:event_pn_Card_DistributorMouseClicked
 
     private void pn_Card_TransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_Card_TransaksiMouseClicked
-         pn_Konten_Tbl_Beranda.removeAll();
+        pn_Konten_Tbl_Beranda.removeAll();
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
-        
+
         pn_Konten_Tbl_Beranda.add(pn_Tbl_Beranda_Transaksi);
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
     }//GEN-LAST:event_pn_Card_TransaksiMouseClicked
 
     private void pn_Card_KaryawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_Card_KaryawanMouseClicked
-         pn_Konten_Tbl_Beranda.removeAll();
+        pn_Konten_Tbl_Beranda.removeAll();
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
-        
+
         pn_Konten_Tbl_Beranda.add(pn_Tbl_Beranda_Karyawan);
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();

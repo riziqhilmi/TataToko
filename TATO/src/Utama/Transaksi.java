@@ -126,9 +126,7 @@ public class Transaksi extends javax.swing.JPanel {
         try {
             while (hasil.next()) {
                 model2.addRow(new Object[]{hasil.getString("tgl_transaksi"),
-                    hasil.getString("id_transaksi"), hasil.getString("id_barang"),
-                    hasil.getString("nama_barang"),
-                    hasil.getString("harga"), hasil.getString("jumlah_barang"),
+                    hasil.getString("id_transaksi"), hasil.getString("jumlah_barang"),
                     hasil.getString("total_harga"), hasil.getString("metode")});
             }
             table_Riwayat.setModel(model2);
@@ -282,7 +280,7 @@ public class Transaksi extends javax.swing.JPanel {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
 
-            String sqlquery = "SELECT MAX(RIGHT(id_transaksi,4)) AS no_auto FROM transaksi";
+            String sqlquery = "SELECT MAX(RIGHT(id_transaksi,4)) AS no_auto FROM keranjang";
             PreparedStatement st = con.prepareStatement(sqlquery);
             ResultSet rs = st.executeQuery();
 
@@ -310,21 +308,29 @@ private int lastTransaksiNumber = 0;
 
 public void autoInN() {
     try {
-        // Increment nomor terakhir
-        lastTransaksiNumber++;
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, pwd);
 
-        String no_a, no_p = "";
-        no_a = Integer.toString(lastTransaksiNumber);
-        int p = no_a.length();
+            String sqlquery = "SELECT MAX(RIGHT(id_transaksi,9)) AS no_auto FROM transaksi";
+            PreparedStatement st = con.prepareStatement(sqlquery);
+            ResultSet rs = st.executeQuery();
 
-        for (int i = 1; i <= 9 - p; i++) {
-            no_p = no_p + "0";
+            String no_a, no_p = "";
+            int p;
+            if (rs.next()) {
+                no_a = Integer.toString(rs.getInt(1) + 1);
+                p = no_a.length();
+
+                for (int i = 1; i <= 9 - p; i++) {
+                    no_p = no_p + "0";
+                }
+                Field_Keranjang_ID.setText( no_p + no_a);
+            }
+
+        } catch (Exception e) {
+            Field_Keranjang_ID.setText("");
+            e.printStackTrace();
         }
-        Field_Keranjang_ID.setText(no_p + no_a);
-    } catch (Exception e) {
-        Field_Keranjang_ID.setText("");
-        e.printStackTrace();
-    }
 }
 
 
@@ -348,6 +354,7 @@ public void autoInN() {
     }
 
     private void keranjang() {
+        String id_T = Field_Keranjang_ID.getText();
         String id_t = Field__Transaksi_ID.getText();
         String id_b = Field_Kode_Barang_Transaksi.getText();
         String nama = Field__Transaksi_Barang.getText();
@@ -363,8 +370,9 @@ public void autoInN() {
         String tanggal = String.valueOf(date.format(tgl_transaksi.getDate()));
 
         try {
-            // Masukkan data transaksi ke database
-            db.aksi("INSERT INTO transaksi VALUES ('" + tanggal + "','" + id_t + "','" + id_b + "','" + nama + "','" + hargaInt + "','" + jumlah + "','" + totalInt + "','" + metode + "')");
+            
+            //db.aksi("INSERT INTO transaksi VALUES ('" + tanggal + "','" + id_t + "','" + id_b + "','" + nama + "','" + hargaInt + "','" + jumlah + "','" + totalInt + "','" + metode + "')");
+            //db.aksi("INSERT INTO transaksi (`tgl_transaksi`, `id_transaksi` , `jumlah_barang`, `total_harga`, `metode`)" + "VALUES ('" + tanggal + "','" + id_T + "', '" + jumlah + "','" + totalInt + "','" + metode + "')");
             db.aksi("INSERT INTO keranjang VALUES ('" + id_t + "','" + id_b + "','" + nama + "','" + tanggal + "','" + hargaInt + "','" + jumlah + "','" + totalInt + "')");
             table.setRowCount(0);
             tb_keranjang.setModel(table);
@@ -388,35 +396,25 @@ public void autoInN() {
     }
 
     public void transaksi() {
-        String id_t = Field__Transaksi_ID.getText();
-        String id_b = Field_Kode_Barang_Transaksi.getText();
-        String nama = Field__Transaksi_Barang.getText();
-        String harga = txt_harga2.getText();
-        String jumlah = Field_Keranjang_ID.getText();
-        String total = txt_totalharga.getText();
-        String metode = String.valueOf(Field_Metode.getSelectedItem());
+        String id_T = Field_Keranjang_ID.getText();
+        
+        String total = Field_Total_Semua.getText();
+        String totalClean = total.replaceAll("[^\\d]", "");
+        int total_bayar = Integer.parseInt(totalClean);
+        String bayar = txt_uang.getText();
+        String metode = String.valueOf(Field_Metode.getSelectedItem()); 
+      
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         String tanggal = String.valueOf(date.format(tgl_transaksi.getDate()));
         try {
-            db.aksi("INSERT INTO transaksi VALUES ('" + tanggal + "','" + id_t + "','" + id_b + "','" + nama + "','" + harga + "','" + jumlah + "','" + total + "')");
-            table.setRowCount(0);
-            tb_keranjang.setModel(table);
-
-            tampilData();
-            autoIn();
-                    
-            JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan");
+            db.aksi("INSERT INTO transaksi ( `tgl_transaksi`,`id_transaksi`, `jumlah_barang`, `total_harga`, `metode`)" + "VALUES ('" + tanggal + "','" + id_T + "', '" + total_bayar + "','" + bayar + "','" + metode + "')");
+            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data Gagal Ditambahkan: " + e.getMessage());
 
-        } finally {
-
-            clear();
-
-        }
-        TotalHarga();
-        totalnya();
+        } 
+        
     }
 
     private void TotalHarga() {
@@ -1247,8 +1245,9 @@ public void autoInN() {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        transaksi();
         kembalian();
-        autoInN();
+        
         //        tambahData();
         //        JOptionPane.showMessageDialog(null, "Transaksi Berhasil !");
         //        new struk.struk().setVisible(true);
@@ -1272,7 +1271,7 @@ public void autoInN() {
     }//GEN-LAST:event_txt_harga2ActionPerformed
 
     private void txt_uangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_uangActionPerformed
-
+        autoInN();
     }//GEN-LAST:event_txt_uangActionPerformed
 
     private void txt_uangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_uangKeyPressed

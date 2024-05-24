@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="430" columnWidth="186" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eae3826-a4aa-4a6e-85e0-0daa517cab65">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="283" columnWidth="186" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="4eae3826-a4aa-4a6e-85e0-0daa517cab65">
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="88"/>
+	<property name="ireport.y" value="106"/>
 	<parameter name="total_semua" class="java.lang.String"/>
 	<parameter name="uang" class="java.lang.String"/>
 	<parameter name="kembali" class="java.lang.String"/>
 	<parameter name="id" class="java.lang.String"/>
+	<parameter name="kasir" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT * FROM keranjang]]>
 	</queryString>
@@ -100,13 +101,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="72" y="17" width="63" height="17" uuid="be6b695e-8156-4f87-85ab-9546f15f59cd"/>
+			<textField>
+				<reportElement x="72" y="17" width="93" height="20" uuid="09f4a1a3-2a0e-46c2-855d-cb1d7606eedb"/>
 				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="false"/>
+					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Iqbal]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{kasir}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnHeader>
 	<detail>
