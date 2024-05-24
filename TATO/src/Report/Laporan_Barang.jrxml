@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4c4db674-b689-4441-87d2-0030d0b1bc45">
-	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
-	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
-	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
-	<style name="Detail" fontName="Arial" fontSize="12"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1e9250f1-47c5-4e02-b363-8a9dbe56c073">
 	<queryString language="SQL">
-		<![CDATA[SELECT * FROM barang]]>
+		<![CDATA[SELECT * FROM barang
+]]>
 	</queryString>
 	<field name="id_barang" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -25,6 +22,9 @@
 	<field name="harga_jual" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="tanggal" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="expired" class="java.sql.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -32,9 +32,6 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="status" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="barcode" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="merk" class="java.lang.String">
@@ -47,177 +44,24 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="70" splitType="Stretch">
-			<image>
-				<reportElement x="275" y="0" width="300" height="64" uuid="fb07fdca-cd48-4a94-ba92-3093edd254af"/>
-				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="5ba9a030-7ee3-4bf6-8cc6-fdbc87f7d6f9"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Leaf Green Title]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="SubTitle" x="100" y="46" width="174" height="22" uuid="afea0c43-22fa-4575-9b52-4b244c9f33e1"/>
-				<text><![CDATA[Leaf Green SubTitle]]></text>
-			</staticText>
-		</band>
+		<band height="79" splitType="Stretch"/>
 	</title>
 	<pageHeader>
-		<band splitType="Stretch"/>
+		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="36" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="3a4541b5-0c46-485f-b17f-002fa95f19fe"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement style="Column header" x="0" y="19" width="46" height="15" uuid="d4bf5bff-e65c-4ff5-86c8-2d24174704b3"/>
-				<text><![CDATA[id_barang]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="46" y="19" width="46" height="15" uuid="48b4c4e4-71b2-44bb-9855-2a45164cc0f4"/>
-				<text><![CDATA[nama_barang]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="92" y="19" width="46" height="15" uuid="cfe06168-3db2-452c-be3a-c24e83e9eee1"/>
-				<text><![CDATA[jenis]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="138" y="19" width="46" height="15" uuid="51d58509-602a-439b-906b-86ca04808181"/>
-				<text><![CDATA[jumlah]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="184" y="19" width="46" height="15" uuid="9021c002-ce75-4bf6-87ca-50284cef7a66"/>
-				<text><![CDATA[harga_beli]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="230" y="19" width="46" height="15" uuid="f73b13c8-db6d-4396-81c0-e66c918df060"/>
-				<text><![CDATA[harga_jual]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="276" y="19" width="46" height="15" uuid="089dfb5c-c7f6-4899-a512-542e5cef61f0"/>
-				<text><![CDATA[expired]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="322" y="19" width="46" height="15" uuid="85dde6fd-5525-4d1b-bcc1-063221651ab4"/>
-				<text><![CDATA[satuan]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="368" y="19" width="46" height="15" uuid="d0bed711-9a12-4d3a-8974-01ba5660ff35"/>
-				<text><![CDATA[status]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="414" y="19" width="46" height="15" uuid="297389dd-caef-4b03-a3a8-ecf7796c04c3"/>
-				<text><![CDATA[barcode]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="460" y="19" width="46" height="15" uuid="96eeaa70-0f7d-4def-8d06-f52c66b9792c"/>
-				<text><![CDATA[merk]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="506" y="19" width="46" height="15" uuid="f8049766-6689-4e77-9f28-e71a0bb2341e"/>
-				<text><![CDATA[id_distributor]]></text>
-			</staticText>
-		</band>
+		<band height="61" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="16" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="b94f306c-b69f-46f7-9eb9-32d23371dcfb"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-			<textField>
-				<reportElement style="Detail" x="0" y="0" width="46" height="15" uuid="9574b707-77ee-400b-a5dd-12889551f25a"/>
-				<textFieldExpression><![CDATA[$F{id_barang}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="46" y="0" width="46" height="15" uuid="327899c5-7de6-4efb-9244-3058bcc6242f"/>
-				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="92" y="0" width="46" height="15" uuid="604a9d66-e5aa-4cdc-851a-03bc2407a009"/>
-				<textFieldExpression><![CDATA[$F{jenis}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="138" y="0" width="46" height="15" uuid="1e5b439f-23a7-4f78-bd63-15daeb246cf7"/>
-				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="184" y="0" width="46" height="15" uuid="a6d9b229-1f81-49aa-8731-394000e4b238"/>
-				<textFieldExpression><![CDATA[$F{harga_beli}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="230" y="0" width="46" height="15" uuid="07f8d2fc-c326-44c6-83a6-ad3d78246c94"/>
-				<textFieldExpression><![CDATA[$F{harga_jual}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="276" y="0" width="46" height="15" uuid="76fd3585-cccd-4a4c-8b52-c25e64d3642f"/>
-				<textFieldExpression><![CDATA[$F{expired}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="322" y="0" width="46" height="15" uuid="5d6c2096-9111-4c38-bfa0-3390fc9c9e6d"/>
-				<textFieldExpression><![CDATA[$F{satuan}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="368" y="0" width="46" height="15" uuid="869c5006-4868-4a68-bf21-63c53cce16d6"/>
-				<textFieldExpression><![CDATA[$F{status}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="414" y="0" width="46" height="15" uuid="c949fe9d-0b4e-4aa3-bbff-df3945ae36b2"/>
-				<textFieldExpression><![CDATA[$F{barcode}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="460" y="0" width="46" height="15" uuid="4334aea9-ecfe-42ba-8cde-dfeb1ec221bc"/>
-				<textFieldExpression><![CDATA[$F{merk}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="506" y="0" width="46" height="15" uuid="274f3acc-29fa-4213-8b5b-effb1f2d0f8f"/>
-				<textFieldExpression><![CDATA[$F{id_distributor}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="125" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="575858c7-f0cb-4aed-b3a9-25741964ccd4"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-		</band>
+		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="20" splitType="Stretch">
-			<textField>
-				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="263e031b-7abf-46c1-b3ee-591927004185"/>
-				<textElement textAlignment="Right">
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="5a0a8fc4-6486-4f93-94c5-269db21e386c"/>
-				<textElement>
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="784ee9d9-3cab-43fe-9747-f29069d186dd"/>
-				<textElement>
-					<font size="10" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="54" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>

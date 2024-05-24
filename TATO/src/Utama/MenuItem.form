@@ -32,8 +32,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="Lb_Icon_Sub" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="Lb_Nama_Menu" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="Lb_Nama_Menu" min="-2" pref="93" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,8 +43,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="Lb_Icon_Sub" max="32767" attributes="0"/>
-                  <Component id="Lb_Nama_Menu" pref="55" max="32767" attributes="0"/>
-                  <Component id="Lb_Icon" alignment="0" pref="55" max="32767" attributes="0"/>
+                  <Component id="Lb_Nama_Menu" pref="56" max="32767" attributes="0"/>
+                  <Component id="Lb_Icon" alignment="0" pref="56" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
