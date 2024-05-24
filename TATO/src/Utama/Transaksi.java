@@ -126,8 +126,8 @@ public class Transaksi extends javax.swing.JPanel {
         try {
             while (hasil.next()) {
                 model2.addRow(new Object[]{hasil.getString("tgl_transaksi"),
-                    hasil.getString("id_transaksi"), hasil.getString("jumlah_barang"),
-                    hasil.getString("total_harga"), hasil.getString("metode")});
+                    hasil.getString("id_transaksi"), hasil.getString("total_bayar"),
+                    hasil.getString("bayar"), hasil.getString("metode")});
             }
             table_Riwayat.setModel(model2);
         } catch (SQLException ex) {
@@ -397,7 +397,6 @@ public void autoInN() {
 
     public void transaksi() {
         String id_T = Field_Keranjang_ID.getText();
-        
         String total = Field_Total_Semua.getText();
         String totalClean = total.replaceAll("[^\\d]", "");
         int total_bayar = Integer.parseInt(totalClean);
@@ -407,8 +406,8 @@ public void autoInN() {
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         String tanggal = String.valueOf(date.format(tgl_transaksi.getDate()));
         try {
-            db.aksi("INSERT INTO transaksi ( `tgl_transaksi`,`id_transaksi`, `jumlah_barang`, `total_harga`, `metode`)" + "VALUES ('" + tanggal + "','" + id_T + "', '" + total_bayar + "','" + bayar + "','" + metode + "')");
-            
+            db.aksi("INSERT INTO transaksi ( `tgl_transaksi`,`id_transaksi`, `total_bayar`, `bayar`, `metode`)" + "VALUES ('" + tanggal + "','" + id_T + "', '" + total_bayar + "','" + bayar + "','" + metode + "')");
+            db.aksi("INSERT INTO detail_transaksi SELECT * FROM keranjang");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data Gagal Ditambahkan: " + e.getMessage());

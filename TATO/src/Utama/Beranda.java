@@ -157,8 +157,8 @@ public class Beranda extends javax.swing.JPanel {
         try {
             while (hasil.next()) {
                 model3.addRow(new Object[]{hasil.getString("tgl_transaksi"),
-                    hasil.getString("id_transaksi"), hasil.getString("jumlah_barang"),
-                    hasil.getString("total_harga"), hasil.getString("metode")});
+                    hasil.getString("id_transaksi"), hasil.getString("total_bayar"),
+                    hasil.getString("bayar"), hasil.getString("metode")});
             }
             Tbl_Beranda_Transaksi.setModel(model3);
         } catch (SQLException ex) {
@@ -213,10 +213,7 @@ public class Beranda extends javax.swing.JPanel {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         String idTransaksi = Tbl_Beranda_Transaksi.getValueAt(row, 0).toString();
-        ResultSet rs = db.ambilData("SELECT transaksi.id_transaksi, transaksi.tgl_transaksi, keranjang.nama_barang, " +
-                   "transaksi.harga, transaksi.jumlah_barang, transaksi.total_harga, transaksi.metode, keranjang.total " +
-                   "FROM transaksi " +
-                   "INNER JOIN keranjang ON transaksi.id_transaksi = keranjang.'" + idTransaksi + "'");
+            ResultSet rs = db.ambilData("SELECT * FROM detail_transaksi dt INNER JOIN barang sb ON dt.id_barang = sb.id_barang WHERE dt.id_transaksi = '" + Tbl_Beranda_Transaksi.getValueAt(row, 0) + "'");
 
         panel.setBounds(0, 0, 300, 300);
         StringBuilder labelText = new StringBuilder("<html><body>");
@@ -225,7 +222,7 @@ public class Beranda extends javax.swing.JPanel {
         try {
             while (rs.next()) {
                 String namaBarang = rs.getString("nama_barang");
-                int jumlahBarang = rs.getInt("jumlah_barang");
+                int jumlahBarang = rs.getInt("jumlah");
                 labelText.append(namaBarang).append(" : ").append(jumlahBarang).append("<br/>");
             }
         } catch (Exception ex) {
@@ -235,6 +232,33 @@ public class Beranda extends javax.swing.JPanel {
         label.setText(labelText.toString());
         panel.add(label);
         return panel;
+    }
+    
+    public void showPopupWithKeranjangData(String idTransaksi) {
+        
+        try {
+            ResultSet hasil = db.ambilData("SELECT detail_transaksi.nama_barang, detail_transaksi.jumlah, detail_transaksi.harga, detail_transaksi.total " +
+                       "FROM detail_transaksi " +
+                       "INNER JOIN transaksi ON transaksi.id_transaksi = detail_transaksi.id_transaksi " +
+                       "WHERE transaksi.id_transaksi = '"+idTransaksi+"'");
+            
+            StringBuilder data = new StringBuilder();
+            while (hasil.next()) {
+                String namaBarang = hasil.getString("nama_barang");
+                int jumlah = hasil.getInt("jumlah");
+                int harga = hasil.getInt("harga");
+                int total = hasil.getInt("total");
+                data.append("Nama Barang: ").append(namaBarang)
+                    .append(", Jumlah: ").append(jumlah)
+                    .append(", Harga: ").append(harga)
+                    .append(", Total: ").append(total)
+                    .append("\n");
+            }
+            
+            JOptionPane.showMessageDialog(null, data.toString(), "Detail Keranjang", JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void SearchB() {
@@ -973,6 +997,11 @@ public class Beranda extends javax.swing.JPanel {
             }
         ));
         Tbl_Beranda_Karyawan.setRowHeight(40);
+        Tbl_Beranda_Karyawan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tbl_Beranda_KaryawanMouseClicked(evt);
+            }
+        });
         jScrollPane10.setViewportView(Tbl_Beranda_Karyawan);
 
         Lb_Tbl_Data_Karyawan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -1164,6 +1193,14 @@ public class Beranda extends javax.swing.JPanel {
         pn_Konten_Tbl_Beranda.repaint();
         pn_Konten_Tbl_Beranda.revalidate();
     }//GEN-LAST:event_pn_Card_KaryawanMouseClicked
+
+    private void Tbl_Beranda_KaryawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_Beranda_KaryawanMouseClicked
+        // TODO add your handling code here:
+        if(Integer.parseInt(String.valueOf(Tbl_Beranda_Transaksi.getSelectedRow())) != -1) {
+            JOptionPane.showMessageDialog(this, thePanel(Integer.parseInt(String.valueOf(Tbl_Beranda_Transaksi.getSelectedRow()))), "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+            
+    }//GEN-LAST:event_Tbl_Beranda_KaryawanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
