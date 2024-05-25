@@ -4,17 +4,67 @@
  */
 package Utama;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author acer
  */
 public class Akses extends javax.swing.JPanel {
-    
+    koneksi db = new koneksi();
+    DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form Beranda
      */
     public Akses() {
         initComponents();
+        getColumnD();
+        getDataD();
+    }
+    
+    public void getColumnD() {
+        model.addColumn("ID");
+        model.addColumn("Nama User");
+        model.addColumn("Password ");
+        model.addColumn("Email");
+        model.addColumn("Nama Lengkap");
+        model.addColumn("No Identitas");
+        model.addColumn("Jenis Kelamin");
+        model.addColumn("No Telepon");
+        model.addColumn("Tanggal Lahir");
+        model.addColumn("Status");
+        model.addColumn("Tanggal Mulai");
+        model.addColumn("Gaji");
+        model.addColumn("No Rek");
+        model.addColumn("Alamat");
+        model.addColumn("Akses");
+        Tbl_User.setModel(model);
+
+    }
+
+    public void getDataD() {
+
+        ResultSet hasil = db.ambilData("SELECT * FROM pengguna");
+        try {
+            while (hasil.next()) {
+                model.addRow(new Object[]{hasil.getString("id_username"),
+                    hasil.getString("username"),hasil.getString("password"),hasil.getString("email"),
+                    hasil.getString("Nama_Lengkap"),
+                    hasil.getString("No_Identitas"), hasil.getString("Jenis_Kelamin"),
+                    hasil.getString("No_Telepon"), hasil.getString("Tanggal_Lahir"),
+                    hasil.getString("Status_Karyawan"),
+                    hasil.getString("Tanggal_Mulai"), hasil.getString("Gaji"),
+                    hasil.getString("No_Rekening"),hasil.getString("Alamat"),hasil.getString("akses")});
+            }
+            Tbl_User.setModel(model);
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -26,354 +76,406 @@ public class Akses extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pn_Akses = new javax.swing.JPanel();
-        Lb_Akses = new javax.swing.JLabel();
-        pn_Konten_Akses = new javax.swing.JPanel();
-        pn_Update_Akses = new javax.swing.JPanel();
-        Lb_Tambah_User = new javax.swing.JLabel();
-        Lb_Akses_User_ID = new javax.swing.JLabel();
-        Lb_Akses_Password = new javax.swing.JLabel();
-        Lb_Akses_Nama = new javax.swing.JLabel();
-        Lb_Akses_Hak_Akses = new javax.swing.JLabel();
-        Field_Akses_User_ID = new javax.swing.JTextField();
-        Field_Akses_Password = new javax.swing.JTextField();
-        Field_Tambah_Nama_User = new javax.swing.JTextField();
-        Field_Akses_Hak_Akses = new javax.swing.JComboBox<>();
-        Lb_Akses_Nama_Lengkap = new javax.swing.JLabel();
-        Field_Akses_Nama_Lengkap = new javax.swing.JTextField();
-        Lb_Akses_Jenis_Kelamin = new javax.swing.JLabel();
-        Field_Data_Karyawan_Jenis_Kelamin = new javax.swing.JTextField();
-        Lb_Akses_No_Telepon = new javax.swing.JLabel();
-        Field_Akses_No_Telepon = new javax.swing.JTextField();
-        Lb_Akses_Tanggal_Lahir = new javax.swing.JLabel();
-        Field_Akses_Tanggal_Lahir = new javax.swing.JTextField();
-        Lb_Akses_Status_Karyawan = new javax.swing.JLabel();
-        Lb_Akses_Gaji = new javax.swing.JLabel();
-        Field_Akses_Gaji = new javax.swing.JTextField();
-        Lb_Akses_No_Rek = new javax.swing.JLabel();
-        Field_Akses_No_Rek = new javax.swing.JTextField();
-        Field_Akses_Status_Karyawan = new javax.swing.JComboBox<>();
-        Field_Akses_No_Identitas = new javax.swing.JTextField();
-        Lb_Akses_No_Identitas = new javax.swing.JLabel();
-        Lb_Akses_Alamat = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        Field_Akses_Alamat = new javax.swing.JTextArea();
-        Field_Akses_Tanggal_Mulai = new javax.swing.JTextField();
-        Lb_Akses_Tanggal_Mulai = new javax.swing.JLabel();
-        Btn_Akses_Update = new javax.swing.JButton();
-        Btn_Akses_Simpan = new javax.swing.JButton();
-        Btn_Akses_Cari_User_ID = new javax.swing.JButton();
-        Btn_Akses_Cari_Nama_User = new javax.swing.JButton();
+        pn_Akses2 = new javax.swing.JPanel();
+        Lb_Akses2 = new javax.swing.JLabel();
+        pn_Konten_Akses2 = new javax.swing.JPanel();
+        pn_Update_Akses2 = new javax.swing.JPanel();
+        Lb_Tambah_User2 = new javax.swing.JLabel();
+        Lb_Akses_User_ID2 = new javax.swing.JLabel();
+        Lb_Akses_Password2 = new javax.swing.JLabel();
+        Lb_Akses_Nama2 = new javax.swing.JLabel();
+        Lb_Akses_Hak_Akses2 = new javax.swing.JLabel();
+        Field_Akses_User_ID2 = new javax.swing.JTextField();
+        Field_Akses_Password2 = new javax.swing.JTextField();
+        Field_Tambah_Nama_User2 = new javax.swing.JTextField();
+        Field_Akses_Hak_Akses2 = new javax.swing.JComboBox<>();
+        Lb_Akses_Nama_Lengkap2 = new javax.swing.JLabel();
+        Field_Akses_Nama_Lengkap2 = new javax.swing.JTextField();
+        Lb_Akses_Jenis_Kelamin2 = new javax.swing.JLabel();
+        Field_Data_Karyawan_Jenis_Kelamin2 = new javax.swing.JTextField();
+        Lb_Akses_No_Telepon2 = new javax.swing.JLabel();
+        Field_Akses_No_Telepon2 = new javax.swing.JTextField();
+        Lb_Akses_Tanggal_Lahir2 = new javax.swing.JLabel();
+        Field_Akses_Tanggal_Lahir2 = new javax.swing.JTextField();
+        Lb_Akses_Status_Karyawan2 = new javax.swing.JLabel();
+        Lb_Akses_Gaji2 = new javax.swing.JLabel();
+        Field_Akses_Gaji2 = new javax.swing.JTextField();
+        Lb_Akses_No_Rek2 = new javax.swing.JLabel();
+        Field_Akses_No_Rek2 = new javax.swing.JTextField();
+        Field_Akses_Status_Karyawan2 = new javax.swing.JComboBox<>();
+        Field_Akses_No_Identitas2 = new javax.swing.JTextField();
+        Lb_Akses_No_Identitas2 = new javax.swing.JLabel();
+        Lb_Akses_Alamat2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        Field_Akses_Alamat2 = new javax.swing.JTextArea();
+        Field_Akses_Tanggal_Mulai2 = new javax.swing.JTextField();
+        Lb_Akses_Tanggal_Mulai2 = new javax.swing.JLabel();
+        Btn_Akses_Update2 = new javax.swing.JButton();
+        Btn_Akses_Simpan2 = new javax.swing.JButton();
+        Btn_Akses_Cari_User_ID2 = new javax.swing.JButton();
+        Btn_Akses_Cari_Nama_User2 = new javax.swing.JButton();
+        pn_User = new javax.swing.JPanel();
+        pn_user = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tbl_User = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1182, 686));
 
-        pn_Akses.setBackground(new java.awt.Color(255, 255, 255));
-        pn_Akses.setPreferredSize(new java.awt.Dimension(1182, 686));
+        pn_Akses2.setBackground(new java.awt.Color(255, 255, 255));
+        pn_Akses2.setPreferredSize(new java.awt.Dimension(1182, 686));
 
-        Lb_Akses.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
-        Lb_Akses.setText("Akses");
+        Lb_Akses2.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        Lb_Akses2.setText("Akses");
 
-        pn_Konten_Akses.setLayout(new java.awt.CardLayout());
+        pn_Konten_Akses2.setLayout(new java.awt.CardLayout());
 
-        Lb_Tambah_User.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        Lb_Tambah_User.setText("Hak Akses");
+        Lb_Tambah_User2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        Lb_Tambah_User2.setText("Hak Akses");
 
-        Lb_Akses_User_ID.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_User_ID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_User_ID.setText("User ID :");
+        Lb_Akses_User_ID2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_User_ID2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_User_ID2.setText("User ID :");
 
-        Lb_Akses_Password.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Password.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Password.setText("Password :");
+        Lb_Akses_Password2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Password2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Password2.setText("Password :");
 
-        Lb_Akses_Nama.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Nama.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Nama.setText("Nama User :");
+        Lb_Akses_Nama2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Nama2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Nama2.setText("Nama User :");
 
-        Lb_Akses_Hak_Akses.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Hak_Akses.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Hak_Akses.setText("Akses :");
+        Lb_Akses_Hak_Akses2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Hak_Akses2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Hak_Akses2.setText("Akses :");
 
-        Field_Akses_User_ID.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Field_Akses_User_ID2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        Field_Akses_Password.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Field_Akses_Password2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        Field_Tambah_Nama_User.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Field_Tambah_Nama_User2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        Field_Akses_Hak_Akses.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Akses_Hak_Akses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Karyawan", " " }));
-        Field_Akses_Hak_Akses.addActionListener(new java.awt.event.ActionListener() {
+        Field_Akses_Hak_Akses2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Field_Akses_Hak_Akses2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Karyawan", " " }));
+
+        Lb_Akses_Nama_Lengkap2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Nama_Lengkap2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Nama_Lengkap2.setText("Nama Lengkap :");
+
+        Field_Akses_Nama_Lengkap2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Lb_Akses_Jenis_Kelamin2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Jenis_Kelamin2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Jenis_Kelamin2.setText("Jenis Kelamin :");
+
+        Field_Data_Karyawan_Jenis_Kelamin2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Lb_Akses_No_Telepon2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_No_Telepon2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_No_Telepon2.setText("No Telepon :");
+
+        Field_Akses_No_Telepon2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Lb_Akses_Tanggal_Lahir2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Tanggal_Lahir2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Tanggal_Lahir2.setText("Tanggal Lahir :");
+
+        Field_Akses_Tanggal_Lahir2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Lb_Akses_Status_Karyawan2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Status_Karyawan2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Status_Karyawan2.setText("Status Karyawan :");
+
+        Lb_Akses_Gaji2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Gaji2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Gaji2.setText("Gaji :");
+
+        Field_Akses_Gaji2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Lb_Akses_No_Rek2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_No_Rek2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_No_Rek2.setText("No Rek :");
+
+        Field_Akses_No_Rek2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Field_Akses_Status_Karyawan2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Field_Akses_Status_Karyawan2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kontrak", "Paruh Waktu", "Penuh Waktu", " " }));
+
+        Field_Akses_No_Identitas2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Lb_Akses_No_Identitas2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_No_Identitas2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_No_Identitas2.setText("No Identitas :");
+
+        Lb_Akses_Alamat2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Alamat2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Alamat2.setText("Alamat :");
+
+        Field_Akses_Alamat2.setColumns(20);
+        Field_Akses_Alamat2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Field_Akses_Alamat2.setRows(5);
+        jScrollPane4.setViewportView(Field_Akses_Alamat2);
+
+        Field_Akses_Tanggal_Mulai2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
+        Lb_Akses_Tanggal_Mulai2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses_Tanggal_Mulai2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Akses_Tanggal_Mulai2.setText("Tanggal Mulai :");
+
+        Btn_Akses_Update2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Btn_Akses_Update2.setText("Update");
+
+        Btn_Akses_Simpan2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Btn_Akses_Simpan2.setText("Simpan");
+
+        Btn_Akses_Cari_User_ID2.setBackground(new java.awt.Color(3, 0, 126));
+        Btn_Akses_Cari_User_ID2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Btn_Akses_Cari_User_ID2.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_Akses_Cari_User_ID2.setText("Cari");
+        Btn_Akses_Cari_User_ID2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Field_Akses_Hak_AksesActionPerformed(evt);
+                Btn_Akses_Cari_User_ID2ActionPerformed(evt);
             }
         });
 
-        Lb_Akses_Nama_Lengkap.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Nama_Lengkap.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Nama_Lengkap.setText("Nama Lengkap :");
+        Btn_Akses_Cari_Nama_User2.setBackground(new java.awt.Color(3, 0, 126));
+        Btn_Akses_Cari_Nama_User2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Btn_Akses_Cari_Nama_User2.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_Akses_Cari_Nama_User2.setText("Cari");
 
-        Field_Akses_Nama_Lengkap.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Akses_Jenis_Kelamin.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Jenis_Kelamin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Jenis_Kelamin.setText("Jenis Kelamin :");
-
-        Field_Data_Karyawan_Jenis_Kelamin.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Akses_No_Telepon.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_No_Telepon.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_No_Telepon.setText("No Telepon :");
-
-        Field_Akses_No_Telepon.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Akses_Tanggal_Lahir.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Tanggal_Lahir.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Tanggal_Lahir.setText("Tanggal Lahir :");
-
-        Field_Akses_Tanggal_Lahir.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Akses_Status_Karyawan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Status_Karyawan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Status_Karyawan.setText("Status Karyawan :");
-
-        Lb_Akses_Gaji.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Gaji.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Gaji.setText("Gaji :");
-
-        Field_Akses_Gaji.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Akses_No_Rek.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_No_Rek.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_No_Rek.setText("No Rek :");
-
-        Field_Akses_No_Rek.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Field_Akses_Status_Karyawan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Akses_Status_Karyawan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kontrak", "Paruh Waktu", "Penuh Waktu", " " }));
-
-        Field_Akses_No_Identitas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Akses_No_Identitas.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_No_Identitas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_No_Identitas.setText("No Identitas :");
-
-        Lb_Akses_Alamat.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Alamat.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Alamat.setText("Alamat :");
-
-        Field_Akses_Alamat.setColumns(20);
-        Field_Akses_Alamat.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Akses_Alamat.setRows(5);
-        jScrollPane2.setViewportView(Field_Akses_Alamat);
-
-        Field_Akses_Tanggal_Mulai.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Akses_Tanggal_Mulai.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses_Tanggal_Mulai.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Akses_Tanggal_Mulai.setText("Tanggal Mulai :");
-
-        Btn_Akses_Update.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Akses_Update.setText("Update");
-        Btn_Akses_Update.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_Akses_UpdateActionPerformed(evt);
-            }
-        });
-
-        Btn_Akses_Simpan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Akses_Simpan.setText("Simpan");
-
-        Btn_Akses_Cari_User_ID.setBackground(new java.awt.Color(3, 0, 126));
-        Btn_Akses_Cari_User_ID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Btn_Akses_Cari_User_ID.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Akses_Cari_User_ID.setText("Cari");
-        Btn_Akses_Cari_User_ID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_Akses_Cari_User_IDActionPerformed(evt);
-            }
-        });
-
-        Btn_Akses_Cari_Nama_User.setBackground(new java.awt.Color(3, 0, 126));
-        Btn_Akses_Cari_Nama_User.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Btn_Akses_Cari_Nama_User.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Akses_Cari_Nama_User.setText("Cari");
-
-        javax.swing.GroupLayout pn_Update_AksesLayout = new javax.swing.GroupLayout(pn_Update_Akses);
-        pn_Update_Akses.setLayout(pn_Update_AksesLayout);
-        pn_Update_AksesLayout.setHorizontalGroup(
-            pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+        javax.swing.GroupLayout pn_Update_Akses2Layout = new javax.swing.GroupLayout(pn_Update_Akses2);
+        pn_Update_Akses2.setLayout(pn_Update_Akses2Layout);
+        pn_Update_Akses2Layout.setHorizontalGroup(
+            pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lb_Tambah_User)
-                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lb_Tambah_User2)
+                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
-                                .addComponent(Lb_Akses_User_ID)
+                                .addComponent(Lb_Akses_User_ID2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Field_Akses_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                                .addComponent(Field_Akses_User_ID2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
-                                .addComponent(Lb_Akses_Hak_Akses)
+                                .addComponent(Lb_Akses_Hak_Akses2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Field_Akses_Hak_Akses, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
-                                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                                .addComponent(Field_Akses_Hak_Akses2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
+                                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                                         .addGap(28, 28, 28)
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
-                                                .addComponent(Lb_Akses_Password)
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
+                                                .addComponent(Lb_Akses_Password2)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(Field_Akses_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
-                                                .addComponent(Lb_Akses_Nama)
+                                                .addComponent(Field_Akses_Password2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
+                                                .addComponent(Lb_Akses_Nama2)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(Field_Tambah_Nama_User, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                                                .addComponent(Field_Tambah_Nama_User2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                                         .addGap(65, 65, 65)
-                                        .addComponent(Btn_Akses_Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Btn_Akses_Simpan2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(28, 28, 28)
-                                        .addComponent(Btn_Akses_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(Btn_Akses_Update2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Btn_Akses_Cari_User_ID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_Akses_Cari_Nama_User, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Btn_Akses_Cari_User_ID2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_Akses_Cari_Nama_User2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                         .addGap(225, 225, 225)
-                        .addComponent(Lb_Akses_Alamat)
+                        .addComponent(Lb_Akses_Alamat2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                         .addGap(155, 155, 155)
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lb_Akses_Nama_Lengkap)
-                            .addComponent(Lb_Akses_No_Identitas)
-                            .addComponent(Lb_Akses_Jenis_Kelamin)
-                            .addComponent(Lb_Akses_No_Telepon)
-                            .addComponent(Lb_Akses_Tanggal_Lahir))
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Lb_Akses_Nama_Lengkap2)
+                            .addComponent(Lb_Akses_No_Identitas2)
+                            .addComponent(Lb_Akses_Jenis_Kelamin2)
+                            .addComponent(Lb_Akses_No_Telepon2)
+                            .addComponent(Lb_Akses_Tanggal_Lahir2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Field_Akses_Tanggal_Lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Akses_No_Telepon, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Akses_No_Identitas, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Akses_Nama_Lengkap, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Field_Akses_Tanggal_Lahir2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Akses_No_Telepon2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Data_Karyawan_Jenis_Kelamin2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Akses_No_Identitas2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Akses_Nama_Lengkap2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(125, 125, 125)
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lb_Akses_Tanggal_Mulai)
-                            .addComponent(Lb_Akses_Gaji)
-                            .addComponent(Lb_Akses_No_Rek)
-                            .addComponent(Lb_Akses_Status_Karyawan))
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Lb_Akses_Tanggal_Mulai2)
+                            .addComponent(Lb_Akses_Gaji2)
+                            .addComponent(Lb_Akses_No_Rek2)
+                            .addComponent(Lb_Akses_Status_Karyawan2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Field_Akses_Status_Karyawan, 0, 200, Short.MAX_VALUE)
-                            .addComponent(Field_Akses_No_Rek)
-                            .addComponent(Field_Akses_Gaji)
-                            .addComponent(Field_Akses_Tanggal_Mulai))))
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Field_Akses_Status_Karyawan2, 0, 200, Short.MAX_VALUE)
+                            .addComponent(Field_Akses_No_Rek2)
+                            .addComponent(Field_Akses_Gaji2)
+                            .addComponent(Field_Akses_Tanggal_Mulai2))))
                 .addGap(337, 337, 337))
         );
-        pn_Update_AksesLayout.setVerticalGroup(
-            pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
-                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+        pn_Update_Akses2Layout.setVerticalGroup(
+            pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
+                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                         .addGap(500, 500, 500)
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lb_Akses_Alamat)
-                            .addComponent(Btn_Akses_Simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Btn_Akses_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lb_Akses_Alamat2)
+                            .addComponent(Btn_Akses_Simpan2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_Akses_Update2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Lb_Tambah_User)
-                        .addGap(100, 100, 100)
-                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
-                                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Lb_Akses_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Btn_Akses_Cari_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Field_Akses_User_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Lb_Tambah_User2)
+                        .addGap(58, 58, 58)
+                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
+                                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lb_Akses_User_ID2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Btn_Akses_Cari_User_ID2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Field_Akses_User_ID2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(40, 40, 40)
-                                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lb_Akses_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Field_Akses_Password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Lb_Akses_Password2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Field_Akses_Password2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(33, 33, 33)
-                                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Update_AksesLayout.createSequentialGroup()
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Tambah_Nama_User, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Akses_Nama)
-                                            .addComponent(Btn_Akses_Cari_Nama_User, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Update_Akses2Layout.createSequentialGroup()
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Field_Tambah_Nama_User2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Lb_Akses_Nama2)
+                                            .addComponent(Btn_Akses_Cari_Nama_User2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(67, 67, 67))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(Field_Akses_Hak_Akses, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Lb_Akses_Hak_Akses))))
-                            .addGroup(pn_Update_AksesLayout.createSequentialGroup()
-                                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Lb_Akses_Nama_Lengkap)
-                                    .addComponent(Field_Akses_Nama_Lengkap, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Akses_Tanggal_Mulai)
-                                    .addComponent(Field_Akses_Tanggal_Mulai, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(Field_Akses_Hak_Akses2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Lb_Akses_Hak_Akses2))))
+                            .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
+                                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lb_Akses_Nama_Lengkap2)
+                                    .addComponent(Field_Akses_Nama_Lengkap2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Akses_Tanggal_Mulai2)
+                                    .addComponent(Field_Akses_Tanggal_Mulai2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                                         .addGap(40, 40, 40)
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Lb_Akses_No_Identitas)
-                                            .addComponent(Field_Akses_No_Identitas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Lb_Akses_No_Identitas2)
+                                            .addComponent(Field_Akses_No_Identitas2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(41, 41, 41)
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Data_Karyawan_Jenis_Kelamin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Akses_Jenis_Kelamin))
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Field_Data_Karyawan_Jenis_Kelamin2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Lb_Akses_Jenis_Kelamin2))
                                         .addGap(38, 38, 38)
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Akses_No_Telepon, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Akses_No_Telepon)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_Update_AksesLayout.createSequentialGroup()
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Field_Akses_No_Telepon2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Lb_Akses_No_Telepon2)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn_Update_Akses2Layout.createSequentialGroup()
                                         .addGap(32, 32, 32)
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Akses_Gaji, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Akses_Gaji))
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Field_Akses_Gaji2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Lb_Akses_Gaji2))
                                         .addGap(33, 33, 33)
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Akses_No_Rek, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Akses_No_Rek))
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Field_Akses_No_Rek2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Lb_Akses_No_Rek2))
                                         .addGap(33, 33, 33)
-                                        .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(Field_Akses_Status_Karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Lb_Akses_Status_Karyawan))))
+                                        .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Field_Akses_Status_Karyawan2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Lb_Akses_Status_Karyawan2))))
                                 .addGap(33, 33, 33)
-                                .addGroup(pn_Update_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Field_Akses_Tanggal_Lahir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Akses_Tanggal_Lahir)))))
-                    .addGroup(pn_Update_AksesLayout.createSequentialGroup()
+                                .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Akses_Tanggal_Lahir2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Akses_Tanggal_Lahir2)))))
+                    .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                         .addGap(500, 500, 500)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        pn_Konten_Akses.add(pn_Update_Akses, "card3");
+        pn_Konten_Akses2.add(pn_Update_Akses2, "card3");
 
-        javax.swing.GroupLayout pn_AksesLayout = new javax.swing.GroupLayout(pn_Akses);
-        pn_Akses.setLayout(pn_AksesLayout);
-        pn_AksesLayout.setHorizontalGroup(
-            pn_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_AksesLayout.createSequentialGroup()
+        pn_User.setLayout(new java.awt.CardLayout());
+
+        pn_user.setBackground(new java.awt.Color(255, 255, 255));
+        pn_user.setPreferredSize(new java.awt.Dimension(1756, 701));
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
+
+        Tbl_User.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Tbl_User.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        Tbl_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tbl_UserMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Tbl_User);
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
+        jLabel1.setText("PILIH USER PENGGUNA");
+
+        javax.swing.GroupLayout pn_userLayout = new javax.swing.GroupLayout(pn_user);
+        pn_user.setLayout(pn_userLayout);
+        pn_userLayout.setHorizontalGroup(
+            pn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_userLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(pn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1450, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(219, Short.MAX_VALUE))
+        );
+        pn_userLayout.setVerticalGroup(
+            pn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_userLayout.createSequentialGroup()
+                .addGap(0, 53, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        pn_User.add(pn_user, "card2");
+
+        pn_Konten_Akses2.add(pn_User, "card3");
+
+        javax.swing.GroupLayout pn_Akses2Layout = new javax.swing.GroupLayout(pn_Akses2);
+        pn_Akses2.setLayout(pn_Akses2Layout);
+        pn_Akses2Layout.setHorizontalGroup(
+            pn_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_Akses2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(pn_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lb_Akses)
-                    .addComponent(pn_Konten_Akses, javax.swing.GroupLayout.PREFERRED_SIZE, 1637, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pn_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lb_Akses2)
+                    .addComponent(pn_Konten_Akses2, javax.swing.GroupLayout.PREFERRED_SIZE, 1637, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        pn_AksesLayout.setVerticalGroup(
-            pn_AksesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_AksesLayout.createSequentialGroup()
+        pn_Akses2Layout.setVerticalGroup(
+            pn_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn_Akses2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(Lb_Akses)
+                .addComponent(Lb_Akses2)
                 .addGap(71, 71, 71)
-                .addComponent(pn_Konten_Akses, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pn_Konten_Akses2, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -383,70 +485,167 @@ public class Akses extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pn_Akses, javax.swing.GroupLayout.DEFAULT_SIZE, 1693, Short.MAX_VALUE))
+                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 1759, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pn_Akses, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Field_Akses_Hak_AksesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Akses_Hak_AksesActionPerformed
+    private void Btn_Akses_Cari_User_ID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Cari_User_ID2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Field_Akses_Hak_AksesActionPerformed
+            pn_Konten_Akses2.removeAll();
+            pn_Konten_Akses2.repaint();
+            pn_Konten_Akses2.revalidate();
 
-    private void Btn_Akses_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_UpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_Akses_UpdateActionPerformed
+            pn_Konten_Akses2.add(pn_User);
+            pn_Konten_Akses2.repaint();
+            pn_Konten_Akses2.revalidate();
+    }//GEN-LAST:event_Btn_Akses_Cari_User_ID2ActionPerformed
 
-    private void Btn_Akses_Cari_User_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Cari_User_IDActionPerformed
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         // TODO add your handling code here:
-       
-        
-    }//GEN-LAST:event_Btn_Akses_Cari_User_IDActionPerformed
+            
+            
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void Tbl_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_UserMouseClicked
+        // TODO add your handling code here:
+            pn_Konten_Akses2.removeAll();
+            pn_Konten_Akses2.repaint();
+            pn_Konten_Akses2.revalidate();
+
+            pn_Konten_Akses2.add(pn_Update_Akses2);
+            pn_Konten_Akses2.repaint();
+            pn_Konten_Akses2.revalidate();
+            int selectedRow = Tbl_User.getSelectedRow();
+
+    }//GEN-LAST:event_Tbl_UserMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Akses_Cari_Nama_User;
+    private javax.swing.JButton Btn_Akses_Cari_Nama_User1;
+    private javax.swing.JButton Btn_Akses_Cari_Nama_User2;
     private javax.swing.JButton Btn_Akses_Cari_User_ID;
+    private javax.swing.JButton Btn_Akses_Cari_User_ID1;
+    private javax.swing.JButton Btn_Akses_Cari_User_ID2;
     private javax.swing.JButton Btn_Akses_Simpan;
+    private javax.swing.JButton Btn_Akses_Simpan1;
+    private javax.swing.JButton Btn_Akses_Simpan2;
     private javax.swing.JButton Btn_Akses_Update;
+    private javax.swing.JButton Btn_Akses_Update1;
+    private javax.swing.JButton Btn_Akses_Update2;
     private javax.swing.JTextArea Field_Akses_Alamat;
+    private javax.swing.JTextArea Field_Akses_Alamat1;
+    private javax.swing.JTextArea Field_Akses_Alamat2;
     private javax.swing.JTextField Field_Akses_Gaji;
+    private javax.swing.JTextField Field_Akses_Gaji1;
+    private javax.swing.JTextField Field_Akses_Gaji2;
     private javax.swing.JComboBox<String> Field_Akses_Hak_Akses;
+    private javax.swing.JComboBox<String> Field_Akses_Hak_Akses1;
+    private javax.swing.JComboBox<String> Field_Akses_Hak_Akses2;
     private javax.swing.JTextField Field_Akses_Nama_Lengkap;
+    private javax.swing.JTextField Field_Akses_Nama_Lengkap1;
+    private javax.swing.JTextField Field_Akses_Nama_Lengkap2;
     private javax.swing.JTextField Field_Akses_No_Identitas;
+    private javax.swing.JTextField Field_Akses_No_Identitas1;
+    private javax.swing.JTextField Field_Akses_No_Identitas2;
     private javax.swing.JTextField Field_Akses_No_Rek;
+    private javax.swing.JTextField Field_Akses_No_Rek1;
+    private javax.swing.JTextField Field_Akses_No_Rek2;
     private javax.swing.JTextField Field_Akses_No_Telepon;
+    private javax.swing.JTextField Field_Akses_No_Telepon1;
+    private javax.swing.JTextField Field_Akses_No_Telepon2;
     private javax.swing.JTextField Field_Akses_Password;
+    private javax.swing.JTextField Field_Akses_Password1;
+    private javax.swing.JTextField Field_Akses_Password2;
     private javax.swing.JComboBox<String> Field_Akses_Status_Karyawan;
+    private javax.swing.JComboBox<String> Field_Akses_Status_Karyawan1;
+    private javax.swing.JComboBox<String> Field_Akses_Status_Karyawan2;
     private javax.swing.JTextField Field_Akses_Tanggal_Lahir;
+    private javax.swing.JTextField Field_Akses_Tanggal_Lahir1;
+    private javax.swing.JTextField Field_Akses_Tanggal_Lahir2;
     private javax.swing.JTextField Field_Akses_Tanggal_Mulai;
+    private javax.swing.JTextField Field_Akses_Tanggal_Mulai1;
+    private javax.swing.JTextField Field_Akses_Tanggal_Mulai2;
     private javax.swing.JTextField Field_Akses_User_ID;
+    private javax.swing.JTextField Field_Akses_User_ID1;
+    private javax.swing.JTextField Field_Akses_User_ID2;
     private javax.swing.JTextField Field_Data_Karyawan_Jenis_Kelamin;
+    private javax.swing.JTextField Field_Data_Karyawan_Jenis_Kelamin1;
+    private javax.swing.JTextField Field_Data_Karyawan_Jenis_Kelamin2;
     private javax.swing.JTextField Field_Tambah_Nama_User;
+    private javax.swing.JTextField Field_Tambah_Nama_User1;
+    private javax.swing.JTextField Field_Tambah_Nama_User2;
     private javax.swing.JLabel Lb_Akses;
+    private javax.swing.JLabel Lb_Akses1;
+    private javax.swing.JLabel Lb_Akses2;
     private javax.swing.JLabel Lb_Akses_Alamat;
+    private javax.swing.JLabel Lb_Akses_Alamat1;
+    private javax.swing.JLabel Lb_Akses_Alamat2;
     private javax.swing.JLabel Lb_Akses_Gaji;
+    private javax.swing.JLabel Lb_Akses_Gaji1;
+    private javax.swing.JLabel Lb_Akses_Gaji2;
     private javax.swing.JLabel Lb_Akses_Hak_Akses;
+    private javax.swing.JLabel Lb_Akses_Hak_Akses1;
+    private javax.swing.JLabel Lb_Akses_Hak_Akses2;
     private javax.swing.JLabel Lb_Akses_Jenis_Kelamin;
+    private javax.swing.JLabel Lb_Akses_Jenis_Kelamin1;
+    private javax.swing.JLabel Lb_Akses_Jenis_Kelamin2;
     private javax.swing.JLabel Lb_Akses_Nama;
+    private javax.swing.JLabel Lb_Akses_Nama1;
+    private javax.swing.JLabel Lb_Akses_Nama2;
     private javax.swing.JLabel Lb_Akses_Nama_Lengkap;
+    private javax.swing.JLabel Lb_Akses_Nama_Lengkap1;
+    private javax.swing.JLabel Lb_Akses_Nama_Lengkap2;
     private javax.swing.JLabel Lb_Akses_No_Identitas;
+    private javax.swing.JLabel Lb_Akses_No_Identitas1;
+    private javax.swing.JLabel Lb_Akses_No_Identitas2;
     private javax.swing.JLabel Lb_Akses_No_Rek;
+    private javax.swing.JLabel Lb_Akses_No_Rek1;
+    private javax.swing.JLabel Lb_Akses_No_Rek2;
     private javax.swing.JLabel Lb_Akses_No_Telepon;
+    private javax.swing.JLabel Lb_Akses_No_Telepon1;
+    private javax.swing.JLabel Lb_Akses_No_Telepon2;
     private javax.swing.JLabel Lb_Akses_Password;
+    private javax.swing.JLabel Lb_Akses_Password1;
+    private javax.swing.JLabel Lb_Akses_Password2;
     private javax.swing.JLabel Lb_Akses_Status_Karyawan;
+    private javax.swing.JLabel Lb_Akses_Status_Karyawan1;
+    private javax.swing.JLabel Lb_Akses_Status_Karyawan2;
     private javax.swing.JLabel Lb_Akses_Tanggal_Lahir;
+    private javax.swing.JLabel Lb_Akses_Tanggal_Lahir1;
+    private javax.swing.JLabel Lb_Akses_Tanggal_Lahir2;
     private javax.swing.JLabel Lb_Akses_Tanggal_Mulai;
+    private javax.swing.JLabel Lb_Akses_Tanggal_Mulai1;
+    private javax.swing.JLabel Lb_Akses_Tanggal_Mulai2;
     private javax.swing.JLabel Lb_Akses_User_ID;
+    private javax.swing.JLabel Lb_Akses_User_ID1;
+    private javax.swing.JLabel Lb_Akses_User_ID2;
     private javax.swing.JLabel Lb_Tambah_User;
+    private javax.swing.JLabel Lb_Tambah_User1;
+    private javax.swing.JLabel Lb_Tambah_User2;
+    private javax.swing.JTable Tbl_User;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel pn_Akses;
+    private javax.swing.JPanel pn_Akses1;
+    private javax.swing.JPanel pn_Akses2;
     private javax.swing.JPanel pn_Konten_Akses;
+    private javax.swing.JPanel pn_Konten_Akses1;
+    private javax.swing.JPanel pn_Konten_Akses2;
     private javax.swing.JPanel pn_Update_Akses;
+    private javax.swing.JPanel pn_Update_Akses1;
+    private javax.swing.JPanel pn_Update_Akses2;
+    private javax.swing.JPanel pn_User;
+    private javax.swing.JPanel pn_user;
     // End of variables declaration//GEN-END:variables
 }
