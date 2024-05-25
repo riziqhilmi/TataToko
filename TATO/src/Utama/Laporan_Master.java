@@ -57,23 +57,11 @@ public class Laporan_Master extends javax.swing.JPanel {
         pn_Konten_Laporan_Master = new javax.swing.JPanel();
         pn_Laporan_Barang = new javax.swing.JPanel();
         pn_Ctrl_Laporan_Barang = new javax.swing.JPanel();
-        Lb_Laporan_Barang_Dari_Tanggal = new javax.swing.JLabel();
-        Lb_Laporan_Barang_Dari_Item = new javax.swing.JLabel();
-        Lb_Laporan_Barang_Urutkan = new javax.swing.JLabel();
-        Field_Laporan_Barang_Dari_Tanggal = new javax.swing.JTextField();
-        Field_Laporan_Barang_Dari_Item = new javax.swing.JComboBox<>();
-        Field_Laporan_Barang_Urutkan = new javax.swing.JComboBox<>();
         Btn_Tambah_Laporan_Barang = new javax.swing.JButton();
         Lb_Laporan_Barang = new javax.swing.JLabel();
         pn_Konten_Laporan_Barang = new javax.swing.JPanel();
         pn_Laporan_Distributor = new javax.swing.JPanel();
         pn_Ctrl_Laporan_Distributor = new javax.swing.JPanel();
-        Lb_Laporan_Distributor_Dari_Tanggal = new javax.swing.JLabel();
-        Lb_Laporan_Distributor_Dari_Item = new javax.swing.JLabel();
-        Lb_Laporan_Distributor_Urutkan = new javax.swing.JLabel();
-        Field_Laporan_Distributor_Dari_Tanggal = new javax.swing.JTextField();
-        Field_Laporan_Distributor_Dari_Item = new javax.swing.JComboBox<>();
-        Field_Laporan_Distributor_Urutkan = new javax.swing.JComboBox<>();
         Btn_Tambah_Laporan_Distributor = new javax.swing.JButton();
         Lb_Laporan_Distributor = new javax.swing.JLabel();
         pn_Konten_Laporan_Distributor = new javax.swing.JPanel();
@@ -92,26 +80,6 @@ public class Laporan_Master extends javax.swing.JPanel {
 
         pn_Ctrl_Laporan_Barang.setBackground(new java.awt.Color(255, 255, 255));
 
-        Lb_Laporan_Barang_Dari_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Barang_Dari_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Barang_Dari_Tanggal.setText("Dari Tanggal :");
-
-        Lb_Laporan_Barang_Dari_Item.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Barang_Dari_Item.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Barang_Dari_Item.setText("Dari Item :");
-
-        Lb_Laporan_Barang_Urutkan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Barang_Urutkan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Barang_Urutkan.setText("Urutkan :");
-
-        Field_Laporan_Barang_Dari_Tanggal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Field_Laporan_Barang_Dari_Item.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Barang_Dari_Item.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        Field_Laporan_Barang_Urutkan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Barang_Urutkan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         Btn_Tambah_Laporan_Barang.setBackground(new java.awt.Color(0, 0, 204));
         Btn_Tambah_Laporan_Barang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         Btn_Tambah_Laporan_Barang.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,39 +95,16 @@ public class Laporan_Master extends javax.swing.JPanel {
         pn_Ctrl_Laporan_BarangLayout.setHorizontalGroup(
             pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Ctrl_Laporan_BarangLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Btn_Tambah_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pn_Ctrl_Laporan_BarangLayout.createSequentialGroup()
-                        .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lb_Laporan_Barang_Dari_Tanggal)
-                            .addComponent(Lb_Laporan_Barang_Dari_Item)
-                            .addComponent(Lb_Laporan_Barang_Urutkan))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Field_Laporan_Barang_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Laporan_Barang_Dari_Item, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Laporan_Barang_Dari_Tanggal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(101, 101, 101)
+                .addComponent(Btn_Tambah_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         pn_Ctrl_Laporan_BarangLayout.setVerticalGroup(
             pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Ctrl_Laporan_BarangLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Laporan_Barang_Dari_Tanggal)
-                    .addComponent(Field_Laporan_Barang_Dari_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Barang_Dari_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Barang_Dari_Item))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Ctrl_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Barang_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Barang_Urutkan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
                 .addComponent(Btn_Tambah_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         Lb_Laporan_Barang.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -192,7 +137,7 @@ public class Laporan_Master extends javax.swing.JPanel {
                         .addComponent(Lb_Laporan_Barang)))
                 .addGap(18, 18, 18)
                 .addComponent(pn_Konten_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         pn_Laporan_BarangLayout.setVerticalGroup(
             pn_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,32 +151,12 @@ public class Laporan_Master extends javax.swing.JPanel {
                     .addGroup(pn_Laporan_BarangLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(pn_Konten_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pn_Konten_Laporan_Master.add(pn_Laporan_Barang, "card2");
 
         pn_Ctrl_Laporan_Distributor.setBackground(new java.awt.Color(255, 255, 255));
-
-        Lb_Laporan_Distributor_Dari_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Distributor_Dari_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Distributor_Dari_Tanggal.setText("Dari Tanggal :");
-
-        Lb_Laporan_Distributor_Dari_Item.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Distributor_Dari_Item.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Distributor_Dari_Item.setText("Dari Item :");
-
-        Lb_Laporan_Distributor_Urutkan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Distributor_Urutkan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Distributor_Urutkan.setText("Urutkan :");
-
-        Field_Laporan_Distributor_Dari_Tanggal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Field_Laporan_Distributor_Dari_Item.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Distributor_Dari_Item.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        Field_Laporan_Distributor_Urutkan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Distributor_Urutkan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         Btn_Tambah_Laporan_Distributor.setBackground(new java.awt.Color(0, 0, 204));
         Btn_Tambah_Laporan_Distributor.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
@@ -248,39 +173,16 @@ public class Laporan_Master extends javax.swing.JPanel {
         pn_Ctrl_Laporan_DistributorLayout.setHorizontalGroup(
             pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Ctrl_Laporan_DistributorLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Btn_Tambah_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pn_Ctrl_Laporan_DistributorLayout.createSequentialGroup()
-                        .addGroup(pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lb_Laporan_Distributor_Dari_Tanggal)
-                            .addComponent(Lb_Laporan_Distributor_Dari_Item)
-                            .addComponent(Lb_Laporan_Distributor_Urutkan))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Field_Laporan_Distributor_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Laporan_Distributor_Dari_Item, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Laporan_Distributor_Dari_Tanggal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(Btn_Tambah_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         pn_Ctrl_Laporan_DistributorLayout.setVerticalGroup(
             pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Ctrl_Laporan_DistributorLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Laporan_Distributor_Dari_Tanggal)
-                    .addComponent(Field_Laporan_Distributor_Dari_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Distributor_Dari_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Distributor_Dari_Item))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Ctrl_Laporan_DistributorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Distributor_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Distributor_Urutkan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addComponent(Btn_Tambah_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         Lb_Laporan_Distributor.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -327,7 +229,7 @@ public class Laporan_Master extends javax.swing.JPanel {
                     .addGroup(pn_Laporan_DistributorLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(pn_Konten_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pn_Konten_Laporan_Master.add(pn_Laporan_Distributor, "card2");
@@ -355,13 +257,16 @@ public class Laporan_Master extends javax.swing.JPanel {
             .addGroup(pn_Laporan_MasterLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pn_Laporan_MasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pn_Laporan_MasterLayout.createSequentialGroup()
-                        .addComponent(Btn_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(Btn_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Lb_Laporan_Master)
-                    .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.PREFERRED_SIZE, 1610, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGroup(pn_Laporan_MasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Laporan_MasterLayout.createSequentialGroup()
+                                .addComponent(Btn_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(Btn_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Lb_Laporan_Master))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pn_Laporan_MasterLayout.setVerticalGroup(
             pn_Laporan_MasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,15 +278,15 @@ public class Laporan_Master extends javax.swing.JPanel {
                     .addComponent(Btn_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Btn_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.PREFERRED_SIZE, 735, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_Laporan_Master, javax.swing.GroupLayout.DEFAULT_SIZE, 1695, Short.MAX_VALUE)
+            .addComponent(pn_Laporan_Master, javax.swing.GroupLayout.DEFAULT_SIZE, 1666, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,7 +361,7 @@ public class Laporan_Master extends javax.swing.JPanel {
     }//GEN-LAST:event_Btn_Tambah_Laporan_BarangActionPerformed
 
     private void Btn_Tambah_Laporan_DistributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_Laporan_DistributorActionPerformed
-        try{
+         try{
             
             String file = "/Report/Laporan_Distributor.jasper";
             
@@ -504,20 +409,8 @@ public class Laporan_Master extends javax.swing.JPanel {
     private javax.swing.JButton Btn_Laporan_Distributor;
     private javax.swing.JButton Btn_Tambah_Laporan_Barang;
     private javax.swing.JButton Btn_Tambah_Laporan_Distributor;
-    private javax.swing.JComboBox<String> Field_Laporan_Barang_Dari_Item;
-    private javax.swing.JTextField Field_Laporan_Barang_Dari_Tanggal;
-    private javax.swing.JComboBox<String> Field_Laporan_Barang_Urutkan;
-    private javax.swing.JComboBox<String> Field_Laporan_Distributor_Dari_Item;
-    private javax.swing.JTextField Field_Laporan_Distributor_Dari_Tanggal;
-    private javax.swing.JComboBox<String> Field_Laporan_Distributor_Urutkan;
     private javax.swing.JLabel Lb_Laporan_Barang;
-    private javax.swing.JLabel Lb_Laporan_Barang_Dari_Item;
-    private javax.swing.JLabel Lb_Laporan_Barang_Dari_Tanggal;
-    private javax.swing.JLabel Lb_Laporan_Barang_Urutkan;
     private javax.swing.JLabel Lb_Laporan_Distributor;
-    private javax.swing.JLabel Lb_Laporan_Distributor_Dari_Item;
-    private javax.swing.JLabel Lb_Laporan_Distributor_Dari_Tanggal;
-    private javax.swing.JLabel Lb_Laporan_Distributor_Urutkan;
     private javax.swing.JLabel Lb_Laporan_Master;
     private javax.swing.JPanel pn_Ctrl_Laporan_Barang;
     private javax.swing.JPanel pn_Ctrl_Laporan_Distributor;

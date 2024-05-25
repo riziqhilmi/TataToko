@@ -69,6 +69,10 @@ private String nama;
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setHorizontalScrollBar(null);
+        jScrollPane1.setWheelScrollingEnabled(false);
 
         Menus.setBackground(new java.awt.Color(46, 46, 46));
         Menus.setLayout(new javax.swing.BoxLayout(Menus, javax.swing.BoxLayout.Y_AXIS));

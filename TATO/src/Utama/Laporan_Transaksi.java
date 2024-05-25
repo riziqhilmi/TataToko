@@ -4,6 +4,19 @@
  */
 package Utama;
 
+import static Utama.Transaksi.txt_kembalian;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JRViewer;
+
 /**
  *
  * @author acer
@@ -13,6 +26,13 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
     /**
      * Creates new form Beranda
      */
+    koneksi db = new koneksi();
+    java.sql.Connection con;
+    private final String driver = "com.mysql.cj.jdbc.Driver";
+    private final String url = "jdbc:mysql://localhost:3306/tatatoko";
+    private final String user = "root";
+    private final String pwd = "";
+
     public Laporan_Transaksi() {
         initComponents();
     }
@@ -34,83 +54,14 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
         Lb_Laporan_Penjualan_Dari_Tanggal = new javax.swing.JLabel();
         Lb_Laporan_Penjualan_Dari_No_Transaksi = new javax.swing.JLabel();
         Lb_Laporan_Penjualan_Urutkan = new javax.swing.JLabel();
-        Field_Laporan_Penjualan_Dari_Tanggal = new javax.swing.JTextField();
-        Lb_Laporan_Penjualan_Sampai_Tanggal = new javax.swing.JLabel();
-        Field_Laporan_Penjualan_Sampai_Tanggal = new javax.swing.JTextField();
-        Lb_Laporan_Penjualan_Sampai_Item = new javax.swing.JLabel();
         Field_Laporan_Penjualan_Urutkan = new javax.swing.JComboBox<>();
         Field_Laporan_Penjualan_Dari_No_Transaksi = new javax.swing.JTextField();
-        Field_Laporan_Penjualan_Sampai_No_Transaksi = new javax.swing.JTextField();
-        pn_Laporan_Utama_Penjualan = new javax.swing.JPanel();
-        RB_Laporan_Penjualan_Harian = new javax.swing.JRadioButton();
-        Lg_Laporan_Penjualan_Harian = new javax.swing.JLabel();
-        RB_Laporan_Penjualan_Bulanan = new javax.swing.JRadioButton();
-        Lg_Laporan_Penjualan_Bulanan = new javax.swing.JLabel();
-        RB_Laporan_Penjualan = new javax.swing.JRadioButton();
-        Lg_Laporan_Penjualan = new javax.swing.JLabel();
-        Btn_Print_Laporan_Penjualan = new javax.swing.JButton();
         Btn_Tambah_Laporan_Penjualan = new javax.swing.JButton();
+        Field_Transaksi_Tanggal_Penjualan_Awal = new com.toedter.calendar.JDateChooser();
+        Field_Transaksi_Tanggal_Penjualan_Akhir = new com.toedter.calendar.JDateChooser();
+        Lb_Laporan_Penjualan_Dari_Tanggal1 = new javax.swing.JLabel();
         Lb_Laporan_Penjualan = new javax.swing.JLabel();
-        pn_Laporan_Pendapatan = new javax.swing.JPanel();
-        pn_Ctrl_Laporan_Penjualan1 = new javax.swing.JPanel();
-        Lb_Laporan_Pendapatan_Dari_Tanggal = new javax.swing.JLabel();
-        Lb_Laporan_Pendapatan_Dari_No_Transaksi = new javax.swing.JLabel();
-        Lb_Laporan_Pendapatan_Urutkan = new javax.swing.JLabel();
-        Field_Laporan_Penjualan_Dari_Tanggal1 = new javax.swing.JTextField();
-        Lb_Laporan_Pendapatan_Sampai_Tanggal = new javax.swing.JLabel();
-        Field_Laporan_Pendapatan_Sampai_Tanggal = new javax.swing.JTextField();
-        Lb_Laporan_Pendapatan_Sampai_No_Transaksi = new javax.swing.JLabel();
-        Field_Laporan_Pendapatan_Urutkan = new javax.swing.JComboBox<>();
-        Field_Laporan_Pendapatan_Dari_No_Transaksi = new javax.swing.JTextField();
-        Field_Laporan_Pendapatan_Sampai_No_Transaksi = new javax.swing.JTextField();
-        pn_Laporan_Utama_Penjualan1 = new javax.swing.JPanel();
-        RB_Laporan_Laba_Kotor_Harian = new javax.swing.JRadioButton();
-        Lg_Laporan_Laba_Kotor_Harian = new javax.swing.JLabel();
-        RB_Laporan_Laba_Kotor_Bulanan = new javax.swing.JRadioButton();
-        Lg_Laporan_Laba_Kotor_Bulanan = new javax.swing.JLabel();
-        RB_Laporan_Laba_Bersih = new javax.swing.JRadioButton();
-        Lg_Laporan_Laba_Bersih = new javax.swing.JLabel();
-        Btn_Print_Laporan_Pendapatan = new javax.swing.JButton();
-        Btn_Tambah_Laporan_Pendapatan = new javax.swing.JButton();
-        Lb_Laporan_Pendapatan = new javax.swing.JLabel();
-        pn_Laporan_Retur = new javax.swing.JPanel();
-        pn_Ctrl_Laporan_Retur = new javax.swing.JPanel();
-        Lb_Laporan_Retur_Dari_Tanggal = new javax.swing.JLabel();
-        Lb_Laporan_Retur_Dari_Item = new javax.swing.JLabel();
-        Lb_Laporan_Retur_Urutkan = new javax.swing.JLabel();
-        Field_Laporan_Retur_Dari_Tanggal = new javax.swing.JTextField();
-        Lb_Laporan_Retur_Sampai_Tanggal = new javax.swing.JLabel();
-        Field_Laporan_Retur_Sampai_Tanggal = new javax.swing.JTextField();
-        Lb_Laporan_Retur_Sampai_Item = new javax.swing.JLabel();
-        Field_Laporan_Retur_Urutkan = new javax.swing.JComboBox<>();
-        Field_Laporan_Retur_Dari_Item = new javax.swing.JTextField();
-        Field_Laporan_Retur_Sampai_Item = new javax.swing.JTextField();
-        Lb_Laporan_Retur_Dari_Distributor = new javax.swing.JLabel();
-        Field_Laporan_Retur_Dari_Distributor = new javax.swing.JComboBox<>();
-        Lb_Laporan_Retur_Sampai_DIstributor = new javax.swing.JLabel();
-        Field_Laporan_Retur_Sampai_Distributor = new javax.swing.JComboBox<>();
-        pn_Laporan_Utama_Retur = new javax.swing.JPanel();
-        RB_Laporan_Retur_Per_Item = new javax.swing.JRadioButton();
-        Lg_Laporan_Retur_Per_Item = new javax.swing.JLabel();
-        RB_Laporan_Retur = new javax.swing.JRadioButton();
-        Lg_Laporan_Retur = new javax.swing.JLabel();
-        Btn_Print_Laporan_Retur = new javax.swing.JButton();
-        Btn_Tambah_Laporan_Retur = new javax.swing.JButton();
-        Lb_Laporan_Retur = new javax.swing.JLabel();
-        pn_Laporan_Hutang = new javax.swing.JPanel();
-        pn_Ctrl_Laporan_Hutang = new javax.swing.JPanel();
-        Lb_Laporan_Hutang_Dari_No_Hutang = new javax.swing.JLabel();
-        Lb_Laporan_Hutang_Status = new javax.swing.JLabel();
-        Field_Laporan_Hutang_Dari_No_Hutang = new javax.swing.JTextField();
-        Lb_Laporan_Hutang_Sampai_No_Hutang = new javax.swing.JLabel();
-        Field_Laporan_Hutang_Sampai_No_Hutang = new javax.swing.JTextField();
-        Field_Laporan_Hutang_Status = new javax.swing.JComboBox<>();
-        pn_Laporan_Utama_Hutang = new javax.swing.JPanel();
-        RB_Laporan_Hutang = new javax.swing.JRadioButton();
-        Lg_Laporan_Hutang = new javax.swing.JLabel();
-        Btn_Print_Laporan_Hutang = new javax.swing.JButton();
-        Btn_Tambah_Laporan_Hutang = new javax.swing.JButton();
-        Lb_Laporan_Hutang = new javax.swing.JLabel();
+        pn_Konten_Penjualan = new javax.swing.JPanel();
         Btn_Laporan_Penjualan = new javax.swing.JButton();
         Btn_Laporan_Pendapatan = new javax.swing.JButton();
         Btn_Laporan_Retur = new javax.swing.JButton();
@@ -128,9 +79,9 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
 
         pn_Ctrl_Laporan_Penjualan.setBackground(new java.awt.Color(255, 255, 255));
 
-        Lb_Laporan_Penjualan_Dari_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Laporan_Penjualan_Dari_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         Lb_Laporan_Penjualan_Dari_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Penjualan_Dari_Tanggal.setText("Dari Tanggal :");
+        Lb_Laporan_Penjualan_Dari_Tanggal.setText("Tanggal :");
 
         Lb_Laporan_Penjualan_Dari_No_Transaksi.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Laporan_Penjualan_Dari_No_Transaksi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -140,742 +91,129 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
         Lb_Laporan_Penjualan_Urutkan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Laporan_Penjualan_Urutkan.setText("Urutkan :");
 
-        Field_Laporan_Penjualan_Dari_Tanggal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Penjualan_Sampai_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Penjualan_Sampai_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Penjualan_Sampai_Tanggal.setText("s/d");
-
-        Field_Laporan_Penjualan_Sampai_Tanggal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Penjualan_Sampai_Item.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Penjualan_Sampai_Item.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Penjualan_Sampai_Item.setText("s/d");
-
         Field_Laporan_Penjualan_Urutkan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Field_Laporan_Penjualan_Urutkan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         Field_Laporan_Penjualan_Dari_No_Transaksi.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        Field_Laporan_Penjualan_Sampai_No_Transaksi.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Btn_Tambah_Laporan_Penjualan.setBackground(new java.awt.Color(0, 0, 204));
+        Btn_Tambah_Laporan_Penjualan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Btn_Tambah_Laporan_Penjualan.setForeground(new java.awt.Color(255, 255, 255));
+        Btn_Tambah_Laporan_Penjualan.setText("Tambah");
+        Btn_Tambah_Laporan_Penjualan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Tambah_Laporan_PenjualanActionPerformed(evt);
+            }
+        });
+
+        Field_Transaksi_Tanggal_Penjualan_Awal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        Field_Transaksi_Tanggal_Penjualan_Akhir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+
+        Lb_Laporan_Penjualan_Dari_Tanggal1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Laporan_Penjualan_Dari_Tanggal1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Laporan_Penjualan_Dari_Tanggal1.setText("S/D");
 
         javax.swing.GroupLayout pn_Ctrl_Laporan_PenjualanLayout = new javax.swing.GroupLayout(pn_Ctrl_Laporan_Penjualan);
         pn_Ctrl_Laporan_Penjualan.setLayout(pn_Ctrl_Laporan_PenjualanLayout);
         pn_Ctrl_Laporan_PenjualanLayout.setHorizontalGroup(
             pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Lb_Laporan_Penjualan_Dari_No_Transaksi)
-                    .addComponent(Lb_Laporan_Penjualan_Dari_Tanggal)
-                    .addComponent(Lb_Laporan_Penjualan_Urutkan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Field_Laporan_Penjualan_Dari_Tanggal)
-                    .addComponent(Field_Laporan_Penjualan_Dari_No_Transaksi)
-                    .addComponent(Field_Laporan_Penjualan_Urutkan, 0, 196, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(18, 18, 18)
+                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createSequentialGroup()
-                        .addComponent(Lb_Laporan_Penjualan_Sampai_Item)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Field_Laporan_Penjualan_Sampai_No_Transaksi))
+                        .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(Btn_Tambah_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createSequentialGroup()
+                                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Lb_Laporan_Penjualan_Urutkan)
+                                    .addComponent(Lb_Laporan_Penjualan_Dari_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(Field_Laporan_Penjualan_Dari_No_Transaksi, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Field_Laporan_Penjualan_Urutkan, 0, 203, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createSequentialGroup()
-                        .addComponent(Lb_Laporan_Penjualan_Sampai_Tanggal)
+                        .addComponent(Lb_Laporan_Penjualan_Dari_Tanggal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Field_Laporan_Penjualan_Sampai_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24))
+                        .addComponent(Field_Transaksi_Tanggal_Penjualan_Awal, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(Lb_Laporan_Penjualan_Dari_Tanggal1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Field_Transaksi_Tanggal_Penjualan_Akhir, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))))
         );
         pn_Ctrl_Laporan_PenjualanLayout.setVerticalGroup(
             pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(39, 39, 39)
+                .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lb_Laporan_Penjualan_Dari_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Penjualan_Dari_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Penjualan_Sampai_Tanggal)
-                    .addComponent(Field_Laporan_Penjualan_Sampai_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(Field_Transaksi_Tanggal_Penjualan_Awal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Field_Transaksi_Tanggal_Penjualan_Akhir, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Lb_Laporan_Penjualan_Dari_Tanggal1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lb_Laporan_Penjualan_Dari_No_Transaksi)
-                    .addComponent(Field_Laporan_Penjualan_Dari_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Penjualan_Sampai_Item)
-                    .addComponent(Field_Laporan_Penjualan_Sampai_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(Field_Laporan_Penjualan_Dari_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(pn_Ctrl_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Field_Laporan_Penjualan_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Lb_Laporan_Penjualan_Urutkan))
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addGap(88, 88, 88)
+                .addComponent(Btn_Tambah_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addGap(32, 32, 32))
         );
-
-        pn_Laporan_Utama_Penjualan.setBackground(new java.awt.Color(255, 255, 255));
-
-        RB_Laporan_Penjualan_Harian.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Penjualan_Harian.setText("Laporan Penjualan Harian");
-
-        Lg_Laporan_Penjualan_Harian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        RB_Laporan_Penjualan_Bulanan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Penjualan_Bulanan.setText("Laporan Penjualan Bulanan");
-        RB_Laporan_Penjualan_Bulanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RB_Laporan_Penjualan_BulananActionPerformed(evt);
-            }
-        });
-
-        Lg_Laporan_Penjualan_Bulanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        RB_Laporan_Penjualan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Penjualan.setText("Laporan Penjualan");
-
-        Lg_Laporan_Penjualan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        javax.swing.GroupLayout pn_Laporan_Utama_PenjualanLayout = new javax.swing.GroupLayout(pn_Laporan_Utama_Penjualan);
-        pn_Laporan_Utama_Penjualan.setLayout(pn_Laporan_Utama_PenjualanLayout);
-        pn_Laporan_Utama_PenjualanLayout.setHorizontalGroup(
-            pn_Laporan_Utama_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_PenjualanLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(pn_Laporan_Utama_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(Lg_Laporan_Penjualan_Bulanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lg_Laporan_Penjualan_Harian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Laporan_Utama_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RB_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Penjualan_Bulanan, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Penjualan_Harian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(193, Short.MAX_VALUE))
-        );
-        pn_Laporan_Utama_PenjualanLayout.setVerticalGroup(
-            pn_Laporan_Utama_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_PenjualanLayout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
-                .addGroup(pn_Laporan_Utama_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Penjualan_Harian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Penjualan_Harian, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Laporan_Utama_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Penjualan_Bulanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Penjualan_Bulanan, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Laporan_Utama_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52))
-        );
-
-        Btn_Print_Laporan_Penjualan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Print_Laporan_Penjualan.setText("Print");
-
-        Btn_Tambah_Laporan_Penjualan.setBackground(new java.awt.Color(0, 0, 204));
-        Btn_Tambah_Laporan_Penjualan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Tambah_Laporan_Penjualan.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Tambah_Laporan_Penjualan.setText("Tambah");
 
         Lb_Laporan_Penjualan.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         Lb_Laporan_Penjualan.setText("Penjualan");
+
+        pn_Konten_Penjualan.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pn_Konten_PenjualanLayout = new javax.swing.GroupLayout(pn_Konten_Penjualan);
+        pn_Konten_Penjualan.setLayout(pn_Konten_PenjualanLayout);
+        pn_Konten_PenjualanLayout.setHorizontalGroup(
+            pn_Konten_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        pn_Konten_PenjualanLayout.setVerticalGroup(
+            pn_Konten_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 665, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout pn_Laporan_PenjualanLayout = new javax.swing.GroupLayout(pn_Laporan_Penjualan);
         pn_Laporan_Penjualan.setLayout(pn_Laporan_PenjualanLayout);
         pn_Laporan_PenjualanLayout.setHorizontalGroup(
             pn_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Laporan_PenjualanLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pn_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lb_Laporan_Penjualan)
                     .addGroup(pn_Laporan_PenjualanLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Lb_Laporan_Penjualan))
-                    .addGroup(pn_Laporan_PenjualanLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(pn_Ctrl_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addGroup(pn_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Laporan_PenjualanLayout.createSequentialGroup()
-                                .addComponent(Btn_Print_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(Btn_Tambah_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pn_Laporan_Utama_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(170, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(pn_Ctrl_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(pn_Konten_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         pn_Laporan_PenjualanLayout.setVerticalGroup(
             pn_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Laporan_PenjualanLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(Lb_Laporan_Penjualan)
-                .addGap(32, 32, 32)
                 .addGroup(pn_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Laporan_PenjualanLayout.createSequentialGroup()
-                        .addComponent(pn_Laporan_Utama_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pn_Laporan_PenjualanLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(Lb_Laporan_Penjualan)
                         .addGap(18, 18, 18)
-                        .addGroup(pn_Laporan_PenjualanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Btn_Tambah_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(Btn_Print_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(pn_Ctrl_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addComponent(pn_Ctrl_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pn_Laporan_PenjualanLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(pn_Konten_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pn_Konten_Laporan_Transaksi.add(pn_Laporan_Penjualan, "card2");
-
-        pn_Ctrl_Laporan_Penjualan1.setBackground(new java.awt.Color(255, 255, 255));
-
-        Lb_Laporan_Pendapatan_Dari_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Pendapatan_Dari_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Pendapatan_Dari_Tanggal.setText("Dari Tanggal :");
-
-        Lb_Laporan_Pendapatan_Dari_No_Transaksi.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Pendapatan_Dari_No_Transaksi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Pendapatan_Dari_No_Transaksi.setText("No Transaksi :");
-
-        Lb_Laporan_Pendapatan_Urutkan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Pendapatan_Urutkan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Pendapatan_Urutkan.setText("Urutkan :");
-
-        Field_Laporan_Penjualan_Dari_Tanggal1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Pendapatan_Sampai_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Pendapatan_Sampai_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Pendapatan_Sampai_Tanggal.setText("s/d");
-
-        Field_Laporan_Pendapatan_Sampai_Tanggal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Pendapatan_Sampai_No_Transaksi.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Pendapatan_Sampai_No_Transaksi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Pendapatan_Sampai_No_Transaksi.setText("s/d");
-
-        Field_Laporan_Pendapatan_Urutkan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Pendapatan_Urutkan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        Field_Laporan_Pendapatan_Dari_No_Transaksi.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Field_Laporan_Pendapatan_Sampai_No_Transaksi.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        javax.swing.GroupLayout pn_Ctrl_Laporan_Penjualan1Layout = new javax.swing.GroupLayout(pn_Ctrl_Laporan_Penjualan1);
-        pn_Ctrl_Laporan_Penjualan1.setLayout(pn_Ctrl_Laporan_Penjualan1Layout);
-        pn_Ctrl_Laporan_Penjualan1Layout.setHorizontalGroup(
-            pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createSequentialGroup()
-                .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(Lb_Laporan_Pendapatan_Dari_Tanggal))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Ctrl_Laporan_Penjualan1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Lb_Laporan_Pendapatan_Dari_No_Transaksi, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lb_Laporan_Pendapatan_Urutkan, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Field_Laporan_Pendapatan_Dari_No_Transaksi)
-                    .addComponent(Field_Laporan_Pendapatan_Urutkan, 0, 196, Short.MAX_VALUE)
-                    .addComponent(Field_Laporan_Penjualan_Dari_Tanggal1))
-                .addGap(49, 49, 49)
-                .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Lb_Laporan_Pendapatan_Sampai_Tanggal)
-                    .addComponent(Lb_Laporan_Pendapatan_Sampai_No_Transaksi))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Field_Laporan_Pendapatan_Sampai_No_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addComponent(Field_Laporan_Pendapatan_Sampai_Tanggal))
-                .addGap(48, 48, 48))
-        );
-        pn_Ctrl_Laporan_Penjualan1Layout.setVerticalGroup(
-            pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Laporan_Pendapatan_Dari_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Penjualan_Dari_Tanggal1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Pendapatan_Sampai_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Pendapatan_Sampai_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Pendapatan_Sampai_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Pendapatan_Dari_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Pendapatan_Dari_No_Transaksi)
-                    .addComponent(Lb_Laporan_Pendapatan_Sampai_No_Transaksi))
-                .addGap(26, 26, 26)
-                .addGroup(pn_Ctrl_Laporan_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Pendapatan_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Pendapatan_Urutkan))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pn_Laporan_Utama_Penjualan1.setBackground(new java.awt.Color(255, 255, 255));
-
-        RB_Laporan_Laba_Kotor_Harian.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Laba_Kotor_Harian.setText("Laporan Laba Kotor Harian");
-        RB_Laporan_Laba_Kotor_Harian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RB_Laporan_Laba_Kotor_HarianActionPerformed(evt);
-            }
-        });
-
-        Lg_Laporan_Laba_Kotor_Harian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        RB_Laporan_Laba_Kotor_Bulanan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Laba_Kotor_Bulanan.setText("Laporan Laba Kotor Bulanan");
-        RB_Laporan_Laba_Kotor_Bulanan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RB_Laporan_Laba_Kotor_BulananActionPerformed(evt);
-            }
-        });
-
-        Lg_Laporan_Laba_Kotor_Bulanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        RB_Laporan_Laba_Bersih.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Laba_Bersih.setText("Laporan Laba Bersih");
-
-        Lg_Laporan_Laba_Bersih.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        javax.swing.GroupLayout pn_Laporan_Utama_Penjualan1Layout = new javax.swing.GroupLayout(pn_Laporan_Utama_Penjualan1);
-        pn_Laporan_Utama_Penjualan1.setLayout(pn_Laporan_Utama_Penjualan1Layout);
-        pn_Laporan_Utama_Penjualan1Layout.setHorizontalGroup(
-            pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_Penjualan1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pn_Laporan_Utama_Penjualan1Layout.createSequentialGroup()
-                        .addComponent(Lg_Laporan_Laba_Kotor_Harian, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(RB_Laporan_Laba_Kotor_Harian, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_Laporan_Utama_Penjualan1Layout.createSequentialGroup()
-                        .addGroup(pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Lg_Laporan_Laba_Kotor_Bulanan, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                            .addComponent(Lg_Laporan_Laba_Bersih, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RB_Laporan_Laba_Kotor_Bulanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(RB_Laporan_Laba_Bersih, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(155, Short.MAX_VALUE))
-        );
-        pn_Laporan_Utama_Penjualan1Layout.setVerticalGroup(
-            pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_Penjualan1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Laba_Kotor_Harian, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Laba_Kotor_Harian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Laba_Kotor_Bulanan, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Laba_Kotor_Bulanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Laporan_Utama_Penjualan1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Laba_Bersih, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Laba_Bersih, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
-
-        Btn_Print_Laporan_Pendapatan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Print_Laporan_Pendapatan.setText("Print");
-
-        Btn_Tambah_Laporan_Pendapatan.setBackground(new java.awt.Color(0, 0, 204));
-        Btn_Tambah_Laporan_Pendapatan.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Tambah_Laporan_Pendapatan.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Tambah_Laporan_Pendapatan.setText("Tambah");
-        Btn_Tambah_Laporan_Pendapatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_Tambah_Laporan_PendapatanActionPerformed(evt);
-            }
-        });
-
-        Lb_Laporan_Pendapatan.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        Lb_Laporan_Pendapatan.setText("Pendapatan");
-
-        javax.swing.GroupLayout pn_Laporan_PendapatanLayout = new javax.swing.GroupLayout(pn_Laporan_Pendapatan);
-        pn_Laporan_Pendapatan.setLayout(pn_Laporan_PendapatanLayout);
-        pn_Laporan_PendapatanLayout.setHorizontalGroup(
-            pn_Laporan_PendapatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_PendapatanLayout.createSequentialGroup()
-                .addGroup(pn_Laporan_PendapatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Laporan_PendapatanLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Lb_Laporan_Pendapatan))
-                    .addGroup(pn_Laporan_PendapatanLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(pn_Ctrl_Laporan_Penjualan1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addGroup(pn_Laporan_PendapatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Laporan_PendapatanLayout.createSequentialGroup()
-                                .addComponent(Btn_Print_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(Btn_Tambah_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pn_Laporan_Utama_Penjualan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-        pn_Laporan_PendapatanLayout.setVerticalGroup(
-            pn_Laporan_PendapatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_PendapatanLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(Lb_Laporan_Pendapatan)
-                .addGap(32, 32, 32)
-                .addGroup(pn_Laporan_PendapatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pn_Laporan_PendapatanLayout.createSequentialGroup()
-                        .addComponent(pn_Laporan_Utama_Penjualan1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pn_Laporan_PendapatanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Btn_Tambah_Laporan_Pendapatan, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(Btn_Print_Laporan_Pendapatan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(pn_Ctrl_Laporan_Penjualan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-
-        pn_Konten_Laporan_Transaksi.add(pn_Laporan_Pendapatan, "card2");
-
-        pn_Ctrl_Laporan_Retur.setBackground(new java.awt.Color(255, 255, 255));
-
-        Lb_Laporan_Retur_Dari_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Retur_Dari_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Retur_Dari_Tanggal.setText("Dari Tanggal :");
-
-        Lb_Laporan_Retur_Dari_Item.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Retur_Dari_Item.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Retur_Dari_Item.setText("Dari Item :");
-
-        Lb_Laporan_Retur_Urutkan.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Retur_Urutkan.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Retur_Urutkan.setText("Urutkan :");
-
-        Field_Laporan_Retur_Dari_Tanggal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Retur_Sampai_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Retur_Sampai_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Retur_Sampai_Tanggal.setText("s/d");
-
-        Field_Laporan_Retur_Sampai_Tanggal.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Retur_Sampai_Item.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Retur_Sampai_Item.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Retur_Sampai_Item.setText("s/d");
-
-        Field_Laporan_Retur_Urutkan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Retur_Urutkan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        Field_Laporan_Retur_Dari_Item.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Field_Laporan_Retur_Sampai_Item.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Retur_Dari_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Retur_Dari_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Retur_Dari_Distributor.setText("Distributor :");
-
-        Field_Laporan_Retur_Dari_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Retur_Dari_Distributor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        Lb_Laporan_Retur_Sampai_DIstributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Retur_Sampai_DIstributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Retur_Sampai_DIstributor.setText("s/d");
-
-        Field_Laporan_Retur_Sampai_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Retur_Sampai_Distributor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        Field_Laporan_Retur_Sampai_Distributor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Field_Laporan_Retur_Sampai_DistributorActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pn_Ctrl_Laporan_ReturLayout = new javax.swing.GroupLayout(pn_Ctrl_Laporan_Retur);
-        pn_Ctrl_Laporan_Retur.setLayout(pn_Ctrl_Laporan_ReturLayout);
-        pn_Ctrl_Laporan_ReturLayout.setHorizontalGroup(
-            pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Ctrl_Laporan_ReturLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Lb_Laporan_Retur_Dari_Tanggal)
-                    .addComponent(Lb_Laporan_Retur_Dari_Item)
-                    .addComponent(Lb_Laporan_Retur_Dari_Distributor)
-                    .addComponent(Lb_Laporan_Retur_Urutkan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Ctrl_Laporan_ReturLayout.createSequentialGroup()
-                        .addComponent(Field_Laporan_Retur_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pn_Ctrl_Laporan_ReturLayout.createSequentialGroup()
-                        .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Field_Laporan_Retur_Dari_Item)
-                            .addComponent(Field_Laporan_Retur_Dari_Tanggal)
-                            .addComponent(Field_Laporan_Retur_Dari_Distributor, 0, 196, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                        .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Lb_Laporan_Retur_Sampai_Item, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lb_Laporan_Retur_Sampai_Tanggal, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Lb_Laporan_Retur_Sampai_DIstributor, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Field_Laporan_Retur_Sampai_Distributor, javax.swing.GroupLayout.Alignment.TRAILING, 0, 196, Short.MAX_VALUE)
-                            .addComponent(Field_Laporan_Retur_Sampai_Tanggal)
-                            .addComponent(Field_Laporan_Retur_Sampai_Item))
-                        .addGap(29, 29, 29))))
-        );
-        pn_Ctrl_Laporan_ReturLayout.setVerticalGroup(
-            pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Ctrl_Laporan_ReturLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Laporan_Retur_Dari_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Retur_Dari_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Retur_Sampai_Tanggal)
-                    .addComponent(Field_Laporan_Retur_Sampai_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Retur_Sampai_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Retur_Sampai_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Retur_Dari_Item, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Retur_Dari_Item))
-                .addGap(25, 25, 25)
-                .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Laporan_Retur_Sampai_DIstributor)
-                    .addComponent(Field_Laporan_Retur_Sampai_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Retur_Dari_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Retur_Dari_Distributor))
-                .addGap(26, 26, 26)
-                .addGroup(pn_Ctrl_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Retur_Urutkan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Retur_Urutkan))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pn_Laporan_Utama_Retur.setBackground(new java.awt.Color(255, 255, 255));
-
-        RB_Laporan_Retur_Per_Item.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Retur_Per_Item.setText("Laporan Retur Per Item");
-        RB_Laporan_Retur_Per_Item.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RB_Laporan_Retur_Per_ItemActionPerformed(evt);
-            }
-        });
-
-        Lg_Laporan_Retur_Per_Item.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        RB_Laporan_Retur.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Retur.setText("Laporan Retur");
-        RB_Laporan_Retur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RB_Laporan_ReturActionPerformed(evt);
-            }
-        });
-
-        Lg_Laporan_Retur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        javax.swing.GroupLayout pn_Laporan_Utama_ReturLayout = new javax.swing.GroupLayout(pn_Laporan_Utama_Retur);
-        pn_Laporan_Utama_Retur.setLayout(pn_Laporan_Utama_ReturLayout);
-        pn_Laporan_Utama_ReturLayout.setHorizontalGroup(
-            pn_Laporan_Utama_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_ReturLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(pn_Laporan_Utama_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Retur_Per_Item, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(Lg_Laporan_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Laporan_Utama_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RB_Laporan_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Retur_Per_Item, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
-                .addContainerGap(226, Short.MAX_VALUE))
-        );
-        pn_Laporan_Utama_ReturLayout.setVerticalGroup(
-            pn_Laporan_Utama_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_ReturLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(pn_Laporan_Utama_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Retur_Per_Item, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Retur_Per_Item, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Laporan_Utama_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
-        );
-
-        Btn_Print_Laporan_Retur.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Print_Laporan_Retur.setText("Print");
-
-        Btn_Tambah_Laporan_Retur.setBackground(new java.awt.Color(0, 0, 204));
-        Btn_Tambah_Laporan_Retur.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Tambah_Laporan_Retur.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Tambah_Laporan_Retur.setText("Tambah");
-
-        Lb_Laporan_Retur.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        Lb_Laporan_Retur.setText("Retur");
-
-        javax.swing.GroupLayout pn_Laporan_ReturLayout = new javax.swing.GroupLayout(pn_Laporan_Retur);
-        pn_Laporan_Retur.setLayout(pn_Laporan_ReturLayout);
-        pn_Laporan_ReturLayout.setHorizontalGroup(
-            pn_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_ReturLayout.createSequentialGroup()
-                .addGroup(pn_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Laporan_ReturLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Lb_Laporan_Retur))
-                    .addGroup(pn_Laporan_ReturLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(pn_Ctrl_Laporan_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addGroup(pn_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Laporan_ReturLayout.createSequentialGroup()
-                                .addComponent(Btn_Print_Laporan_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(Btn_Tambah_Laporan_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pn_Laporan_Utama_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-        pn_Laporan_ReturLayout.setVerticalGroup(
-            pn_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_ReturLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(Lb_Laporan_Retur)
-                .addGap(32, 32, 32)
-                .addGroup(pn_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pn_Laporan_ReturLayout.createSequentialGroup()
-                        .addComponent(pn_Laporan_Utama_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pn_Laporan_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Btn_Print_Laporan_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_Tambah_Laporan_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)))
-                    .addComponent(pn_Ctrl_Laporan_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-
-        pn_Konten_Laporan_Transaksi.add(pn_Laporan_Retur, "card2");
-
-        pn_Ctrl_Laporan_Hutang.setBackground(new java.awt.Color(255, 255, 255));
-
-        Lb_Laporan_Hutang_Dari_No_Hutang.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Hutang_Dari_No_Hutang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Hutang_Dari_No_Hutang.setText("No Hutang :");
-
-        Lb_Laporan_Hutang_Status.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Hutang_Status.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Hutang_Status.setText("Status :");
-
-        Field_Laporan_Hutang_Dari_No_Hutang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Lb_Laporan_Hutang_Sampai_No_Hutang.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Laporan_Hutang_Sampai_No_Hutang.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Laporan_Hutang_Sampai_No_Hutang.setText("s/d");
-
-        Field_Laporan_Hutang_Sampai_No_Hutang.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-
-        Field_Laporan_Hutang_Status.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        Field_Laporan_Hutang_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout pn_Ctrl_Laporan_HutangLayout = new javax.swing.GroupLayout(pn_Ctrl_Laporan_Hutang);
-        pn_Ctrl_Laporan_Hutang.setLayout(pn_Ctrl_Laporan_HutangLayout);
-        pn_Ctrl_Laporan_HutangLayout.setHorizontalGroup(
-            pn_Ctrl_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Ctrl_Laporan_HutangLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(pn_Ctrl_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Lb_Laporan_Hutang_Dari_No_Hutang, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Lb_Laporan_Hutang_Status, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Ctrl_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(Field_Laporan_Hutang_Status, 0, 196, Short.MAX_VALUE)
-                    .addComponent(Field_Laporan_Hutang_Dari_No_Hutang))
-                .addGap(49, 49, 49)
-                .addComponent(Lb_Laporan_Hutang_Sampai_No_Hutang)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Field_Laporan_Hutang_Sampai_No_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
-        );
-        pn_Ctrl_Laporan_HutangLayout.setVerticalGroup(
-            pn_Ctrl_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Ctrl_Laporan_HutangLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(pn_Ctrl_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Laporan_Hutang_Dari_No_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Laporan_Hutang_Dari_No_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Hutang_Sampai_No_Hutang)
-                    .addComponent(Field_Laporan_Hutang_Sampai_No_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(pn_Ctrl_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Laporan_Hutang_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Laporan_Hutang_Status))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pn_Laporan_Utama_Hutang.setBackground(new java.awt.Color(255, 255, 255));
-
-        RB_Laporan_Hutang.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        RB_Laporan_Hutang.setText("Laporan Hutang");
-        RB_Laporan_Hutang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RB_Laporan_HutangActionPerformed(evt);
-            }
-        });
-
-        Lg_Laporan_Hutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Gambar/icon_Report.png"))); // NOI18N
-
-        javax.swing.GroupLayout pn_Laporan_Utama_HutangLayout = new javax.swing.GroupLayout(pn_Laporan_Utama_Hutang);
-        pn_Laporan_Utama_Hutang.setLayout(pn_Laporan_Utama_HutangLayout);
-        pn_Laporan_Utama_HutangLayout.setHorizontalGroup(
-            pn_Laporan_Utama_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_HutangLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(Lg_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RB_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(261, Short.MAX_VALUE))
-        );
-        pn_Laporan_Utama_HutangLayout.setVerticalGroup(
-            pn_Laporan_Utama_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_Utama_HutangLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addGroup(pn_Laporan_Utama_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lg_Laporan_Hutang, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                    .addComponent(RB_Laporan_Hutang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(146, Short.MAX_VALUE))
-        );
-
-        Btn_Print_Laporan_Hutang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Print_Laporan_Hutang.setText("Print");
-
-        Btn_Tambah_Laporan_Hutang.setBackground(new java.awt.Color(0, 0, 204));
-        Btn_Tambah_Laporan_Hutang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Tambah_Laporan_Hutang.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Tambah_Laporan_Hutang.setText("Tambah");
-
-        Lb_Laporan_Hutang.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
-        Lb_Laporan_Hutang.setText("Hutang");
-
-        javax.swing.GroupLayout pn_Laporan_HutangLayout = new javax.swing.GroupLayout(pn_Laporan_Hutang);
-        pn_Laporan_Hutang.setLayout(pn_Laporan_HutangLayout);
-        pn_Laporan_HutangLayout.setHorizontalGroup(
-            pn_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_HutangLayout.createSequentialGroup()
-                .addGroup(pn_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Laporan_HutangLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Lb_Laporan_Hutang))
-                    .addGroup(pn_Laporan_HutangLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(pn_Ctrl_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addGroup(pn_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Laporan_HutangLayout.createSequentialGroup()
-                                .addComponent(Btn_Print_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(Btn_Tambah_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pn_Laporan_Utama_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-        pn_Laporan_HutangLayout.setVerticalGroup(
-            pn_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pn_Laporan_HutangLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(Lb_Laporan_Hutang)
-                .addGap(32, 32, 32)
-                .addGroup(pn_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pn_Laporan_HutangLayout.createSequentialGroup()
-                        .addComponent(pn_Laporan_Utama_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pn_Laporan_HutangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Btn_Print_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Btn_Tambah_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(pn_Ctrl_Laporan_Hutang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(80, Short.MAX_VALUE))
-        );
-
-        pn_Konten_Laporan_Transaksi.add(pn_Laporan_Hutang, "card2");
 
         Btn_Laporan_Penjualan.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         Btn_Laporan_Penjualan.setText("Penjualan");
@@ -925,7 +263,7 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addComponent(Btn_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Lb_Laporan_Transasksi)
-                    .addComponent(pn_Konten_Laporan_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 1517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pn_Konten_Laporan_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 1630, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_Laporan_TransaksiLayout.setVerticalGroup(
@@ -933,41 +271,39 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
             .addGroup(pn_Laporan_TransaksiLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(Lb_Laporan_Transasksi)
-                .addGap(82, 82, 82)
+                .addGap(45, 45, 45)
                 .addGroup(pn_Laporan_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pn_Laporan_TransaksiLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(Btn_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Btn_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pn_Laporan_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Btn_Laporan_Hutang, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Btn_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(Btn_Laporan_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pn_Konten_Laporan_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(pn_Konten_Laporan_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_Laporan_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 1573, Short.MAX_VALUE)
+            .addComponent(pn_Laporan_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 1686, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_Laporan_Transaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pn_Laporan_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 1008, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void RB_Laporan_Penjualan_BulananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Laporan_Penjualan_BulananActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RB_Laporan_Penjualan_BulananActionPerformed
 
     private void Btn_Laporan_PenjualanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Laporan_PenjualanMouseClicked
         pn_Konten_Laporan_Transaksi.removeAll();
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
-        
+
         pn_Konten_Laporan_Transaksi.add(pn_Laporan_Penjualan);
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
@@ -977,8 +313,8 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
         pn_Konten_Laporan_Transaksi.removeAll();
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
-        
-        pn_Konten_Laporan_Transaksi.add(pn_Laporan_Pendapatan);
+
+        //pn_Konten_Laporan_Transaksi.add(pn_Laporan_Pendapatan);
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
     }//GEN-LAST:event_Btn_Laporan_PendapatanMouseClicked
@@ -987,8 +323,8 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
         pn_Konten_Laporan_Transaksi.removeAll();
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
-        
-        pn_Konten_Laporan_Transaksi.add(pn_Laporan_Retur);
+
+        //pn_Konten_Laporan_Transaksi.add(pn_Laporan_Retur);
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
     }//GEN-LAST:event_Btn_Laporan_ReturMouseClicked
@@ -997,39 +333,57 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
         pn_Konten_Laporan_Transaksi.removeAll();
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
-        
-        pn_Konten_Laporan_Transaksi.add(pn_Laporan_Hutang);
+
+        //pn_Konten_Laporan_Transaksi.add(pn_Laporan_Hutang);
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
     }//GEN-LAST:event_Btn_Laporan_HutangMouseClicked
 
-    private void RB_Laporan_Laba_Kotor_BulananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Laporan_Laba_Kotor_BulananActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RB_Laporan_Laba_Kotor_BulananActionPerformed
+    private void Btn_Tambah_Laporan_PenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_Laporan_PenjualanActionPerformed
+        try {
+            String file = "/Report/Transaksi_Penjualan.jasper";
 
-    private void RB_Laporan_Laba_Kotor_HarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Laporan_Laba_Kotor_HarianActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RB_Laporan_Laba_Kotor_HarianActionPerformed
+            // Memuat kelas driver JDBC
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, pwd);
 
-    private void RB_Laporan_Retur_Per_ItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Laporan_Retur_Per_ItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RB_Laporan_Retur_Per_ItemActionPerformed
+            // Membuat objek parameter
+            HashMap<String, Object> param = new HashMap<>();
 
-    private void RB_Laporan_ReturActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Laporan_ReturActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RB_Laporan_ReturActionPerformed
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        String tanggalakhir = String.valueOf(date.format(Field_Transaksi_Tanggal_Penjualan_Akhir.getDate()));
+        String tanggalawal = String.valueOf(date.format(Field_Transaksi_Tanggal_Penjualan_Awal.getDate()));    
+        
+            // Mengambil tanggal awal dan akhir dari JDateChooser
+            param.put("daritgl", tanggalawal);
+            param.put("sampaitgl", tanggalakhir);
 
-    private void RB_Laporan_HutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RB_Laporan_HutangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RB_Laporan_HutangActionPerformed
+            // Mengisi laporan dengan data dari database
+            JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
 
-    private void Btn_Tambah_Laporan_PendapatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_Laporan_PendapatanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_Tambah_Laporan_PendapatanActionPerformed
+            // Menghapus konten panel sebelumnya
+            pn_Konten_Penjualan.removeAll();
+            pn_Konten_Penjualan.setLayout(new java.awt.BorderLayout());
 
-    private void Field_Laporan_Retur_Sampai_DistributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Laporan_Retur_Sampai_DistributorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Field_Laporan_Retur_Sampai_DistributorActionPerformed
+            // Membuat JRViewer untuk menampilkan laporan
+            JRViewer viewer = new JRViewer(print);
+
+            // Menambahkan JRViewer ke panel
+            pn_Konten_Penjualan.add(viewer, java.awt.BorderLayout.CENTER);
+
+            // Menetapkan ukuran preferensi agar JRViewer sesuai dengan panel
+            viewer.setPreferredSize(pn_Konten_Penjualan.getSize());
+
+            viewer.setZoomRatio(0.75f);
+
+            // Refresh panel
+            pn_Konten_Penjualan.revalidate();
+            pn_Konten_Penjualan.repaint();
+
+        } catch (ClassNotFoundException | JRException | SQLException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_Btn_Tambah_Laporan_PenjualanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1037,90 +391,21 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
     private javax.swing.JButton Btn_Laporan_Pendapatan;
     private javax.swing.JButton Btn_Laporan_Penjualan;
     private javax.swing.JButton Btn_Laporan_Retur;
-    private javax.swing.JButton Btn_Print_Laporan_Hutang;
-    private javax.swing.JButton Btn_Print_Laporan_Pendapatan;
-    private javax.swing.JButton Btn_Print_Laporan_Penjualan;
-    private javax.swing.JButton Btn_Print_Laporan_Retur;
-    private javax.swing.JButton Btn_Tambah_Laporan_Hutang;
-    private javax.swing.JButton Btn_Tambah_Laporan_Pendapatan;
     private javax.swing.JButton Btn_Tambah_Laporan_Penjualan;
-    private javax.swing.JButton Btn_Tambah_Laporan_Retur;
-    private javax.swing.JTextField Field_Laporan_Hutang_Dari_No_Hutang;
-    private javax.swing.JTextField Field_Laporan_Hutang_Sampai_No_Hutang;
-    private javax.swing.JComboBox<String> Field_Laporan_Hutang_Status;
-    private javax.swing.JTextField Field_Laporan_Pendapatan_Dari_No_Transaksi;
-    private javax.swing.JTextField Field_Laporan_Pendapatan_Sampai_No_Transaksi;
-    private javax.swing.JTextField Field_Laporan_Pendapatan_Sampai_Tanggal;
-    private javax.swing.JComboBox<String> Field_Laporan_Pendapatan_Urutkan;
     private javax.swing.JTextField Field_Laporan_Penjualan_Dari_No_Transaksi;
-    private javax.swing.JTextField Field_Laporan_Penjualan_Dari_Tanggal;
-    private javax.swing.JTextField Field_Laporan_Penjualan_Dari_Tanggal1;
-    private javax.swing.JTextField Field_Laporan_Penjualan_Sampai_No_Transaksi;
-    private javax.swing.JTextField Field_Laporan_Penjualan_Sampai_Tanggal;
     private javax.swing.JComboBox<String> Field_Laporan_Penjualan_Urutkan;
-    private javax.swing.JComboBox<String> Field_Laporan_Retur_Dari_Distributor;
-    private javax.swing.JTextField Field_Laporan_Retur_Dari_Item;
-    private javax.swing.JTextField Field_Laporan_Retur_Dari_Tanggal;
-    private javax.swing.JComboBox<String> Field_Laporan_Retur_Sampai_Distributor;
-    private javax.swing.JTextField Field_Laporan_Retur_Sampai_Item;
-    private javax.swing.JTextField Field_Laporan_Retur_Sampai_Tanggal;
-    private javax.swing.JComboBox<String> Field_Laporan_Retur_Urutkan;
-    private javax.swing.JLabel Lb_Laporan_Hutang;
-    private javax.swing.JLabel Lb_Laporan_Hutang_Dari_No_Hutang;
-    private javax.swing.JLabel Lb_Laporan_Hutang_Sampai_No_Hutang;
-    private javax.swing.JLabel Lb_Laporan_Hutang_Status;
-    private javax.swing.JLabel Lb_Laporan_Pendapatan;
-    private javax.swing.JLabel Lb_Laporan_Pendapatan_Dari_No_Transaksi;
-    private javax.swing.JLabel Lb_Laporan_Pendapatan_Dari_Tanggal;
-    private javax.swing.JLabel Lb_Laporan_Pendapatan_Sampai_No_Transaksi;
-    private javax.swing.JLabel Lb_Laporan_Pendapatan_Sampai_Tanggal;
-    private javax.swing.JLabel Lb_Laporan_Pendapatan_Urutkan;
+    private com.toedter.calendar.JDateChooser Field_Transaksi_Tanggal_Penjualan_Akhir;
+    private com.toedter.calendar.JDateChooser Field_Transaksi_Tanggal_Penjualan_Awal;
     private javax.swing.JLabel Lb_Laporan_Penjualan;
     private javax.swing.JLabel Lb_Laporan_Penjualan_Dari_No_Transaksi;
     private javax.swing.JLabel Lb_Laporan_Penjualan_Dari_Tanggal;
-    private javax.swing.JLabel Lb_Laporan_Penjualan_Sampai_Item;
-    private javax.swing.JLabel Lb_Laporan_Penjualan_Sampai_Tanggal;
+    private javax.swing.JLabel Lb_Laporan_Penjualan_Dari_Tanggal1;
     private javax.swing.JLabel Lb_Laporan_Penjualan_Urutkan;
-    private javax.swing.JLabel Lb_Laporan_Retur;
-    private javax.swing.JLabel Lb_Laporan_Retur_Dari_Distributor;
-    private javax.swing.JLabel Lb_Laporan_Retur_Dari_Item;
-    private javax.swing.JLabel Lb_Laporan_Retur_Dari_Tanggal;
-    private javax.swing.JLabel Lb_Laporan_Retur_Sampai_DIstributor;
-    private javax.swing.JLabel Lb_Laporan_Retur_Sampai_Item;
-    private javax.swing.JLabel Lb_Laporan_Retur_Sampai_Tanggal;
-    private javax.swing.JLabel Lb_Laporan_Retur_Urutkan;
     private javax.swing.JLabel Lb_Laporan_Transasksi;
-    private javax.swing.JLabel Lg_Laporan_Hutang;
-    private javax.swing.JLabel Lg_Laporan_Laba_Bersih;
-    private javax.swing.JLabel Lg_Laporan_Laba_Kotor_Bulanan;
-    private javax.swing.JLabel Lg_Laporan_Laba_Kotor_Harian;
-    private javax.swing.JLabel Lg_Laporan_Penjualan;
-    private javax.swing.JLabel Lg_Laporan_Penjualan_Bulanan;
-    private javax.swing.JLabel Lg_Laporan_Penjualan_Harian;
-    private javax.swing.JLabel Lg_Laporan_Retur;
-    private javax.swing.JLabel Lg_Laporan_Retur_Per_Item;
-    private javax.swing.JRadioButton RB_Laporan_Hutang;
-    private javax.swing.JRadioButton RB_Laporan_Laba_Bersih;
-    private javax.swing.JRadioButton RB_Laporan_Laba_Kotor_Bulanan;
-    private javax.swing.JRadioButton RB_Laporan_Laba_Kotor_Harian;
-    private javax.swing.JRadioButton RB_Laporan_Penjualan;
-    private javax.swing.JRadioButton RB_Laporan_Penjualan_Bulanan;
-    private javax.swing.JRadioButton RB_Laporan_Penjualan_Harian;
-    private javax.swing.JRadioButton RB_Laporan_Retur;
-    private javax.swing.JRadioButton RB_Laporan_Retur_Per_Item;
-    private javax.swing.JPanel pn_Ctrl_Laporan_Hutang;
     private javax.swing.JPanel pn_Ctrl_Laporan_Penjualan;
-    private javax.swing.JPanel pn_Ctrl_Laporan_Penjualan1;
-    private javax.swing.JPanel pn_Ctrl_Laporan_Retur;
     private javax.swing.JPanel pn_Konten_Laporan_Transaksi;
-    private javax.swing.JPanel pn_Laporan_Hutang;
-    private javax.swing.JPanel pn_Laporan_Pendapatan;
+    private javax.swing.JPanel pn_Konten_Penjualan;
     private javax.swing.JPanel pn_Laporan_Penjualan;
-    private javax.swing.JPanel pn_Laporan_Retur;
     private javax.swing.JPanel pn_Laporan_Transaksi;
-    private javax.swing.JPanel pn_Laporan_Utama_Hutang;
-    private javax.swing.JPanel pn_Laporan_Utama_Penjualan;
-    private javax.swing.JPanel pn_Laporan_Utama_Penjualan1;
-    private javax.swing.JPanel pn_Laporan_Utama_Retur;
     // End of variables declaration//GEN-END:variables
 }
