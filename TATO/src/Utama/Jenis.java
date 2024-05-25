@@ -562,7 +562,7 @@ public class Jenis extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel1.setText("Kategori");
 
-        Field_Status_Kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Barang", "Kategori", "Satuan", "Hutang", " " }));
+        Field_Status_Kategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Pilih--", "Barang", "Distributor" }));
 
         Btn_Status_Cari.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Status_Cari.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

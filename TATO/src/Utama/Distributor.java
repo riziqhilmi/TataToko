@@ -36,21 +36,22 @@ public class Distributor extends javax.swing.JPanel {
         getColumnD();
         getDataD();
         tanggal();
+        status();
     }
 
     public void getColumnD() {
         model.addColumn("ID");
         model.addColumn("Nama ");
         model.addColumn("Kota");
+        model.addColumn("Bergabung");
         model.addColumn("Telepon");
         model.addColumn("Email");
-        model.addColumn("Fax");
         model.addColumn("Alamat");
         model.addColumn("No Rek");
         model.addColumn("Bank");
         model.addColumn("Ket");
         model.addColumn("Status");
-        model.addColumn("Bergabung");
+        
         Tbl_Daftar_Distributor.setModel(model);
         Tbl_Detail_Distributor.setModel(model);
         Tbl_Update_Distributor.setModel(model);
@@ -64,11 +65,10 @@ public class Distributor extends javax.swing.JPanel {
             while (hasil.next()) {
                 model.addRow(new Object[]{hasil.getString("id_distributor"),
                     hasil.getString("nama"), hasil.getString("kota"),
-                    hasil.getString("telepon"), hasil.getString("email"),
-                    hasil.getString("fax"), hasil.getString("alamat"),
+                    hasil.getString("bergabung"),hasil.getString("telepon"),
+                    hasil.getString("email"), hasil.getString("alamat"),
                     hasil.getString("no_rek"), hasil.getString("bank"),
-                    hasil.getString("ket"), hasil.getString("status"),
-                    hasil.getString("bergabung")});
+                    hasil.getString("ket"), hasil.getString("status")});
             }
             Tbl_Daftar_Distributor.setModel(model);
             Tbl_Detail_Distributor.setModel(model);
@@ -76,6 +76,20 @@ public class Distributor extends javax.swing.JPanel {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void status() {
+        ResultSet hasil = db.ambilData("SELECT * FROM `status` WHERE kategori = 'Distributor'");
+        try {
+            while (hasil.next()) {
+                // Ambil nilai dari kolom "nama" dan tambahkan ke dalam JComboBox
+                Field_Tambah_Status_Distributor.addItem(hasil.getString("nama"));
+                Field_Update_Status_Distributor.addItem(hasil.getString("nama"));
+            }
+        } catch (Exception e) {
+            System.out.println("Tidak Dapat Mengambil Data");
+        }
+
     }
 
     public void tanggal(){
@@ -221,6 +235,9 @@ public class Distributor extends javax.swing.JPanel {
         Btn_Cari_Detail_Distributor = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         Tbl_Detail_Distributor = new javax.swing.JTable();
+        Btn_Detail_Update_Distributor1 = new rojerusan.RSMaterialButtonRectangle();
+        Lb_Update_Status_Distributor1 = new javax.swing.JLabel();
+        Field_Detail_Status_Distributor = new javax.swing.JComboBox<>();
         pn__Distributor_Update = new javax.swing.JPanel();
         Lb_Distributor7 = new javax.swing.JLabel();
         Lb_Distributor8 = new javax.swing.JLabel();
@@ -237,16 +254,10 @@ public class Distributor extends javax.swing.JPanel {
         Field_Update_Telepon_Distributor = new javax.swing.JTextField();
         Lb_Update_Email_Distributor = new javax.swing.JLabel();
         Field_Update_Email_Distributor = new javax.swing.JTextField();
-        Lb_Update_Fax_Distributor = new javax.swing.JLabel();
-        Field_Update_Fax_Distributor = new javax.swing.JTextField();
         Lb_Update_Rekening_Distributor = new javax.swing.JLabel();
         Field_Update_Rekening_Distributor = new javax.swing.JTextField();
-        Lb_Update_Nama_Rekening_Distributor = new javax.swing.JLabel();
-        Field_Update_Nama_Rekening_Distributor = new javax.swing.JTextField();
         Field_Update_Bank_Distributor = new javax.swing.JTextField();
         Lb_Update_Bank_Distributor = new javax.swing.JLabel();
-        Field_Update_NPWP_Distributor = new javax.swing.JTextField();
-        Lb_Update_NPWP_Distributor = new javax.swing.JLabel();
         Lb_Update_Keterangan_Distributor = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         Field_Update_Keterangan_Distributor = new javax.swing.JTextArea();
@@ -914,6 +925,19 @@ public class Distributor extends javax.swing.JPanel {
         Tbl_Detail_Distributor.setRowHeight(30);
         jScrollPane6.setViewportView(Tbl_Detail_Distributor);
 
+        Btn_Detail_Update_Distributor1.setBackground(new java.awt.Color(102, 102, 255));
+        Btn_Detail_Update_Distributor1.setText("PILIH");
+        Btn_Detail_Update_Distributor1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Btn_Detail_Update_Distributor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Detail_Update_Distributor1ActionPerformed(evt);
+            }
+        });
+
+        Lb_Update_Status_Distributor1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Update_Status_Distributor1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Update_Status_Distributor1.setText("Status  :");
+
         javax.swing.GroupLayout pn_Konten_Tbl_Distributor_DetailLayout = new javax.swing.GroupLayout(pn_Konten_Tbl_Distributor_Detail);
         pn_Konten_Tbl_Distributor_Detail.setLayout(pn_Konten_Tbl_Distributor_DetailLayout);
         pn_Konten_Tbl_Distributor_DetailLayout.setHorizontalGroup(
@@ -960,7 +984,11 @@ public class Distributor extends javax.swing.JPanel {
                                         .addComponent(Lb_Detail_Alamat_Distributor)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Lb_Update_Status_Distributor1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Field_Detail_Status_Distributor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(1, 1, 1))
                                     .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
                                         .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
@@ -1013,7 +1041,8 @@ public class Distributor extends javax.swing.JPanel {
                     .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
                         .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Btn_Detail_Update_Distributor, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(Btn_Detail_Kembali_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addComponent(Btn_Detail_Kembali_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(Btn_Detail_Update_Distributor1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         pn_Konten_Tbl_Distributor_DetailLayout.setVerticalGroup(
@@ -1029,23 +1058,6 @@ public class Distributor extends javax.swing.JPanel {
                 .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
                         .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Field_Detail_Nama_Rekening_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Detail_Nama_Rekening_Distributor))
-                                .addGap(31, 31, 31)
-                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Field_Tambah_Bank_Distributor1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Detail_Bank_Distributor))
-                                .addGap(29, 29, 29)
-                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Field_Detail_NPWP_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Detail_NPWP_Distributor))
-                                .addGap(28, 28, 28)
-                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lb_Detail_Keterangan_Distributor)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1082,14 +1094,40 @@ public class Distributor extends javax.swing.JPanel {
                                     .addComponent(Field_Detail_Kontak_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Field_Detail_Email_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Lb_Detail_Kontak_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
                                 .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lb_Detail_Alamat_Distributor)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(61, 61, 61)))
-                        .addGap(64, 64, 64)
-                        .addComponent(Btn_Detail_Update_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                                    .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Lb_Detail_Alamat_Distributor)
+                                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(Field_Detail_Status_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Lb_Update_Status_Distributor1))))
+                                .addGap(194, 194, 194))
+                            .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Detail_Nama_Rekening_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Detail_Nama_Rekening_Distributor))
+                                .addGap(31, 31, 31)
+                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Tambah_Bank_Distributor1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Detail_Bank_Distributor))
+                                .addGap(29, 29, 29)
+                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Detail_NPWP_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Detail_NPWP_Distributor))
+                                .addGap(28, 28, 28)
+                                .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Lb_Detail_Keterangan_Distributor)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Btn_Detail_Update_Distributor1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Btn_Detail_Update_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(Btn_Detail_Kembali_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pn_Konten_Tbl_Distributor_DetailLayout.createSequentialGroup()
                         .addGap(493, 493, 493)
@@ -1173,35 +1211,17 @@ public class Distributor extends javax.swing.JPanel {
 
         Field_Update_Email_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        Lb_Update_Fax_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Update_Fax_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Update_Fax_Distributor.setText("Fax  :");
-
-        Field_Update_Fax_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         Lb_Update_Rekening_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Update_Rekening_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Update_Rekening_Distributor.setText("No Rek  :");
 
         Field_Update_Rekening_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        Lb_Update_Nama_Rekening_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Update_Nama_Rekening_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Update_Nama_Rekening_Distributor.setText("Rek. A/N  :");
-
-        Field_Update_Nama_Rekening_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
         Field_Update_Bank_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         Lb_Update_Bank_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Update_Bank_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Update_Bank_Distributor.setText("Bank  :");
-
-        Field_Update_NPWP_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        Lb_Update_NPWP_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Update_NPWP_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Update_NPWP_Distributor.setText("NPWP  :");
 
         Lb_Update_Keterangan_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Update_Keterangan_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -1318,58 +1338,44 @@ public class Distributor extends javax.swing.JPanel {
                                 .addComponent(Lb_Update_Status_Distributor)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Field_Update_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(Field_Update_Kota_Distributor, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Field_Update_Status_Distributor, 0, 200, Short.MAX_VALUE))
-                                    .addGap(80, 80, 80)
-                                    .addComponent(Lb_Update_Alamat_Distributor)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(223, 223, 223)))
                             .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
                                 .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(Field_Update_Email_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Field_Update_Telepon_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                                                .addComponent(Lb_Update_Bergabung_Distributor)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(Field_Update_Bergabung_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                                                .addComponent(Lb_Update_Fax_Distributor)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(Field_Update_Fax_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                                        .addComponent(Field_Update_Nama_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 1, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(Field_Update_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(Field_Update_Kota_Distributor, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Field_Update_Status_Distributor, 0, 200, Short.MAX_VALUE))
+                                        .addGap(676, 676, 676)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                                .addComponent(Field_Update_Nama_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Btn_Cari_Update_Distributor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(249, 249, 249))))
+                                .addGap(249, 249, 249))
+                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Field_Update_Email_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Field_Update_Telepon_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(72, 72, 72)
+                                .addComponent(Lb_Update_Alamat_Distributor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(Lb_Update_Telepon_Distributor1)))
                 .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(Lb_Update_Bank_Distributor)
+                        .addComponent(Lb_Update_Keterangan_Distributor)
                         .addComponent(Lb_Update_Rekening_Distributor))
-                    .addComponent(Lb_Update_Nama_Rekening_Distributor, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Lb_Update_Bank_Distributor, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Lb_Update_NPWP_Distributor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Update_Keterangan_Distributor, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(Lb_Update_Bergabung_Distributor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Field_Update_NPWP_Distributor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(Field_Update_Bank_Distributor)
-                        .addComponent(Field_Update_Nama_Rekening_Distributor, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(Field_Update_Rekening_Distributor, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(Field_Update_Rekening_Distributor, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Field_Update_Bank_Distributor, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Field_Update_Bergabung_Distributor))
                 .addGap(170, 170, 170))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -1390,50 +1396,54 @@ public class Distributor extends javax.swing.JPanel {
                 .addGap(49, 49, 49)
                 .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Field_Update_Fax_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lb_Update_Fax_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Update_Telepon_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lb_Update_Telepon_Distributor)
-                            .addComponent(Field_Update_Bank_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lb_Update_Bank_Distributor))
-                        .addGap(26, 26, 26)
-                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lb_Update_Email_Distributor)
-                            .addComponent(Field_Update_Email_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Update_Bergabung_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lb_Update_Bergabung_Distributor)
-                            .addComponent(Field_Update_NPWP_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lb_Update_NPWP_Distributor)))
+                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                                .addGap(121, 121, 121)
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Update_Telepon_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Update_Telepon_Distributor))
+                                .addGap(26, 26, 26)
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lb_Update_Email_Distributor)
+                                    .addComponent(Field_Update_Email_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Lb_Update_Kode_Distributor)
+                                    .addComponent(Field_Update_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Update_Rekening_Distributor)
+                                    .addComponent(Field_Update_Rekening_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(45, 45, 45)
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Update_Bank_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Update_Bank_Distributor))
+                                .addGap(48, 48, 48)
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Update_Bergabung_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Update_Bergabung_Distributor))))
+                        .addGap(34, 34, 34)
+                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Update_Kota_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Update_Telepon_Distributor1))
+                                .addGap(33, 33, 33)
+                                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Field_Update_Status_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Lb_Update_Status_Distributor)))
+                            .addComponent(Lb_Update_Keterangan_Distributor)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
+                        .addGap(59, 59, 59)
                         .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Field_Update_Nama_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Lb_Update_Nama_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Btn_Cari_Update_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Field_Update_Nama_Rekening_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lb_Update_Nama_Rekening_Distributor)))
-                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Lb_Update_Kode_Distributor)
-                        .addComponent(Field_Update_Kode_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Lb_Update_Rekening_Distributor)
-                        .addComponent(Field_Update_Rekening_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
-                .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                            .addComponent(Btn_Cari_Update_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
                         .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(Field_Update_Kota_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Lb_Update_Telepon_Distributor1))
-                            .addComponent(Lb_Update_Alamat_Distributor))
-                        .addGap(33, 33, 33)
-                        .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Field_Update_Status_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Lb_Update_Status_Distributor)))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Update_Keterangan_Distributor)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
+                                .addComponent(Lb_Update_Alamat_Distributor)
+                                .addGap(66, 66, 66))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(143, 143, 143)
                 .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
@@ -1552,16 +1562,13 @@ public class Distributor extends javax.swing.JPanel {
         String email = Field_Tambah_Email_Distributor.getText();
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         String bergabung = date.format(Field_Tambah_Bergabung_Distributor.getDate());
-        String fax = Field_Tambah_Fax_Distributor.getText();
         String status = String.valueOf(Field_Tambah_Status_Distributor.getSelectedItem());
         String no_rek = Field_Tambah_Rekening_Distributor.getText();
-        String rek = Field_Tambah_Nama_Rekening_Distributor.getText();
         String bank = Field_Tambah_Bank_Distributor.getText();
-        String npwp = Field_Tambah_NPWP_Distributor.getText();
         String ket = Field_Tambah_Keterangan_Distributor.getText();
 
         try {
-            db.aksi("INSERT INTO distributor VALUES ('" + id + "','" + nama + "','" + kota + "','" + bergabung + "','" + telepon + "','" + email + "','" + fax + "','" + alamat + "','" + no_rek + "','" + rek + "','" + bank + "','" + npwp + "','" + ket + "','" + status + "')");
+            db.aksi("INSERT INTO distributor VALUES ('" + id + "','" + nama + "','" + kota + "','" + bergabung + "','" + telepon + "','" + email + "','" + alamat + "','" + no_rek + "','" + bank + "','" + ket + "','" + status + "')");
             model.setRowCount(0);
             Tbl_Daftar_Distributor.setModel(model);
             Tbl_Detail_Distributor.setModel(model);
@@ -1588,15 +1595,14 @@ public class Distributor extends javax.swing.JPanel {
         Field_Update_Kode_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 0)));
         Field_Update_Nama_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 1)));
         Field_Update_Kota_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 2)));
-        Field_Update_Telepon_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 3)));
-        Field_Update_Email_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 4)));
-        Field_Update_Fax_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 5)));
+        Field_Update_Bergabung_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 3)));
+        Field_Update_Telepon_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 4)));
+        Field_Update_Email_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 5)));
         Field_Update_Alamat_Distributor.setText(String.valueOf( Tbl_Update_Distributor.getValueAt(selectedRow, 6)));
         Field_Update_Rekening_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 7)));
         Field_Update_Bank_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 8)));
         Field_Update_Keterangan_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 9)));
         Field_Update_Status_Distributor.setSelectedItem(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 10)));
-        Field_Update_Bergabung_Distributor.setText(String.valueOf(Tbl_Update_Distributor.getValueAt(selectedRow, 11)));
     }//GEN-LAST:event_rSMaterialButtonRectangle2ActionPerformed
 
     private void rSMaterialButtonRectangle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle1ActionPerformed
@@ -1629,9 +1635,9 @@ public class Distributor extends javax.swing.JPanel {
         db.aksi("UPDATE distributor SET nama = '"+Field_Update_Nama_Distributor.getText()+
             "',kota = '"+Field_Update_Kota_Distributor.getText()+"',bergabung = '"+Field_Update_Bergabung_Distributor.getText()+
             "',telepon = '"+Field_Update_Telepon_Distributor.getText()+ "',email = '"+Field_Update_Email_Distributor.getText()+
-            "',fax = '"+Field_Update_Fax_Distributor.getText()+ "',alamat = '"+Field_Update_Alamat_Distributor.getText()+"',no_rek = '"+Field_Update_Rekening_Distributor.getText()+
-            "',rek = '"+Field_Update_Nama_Rekening_Distributor.getText()+"',bank = '"+Field_Update_Bank_Distributor.getText()+
-            "',npwp = '"+Field_Update_NPWP_Distributor.getText()+"',ket = '"+Field_Update_Keterangan_Distributor.getText()+"',status = '"+Field_Update_Status_Distributor.getSelectedItem()+
+            "',alamat = '"+Field_Update_Alamat_Distributor.getText()+"',no_rek = '"+Field_Update_Rekening_Distributor.getText()+
+            "',bank = '"+Field_Update_Bank_Distributor.getText()+
+            "',ket = '"+Field_Update_Keterangan_Distributor.getText()+"',status = '"+Field_Update_Status_Distributor.getSelectedItem()+
             "' WHERE id_distributor = '"+Field_Update_Kode_Distributor.getText()+"'");
         model.setRowCount(0);
         Tbl_Update_Distributor.setModel(model);
@@ -1651,6 +1657,24 @@ public class Distributor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Field_Tambah_Nama_DistributorActionPerformed
 
+    private void Btn_Detail_Update_Distributor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Detail_Update_Distributor1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = Tbl_Detail_Distributor.getSelectedRow();
+        
+        Field_Detail_Kode_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 0)));
+        Field_Detail_Nama_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 1)));
+        Field_Detail_Kota_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 2)));
+        Field_Detail_Telepon_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 3)));
+        Field_Detail_Email_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 4)));
+        Field_Detail_Fax_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 5)));
+        Field_Detail_Alamat_Distributor.setText(String.valueOf( Tbl_Detail_Distributor.getValueAt(selectedRow, 6)));
+        Field_Detail_Rekening_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 7)));
+        Field_Tambah_Bank_Distributor1.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 8)));
+        Field_Detail_Keterangan_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 9)));
+        Field_Detail_Status_Distributor.setSelectedItem(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 10)));
+        Field_Update_Bergabung_Distributor.setText(String.valueOf(Tbl_Detail_Distributor.getValueAt(selectedRow, 11)));
+    }//GEN-LAST:event_Btn_Detail_Update_Distributor1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Cari_Detail_Distributor;
@@ -1661,6 +1685,7 @@ public class Distributor extends javax.swing.JPanel {
     private rojerusan.RSMaterialButtonRectangle Btn_Ctrl_Distributor_Update;
     private rojerusan.RSMaterialButtonRectangle Btn_Detail_Kembali_Distributor;
     private rojerusan.RSMaterialButtonRectangle Btn_Detail_Update_Distributor;
+    private rojerusan.RSMaterialButtonRectangle Btn_Detail_Update_Distributor1;
     private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Kembali_Distributor;
     private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Tambah_Distributor;
     private rojerusan.RSMaterialButtonRectangle Btn_Update_Kembali_Distributor;
@@ -1680,6 +1705,7 @@ public class Distributor extends javax.swing.JPanel {
     private javax.swing.JTextField Field_Detail_Provinsi_Distributor;
     private javax.swing.JTextField Field_Detail_Provinsi_Distributor1;
     private javax.swing.JTextField Field_Detail_Rekening_Distributor;
+    private javax.swing.JComboBox<String> Field_Detail_Status_Distributor;
     private javax.swing.JTextField Field_Detail_Telepon_Distributor;
     private javax.swing.JTextArea Field_Tambah_Alamat_Distributor;
     private javax.swing.JTextField Field_Tambah_Bank_Distributor;
@@ -1702,13 +1728,10 @@ public class Distributor extends javax.swing.JPanel {
     private javax.swing.JTextField Field_Update_Bank_Distributor;
     private javax.swing.JTextField Field_Update_Bergabung_Distributor;
     private javax.swing.JTextField Field_Update_Email_Distributor;
-    private javax.swing.JTextField Field_Update_Fax_Distributor;
     private javax.swing.JTextArea Field_Update_Keterangan_Distributor;
     private javax.swing.JTextField Field_Update_Kode_Distributor;
     private javax.swing.JTextField Field_Update_Kota_Distributor;
-    private javax.swing.JTextField Field_Update_NPWP_Distributor;
     private javax.swing.JTextField Field_Update_Nama_Distributor;
-    private javax.swing.JTextField Field_Update_Nama_Rekening_Distributor;
     private javax.swing.JTextField Field_Update_Rekening_Distributor;
     private javax.swing.JComboBox<String> Field_Update_Status_Distributor;
     private javax.swing.JTextField Field_Update_Telepon_Distributor;
@@ -1759,14 +1782,12 @@ public class Distributor extends javax.swing.JPanel {
     private javax.swing.JLabel Lb_Update_Bank_Distributor;
     private javax.swing.JLabel Lb_Update_Bergabung_Distributor;
     private javax.swing.JLabel Lb_Update_Email_Distributor;
-    private javax.swing.JLabel Lb_Update_Fax_Distributor;
     private javax.swing.JLabel Lb_Update_Keterangan_Distributor;
     private javax.swing.JLabel Lb_Update_Kode_Distributor;
-    private javax.swing.JLabel Lb_Update_NPWP_Distributor;
     private javax.swing.JLabel Lb_Update_Nama_Distributor;
-    private javax.swing.JLabel Lb_Update_Nama_Rekening_Distributor;
     private javax.swing.JLabel Lb_Update_Rekening_Distributor;
     private javax.swing.JLabel Lb_Update_Status_Distributor;
+    private javax.swing.JLabel Lb_Update_Status_Distributor1;
     private javax.swing.JLabel Lb_Update_Telepon_Distributor;
     private javax.swing.JLabel Lb_Update_Telepon_Distributor1;
     private javax.swing.JTable Tbl_Daftar_Distributor;
@@ -1820,12 +1841,12 @@ private void resetForm() {
         Field_Update_Telepon_Distributor.setText("");
         Field_Update_Email_Distributor.setText("");
         Field_Update_Bergabung_Distributor.setText("");
-        Field_Update_Fax_Distributor.setText("");
+        //Field_Update_Fax_Distributor.setText("");
         Field_Update_Status_Distributor.equals("");
         Field_Update_Rekening_Distributor.setText("");
-        Field_Update_Nama_Rekening_Distributor.setText("");
+        //Field_Update_Nama_Rekening_Distributor.setText("");
         Field_Update_Bank_Distributor.setText("");
-        Field_Update_NPWP_Distributor.setText("");
+        //Field_Update_NPWP_Distributor.setText("");
         Field_Update_Keterangan_Distributor.setText("");
     }
 }

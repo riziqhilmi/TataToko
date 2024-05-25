@@ -906,13 +906,10 @@
                     <Component class="javax.swing.JComboBox" name="Field_Status_Kategori">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                          <StringArray count="6">
+                          <StringArray count="3">
                             <StringItem index="0" value="--Pilih--"/>
                             <StringItem index="1" value="Barang"/>
-                            <StringItem index="2" value="Kategori"/>
-                            <StringItem index="3" value="Satuan"/>
-                            <StringItem index="4" value="Hutang"/>
-                            <StringItem index="5" value=" "/>
+                            <StringItem index="2" value="Distributor"/>
                           </StringArray>
                         </Property>
                       </Properties>

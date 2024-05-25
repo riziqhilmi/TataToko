@@ -153,10 +153,10 @@ public class Beranda extends javax.swing.JPanel {
             while (hasil.next()) {
                 model2.addRow(new Object[]{hasil.getString("id_distributor"),
                     hasil.getString("nama"), hasil.getString("kota"),
-                    hasil.getString("telepon"), hasil.getString("email"),
-                    hasil.getString("fax"), hasil.getString("alamat"),
+                    hasil.getString("bergabung"),hasil.getString("telepon"),
+                    hasil.getString("email"), hasil.getString("alamat"),
                     hasil.getString("no_rek"), hasil.getString("bank"),
-                    hasil.getString("ket"), hasil.getString("status"),});
+                    hasil.getString("ket"), hasil.getString("status")});
             }
             Tbl_Beranda_Distributor.setModel(model2);
         } catch (SQLException ex) {
