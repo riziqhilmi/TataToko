@@ -61,6 +61,10 @@ public class Barang extends javax.swing.JPanel {
         distributor();
         search();
         ViewBarcode();
+        kategori();
+        satuan();
+        status();
+        
         //tampilkan();
         
         Field_Tambah_Kategori.addItemListener(new ItemListener() {
@@ -269,7 +273,7 @@ public class Barang extends javax.swing.JPanel {
     }
 
     public void status() {
-        ResultSet hasil = db.ambilData("SELECT * FROM status");
+        ResultSet hasil = db.ambilData("SELECT * FROM status WHERE kategori = 'Barang'");
         try {
             while (hasil.next()) {
                 // Ambil nilai dari kolom "nama" dan tambahkan ke dalam JComboBox
@@ -465,9 +469,6 @@ public class Barang extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         FIeld_Informasi_Catatan_Detail = new javax.swing.JTextArea();
         Btn_Barang_Detail_Kembali = new rojerusan.RSMaterialButtonRectangle();
-        Field_Informasi_Cari_Barang_Detail = new javax.swing.JTextField();
-        Btn_Informasi_Cari_Barang = new javax.swing.JButton();
-        Btn_Informasi_Ok = new javax.swing.JButton();
         pn_Tbl_Barang_Update = new javax.swing.JPanel();
         Lb_Barang_Update1 = new javax.swing.JLabel();
         Lb_Barang_Update2 = new javax.swing.JLabel();
@@ -1024,8 +1025,9 @@ public class Barang extends javax.swing.JPanel {
         pn_Informasi_Barang_Detail.setBackground(new java.awt.Color(255, 255, 255));
         pn_Informasi_Barang_Detail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        Lb_Informasi_Nama_Barang.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        Lb_Informasi_Nama_Barang.setFont(new java.awt.Font("SansSerif", 0, 28)); // NOI18N
         Lb_Informasi_Nama_Barang.setText("Nama Barang");
+        Lb_Informasi_Nama_Barang.setIconTextGap(5);
 
         Lb_Informasi_Kode_Barang.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Lb_Informasi_Kode_Barang.setText("Kode Barang");
@@ -1042,19 +1044,19 @@ public class Barang extends javax.swing.JPanel {
         Lb_Informasi_Kadaluwarsa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Lb_Informasi_Kadaluwarsa.setText("Expired");
 
-        Lb_Informasi_Terjual_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Lb_Informasi_Terjual_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Lb_Informasi_Terjual_Jumlah.setForeground(new java.awt.Color(51, 153, 255));
         Lb_Informasi_Terjual_Jumlah.setText("#");
 
-        Lb_Informasi_Dibeli_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Lb_Informasi_Dibeli_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Lb_Informasi_Dibeli_Jumlah.setForeground(new java.awt.Color(51, 153, 255));
         Lb_Informasi_Dibeli_Jumlah.setText("#");
 
-        Lb_Informasi_Stok_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Lb_Informasi_Stok_Jumlah.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Lb_Informasi_Stok_Jumlah.setForeground(new java.awt.Color(51, 153, 255));
         Lb_Informasi_Stok_Jumlah.setText("#");
 
-        Lb_Informasi_exp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Lb_Informasi_exp.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Lb_Informasi_exp.setForeground(new java.awt.Color(51, 153, 255));
         Lb_Informasi_exp.setText("#");
 
@@ -1063,29 +1065,28 @@ public class Barang extends javax.swing.JPanel {
         pn_Informasi_Barang_DetailLayout.setHorizontalGroup(
             pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(39, 39, 39)
                 .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
                         .addComponent(Lb_Informasi_Terjual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(172, 172, 172))
+                        .addGap(67, 67, 67))
                     .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
                         .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Lb_Informasi_Dibeli)
                             .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
                                 .addComponent(Lb_Informasi_Stok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(1, 1, 1)))
-                        .addGap(194, 194, 194))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Informasi_Barang_DetailLayout.createSequentialGroup()
-                        .addComponent(Lb_Informasi_Kadaluwarsa, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-                        .addGap(105, 105, 105)))
+                        .addGap(89, 89, 89))
+                    .addComponent(Lb_Informasi_Kadaluwarsa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(72, 72, 72)
                 .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Lb_Informasi_Terjual_Jumlah)
                     .addComponent(Lb_Informasi_Dibeli_Jumlah, javax.swing.GroupLayout.DEFAULT_SIZE, 13, Short.MAX_VALUE)
                     .addComponent(Lb_Informasi_Stok_Jumlah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Lb_Informasi_exp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
+                .addGap(19, 19, 19)
                 .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Lb_Informasi_Nama_Barang)
                     .addComponent(Lb_Informasi_Kode_Barang))
@@ -1094,11 +1095,11 @@ public class Barang extends javax.swing.JPanel {
         pn_Informasi_Barang_DetailLayout.setVerticalGroup(
             pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Informasi_Barang_DetailLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(15, 15, 15)
                 .addComponent(Lb_Informasi_Kode_Barang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Lb_Informasi_Nama_Barang)
-                .addGap(58, 58, 58)
+                .addGap(63, 63, 63)
                 .addGroup(pn_Informasi_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Lb_Informasi_Terjual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Lb_Informasi_Terjual_Jumlah))
@@ -1208,50 +1209,22 @@ public class Barang extends javax.swing.JPanel {
             }
         });
 
-        Btn_Informasi_Cari_Barang.setBackground(new java.awt.Color(0, 0, 153));
-        Btn_Informasi_Cari_Barang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Btn_Informasi_Cari_Barang.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Informasi_Cari_Barang.setText("Cari");
-        Btn_Informasi_Cari_Barang.setMaximumSize(new java.awt.Dimension(82, 21));
-        Btn_Informasi_Cari_Barang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_Informasi_Cari_BarangActionPerformed(evt);
-            }
-        });
-
-        Btn_Informasi_Ok.setBackground(new java.awt.Color(0, 170, 40));
-        Btn_Informasi_Ok.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Btn_Informasi_Ok.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Informasi_Ok.setText("Ok");
-        Btn_Informasi_Ok.setMaximumSize(new java.awt.Dimension(82, 21));
-        Btn_Informasi_Ok.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_Informasi_OkActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pn_Konten_Barang_DetailLayout = new javax.swing.GroupLayout(pn_Konten_Barang_Detail);
         pn_Konten_Barang_Detail.setLayout(pn_Konten_Barang_DetailLayout);
         pn_Konten_Barang_DetailLayout.setHorizontalGroup(
             pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pn_Informasi_Barang_Detail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Btn_Barang_Detail_Update, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
-                        .addComponent(Field_Informasi_Cari_Barang_Detail, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Btn_Informasi_Cari_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Btn_Informasi_Ok, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
                         .addComponent(Btn_Detail_Barang_Cetak_Barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Btn_Barang_Detail_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
+                        .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pn_Informasi_Barang_Detail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Btn_Barang_Detail_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Lb_Informasi_Kode_Distributor_Detail, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Lb_Informasi_Tanggal_Masuk_Detail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1286,15 +1259,9 @@ public class Barang extends javax.swing.JPanel {
         pn_Konten_Barang_DetailLayout.setVerticalGroup(
             pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
-                        .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(Field_Informasi_Cari_Barang_Detail, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Btn_Informasi_Cari_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Btn_Informasi_Ok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(69, 69, 69)
+                        .addGap(139, 139, 139)
                         .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
                                 .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1349,16 +1316,17 @@ public class Barang extends javax.swing.JPanel {
                                                 .addComponent(Lb_Informasi_Status_Detail, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(46, 46, 46)
                                                 .addComponent(Lb_Informasi_Harga_Beli_Detail, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)))
-                        .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Btn_Detail_Barang_Cetak_Barcode, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                            .addComponent(Btn_Barang_Detail_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(274, 274, 274))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE))))
                     .addGroup(pn_Konten_Barang_DetailLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
                         .addComponent(pn_Informasi_Barang_Detail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(40, 40, 40)
                         .addComponent(Btn_Barang_Detail_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(pn_Konten_Barang_DetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Btn_Detail_Barang_Cetak_Barcode, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(Btn_Barang_Detail_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(274, 274, 274))
         );
 
         javax.swing.GroupLayout pn_Tbl_Barang_DetailLayout = new javax.swing.GroupLayout(pn_Tbl_Barang_Detail);
@@ -1748,7 +1716,7 @@ public class Barang extends javax.swing.JPanel {
                     .addComponent(Lb_Data_Barang_Update, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addContainerGap())
         );
 
         pn_Konten_Barang.add(pn_Tbl_Barang_Update, "card2");
@@ -1818,9 +1786,7 @@ public class Barang extends javax.swing.JPanel {
         pn_Konten_Barang.add(pn_Tbl_Barang_Tambah);
         pn_Konten_Barang.repaint();
         pn_Konten_Barang.revalidate();
-        kategori();
-        satuan();
-        status();
+        
     }//GEN-LAST:event_Btn_Barang_TambahActionPerformed
 
     private void Btn_Barang_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Barang_UpdateActionPerformed
@@ -1887,9 +1853,7 @@ public class Barang extends javax.swing.JPanel {
         pn_Konten_Barang.add(pn_Tbl_Barang_Update);
         pn_Konten_Barang.repaint();
         pn_Konten_Barang.revalidate();
-        kategori();
-        satuan();
-        status();
+        
     }//GEN-LAST:event_Btn_Barang_UpdateMouseClicked
 
     private void Btn_Tambah_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_KembaliActionPerformed
@@ -1902,14 +1866,6 @@ public class Barang extends javax.swing.JPanel {
         pn_Konten_Barang.revalidate();
         resetForm();
     }//GEN-LAST:event_Btn_Tambah_KembaliActionPerformed
-
-    private void Btn_Informasi_Cari_BarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Informasi_Cari_BarangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_Informasi_Cari_BarangActionPerformed
-
-    private void Btn_Informasi_OkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Informasi_OkActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_Informasi_OkActionPerformed
 
     private void Field_Tambah_MerkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Tambah_MerkActionPerformed
         // TODO add your handling code here:
@@ -2057,8 +2013,6 @@ public class Barang extends javax.swing.JPanel {
     private rojerusan.RSMaterialButtonRectangle Btn_Barang_Update;
     private javax.swing.JButton Btn_Barang_Update_Cari;
     private rojerusan.RSMaterialButtonRectangle Btn_Detail_Barang_Cetak_Barcode;
-    private javax.swing.JButton Btn_Informasi_Cari_Barang;
-    private javax.swing.JButton Btn_Informasi_Ok;
     private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Barcode;
     private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Kembali;
     private rojerusan.RSMaterialButtonRectangle Btn_Tambah_Simpan;
@@ -2078,7 +2032,6 @@ public class Barang extends javax.swing.JPanel {
     private javax.swing.JTextField FIeld_Informasi_Status_Detail;
     private javax.swing.JTextField FIeld_Informasi_Tanggal_Masuk_Detail;
     private javax.swing.JTextField Field_Barang_Update_Cari;
-    private javax.swing.JTextField Field_Informasi_Cari_Barang_Detail;
     private javax.swing.JLabel Field_Tambah_Barcode;
     private javax.swing.JTextArea Field_Tambah_Catatan;
     private javax.swing.JTextField Field_Tambah_Harga_Beli;

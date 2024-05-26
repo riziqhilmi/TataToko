@@ -914,7 +914,7 @@ public class Transaksi extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel13.setText("Nama Pelanggan");
 
-        Field_Nama_Pelanggan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Field_Nama_Pelanggan.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
         jButton9.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jButton9.setText("Tambah Transaksi");
@@ -1076,8 +1076,8 @@ public class Transaksi extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel13)
                         .addGap(25, 25, 25)
-                        .addComponent(Field_Nama_Pelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5)
+                        .addComponent(Field_Nama_Pelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(Panel_TransaksiLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1217,7 +1217,7 @@ public class Transaksi extends javax.swing.JPanel {
                         .addComponent(rSMaterialButtonRectangle2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
                         .addComponent(rSMaterialButtonRectangle3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(324, Short.MAX_VALUE))
         );
 
         Panel_Utama.add(Panel_Stok, "card2");
@@ -1345,7 +1345,7 @@ public class Transaksi extends javax.swing.JPanel {
                         .addComponent(rSMaterialButtonRectangle5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
                         .addComponent(rSMaterialButtonRectangle6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(634, Short.MAX_VALUE))
+                        .addContainerGap(643, Short.MAX_VALUE))
                     .addGroup(Panel_Detail_RiwayatLayout.createSequentialGroup()
                         .addGroup(Panel_Detail_RiwayatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Field_Cari_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1677,6 +1677,30 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void rSMaterialButtonRectangle5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle5ActionPerformed
         // TODO add your handling code here:
+        try {
+
+            String file = "/Report/nota_riwayat.jasper";
+
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, pwd);
+
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            HashMap param = new HashMap();
+
+            param.put("total_semua", Field_Total_Semua.getText());
+            param.put("uang", txt_uang.getText());
+            param.put("kembali", txt_kembalian.getText());
+            param.put("id", Field__Transaksi_ID.getText());
+            param.put("kasir", Lb_Nama_Kasir.getText());
+
+            JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
+            JasperViewer.viewReport(print, false);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | JRException e) {
+            System.out.println(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_rSMaterialButtonRectangle5ActionPerformed
 
     private void rSMaterialButtonRectangle6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle6ActionPerformed
