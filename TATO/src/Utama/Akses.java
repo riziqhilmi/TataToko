@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -65,6 +66,23 @@ public class Akses extends javax.swing.JPanel {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    private void refresh(){
+        
+            Field_Akses_User_ID2.setText(null);
+            Field_Akses_Password2.setText(null);
+            Field_Tambah_Nama_User2.setText(null);
+            
+            Field_Akses_Nama_Lengkap2.setText(null);
+            Field_Akses_No_Identitas2.setText(null);
+            Field_Data_Karyawan_Jenis_Kelamin2.setText(null);
+            Field_Akses_No_Telepon2.setText(null);
+            Field_Akses_Tanggal_Lahir2.setText(null);
+            Field_Akses_Alamat2.setText(null);
+            Field_Akses_Tanggal_Mulai2.setText(null);
+            Field_Akses_Gaji2.setText(null);
+            Field_Akses_No_Rek2.setText(null);
     }
 
     /**
@@ -150,6 +168,7 @@ public class Akses extends javax.swing.JPanel {
         Lb_Akses_Hak_Akses2.setText("Akses :");
 
         Field_Akses_User_ID2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        Field_Akses_User_ID2.setEnabled(false);
 
         Field_Akses_Password2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -227,6 +246,11 @@ public class Akses extends javax.swing.JPanel {
 
         Btn_Akses_Simpan2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         Btn_Akses_Simpan2.setText("Simpan");
+        Btn_Akses_Simpan2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Akses_Simpan2ActionPerformed(evt);
+            }
+        });
 
         Btn_Akses_Cari_User_ID2.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Akses_Cari_User_ID2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -242,6 +266,11 @@ public class Akses extends javax.swing.JPanel {
         Btn_Akses_Cari_Nama_User2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Btn_Akses_Cari_Nama_User2.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Akses_Cari_Nama_User2.setText("Cari");
+        Btn_Akses_Cari_Nama_User2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Akses_Cari_Nama_User2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pn_Update_Akses2Layout = new javax.swing.GroupLayout(pn_Update_Akses2);
         pn_Update_Akses2.setLayout(pn_Update_Akses2Layout);
@@ -412,7 +441,7 @@ public class Akses extends javax.swing.JPanel {
             }
         });
 
-        Tbl_User.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Tbl_User.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Tbl_User.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -424,6 +453,7 @@ public class Akses extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Tbl_User.setRowHeight(35);
         Tbl_User.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Tbl_UserMouseClicked(evt);
@@ -443,7 +473,7 @@ public class Akses extends javax.swing.JPanel {
                 .addGroup(pn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         pn_userLayout.setVerticalGroup(
             pn_userLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,13 +515,13 @@ public class Akses extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 1759, Short.MAX_VALUE))
+                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 1693, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -523,127 +553,102 @@ public class Akses extends javax.swing.JPanel {
             pn_Konten_Akses2.repaint();
             pn_Konten_Akses2.revalidate();
             int selectedRow = Tbl_User.getSelectedRow();
+            
+            Field_Akses_User_ID2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 0)));
+            Field_Akses_Password2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 2)));
+            Field_Tambah_Nama_User2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 1)));
+            Field_Akses_Hak_Akses2.setSelectedItem(String.valueOf(Tbl_User.getValueAt(selectedRow, 14)));
+            Field_Akses_Nama_Lengkap2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 4)));
+            Field_Akses_No_Identitas2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 5)));
+            Field_Data_Karyawan_Jenis_Kelamin2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 6)));
+            Field_Akses_No_Telepon2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 7)));
+            Field_Akses_Tanggal_Lahir2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 8)));
+            Field_Akses_Alamat2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 13)));
+            Field_Akses_Tanggal_Mulai2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 10)));
+            Field_Akses_Gaji2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 11)));
+            Field_Akses_No_Rek2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 12)));
+            Field_Akses_Status_Karyawan2.setSelectedItem(String.valueOf(Tbl_User.getValueAt(selectedRow, 9)));
+            
 
     }//GEN-LAST:event_Tbl_UserMouseClicked
 
+    private void Btn_Akses_Cari_Nama_User2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Cari_Nama_User2ActionPerformed
+        // TODO add your handling code here:
+        pn_Konten_Akses2.removeAll();
+            pn_Konten_Akses2.repaint();
+            pn_Konten_Akses2.revalidate();
+
+            pn_Konten_Akses2.add(pn_User);
+            pn_Konten_Akses2.repaint();
+            pn_Konten_Akses2.revalidate();
+    }//GEN-LAST:event_Btn_Akses_Cari_Nama_User2ActionPerformed
+
+    private void Btn_Akses_Simpan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Simpan2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            int Row = Tbl_User.getSelectedRow();
+        String ID = (String) Tbl_User.getValueAt(Row, 0);
+        db.aksi("UPDATE pengguna SET username = '"+Field_Tambah_Nama_User2.getText()+
+            "',password = '"+Field_Akses_Password2.getText()+"',Nama_Lengkap = '"+Field_Akses_Nama_Lengkap2.getText()+
+            "',No_Identitas = '"+Field_Akses_No_Identitas2.getText()+ "',Jenis_Kelamin = '"+Field_Data_Karyawan_Jenis_Kelamin2.getText()+
+            "',No_Telepon = '"+Field_Akses_No_Telepon2.getText()+"',Tanggal_Lahir = '"+Field_Akses_Tanggal_Lahir2.getText()+
+            "',Status_Karyawan = '"+Field_Akses_Status_Karyawan2.getSelectedItem()+
+            "',Tanggal_Mulai = '"+Field_Akses_Tanggal_Mulai2.getText()+"',Gaji = '"+Field_Akses_Gaji2.getText()+
+            "',No_Rekening = '"+Field_Akses_No_Rek2.getText()+"',Alamat = '"+Field_Akses_Alamat2.getText()+
+            "',akses = '"+Field_Akses_Hak_Akses2.getSelectedItem()+
+            "' WHERE id_username = '"+Field_Akses_User_ID2.getText()+"'");
+        model.setRowCount(0);
+        Tbl_User.setModel(model);
+        getDataD();
+            JOptionPane.showMessageDialog(null, "Pengguna Berhasil Ter-Update");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Data Gagal Diubah !!");
+        }
+        refresh();
+    }//GEN-LAST:event_Btn_Akses_Simpan2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Btn_Akses_Cari_Nama_User;
-    private javax.swing.JButton Btn_Akses_Cari_Nama_User1;
     private javax.swing.JButton Btn_Akses_Cari_Nama_User2;
-    private javax.swing.JButton Btn_Akses_Cari_User_ID;
-    private javax.swing.JButton Btn_Akses_Cari_User_ID1;
     private javax.swing.JButton Btn_Akses_Cari_User_ID2;
-    private javax.swing.JButton Btn_Akses_Simpan;
-    private javax.swing.JButton Btn_Akses_Simpan1;
     private javax.swing.JButton Btn_Akses_Simpan2;
-    private javax.swing.JButton Btn_Akses_Update;
-    private javax.swing.JButton Btn_Akses_Update1;
     private javax.swing.JButton Btn_Akses_Update2;
-    private javax.swing.JTextArea Field_Akses_Alamat;
-    private javax.swing.JTextArea Field_Akses_Alamat1;
     private javax.swing.JTextArea Field_Akses_Alamat2;
-    private javax.swing.JTextField Field_Akses_Gaji;
-    private javax.swing.JTextField Field_Akses_Gaji1;
     private javax.swing.JTextField Field_Akses_Gaji2;
-    private javax.swing.JComboBox<String> Field_Akses_Hak_Akses;
-    private javax.swing.JComboBox<String> Field_Akses_Hak_Akses1;
     private javax.swing.JComboBox<String> Field_Akses_Hak_Akses2;
-    private javax.swing.JTextField Field_Akses_Nama_Lengkap;
-    private javax.swing.JTextField Field_Akses_Nama_Lengkap1;
     private javax.swing.JTextField Field_Akses_Nama_Lengkap2;
-    private javax.swing.JTextField Field_Akses_No_Identitas;
-    private javax.swing.JTextField Field_Akses_No_Identitas1;
     private javax.swing.JTextField Field_Akses_No_Identitas2;
-    private javax.swing.JTextField Field_Akses_No_Rek;
-    private javax.swing.JTextField Field_Akses_No_Rek1;
     private javax.swing.JTextField Field_Akses_No_Rek2;
-    private javax.swing.JTextField Field_Akses_No_Telepon;
-    private javax.swing.JTextField Field_Akses_No_Telepon1;
     private javax.swing.JTextField Field_Akses_No_Telepon2;
-    private javax.swing.JTextField Field_Akses_Password;
-    private javax.swing.JTextField Field_Akses_Password1;
     private javax.swing.JTextField Field_Akses_Password2;
-    private javax.swing.JComboBox<String> Field_Akses_Status_Karyawan;
-    private javax.swing.JComboBox<String> Field_Akses_Status_Karyawan1;
     private javax.swing.JComboBox<String> Field_Akses_Status_Karyawan2;
-    private javax.swing.JTextField Field_Akses_Tanggal_Lahir;
-    private javax.swing.JTextField Field_Akses_Tanggal_Lahir1;
     private javax.swing.JTextField Field_Akses_Tanggal_Lahir2;
-    private javax.swing.JTextField Field_Akses_Tanggal_Mulai;
-    private javax.swing.JTextField Field_Akses_Tanggal_Mulai1;
     private javax.swing.JTextField Field_Akses_Tanggal_Mulai2;
-    private javax.swing.JTextField Field_Akses_User_ID;
-    private javax.swing.JTextField Field_Akses_User_ID1;
     private javax.swing.JTextField Field_Akses_User_ID2;
-    private javax.swing.JTextField Field_Data_Karyawan_Jenis_Kelamin;
-    private javax.swing.JTextField Field_Data_Karyawan_Jenis_Kelamin1;
     private javax.swing.JTextField Field_Data_Karyawan_Jenis_Kelamin2;
-    private javax.swing.JTextField Field_Tambah_Nama_User;
-    private javax.swing.JTextField Field_Tambah_Nama_User1;
     private javax.swing.JTextField Field_Tambah_Nama_User2;
-    private javax.swing.JLabel Lb_Akses;
-    private javax.swing.JLabel Lb_Akses1;
     private javax.swing.JLabel Lb_Akses2;
-    private javax.swing.JLabel Lb_Akses_Alamat;
-    private javax.swing.JLabel Lb_Akses_Alamat1;
     private javax.swing.JLabel Lb_Akses_Alamat2;
-    private javax.swing.JLabel Lb_Akses_Gaji;
-    private javax.swing.JLabel Lb_Akses_Gaji1;
     private javax.swing.JLabel Lb_Akses_Gaji2;
-    private javax.swing.JLabel Lb_Akses_Hak_Akses;
-    private javax.swing.JLabel Lb_Akses_Hak_Akses1;
     private javax.swing.JLabel Lb_Akses_Hak_Akses2;
-    private javax.swing.JLabel Lb_Akses_Jenis_Kelamin;
-    private javax.swing.JLabel Lb_Akses_Jenis_Kelamin1;
     private javax.swing.JLabel Lb_Akses_Jenis_Kelamin2;
-    private javax.swing.JLabel Lb_Akses_Nama;
-    private javax.swing.JLabel Lb_Akses_Nama1;
     private javax.swing.JLabel Lb_Akses_Nama2;
-    private javax.swing.JLabel Lb_Akses_Nama_Lengkap;
-    private javax.swing.JLabel Lb_Akses_Nama_Lengkap1;
     private javax.swing.JLabel Lb_Akses_Nama_Lengkap2;
-    private javax.swing.JLabel Lb_Akses_No_Identitas;
-    private javax.swing.JLabel Lb_Akses_No_Identitas1;
     private javax.swing.JLabel Lb_Akses_No_Identitas2;
-    private javax.swing.JLabel Lb_Akses_No_Rek;
-    private javax.swing.JLabel Lb_Akses_No_Rek1;
     private javax.swing.JLabel Lb_Akses_No_Rek2;
-    private javax.swing.JLabel Lb_Akses_No_Telepon;
-    private javax.swing.JLabel Lb_Akses_No_Telepon1;
     private javax.swing.JLabel Lb_Akses_No_Telepon2;
-    private javax.swing.JLabel Lb_Akses_Password;
-    private javax.swing.JLabel Lb_Akses_Password1;
     private javax.swing.JLabel Lb_Akses_Password2;
-    private javax.swing.JLabel Lb_Akses_Status_Karyawan;
-    private javax.swing.JLabel Lb_Akses_Status_Karyawan1;
     private javax.swing.JLabel Lb_Akses_Status_Karyawan2;
-    private javax.swing.JLabel Lb_Akses_Tanggal_Lahir;
-    private javax.swing.JLabel Lb_Akses_Tanggal_Lahir1;
     private javax.swing.JLabel Lb_Akses_Tanggal_Lahir2;
-    private javax.swing.JLabel Lb_Akses_Tanggal_Mulai;
-    private javax.swing.JLabel Lb_Akses_Tanggal_Mulai1;
     private javax.swing.JLabel Lb_Akses_Tanggal_Mulai2;
-    private javax.swing.JLabel Lb_Akses_User_ID;
-    private javax.swing.JLabel Lb_Akses_User_ID1;
     private javax.swing.JLabel Lb_Akses_User_ID2;
-    private javax.swing.JLabel Lb_Tambah_User;
-    private javax.swing.JLabel Lb_Tambah_User1;
     private javax.swing.JLabel Lb_Tambah_User2;
     private javax.swing.JTable Tbl_User;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JPanel pn_Akses;
-    private javax.swing.JPanel pn_Akses1;
     private javax.swing.JPanel pn_Akses2;
-    private javax.swing.JPanel pn_Konten_Akses;
-    private javax.swing.JPanel pn_Konten_Akses1;
     private javax.swing.JPanel pn_Konten_Akses2;
-    private javax.swing.JPanel pn_Update_Akses;
-    private javax.swing.JPanel pn_Update_Akses1;
     private javax.swing.JPanel pn_Update_Akses2;
     private javax.swing.JPanel pn_User;
     private javax.swing.JPanel pn_user;
