@@ -247,16 +247,23 @@ public class Transaksi extends javax.swing.JPanel {
         String uangClean = uangText.replaceAll("[^\\d]", "");
 
         try {
-            int total = Integer.parseInt(totalClean);
-            int uang = Integer.parseInt(uangClean);
+            // Hapus teks di txt_kembalian jika uangText kosong atau panjangnya kurang dari yang diinginkan
+            if (uangClean.isEmpty() || uangClean.length() <= 3) {
+                txt_kembalian.setText("");
+                return;
+            }
 
-            if (uang >= total) {
-                int kembali = uang - total;
-                String kembaliText = "Rp. " + NumberFormat.getNumberInstance(Locale.GERMAN).format(kembali);
-                txt_kembalian.setText(kembaliText);
-                JOptionPane.showMessageDialog(null, "Transaksi Berhasil!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Uang yang diinput kurang!!");
+            // Pastikan total dan uang tidak kosong dan merupakan angka yang valid
+            if (!totalClean.isEmpty() && !uangClean.isEmpty()) {
+                int total = Integer.parseInt(totalClean);
+                int uang = Integer.parseInt(uangClean);
+
+                // Hanya lakukan perhitungan jika panjang uangClean lebih dari 5 digit
+                if (uang >= total) {
+                    int kembali = uang - total;
+                    String kembaliText = "Rp. " + NumberFormat.getNumberInstance(Locale.GERMAN).format(kembali);
+                    txt_kembalian.setText(kembaliText);
+                }
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Invalid Input: Pastikan masukan hanya berupa angka");
@@ -403,7 +410,9 @@ public class Transaksi extends javax.swing.JPanel {
         String id_t = Field__Transaksi_ID.getText();
         String id_b = Field_Kode_Barang_Transaksi.getText();
         String pelanggan = Field_Nama_Pelanggan.getText();
-
+        String kembaliInt = txt_kembalian.getText();
+        String kembaliC = kembaliInt.replaceAll("[^\\d]", "");
+        int kembali = Integer.parseInt(kembaliC);
         String total = Field_Total_Semua.getText();
         String totalClean = total.replaceAll("[^\\d]", "");
         int total_bayar = Integer.parseInt(totalClean);
@@ -419,8 +428,8 @@ public class Transaksi extends javax.swing.JPanel {
             db.aksi("START TRANSACTION");
 
             // Insert ke tabel transaksi
-            db.aksi("INSERT INTO transaksi (tgl_transaksi, id_transaksi, total_bayar, bayar, pelanggan, metode) "
-                    + "VALUES ('" + tanggal + "','" + id_t + "', '" + total_bayar + "','" + bayar + "','" + pelanggan + "','" + metode + "')");
+            db.aksi("INSERT INTO transaksi (tgl_transaksi, id_transaksi, total_bayar, bayar, kembali, pelanggan, metode) "
+                    + "VALUES ('" + tanggal + "','" + id_t + "', '" + total_bayar + "','" + bayar + "','" + kembali + "','" + pelanggan + "','" + metode + "')");
 
             // Insert ke tabel detail_transaksi dengan id_transaksi
             db.aksi("INSERT INTO detail_transaksi (id_transaksi, id_barang, nama_barang, tanggal, harga, jumlah, total) "
@@ -428,7 +437,7 @@ public class Transaksi extends javax.swing.JPanel {
 
             // Commit transaksi
             db.aksi("COMMIT");
-
+            JOptionPane.showMessageDialog(null, "Transaksi Berhasil ");
         } catch (Exception e) {
             try {
                 // Rollback transaksi jika terjadi kesalahan
@@ -839,6 +848,11 @@ public class Transaksi extends javax.swing.JPanel {
                 Field_Total_SemuaActionPerformed(evt);
             }
         });
+        Field_Total_Semua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Field_Total_SemuaKeyReleased(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jButton6.setText("HAPUS");
@@ -953,9 +967,7 @@ public class Transaksi extends javax.swing.JPanel {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
                                         .addGroup(Panel_TransaksiLayout.createSequentialGroup()
                                             .addGap(187, 187, 187)
-                                            .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27)
@@ -999,8 +1011,14 @@ public class Transaksi extends javax.swing.JPanel {
                                         .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(Field_Metode, javax.swing.GroupLayout.Alignment.LEADING, 0, 450, Short.MAX_VALUE))
                                     .addComponent(jLabel12))
-                                .addGap(230, 230, 230)
-                                .addComponent(txt_kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(Panel_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Panel_TransaksiLayout.createSequentialGroup()
+                                        .addGap(230, 230, 230)
+                                        .addComponent(txt_kembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_TransaksiLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(26, 26, 26)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(156, 156, 156))
         );
@@ -1382,15 +1400,11 @@ public class Transaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
         transaksi();
 
-        
-        kembalian();
-
         // Kosongkan kolom input untuk nama pelanggan
         Field_Nama_Pelanggan.setText(null);
 
         // Kosongkan tabel keranjang setelah transaksi selesai
-        
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1421,6 +1435,7 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void txt_uangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_uangKeyReleased
         // TODO add your handling code here:
+        kembalian();
     }//GEN-LAST:event_txt_uangKeyReleased
 
     private void txt_uangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_uangKeyTyped
@@ -1456,7 +1471,7 @@ public class Transaksi extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -1656,6 +1671,7 @@ public class Transaksi extends javax.swing.JPanel {
     private void txt_uangMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_uangMouseReleased
         // TODO add your handling code here:
         txt_kembalian.setText("Rp. ");
+
     }//GEN-LAST:event_txt_uangMouseReleased
 
     private void rSMaterialButtonRectangle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle2ActionPerformed
@@ -1752,6 +1768,7 @@ public class Transaksi extends javax.swing.JPanel {
     private void txt_uangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_uangMouseClicked
         // TODO add your handling code here:
         autoInN();
+
     }//GEN-LAST:event_txt_uangMouseClicked
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1765,8 +1782,13 @@ public class Transaksi extends javax.swing.JPanel {
         txt_uang.setText(null);
         Field_Nama_Pelanggan.setText(null);
         txt_totalharga.setText(null);
-        
+
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void Field_Total_SemuaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Field_Total_SemuaKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_Field_Total_SemuaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
