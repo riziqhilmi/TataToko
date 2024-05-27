@@ -5,6 +5,7 @@
 package Utama;
 
 import java.awt.HeadlessException;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -98,6 +99,8 @@ public class Transaksi extends javax.swing.JPanel {
                 }
             }
         });
+        
+
     }
 
     public void tanggal() {
@@ -424,14 +427,11 @@ public class Transaksi extends javax.swing.JPanel {
         String tanggal = String.valueOf(date.format(tgl_transaksi.getDate()));
 
         try {
-            // Mulai transaksi
             db.aksi("START TRANSACTION");
 
-            // Insert ke tabel transaksi
             db.aksi("INSERT INTO transaksi (tgl_transaksi, id_transaksi, total_bayar, bayar, kembali, pelanggan, metode) "
                     + "VALUES ('" + tanggal + "','" + id_t + "', '" + total_bayar + "','" + bayar + "','" + kembali + "','" + pelanggan + "','" + metode + "')");
 
-            // Insert ke tabel detail_transaksi dengan id_transaksi
             db.aksi("INSERT INTO detail_transaksi (id_transaksi, id_barang, nama_barang, tanggal, harga, jumlah, total) "
                     + "SELECT '" + id_t + "', id_barang, nama_barang, '" + tanggal + "', harga, jumlah, total FROM keranjang");
 
@@ -447,7 +447,7 @@ public class Transaksi extends javax.swing.JPanel {
             }
             JOptionPane.showMessageDialog(null, "Data Gagal Ditambahkan: " + e.getMessage());
         }
-
+        
     }
 
     private void loadDetailTransaksi(String id_transaksi) {
@@ -1689,34 +1689,42 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void table_RiwayatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_RiwayatMouseClicked
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_table_RiwayatMouseClicked
 
     private void rSMaterialButtonRectangle5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle5ActionPerformed
         // TODO add your handling code here:
-        try {
+         int Row = table_Riwayat.getSelectedRow();
+         String ID = (String) table_Riwayat.getValueAt(Row, 1);
 
-            String file = "/Report/nota_riwayat.jasper";
+            try {
+                // Load laporan Jasper
+                Class.forName(driver);
+                con = DriverManager.getConnection(url, user, pwd);
+                String file = "/Report/nota_r_1.jasper";
 
-            Class.forName(driver);
-            con = DriverManager.getConnection(url, user, pwd);
-
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-            HashMap param = new HashMap();
-
-            param.put("total_semua", Field_Total_Semua.getText());
-            param.put("uang", txt_uang.getText());
-            param.put("kembali", txt_kembalian.getText());
-            param.put("id", Field__Transaksi_ID.getText());
-            param.put("kasir", Lb_Nama_Kasir.getText());
-
-            JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
-            JasperViewer.viewReport(print, false);
-
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | JRException e) {
-            System.out.println(e);
-        } catch (SQLException ex) {
-            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                // Buat parameter untuk laporan Jasper
+                
+                HashMap<String, Object> param = new HashMap<>();
+                
+                param.put("id_transaksi", new String(String.valueOf(table_Riwayat.getValueAt(Row, 1)))); // Set parameter id_transaksi dengan nilai yang dipilih dari tabel
+                param.put("kasir", Lb_Nama_Kasir.getText());
+                // Isi laporan Jasper dengan parameter
+                JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
+                
+                // Tampilkan laporan dalam JasperViewer
+                JasperViewer.viewReport(print, false);
+            } catch (JRException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+            } catch (ClassNotFoundException ex) {
+                 Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (SQLException ex) {
+                 Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+             }
+        
+    
     }//GEN-LAST:event_rSMaterialButtonRectangle5ActionPerformed
 
     private void rSMaterialButtonRectangle6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle6ActionPerformed
