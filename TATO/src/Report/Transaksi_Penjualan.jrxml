@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8a8d4777-c984-4cb7-a8ec-7cddc981dbb2">
-	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="Jumlah" class="java.lang.String"/>
@@ -64,15 +64,102 @@ WHERE tgl_transaksi BETWEEN $P{daritgl} AND $P{sampaitgl};]]>
 	<group name="TransaksiPenjualan" keepTogether="true">
 		<groupExpression><![CDATA[$F{id_transaksi}]]></groupExpression>
 		<groupHeader>
-			<band height="50">
+			<band height="109">
+				<staticText>
+					<reportElement x="0" y="88" width="100" height="20" uuid="891b5de5-d5fb-43f4-b6e5-69050c33ab03"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Barang]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="100" y="88" width="100" height="20" uuid="ba89b749-e311-4c34-9b8d-480b23892035"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nama Barang]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="241" y="88" width="66" height="20" uuid="2cf1c10e-37a2-4421-9231-96f3c73825cd"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Harga]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="337" y="88" width="61" height="20" uuid="fb203f81-00fa-4f5b-ae70-9719749bf16d"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Jumlah]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="426" y="88" width="85" height="20" uuid="9fdf2afe-e248-4fae-ad69-2e3c3b9f61b5"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Jumlah Bayar]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="85" width="555" height="1" uuid="f75fe577-f420-4af9-8923-32a3a9c83605"/>
+				</line>
 				<textField>
-					<reportElement x="115" y="16" width="100" height="20" uuid="817e91c4-5d4f-49e0-a1f4-a58140d631e6"/>
-					<textFieldExpression><![CDATA[$P{daritgl}]]></textFieldExpression>
+					<reportElement x="115" y="65" width="100" height="20" uuid="b6044638-2e99-4433-8909-9221201e0cea"/>
+					<textFieldExpression><![CDATA[$F{pelanggan}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="276" y="20" width="100" height="20" uuid="f7110b45-f36b-466a-a049-0a0cd0870f47"/>
-					<textFieldExpression><![CDATA[$P{sampaitgl}]]></textFieldExpression>
+					<reportElement x="115" y="45" width="100" height="20" uuid="d5bb6ca5-1fee-444c-9331-33a6b4bbd5ad"/>
+					<textFieldExpression><![CDATA[$F{tgl_transaksi}]]></textFieldExpression>
 				</textField>
+				<line>
+					<reportElement x="0" y="108" width="555" height="1" uuid="71b7b459-e928-4ea6-8b4a-fec83b98c6f1"/>
+				</line>
+				<textField>
+					<reportElement x="115" y="25" width="100" height="20" uuid="faa2a7ef-88d2-4e6d-b0eb-5769c30238b1"/>
+					<textFieldExpression><![CDATA[$F{id_transaksi}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="45" width="100" height="20" uuid="ec2c1ad1-688e-4655-b117-a908e5fbbf0c"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tanggal Transaksi]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="65" width="100" height="20" uuid="d522e01b-131a-4228-8339-d5d3bef5b7c0"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Customer]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="25" width="100" height="20" uuid="6f96eeee-b1f0-4041-b0b2-b926a220c178"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Transaksi]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="25" width="14" height="20" uuid="30c47c82-df30-4b96-a2fc-c13049f318de"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="45" width="14" height="20" uuid="cbaaef06-7089-4f63-89f9-76446e147eb3"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="101" y="65" width="14" height="20" uuid="bab87606-773e-423a-8456-7640f4a747b3"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[:]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -140,11 +227,38 @@ WHERE tgl_transaksi BETWEEN $P{daritgl} AND $P{sampaitgl};]]>
 			</staticText>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="18" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement x="368" y="0" width="72" height="20" uuid="f7110b45-f36b-466a-a049-0a0cd0870f47"/>
+				<textFieldExpression><![CDATA[$P{sampaitgl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="0" width="68" height="20" uuid="817e91c4-5d4f-49e0-a1f4-a58140d631e6"/>
+				<textFieldExpression><![CDATA[$P{daritgl}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="215" y="0" width="57" height="20" uuid="91317d3e-f1cb-47b7-be6e-546c601168d5"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periode]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="0" width="14" height="20" uuid="92c06974-5248-4d9f-a790-ffa6b7bd1703"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="0" width="14" height="20" uuid="6ea15bee-c8ec-48e0-ada3-1f9cc505326a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
 		<band height="28" splitType="Stretch">
