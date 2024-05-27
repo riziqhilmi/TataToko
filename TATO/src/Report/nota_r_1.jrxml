@@ -142,17 +142,23 @@ WHERE dt.id_transaksi = $P{id_transaksi};]]>
 		<band height="28">
 			<textField>
 				<reportElement x="0" y="0" width="84" height="20" uuid="d46a739d-60b3-4ce9-b4be-792fe78bbe01"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="84" y="0" width="38" height="20" uuid="ec2a6351-dc08-4d84-ab45-c525f056cd68"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="122" y="0" width="59" height="20" uuid="9e4593d9-e4a0-4373-b27d-6caab39b31c1"/>
-				<textElement verticalAlignment="Middle"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 		</band>

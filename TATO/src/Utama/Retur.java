@@ -5,14 +5,25 @@
 package Utama;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author acer
  */
 public class Retur extends javax.swing.JPanel {
+
     Connection con;
     private final String driver = "com.mysql.cj.jdbc.Driver";
     private final String url = "jdbc:mysql://localhost:3306/tatatoko";
@@ -21,60 +32,49 @@ public class Retur extends javax.swing.JPanel {
 
     koneksi db = new koneksi();
     DefaultTableModel model = new DefaultTableModel();
+
     /**
      * Creates new form Beranda
      */
     public Retur() {
         initComponents();
         distributor();
+        barang();
+        tanggal();
         model.addColumn("No Return");
         model.addColumn("Tanggal");
         model.addColumn("Nama Barang");
+        model.addColumn("Jumlah");
         model.addColumn("Distributor");
         model.addColumn("Keterangan");
-        
+
         Tbl_Daftar_Retur.setModel(model);
         Tbl_Tambah_Retur.setModel(model);
         getData();
-        
+        autoIn();
+        search();
     }
-    
-    private void getData(){
+    public void tanggal(){
+        Date now = new Date();  
+        Field_Retur_Tambah_Tanggal.setDate(now);
+    }
+    private void getData() {
         ResultSet hasil = db.ambilData("SELECT * FROM retur");
         try {
-            while(hasil.next()){
+            while (hasil.next()) {
                 model.addRow(new Object[]{hasil.getString("id_return"),
-                hasil.getString("tanggal"),
-                hasil.getString("nama_barang"),
-                hasil.getString("distributor"),
-                hasil.getString("keterangan")});
+                    hasil.getString("tanggal"),
+                    hasil.getString("nama_barang"),
+                    hasil.getString("jumlah"),
+                    hasil.getString("distributor"),
+                    hasil.getString("keterangan")});
             }
         } catch (Exception e) {
             System.out.println("Tidak Dapat Mengambil Data");
         }
-            
+
     }
-    
-    private void tambahData(){
-       String kode = Field_Retur_Tambah_No_Transaksi.getText();
-       String tanggal = Field_Retur_Tambah_Tanggal.getText();
-       String distributor = String.valueOf(Field_Retur_Tambah_Distributor.getSelectedItem());
-       String nama = Field_Retur_Tambah_Nama.getText();
-       String ket = Field_Retur_Tambah_Keterangan.getText();
-      
-        try {
-            
-            db.aksi("INSERT INTO retur VALUES ('" + kode + "','" + tanggal + "','" + nama + "','" + distributor + "','" + ket + "')");
-            model.setRowCount(0);
-            Tbl_Daftar_Retur.setModel(model);
-            Tbl_Tambah_Retur.setModel(model);
-            getData();
-            clear();
-        } catch (Exception e) {
-            
-        }
-    }
-    
+
     public void distributor() {
         ResultSet hasil = db.ambilData("SELECT * FROM distributor");
         try {
@@ -82,17 +82,161 @@ public class Retur extends javax.swing.JPanel {
                 // Ambil nilai dari kolom "nama" dan tambahkan ke dalam JComboBox
                 Field_Retur_Tambah_Distributor.addItem(hasil.getString("nama"));
                 Field_Daftar_Retur_Distributor.addItem(hasil.getString("nama"));
-                
-                
-            
+
             }
         } catch (Exception e) {
             System.out.println("Tidak Dapat Mengambil Data");
         }
 
     }
+
+    public void barang() {
+        ResultSet hasil = db.ambilData("SELECT * FROM barang");
+        try {
+            while (hasil.next()) {
+                Field_Retur_Tambah_Nama.addItem(hasil.getString("nama_barang"));
+            }
+        } catch (Exception e) {
+        }
+    }
+    // Method to reduce the stock of an item
+
+    private boolean kurangiStokBarang(String id_b, int jumlah) {
+        try {
+            // Get the current stock of the item from the database
+            ResultSet rs = db.ambilData("SELECT jumlah FROM barang WHERE id_barang = '" + id_b + "'");
+            int stokSaatIni = 0;
+            if (rs.next()) {
+                stokSaatIni = rs.getInt("jumlah");
+            }
+
+            // Calculate new stock after reducing the purchased amount
+            int stokBaru = stokSaatIni - jumlah;
+
+            // Check if the stock is sufficient
+            if (stokBaru < 0) {
+                JOptionPane.showMessageDialog(null, "Stok tidak cukup. Stok saat ini: " + stokSaatIni);
+                return false;
+            } else {
+                // Update the stock of the item in the database
+                db.aksi("UPDATE barang SET jumlah = " + stokBaru + " WHERE id_barang = '" + id_b + "'");
+                return true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Gagal mengurangi stok barang: " + e.getMessage());
+            return false;
+        }
+    }
+
+// Method to add data and reduce stock accordingly
+    private void tambahData() {
+        String kode = Field_Retur_Tambah_No_Transaksi.getText();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        String tanggal = String.valueOf(date.format(Field_Retur_Tambah_Tanggal.getDate()));
+        String distributor = String.valueOf(Field_Retur_Tambah_Distributor.getSelectedItem());
+        String nama = String.valueOf(Field_Retur_Tambah_Nama.getSelectedItem());
+        String ket = Field_Retur_Tambah_Keterangan.getText();
+        String jumlahStr = Field_Retur_Tambah_Jumlah.getText();
+
+        try {
+            // Assume id_barang is the ID of the selected item, you need to adjust it according to your application's logic
+            String id_barang = getIdBarangByName(nama); // Implement this method to get the ID of the item based on the name
+
+            int jumlah = Integer.parseInt(jumlahStr);
+
+            // Insert retur data into the database
+            db.aksi("INSERT INTO retur VALUES ('" + kode + "','" + tanggal + "','" + nama + "','" + jumlah + "','" + distributor + "','" + ket + "')");
+
+            // Reduce item stock
+            boolean success = kurangiStokBarang(id_barang, jumlah);
+            if (success) {
+                // If stock reduction is successful, refresh the table and clear the form
+                model.setRowCount(0);
+                Tbl_Daftar_Retur.setModel(model);
+                Tbl_Tambah_Retur.setModel(model);
+                getData();
+                clear();
+                JOptionPane.showMessageDialog(null, "Data Berhasil Di Retur !!!");
+            } else {
+                // If stock reduction fails, delete the recently inserted retur data
+                db.aksi("DELETE FROM retur WHERE kode_transaksi = '" + kode + "'");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Gagal menambah data retur: " + e.getMessage());
+        }
+    }
+
+// Method to get the ID of an item based on its name
+    private String getIdBarangByName(String namaBarang) {
+        try {
+            ResultSet rs = db.ambilData("SELECT id_barang FROM barang WHERE nama_barang = '" + namaBarang + "'");
+            if (rs.next()) {
+                return rs.getString("id_barang");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Gagal mendapatkan ID barang: " + e.getMessage());
+        }
+        return null;
+    }
     
+    public void autoIn() {
+        try {
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, pwd);
+
+            String sqlquery = "SELECT MAX(RIGHT(id_return,4)) AS no_auto FROM retur";
+            PreparedStatement st = con.prepareStatement(sqlquery);
+            ResultSet rs = st.executeQuery();
+
+            String no_a, no_p = "";
+            int p;
+            if (rs.next()) {
+                no_a = Integer.toString(rs.getInt(1)+1);
+                p = no_a.length();
+                
+                for(int i = 1; i <=4-p;i++){
+                no_p = no_p + "0";
+                }
+                Field_Retur_Tambah_No_Transaksi.setText(no_p+no_a);
+            }
+                
+
+        } catch (Exception e) {
+            Field_Retur_Tambah_No_Transaksi.setText("");
+            e.printStackTrace();
+        }
+
+    }
     
+    public void search() {
+        Field_Cari_Tambah_Retur.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Tambah_Retur.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Tambah_Retur.getText()); // Call filterData on removeUpdate
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterData(Field_Cari_Tambah_Retur.getText()); // Call filterData on changedUpdate
+            }
+
+            private void filterData(String keyword) {
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(Tbl_Tambah_Retur.getModel());
+                Tbl_Tambah_Retur.setRowSorter(sorter);
+
+                if (keyword.trim().length() == 0) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + keyword)); // Filter data sesuai dengan kata kunci (ignore case)
+                }
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,7 +273,6 @@ public class Retur extends javax.swing.JPanel {
         Lb_Retur_Tambah_Tanggal = new javax.swing.JLabel();
         Lb_Retur_Tambah_Distributor = new javax.swing.JLabel();
         Field_Retur_Tambah_No_Transaksi = new javax.swing.JTextField();
-        Field_Retur_Tambah_Tanggal = new javax.swing.JTextField();
         Field_Retur_Tambah_Distributor = new javax.swing.JComboBox<>();
         Lb_Retur_Tambah_Nama_Toko = new javax.swing.JLabel();
         Field_Retur_Tambah_Nama_Toko = new javax.swing.JTextField();
@@ -147,7 +290,10 @@ public class Retur extends javax.swing.JPanel {
         Btn_Tambah_Retur_Tambah_Baru = new javax.swing.JButton();
         Btn_Tambah_Retur_Cetak = new javax.swing.JButton();
         Lb_Retur_Tambah_No_Transaksi1 = new javax.swing.JLabel();
-        Field_Retur_Tambah_Nama = new javax.swing.JTextField();
+        Field_Retur_Tambah_Nama = new javax.swing.JComboBox<>();
+        Lb_Retur_Tambah_No_Transaksi2 = new javax.swing.JLabel();
+        Field_Retur_Tambah_Jumlah = new javax.swing.JTextField();
+        Field_Retur_Tambah_Tanggal = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(1182, 686));
 
@@ -174,6 +320,8 @@ public class Retur extends javax.swing.JPanel {
         });
 
         pn_Konten_Retur.setLayout(new java.awt.CardLayout());
+
+        pn_Daftar_Retur.setBackground(new java.awt.Color(255, 255, 255));
 
         Tbl_Daftar_Retur.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         Tbl_Daftar_Retur.setModel(new javax.swing.table.DefaultTableModel(
@@ -251,7 +399,7 @@ public class Retur extends javax.swing.JPanel {
                     .addComponent(Field_Daftar_Retur_Kata_Kunci, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(Btn_Daftar_Retur_Cari)
-                .addContainerGap(477, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
             .addGroup(pn_Daftar_ReturLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane1)
@@ -288,6 +436,8 @@ public class Retur extends javax.swing.JPanel {
 
         pn_Konten_Retur.add(pn_Daftar_Retur, "card2");
 
+        pn_Tambah_Retur.setBackground(new java.awt.Color(255, 255, 255));
+
         Tbl_Tambah_Retur.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Tbl_Tambah_Retur.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -308,17 +458,24 @@ public class Retur extends javax.swing.JPanel {
 
         Lb_Retur_Tambah_No_Transaksi.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Retur_Tambah_No_Transaksi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Retur_Tambah_No_Transaksi.setText("No Transaksi :");
+        Lb_Retur_Tambah_No_Transaksi.setText("No Retur         :");
 
         Lb_Retur_Tambah_Tanggal.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Retur_Tambah_Tanggal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Retur_Tambah_Tanggal.setText("Tanggal          :");
+        Lb_Retur_Tambah_Tanggal.setText("Tanggal :");
 
         Lb_Retur_Tambah_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Retur_Tambah_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Retur_Tambah_Distributor.setText("Distributor      :");
 
+        Field_Retur_Tambah_No_Transaksi.setEnabled(false);
+
         Field_Retur_Tambah_Distributor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--default--" }));
+        Field_Retur_Tambah_Distributor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Field_Retur_Tambah_DistributorActionPerformed(evt);
+            }
+        });
 
         Lb_Retur_Tambah_Nama_Toko.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Retur_Tambah_Nama_Toko.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -379,40 +536,65 @@ public class Retur extends javax.swing.JPanel {
         Lb_Retur_Tambah_No_Transaksi1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Retur_Tambah_No_Transaksi1.setText("Nama Barang  :");
 
+        Field_Retur_Tambah_Nama.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--default--" }));
+
+        Lb_Retur_Tambah_No_Transaksi2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Retur_Tambah_No_Transaksi2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        Lb_Retur_Tambah_No_Transaksi2.setText("Jumlah           :");
+
+        Field_Retur_Tambah_Tanggal.setDateFormatString("dd-MM-yyyy");
+        Field_Retur_Tambah_Tanggal.setEnabled(false);
+        Field_Retur_Tambah_Tanggal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout pn_Tambah_ReturLayout = new javax.swing.GroupLayout(pn_Tambah_Retur);
         pn_Tambah_Retur.setLayout(pn_Tambah_ReturLayout);
         pn_Tambah_ReturLayout.setHorizontalGroup(
             pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Lb_Retur_Tambah_No_Transaksi)
-                    .addComponent(Lb_Retur_Tambah_Distributor, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Lb_Retur_Tambah_No_Transaksi1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Lb_Retur_Tambah_Tanggal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Field_Retur_Tambah_No_Transaksi)
-                    .addComponent(Field_Retur_Tambah_Tanggal)
-                    .addComponent(Field_Retur_Tambah_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(167, 167, 167)
-                .addComponent(Lb_Retur_Tambah_Nama_Toko)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Field_Retur_Tambah_Nama_Toko, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                                .addComponent(Lb_Retur_Tambah_No_Transaksi)
+                                .addGap(15, 15, 15)
+                                .addComponent(Field_Retur_Tambah_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                                .addComponent(Lb_Retur_Tambah_No_Transaksi1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Field_Retur_Tambah_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                                .addComponent(Lb_Retur_Tambah_Distributor)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Field_Retur_Tambah_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(2, 2, 2)))
+                        .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                                .addGap(415, 415, 415)
+                                .addComponent(Lb_Retur_Tambah_Nama_Toko)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Field_Retur_Tambah_Nama_Toko, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Lb_Retur_Tambah_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Field_Retur_Tambah_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59))
+                            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Field_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Btn_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47))
+                            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(Lb_Retur_Tambah_No_Transaksi2)
+                                .addGap(18, 18, 18)
+                                .addComponent(Field_Retur_Tambah_Jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Tambah_ReturLayout.createSequentialGroup()
                         .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1260, Short.MAX_VALUE)
-                            .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
-                                .addGap(313, 313, 313)
-                                .addComponent(Field_Retur_Tambah_Nama)
-                                .addGap(400, 400, 400)
-                                .addComponent(Field_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Btn_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2)
                             .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
                                 .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
@@ -443,7 +625,7 @@ public class Retur extends javax.swing.JPanel {
                         .addGap(43, 43, 43))
                     .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
                         .addComponent(Lb_Retur_Tambah)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         pn_Tambah_ReturLayout.setVerticalGroup(
             pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,26 +633,35 @@ public class Retur extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(Lb_Retur_Tambah)
                 .addGap(8, 8, 8)
-                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lb_Retur_Tambah_Nama_Toko)
-                    .addComponent(Field_Retur_Tambah_Nama_Toko, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Retur_Tambah_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Retur_Tambah_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Retur_Tambah_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Retur_Tambah_Tanggal))
-                .addGap(18, 18, 18)
-                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Retur_Tambah_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Retur_Tambah_Distributor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Lb_Retur_Tambah_No_Transaksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Field_Retur_Tambah_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
+                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                        .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Lb_Retur_Tambah_Nama_Toko)
+                                .addComponent(Field_Retur_Tambah_Nama_Toko, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(Lb_Retur_Tambah_Tanggal)
+                                .addComponent(Field_Retur_Tambah_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Field_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Btn_Cari_Tambah_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                        .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Field_Retur_Tambah_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Lb_Retur_Tambah_No_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lb_Retur_Tambah_Distributor)
+                            .addComponent(Field_Retur_Tambah_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Lb_Retur_Tambah_No_Transaksi1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Field_Retur_Tambah_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Field_Retur_Tambah_Jumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Lb_Retur_Tambah_No_Transaksi2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 53, Short.MAX_VALUE)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -506,7 +697,7 @@ public class Retur extends javax.swing.JPanel {
             .addGroup(pn_ReturLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pn_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pn_Konten_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pn_Konten_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pn_ReturLayout.createSequentialGroup()
                         .addGroup(pn_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Lb_Retur)
@@ -535,7 +726,7 @@ public class Retur extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, 1376, Short.MAX_VALUE)
+            .addComponent(pn_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,7 +740,7 @@ public class Retur extends javax.swing.JPanel {
         pn_Konten_Retur.removeAll();
         pn_Konten_Retur.repaint();
         pn_Konten_Retur.revalidate();
-        
+
         pn_Konten_Retur.add(pn_Daftar_Retur);
         pn_Konten_Retur.repaint();
         pn_Konten_Retur.revalidate();
@@ -563,7 +754,7 @@ public class Retur extends javax.swing.JPanel {
         pn_Konten_Retur.removeAll();
         pn_Konten_Retur.repaint();
         pn_Konten_Retur.revalidate();
-        
+
         pn_Konten_Retur.add(pn_Tambah_Retur);
         pn_Konten_Retur.repaint();
         pn_Konten_Retur.revalidate();
@@ -580,8 +771,12 @@ public class Retur extends javax.swing.JPanel {
     private void Btn_Tambah_Retur_Tambah_BaruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_Retur_Tambah_BaruActionPerformed
         // TODO add your handling code here:
         tambahData();
-        
+
     }//GEN-LAST:event_Btn_Tambah_Retur_Tambah_BaruActionPerformed
+
+    private void Field_Retur_Tambah_DistributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Retur_Tambah_DistributorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Field_Retur_Tambah_DistributorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -598,12 +793,13 @@ public class Retur extends javax.swing.JPanel {
     private javax.swing.JTextField Field_Daftar_Retur_Sampai_Tanggal;
     private javax.swing.JTextField Field_Retur_Tambah_Biaya_Lain;
     private javax.swing.JComboBox<String> Field_Retur_Tambah_Distributor;
+    private javax.swing.JTextField Field_Retur_Tambah_Jumlah;
     private javax.swing.JTextArea Field_Retur_Tambah_Keterangan;
-    private javax.swing.JTextField Field_Retur_Tambah_Nama;
+    private javax.swing.JComboBox<String> Field_Retur_Tambah_Nama;
     private javax.swing.JTextField Field_Retur_Tambah_Nama_Toko;
     private javax.swing.JTextField Field_Retur_Tambah_No_Transaksi;
     private javax.swing.JTextField Field_Retur_Tambah_Potongan;
-    private javax.swing.JTextField Field_Retur_Tambah_Tanggal;
+    private com.toedter.calendar.JDateChooser Field_Retur_Tambah_Tanggal;
     private javax.swing.JTextField Field_Retur_Tambah_Total;
     private javax.swing.JLabel Lb_Daftar_Retur_Dari_Tanggal;
     private javax.swing.JLabel Lb_Daftar_Retur_Distributor;
@@ -617,6 +813,7 @@ public class Retur extends javax.swing.JPanel {
     private javax.swing.JLabel Lb_Retur_Tambah_Nama_Toko;
     private javax.swing.JLabel Lb_Retur_Tambah_No_Transaksi;
     private javax.swing.JLabel Lb_Retur_Tambah_No_Transaksi1;
+    private javax.swing.JLabel Lb_Retur_Tambah_No_Transaksi2;
     private javax.swing.JLabel Lb_Retur_Tambah_Potongan;
     private javax.swing.JLabel Lb_Retur_Tambah_Tanggal;
     private javax.swing.JLabel Lb_Retur_Tambah_Total;
@@ -633,8 +830,9 @@ public class Retur extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void clear() {
-       Field_Retur_Tambah_No_Transaksi.setText(null);
-       Field_Retur_Tambah_Tanggal.setText(null);
-       Field_Retur_Tambah_Nama.setText(null);
-       Field_Retur_Tambah_Keterangan.setText(null);}
+        Field_Retur_Tambah_No_Transaksi.setText(null);
+        
+        Field_Retur_Tambah_Keterangan.setText(null);
+        Field_Retur_Tambah_Keterangan.setText(null);
+    }
 }

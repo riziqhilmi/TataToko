@@ -1146,7 +1146,7 @@
                                                       <Component id="Lb_Informasi_Kategori_Detail" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                                       <Component id="FIeld_Informasi_Kategori_Detail" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
                                                   <Group type="103" groupAlignment="1" attributes="0">
                                                       <Group type="102" alignment="1" attributes="0">
                                                           <Component id="Lb_Informasi_Catatan_Detail" min="-2" pref="45" max="-2" attributes="0"/>
@@ -1202,7 +1202,7 @@
                                                   </Group>
                                               </Group>
                                           </Group>
-                                          <EmptySpace pref="81" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1247,21 +1247,14 @@
                                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="Lb_Informasi_Dibeli" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="Lb_Informasi_Stok" max="32767" attributes="0"/>
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                                      <Component id="Lb_Informasi_Stok" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="Lb_Informasi_Kadaluwarsa" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="Lb_Informasi_Terjual_Jumlah" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Lb_Informasi_Dibeli_Jumlah" pref="13" max="32767" attributes="0"/>
                                   <Component id="Lb_Informasi_Stok_Jumlah" max="32767" attributes="0"/>
                                   <Component id="Lb_Informasi_exp" max="32767" attributes="0"/>
                               </Group>
@@ -1289,22 +1282,17 @@
                                   <Component id="Lb_Informasi_Terjual" alignment="3" max="32767" attributes="0"/>
                                   <Component id="Lb_Informasi_Terjual_Jumlah" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="Lb_Informasi_Dibeli" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Lb_Informasi_Dibeli_Jumlah" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="Lb_Informasi_Stok" alignment="3" max="32767" attributes="0"/>
                                   <Component id="Lb_Informasi_Stok_Jumlah" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="Lb_Informasi_Kadaluwarsa" alignment="3" max="32767" attributes="0"/>
                                   <Component id="Lb_Informasi_exp" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1330,23 +1318,15 @@
                     <Component class="javax.swing.JLabel" name="Lb_Informasi_Terjual">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
+                          <Font name="Segoe UI" size="24" style="1"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Terjual"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="Lb_Informasi_Dibeli">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Dibeli"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="Lb_Informasi_Stok">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
+                          <Font name="Segoe UI" size="24" style="1"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Stok"/>
                       </Properties>
@@ -1354,7 +1334,7 @@
                     <Component class="javax.swing.JLabel" name="Lb_Informasi_Kadaluwarsa">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
+                          <Font name="Segoe UI" size="24" style="1"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Expired"/>
                       </Properties>
@@ -1362,18 +1342,7 @@
                     <Component class="javax.swing.JLabel" name="Lb_Informasi_Terjual_Jumlah">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="99" red="33" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="#"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="Lb_Informasi_Dibeli_Jumlah">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
+                          <Font name="Segoe UI" size="24" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -1384,7 +1353,7 @@
                     <Component class="javax.swing.JLabel" name="Lb_Informasi_Stok_Jumlah">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
+                          <Font name="Segoe UI" size="24" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -1395,7 +1364,7 @@
                     <Component class="javax.swing.JLabel" name="Lb_Informasi_exp">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Segoe UI" size="18" style="1"/>
+                          <Font name="Segoe UI" size="24" style="1"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="99" red="33" type="rgb"/>
@@ -1680,7 +1649,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" pref="250" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
