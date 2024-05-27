@@ -359,13 +359,13 @@
                           <Component id="Lb_Barang_Tambah2" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                           <Component id="Lb_Barang_Tambah3" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="pn_Tambah_Barang" min="-2" pref="561" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Lb_Data_Barang_Tambah" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="Scrl_Tambah_Barang" min="-2" pref="354" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="Scrl_Tambah_Barang" min="-2" pref="173" max="-2" attributes="0"/>
+                      <EmptySpace pref="98" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -521,19 +521,18 @@
                                       <Component id="Lb_Tambah_Status" min="-2" pref="48" max="-2" attributes="0"/>
                                       <Component id="Field_Tambah_Status" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="164" pref="164" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="Lb_Tambah_Barcode1" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="243" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="164" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="Lb_Tambah_Barcode1" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="243" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jScrollPane_Tambah_Catatan" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Field_Tambah_Barcode" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="jScrollPane_Tambah_Catatan" alignment="0" max="32767" attributes="0"/>
                                       <Component id="Btn_Tambah_Barcode" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Field_Tambah_Barcode" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="Lb_Tambah_Barcode2" min="-2" pref="74" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="Lb_Tambah_Barcode2" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
@@ -561,46 +560,50 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                           <Component id="Field_Tambah_Kode_Barang" min="-2" pref="42" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="Field_Tambah_Nama_Barang" alignment="1" min="-2" pref="42" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="Lb_Tambah_Kode_Distributor" min="-2" pref="22" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="Field_Tambah_Kode_Distributor" min="-2" pref="42" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="Lb_Tambah_Kategori" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                                  <Component id="Field_Tambah_Kategori" min="-2" pref="41" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="Field_Tambah_Nama_Barang" alignment="1" min="-2" pref="42" max="-2" attributes="0"/>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <Component id="Lb_Tambah_Kode_Distributor" min="-2" pref="22" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="Field_Tambah_Kode_Distributor" min="-2" pref="42" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="Lb_Tambah_Kategori" min="-2" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                                          <Component id="Field_Tambah_Kategori" min="-2" pref="41" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <Component id="Lb_Tambah_Tanggal_Masuk" min="-2" max="-2" attributes="0"/>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Component id="Field_Tambah_Tanggal_Masuk" min="-2" pref="42" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <Component id="Lb_Tambah_Kadaluwarsa" min="-2" pref="24" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                                              <Component id="Field_Tambah_Kadaluwarsa" min="-2" pref="41" max="-2" attributes="0"/>
+                                                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                  </Group>
                                               </Group>
-                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="Lb_Tambah_Tanggal_Masuk" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="Field_Tambah_Tanggal_Masuk" min="-2" pref="42" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="Lb_Tambah_Kadaluwarsa" min="-2" pref="24" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                                                      <Component id="Field_Tambah_Kadaluwarsa" min="-2" pref="41" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                                  </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="Lb_Tambah_Barcode2" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="Field_Tambah_Barcode" min="-2" pref="118" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="Lb_Tambah_Barcode2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="Field_Tambah_Barcode" min="-2" pref="118" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="Lb_Tambah_Harga_Beli" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="Lb_Tambah_Merk" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
@@ -629,32 +632,24 @@
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="Field_Tambah_Harga_Jual" min="-2" pref="42" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="Field_Tambah_Jumlah" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                                              <Component id="Field_Tambah_Status" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                  <Component id="Btn_Tambah_Barcode" min="-2" pref="43" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Btn_Tambah_Simpan" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                                      <Component id="Btn_Tambah_Kembali" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="Field_Tambah_Jumlah" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="Field_Tambah_Status" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <Component id="Field_Tambah_Harga_Jual" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="Btn_Tambah_Barcode" min="-2" pref="55" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="Btn_Tambah_Kembali" pref="56" max="32767" attributes="0"/>
+                                      <Component id="Btn_Tambah_Simpan" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
+                          <EmptySpace pref="25" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1643,7 +1638,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="Field_Barang_Update_Cari" min="-2" pref="310" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -1652,16 +1647,17 @@
                               <Component id="Lb_Data_Barang_Update" min="-2" pref="129" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="Lb_Barang_Update1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Lb_Barang_Update2" min="-2" pref="19" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="Lb_Barang_Update3" min="-2" max="-2" attributes="0"/>
+                              <Component id="Lb_Barang_Update1" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <Component id="Lb_Barang_Update2" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Component id="Lb_Barang_Update3" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="1325" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
                           <Component id="pn_Konten_Barang_Detail1" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1669,24 +1665,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Lb_Barang_Update2" alignment="3" max="32767" attributes="0"/>
+                          <Component id="Lb_Barang_Update3" alignment="3" max="32767" attributes="0"/>
                           <Component id="Lb_Barang_Update1" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Lb_Barang_Update2" alignment="3" max="32767" attributes="0"/>
-                              <Component id="Lb_Barang_Update3" alignment="3" max="32767" attributes="0"/>
-                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="pn_Konten_Barang_Detail1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Field_Barang_Update_Cari" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                           <Component id="Btn_Barang_Update_Cari" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                           <Component id="Lb_Data_Barang_Update" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" pref="675" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="250" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1738,7 +1732,7 @@
                               <Component id="Lb_Update_Harga_Beli" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
                               <Component id="Field_Update_Kode_Barang" alignment="1" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="99" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="Lb_Update_Jumlah" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
@@ -1751,7 +1745,7 @@
                                               <Component id="Lb_Update_Nama_Barang" min="-2" max="-2" attributes="0"/>
                                               <Component id="Lb_Update_Kadaluwarsa" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="0" pref="186" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -1759,30 +1753,25 @@
                           </Group>
                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="Lb_Update_Kategori1" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="Lb_Update_Kode_Distributor" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="Field_Update_Kategori" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="Field_Update_Kode_Distributor" alignment="0" min="-2" pref="255" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="Lb_Update_Satuan1" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
-                                          <Component id="Field_Update_Satuan" alignment="0" min="-2" pref="255" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="Lb_Update_Kategori1" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                  <Component id="Lb_Update_Status" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Field_Update_Status" min="-2" pref="257" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Lb_Update_Kode_Distributor" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="Field_Update_Kategori" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="Field_Update_Kode_Distributor" alignment="0" min="-2" pref="255" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="Lb_Update_Satuan1" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="Field_Update_Satuan" alignment="0" min="-2" pref="255" max="-2" attributes="0"/>
+                                      <Component id="Lb_Update_Status" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Field_Update_Status" min="-2" pref="257" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1818,37 +1807,6 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                                          <Component id="Lb_Update_Tanggal_Masuk" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                          <Component id="Field_Update_Tanggal_Masuk" min="-2" pref="40" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="Lb_Update_Harga_Beli" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="Lb_Update_Jumlah" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="Field_Update_Harga_Beli" min="-2" pref="34" max="-2" attributes="0"/>
-                                              <Component id="Field_Update_Jumlah" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="8" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="Btn_Update_Simpan" min="-2" pref="56" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Btn_Update_Kembali" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                                      <Component id="Btn_Update_Hapus" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
                                           <Component id="Lb_Update_Kode_Barang" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="Field_Update_Kode_Barang" min="-2" pref="35" max="-2" attributes="0"/>
@@ -1873,12 +1831,6 @@
                                                   <Component id="Field_Update_Harga_Jual" min="-2" pref="35" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="279" pref="279" max="-2" attributes="0"/>
-                                                  <Component id="Lb_Update_Status" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="Field_Update_Status" min="-2" pref="35" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="Lb_Update_Kode_Distributor" min="-2" max="-2" attributes="0"/>
@@ -1897,7 +1849,10 @@
                                                   </Group>
                                                   <EmptySpace min="28" max="32767" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="rSMaterialButtonRectangle1" min="-2" pref="56" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="3" attributes="0">
+                                                          <Component id="rSMaterialButtonRectangle1" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                                                          <Component id="Btn_Update_Simpan" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>
+                                                      </Group>
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <Component id="Lb_Update_Satuan1" min="-2" pref="16" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
@@ -1910,6 +1865,39 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="Lb_Update_Tanggal_Masuk" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                                          <Component id="Field_Update_Tanggal_Masuk" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="Lb_Update_Harga_Beli" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="Lb_Update_Jumlah" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="Field_Update_Harga_Beli" min="-2" pref="34" max="-2" attributes="0"/>
+                                              <Component id="Field_Update_Jumlah" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="Btn_Update_Hapus" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
+                                              <Component id="Btn_Update_Kembali" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="Lb_Update_Status" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="Field_Update_Status" min="-2" pref="35" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

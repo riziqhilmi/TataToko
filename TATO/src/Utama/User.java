@@ -342,7 +342,7 @@ public class User extends javax.swing.JPanel {
 
         Field_Daftar_Tanggal_Lahir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        Field_Data_Karyawan_Jenis_Kelamin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Field_Data_Karyawan_Jenis_Kelamin.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         Field_Data_Karyawan_Jenis_Kelamin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki - Laki", "Perempuan" }));
 
         javax.swing.GroupLayout pn_Tambah_Daftar_UserLayout = new javax.swing.GroupLayout(pn_Tambah_Daftar_User);

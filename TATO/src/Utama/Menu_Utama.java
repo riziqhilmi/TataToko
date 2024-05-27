@@ -8,9 +8,14 @@ import Utama.Beranda;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 /**
  *
@@ -30,7 +35,36 @@ private String nama;
         Lb_Akses.setText(Akses);
         
         execute(Akses);
+        
+        
+        
+        UpdateDate();
+        
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                UpdateDate();
+            }
+        });
+        
+        timer.start();
+        
+        
     }
+    
+    
+    private void UpdateDate() {
+        Calendar calendar = Calendar.getInstance();
+        Date now = new Date();
+        SimpleDateFormat Hari = new SimpleDateFormat("EEEE", new Locale("in", "id"));
+        SimpleDateFormat tanggalwaktu = new SimpleDateFormat("dd-MM-yyyy   HH-mm-ss");
+        String HariIni = Hari.format(calendar.getTime());
+        String tanggal  = tanggalwaktu.format(now);
+        Lb_Tanggal.setText(HariIni+", "+ tanggal);
+    }
+    
+    
+    
 
     Menu_Utama() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -52,11 +86,12 @@ private String nama;
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Lb_Nama = new javax.swing.JLabel();
+        Lb_Akses = new javax.swing.JLabel();
         Konten = new javax.swing.JPanel();
         Dasar = new javax.swing.JPanel();
         Navbar = new javax.swing.JPanel();
         Btn_Logout = new javax.swing.JButton();
-        Lb_Akses = new javax.swing.JLabel();
+        Lb_Tanggal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -90,27 +125,39 @@ private String nama;
         Lb_Nama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lb_Nama.setText("Nama");
 
+        Lb_Akses.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Lb_Akses.setForeground(new java.awt.Color(255, 255, 255));
+        Lb_Akses.setText("Akses");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Lb_Nama, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Lb_Nama, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(Lb_Akses)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(63, 63, 63)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Lb_Nama, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Lb_Akses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(Lb_Nama)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
@@ -125,8 +172,8 @@ private String nama;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SidebarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(Sidebar, java.awt.BorderLayout.LINE_START);
@@ -151,18 +198,18 @@ private String nama;
             }
         });
 
-        Lb_Akses.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Akses.setForeground(new java.awt.Color(255, 255, 255));
-        Lb_Akses.setText("Akses");
+        Lb_Tanggal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        Lb_Tanggal.setForeground(new java.awt.Color(255, 255, 255));
+        Lb_Tanggal.setText("Tanggal dan Waktu");
 
         javax.swing.GroupLayout NavbarLayout = new javax.swing.GroupLayout(Navbar);
         Navbar.setLayout(NavbarLayout);
         NavbarLayout.setHorizontalGroup(
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
-                .addGap(1740, 1740, 1740)
-                .addComponent(Lb_Akses)
-                .addGap(32, 32, 32)
+                .addGap(1543, 1543, 1543)
+                .addComponent(Lb_Tanggal, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(15, 15, 15))
         );
@@ -170,12 +217,12 @@ private String nama;
             NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(NavbarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addGroup(NavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NavbarLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(Lb_Tanggal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Btn_Logout, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NavbarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Lb_Akses)
-                .addGap(17, 17, 17))
         );
 
         getContentPane().add(Navbar, java.awt.BorderLayout.PAGE_START);
@@ -239,6 +286,7 @@ private String nama;
     private javax.swing.JPanel Konten;
     private javax.swing.JLabel Lb_Akses;
     private javax.swing.JLabel Lb_Nama;
+    private javax.swing.JLabel Lb_Tanggal;
     private javax.swing.JPanel Menus;
     private javax.swing.JPanel Navbar;
     private javax.swing.JPanel Sidebar;

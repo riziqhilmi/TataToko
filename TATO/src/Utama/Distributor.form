@@ -1861,10 +1861,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="Lb_Update_Alamat_Distributor" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="66" pref="66" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="Lb_Update_Alamat_Distributor" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -2170,6 +2167,11 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="Field_Update_Bergabung_Distributor">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="16" style="0"/>
+                    </Property>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Update_Status_Distributor">
                   <Properties>
@@ -2182,6 +2184,9 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="Field_Update_Status_Distributor">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="0"/>
+                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
@@ -2219,6 +2224,11 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="Field_Update_Kota_Distributor">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="16" style="0"/>
+                    </Property>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Field_Update_Kota_DistributorActionPerformed"/>
                   </Events>

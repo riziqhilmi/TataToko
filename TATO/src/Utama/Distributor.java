@@ -1289,9 +1289,13 @@ public class Distributor extends javax.swing.JPanel {
         Lb_Update_Bergabung_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Update_Bergabung_Distributor.setText("Bergabung  :");
 
+        Field_Update_Bergabung_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+
         Lb_Update_Status_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Update_Status_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Update_Status_Distributor.setText("Status  :");
+
+        Field_Update_Status_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         rSMaterialButtonRectangle1.setBackground(new java.awt.Color(51, 51, 51));
         rSMaterialButtonRectangle1.setText("Hapus");
@@ -1312,6 +1316,7 @@ public class Distributor extends javax.swing.JPanel {
         Lb_Update_Telepon_Distributor1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Update_Telepon_Distributor1.setText("Kota :");
 
+        Field_Update_Kota_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         Field_Update_Kota_Distributor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Field_Update_Kota_DistributorActionPerformed(evt);
@@ -1440,9 +1445,7 @@ public class Distributor extends javax.swing.JPanel {
                             .addComponent(Btn_Cari_Update_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createSequentialGroup()
-                                .addComponent(Lb_Update_Alamat_Distributor)
-                                .addGap(66, 66, 66))
+                            .addComponent(Lb_Update_Alamat_Distributor)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(143, 143, 143)
                 .addGroup(pn_Konten_Tbl_Distributor_UpdateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
