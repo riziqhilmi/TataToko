@@ -195,10 +195,6 @@ WHERE tgl_transaksi BETWEEN $P{daritgl} AND $P{sampaitgl};]]>
 	</background>
 	<title>
 		<band height="76" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="104" height="75" uuid="78d8862c-b509-4c6d-b2e3-1414af2944ca"/>
-				<imageExpression><![CDATA["D:\\acer\\GIT\\Dokumen git\\TATO\\TataToko\\TATO\\src\\Gambar\\Lg_TATO.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="104" y="0" width="233" height="29" uuid="b714d6a0-d368-4719-8064-e3da981de146"/>
 				<textElement>
