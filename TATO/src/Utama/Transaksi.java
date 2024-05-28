@@ -92,9 +92,7 @@ public class Transaksi extends javax.swing.JPanel {
             if (!e.getValueIsAdjusting()) {
                 int selectedRow = table_Riwayat.getSelectedRow();
                 if (selectedRow != -1) {
-                    // Ambil id_transaksi dari baris yang dipilih
                     String id_transaksi = table_Riwayat.getValueAt(selectedRow, 1).toString();
-                    // Panggil fungsi untuk memuat detail transaksi berdasarkan id_transaksi
                     loadDetailTransaksi(id_transaksi);
                 }
             }
@@ -142,7 +140,6 @@ public class Transaksi extends javax.swing.JPanel {
     }
 
     private void tampilData() {
-        //untuk mengahapus baris setelah input
         int row = tb_keranjang.getRowCount();
         for (int a = 0; a < row; a++) {
             table.removeRow(0);
@@ -169,7 +166,6 @@ public class Transaksi extends javax.swing.JPanel {
     private void refresh() {
         model.setRowCount(0);
 
-        // Ambil data stok barang dari database
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
@@ -178,7 +174,6 @@ public class Transaksi extends javax.swing.JPanel {
             PreparedStatement psGetData = con.prepareStatement(queryGetData);
             ResultSet rsGetData = psGetData.executeQuery();
 
-            // Isi model tabel dengan data dari database
             while (rsGetData.next()) {
                 String idBarang = rsGetData.getString("id_barang");
                 String namaBarang = rsGetData.getString("nama_barang");
@@ -188,7 +183,6 @@ public class Transaksi extends javax.swing.JPanel {
                 String satuan = rsGetData.getString("satuan");
                 String status = rsGetData.getString("status");
 
-                // Tambahkan baris baru ke model tabel
                 model.addRow(new Object[]{idBarang, namaBarang, jenis, jumlah, harga, satuan, status});
             }
 
@@ -202,9 +196,9 @@ public class Transaksi extends javax.swing.JPanel {
         String procedures = "CALL `total_harga_transaksi`()";
 
         try {
-            java.sql.Connection connect = koneksi.getConnection();//memanggil koneksi
-            Statement sttmnt = connect.createStatement();//membuat statement
-            ResultSet rslt = sttmnt.executeQuery(procedures);//menjalanakn query\
+            java.sql.Connection connect = koneksi.getConnection();
+            Statement sttmnt = connect.createStatement();
+            ResultSet rslt = sttmnt.executeQuery(procedures);
             while (rslt.next()) {
                 Field_Total_Semua.setText(rslt.getString(1));
             }
@@ -219,7 +213,6 @@ public class Transaksi extends javax.swing.JPanel {
         String hargaText = txt_harga2.getText();
         String jumlahText = txt_jumlah3.getText();
 
-        // Menghilangkan "Rp." dan spasi dari string harga
         String hargaClean = hargaText.replaceAll("[^\\d]", "");
 
         try {
@@ -243,23 +236,19 @@ public class Transaksi extends javax.swing.JPanel {
         String totalText = Field_Total_Semua.getText();
         String uangText = txt_uang.getText();
 
-        // Menghilangkan "Rp." dan spasi dari string total dan uang
         String totalClean = totalText.replaceAll("[^\\d]", "");
         String uangClean = uangText.replaceAll("[^\\d]", "");
 
         try {
-            // Hapus teks di txt_kembalian jika uangText kosong atau panjangnya kurang dari yang diinginkan
             if (uangClean.isEmpty() || uangClean.length() <= 3) {
                 txt_kembalian.setText("");
                 return;
             }
 
-            // Pastikan total dan uang tidak kosong dan merupakan angka yang valid
             if (!totalClean.isEmpty() && !uangClean.isEmpty()) {
                 int total = Integer.parseInt(totalClean);
                 int uang = Integer.parseInt(uangClean);
 
-                // Hanya lakukan perhitungan jika panjang uangClean lebih dari 5 digit
                 if (uang >= total) {
                     int kembali = uang - total;
                     String kembaliText = "Rp. " + NumberFormat.getNumberInstance(Locale.GERMAN).format(kembali);
@@ -307,7 +296,6 @@ public class Transaksi extends javax.swing.JPanel {
 
     }
 
-    // Variabel global untuk menyimpan nomor terakhir
     private int lastTransaksiNumber = 0;
 
     public void autoInN() {
@@ -339,22 +327,18 @@ public class Transaksi extends javax.swing.JPanel {
 
     private boolean kurangiStokBarang(String id_b, int jumlah) {
         try {
-            // Ambil stok barang saat ini dari database
             ResultSet rs = db.ambilData("SELECT jumlah FROM barang WHERE id_barang = '" + id_b + "'");
             int stokSaatIni = 0;
             if (rs.next()) {
                 stokSaatIni = rs.getInt("jumlah");
             }
-
-            // Hitung stok baru setelah dikurangi jumlah yang dibeli
+            
             int stokBaru = stokSaatIni - jumlah;
 
-            // Periksa apakah stok cukup
             if (stokBaru < 0) {
                 JOptionPane.showMessageDialog(null, "Stok tidak cukup. Stok saat ini: " + stokSaatIni);
                 return false;
             } else {
-                // Update stok barang di database
                 db.aksi("UPDATE barang SET jumlah = " + stokBaru + " WHERE id_barang = '" + id_b + "'");
                 return true;
             }
@@ -389,17 +373,14 @@ public class Transaksi extends javax.swing.JPanel {
                 return;
             }
 
-            // Check if the item already exists in the keranjang
             ResultSet rs = db.ambilData("SELECT jumlah, total FROM keranjang WHERE id_transaksi = '" + id_T + "' AND id_barang = '" + id_b + "'");
             if (rs.next()) {
-                // Item exists, update the quantity and total price
                 int existingJumlah = rs.getInt("jumlah");
                 int existingTotal = rs.getInt("total");
                 int newJumlah = existingJumlah + jumlahInt;
                 int newTotal = existingTotal + totalInt;
                 db.aksi("UPDATE keranjang SET jumlah = '" + newJumlah + "', total = '" + newTotal + "' WHERE id_transaksi = '" + id_T + "' AND id_barang = '" + id_b + "'");
             } else {
-                // Item does not exist, insert a new record
                 db.aksi("INSERT INTO keranjang VALUES ('" + id_T + "','" + id_b + "','" + nama + "','" + tanggal + "','" + hargaInt + "','" + jumlahInt + "','" + totalInt + "')");
             }
 
@@ -432,7 +413,9 @@ public class Transaksi extends javax.swing.JPanel {
         String totalClean = total.replaceAll("[^\\d]", "");
         int total_bayar = Integer.parseInt(totalClean);
 
-        String bayar = txt_uang.getText();
+        String bayarInt = txt_uang.getText();
+        String bayarC = bayarInt.replaceAll("[^\\d]","");
+        int bayar = Integer.parseInt(bayarC);
         String metode = String.valueOf(Field_Metode.getSelectedItem());
 
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -447,12 +430,10 @@ public class Transaksi extends javax.swing.JPanel {
             db.aksi("INSERT INTO detail_transaksi (id_transaksi, id_barang, nama_barang, tanggal, harga, jumlah, total) "
                     + "SELECT '" + id_t + "', id_barang, nama_barang, '" + tanggal + "', harga, jumlah, total FROM keranjang");
 
-            // Commit transaksi
             db.aksi("COMMIT");
             JOptionPane.showMessageDialog(null, "Transaksi Berhasil ");
         } catch (Exception e) {
             try {
-                // Rollback transaksi jika terjadi kesalahan
                 db.aksi("ROLLBACK");
             } catch (Exception rollbackException) {
                 JOptionPane.showMessageDialog(null, "Rollback Gagal: " + rollbackException.getMessage());
@@ -463,16 +444,13 @@ public class Transaksi extends javax.swing.JPanel {
     }
 
     private void loadDetailTransaksi(String id_transaksi) {
-        // Bersihkan tabel detail transaksi sebelum memuat data baru
         DefaultTableModel modelDetail = (DefaultTableModel) Tbl_Detail_Transaksi.getModel();
         modelDetail.setRowCount(0);
 
-        // Ambil data dari tabel detail_transaksi berdasarkan id_transaksi
         ResultSet hasilDetail = db.ambilData("SELECT * FROM detail_transaksi WHERE id_transaksi = '" + id_transaksi + "'");
         try {
             while (hasilDetail.next()) {
                 modelDetail.addRow(new Object[]{
-                    //hasilDetail.getString("id_transaksi"),
                     hasilDetail.getString("id_barang"),
                     hasilDetail.getString("nama_barang"),
                     hasilDetail.getString("tanggal"),
@@ -500,13 +478,11 @@ public class Transaksi extends javax.swing.JPanel {
                 Field_Total_Semua.setText(String.valueOf("Rp. " + totalHarga)); // Set the total price to your field
             }
         } catch (Exception e) {
-            // Handle exceptions here
             e.printStackTrace();
         }
     }
 
     private void hapusData() {
-        //ambill data no pendaftaran
         int i = tb_keranjang.getSelectedRow();
 
         String kode = table.getValueAt(i, 0).toString();
@@ -1412,10 +1388,7 @@ public class Transaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
         transaksi();
 
-        // Kosongkan kolom input untuk nama pelanggan
         Field_Nama_Pelanggan.setText(null);
-
-        // Kosongkan tabel keranjang setelah transaksi selesai
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1474,7 +1447,8 @@ public class Transaksi extends javax.swing.JPanel {
             param.put("kembali", txt_kembalian.getText());
             param.put("id", Field__Transaksi_ID.getText());
             param.put("kasir", Lb_Nama_Kasir.getText());
-
+            param.put("pelanggan", Field_Nama_Pelanggan.getText());
+            
             JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
             JasperViewer.viewReport(print, false);
 
@@ -1494,8 +1468,7 @@ public class Transaksi extends javax.swing.JPanel {
          ResultSet rs = db.ambilData("SELECT * FROM keranjang WHERE id_transaksi = '" + idBarang + "'");
         try {
             if (rs.next()) {
-                // Menampilkan nilai merk di JTextField "FIeld_Informasi_Brand_Merk_Detail"
-                String idB = rs.getString("id_barang");
+                 String idB = rs.getString("id_barang");
                 Field_Kode_Barang_Transaksi.setText(idB);}
         } catch (SQLException ex) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
@@ -1511,6 +1484,7 @@ public class Transaksi extends javax.swing.JPanel {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         keranjang();
+        txt_uang.setText("Rp. ");
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -1531,7 +1505,6 @@ public class Transaksi extends javax.swing.JPanel {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
 
-            // Ambil data barang yang akan dihapus dari tabel "keranjang"
             String queryGetData = "SELECT id_barang, jumlah FROM keranjang WHERE id_transaksi = ?";
             PreparedStatement psGetData = con.prepareStatement(queryGetData);
             psGetData.setString(1, kode);
@@ -1541,13 +1514,11 @@ public class Transaksi extends javax.swing.JPanel {
                 String idBarang = rsGetData.getString("id_barang");
                 int jumlahDihapus = rsGetData.getInt("jumlah");
 
-                // Hapus data dari tabel "keranjang"
                 String queryDelete = "DELETE FROM keranjang WHERE id_transaksi = ?";
                 PreparedStatement psDelete = con.prepareStatement(queryDelete);
                 psDelete.setString(1, kode);
                 psDelete.executeUpdate();
 
-                // Perbarui stok barang di tabel "barang"
                 String queryUpdateStock = "UPDATE barang SET jumlah = jumlah + ? WHERE id_barang = ?";
                 PreparedStatement psUpdateStock = con.prepareStatement(queryUpdateStock);
                 psUpdateStock.setInt(1, jumlahDihapus);
@@ -1579,10 +1550,8 @@ public class Transaksi extends javax.swing.JPanel {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
 
-            // Simpan stok barang sebelum mengosongkan tabel "keranjang"
             Map<String, Integer> stokSebelumnya = new HashMap<>();
 
-            // Ambil data barang dari tabel "keranjang"
             String queryGetData = "SELECT id_barang, jumlah FROM keranjang";
             PreparedStatement psGetData = con.prepareStatement(queryGetData);
             ResultSet rsGetData = psGetData.executeQuery();
@@ -1592,12 +1561,10 @@ public class Transaksi extends javax.swing.JPanel {
                 stokSebelumnya.put(idBarang, jumlah);
             }
 
-            // Kosongkan tabel "keranjang"
             String queryTruncate = "TRUNCATE keranjang";
             PreparedStatement st = con.prepareStatement(queryTruncate);
             st.executeUpdate();
 
-            // Pemulihan stok barang setelah mengosongkan tabel "keranjang"
             for (Map.Entry<String, Integer> entry : stokSebelumnya.entrySet()) {
                 String idBarang = entry.getKey();
                 int jumlahSebelumnya = entry.getValue();
@@ -1608,17 +1575,14 @@ public class Transaksi extends javax.swing.JPanel {
                 psUpdateStock.executeUpdate();
             }
 
-            // Setelah menghapus data, hitung kembali total harga
             TotalHarga();
 
             con.close();
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-            // Tampilkan data yang tersisa setelah menghapus
-            tampilData();
+             tampilData();
 
-            // Kosongkan teks uang dan kembalian
             txt_uang.setText(null);
             txt_kembalian.setText(null);
         }
@@ -1728,20 +1692,16 @@ public class Transaksi extends javax.swing.JPanel {
         String ID = (String) table_Riwayat.getValueAt(Row, 1);
 
         try {
-            // Load laporan Jasper
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
             String file = "/Report/nota_r_1.jasper";
 
-            // Buat parameter untuk laporan Jasper
             HashMap<String, Object> param = new HashMap<>();
 
             param.put("id_transaksi", new String(String.valueOf(table_Riwayat.getValueAt(Row, 1)))); // Set parameter id_transaksi dengan nilai yang dipilih dari tabel
             param.put("kasir", Lb_Nama_Kasir.getText());
-            // Isi laporan Jasper dengan parameter
             JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
 
-            // Tampilkan laporan dalam JasperViewer
             JasperViewer.viewReport(print, false);
         } catch (JRException ex) {
             ex.printStackTrace();
@@ -1787,7 +1747,6 @@ public class Transaksi extends javax.swing.JPanel {
 
         String id_barang = Field_Cari_Stok.getText();
 
-        // Cari baris yang sesuai dalam table_barang
         for (int i = 0; i < table_barang.getRowCount(); i++) {
             if (id_barang.equals(String.valueOf(table_barang.getValueAt(i, 0)))) { // Menggunakan kolom pertama sebagai kolom ID barang, ganti dengan indeks kolom yang sesuai
                 // Jika baris yang sesuai ditemukan, isi field-field dengan nilai-nilai yang ditemukan
@@ -1803,6 +1762,7 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void txt_uangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_uangMouseClicked
         // TODO add your handling code here:
+        txt_uang.setText("Rp. ");
         autoInN();
 
     }//GEN-LAST:event_txt_uangMouseClicked
