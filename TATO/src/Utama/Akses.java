@@ -242,7 +242,12 @@ public class Akses extends javax.swing.JPanel {
         Lb_Akses_Tanggal_Mulai2.setText("Tanggal Mulai :");
 
         Btn_Akses_Update2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        Btn_Akses_Update2.setText("Update");
+        Btn_Akses_Update2.setText("Hapus Data");
+        Btn_Akses_Update2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Akses_Update2ActionPerformed(evt);
+            }
+        });
 
         Btn_Akses_Simpan2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         Btn_Akses_Simpan2.setText("Simpan");
@@ -307,10 +312,11 @@ public class Akses extends javax.swing.JPanel {
                                                 .addComponent(Field_Tambah_Nama_User2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(pn_Update_Akses2Layout.createSequentialGroup()
                                         .addGap(65, 65, 65)
-                                        .addComponent(Btn_Akses_Simpan2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(Btn_Akses_Update2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(Btn_Akses_Simpan2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Update_Akses2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(Btn_Akses_Update2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Btn_Akses_Cari_User_ID2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -521,7 +527,7 @@ public class Akses extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+                .addComponent(pn_Akses2, javax.swing.GroupLayout.PREFERRED_SIZE, 830, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -606,6 +612,18 @@ public class Akses extends javax.swing.JPanel {
         }
         refresh();
     }//GEN-LAST:event_Btn_Akses_Simpan2ActionPerformed
+
+    private void Btn_Akses_Update2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Update2ActionPerformed
+        // TODO add your handling code here:
+        String ID = Field_Akses_User_ID2.getText();
+        db.aksi("DELETE FROM pengguna WHERE id_username='" + ID + "'");
+        model.setRowCount(0);
+        Tbl_User.setModel(model);
+        getDataD();
+        JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!!");
+        refresh();
+        
+    }//GEN-LAST:event_Btn_Akses_Update2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

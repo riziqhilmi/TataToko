@@ -175,22 +175,26 @@ public class Barang extends javax.swing.JPanel {
                 String prefix = ""; // Inisialisasi awalan kode barang
 
                 if (selectedCategory != null) {
-                    // Query untuk mendapatkan kode unik dari tabel kategori
                     String categoryQuery = "SELECT kode_unik FROM kategori WHERE nama = ?";
                     PreparedStatement categoryStmt = con.prepareStatement(categoryQuery);
                     categoryStmt.setString(1, selectedCategory);
                     ResultSet categoryRs = categoryStmt.executeQuery();
                     if (categoryRs.next()) {
                         prefix = categoryRs.getString("kode_unik");
+                        if (prefix.equals("")) {
+                            prefix = "";
+                        }
                     } else {
-                        prefix = "D"; // Jika kategori tidak ditemukan, awalan menjadi kosong
+                        prefix = "D";
                     }
                     categoryRs.close();
                     categoryStmt.close();
                 }
-
-                // Mengganti bagian pengisian kode barang sesuai dengan kategori yang dipilih
-                Field_Tambah_Kode_Barang.setText(prefix + no_p + no_a);
+                if (prefix.isEmpty()) {
+                    Field_Tambah_Kode_Barang.setText(""); 
+                } else {
+                    Field_Tambah_Kode_Barang.setText(prefix + no_p + no_a);
+                }
             }
 
             rs.close();
@@ -1804,7 +1808,7 @@ public class Barang extends javax.swing.JPanel {
         Field_Update_Satuan.setSelectedItem(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 8)));
         Field_Update_Status.setSelectedItem(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 9)));
         Field_Update_Catatan.setText(String.valueOf(Tbl_Barang_Detail_Barang.getValueAt(selectedRow, 10)));
-        
+
         getData();
     }//GEN-LAST:event_Btn_Barang_Detail_UpdateActionPerformed
 
@@ -1928,18 +1932,18 @@ public class Barang extends javax.swing.JPanel {
     }//GEN-LAST:event_rSMaterialButtonRectangle1ActionPerformed
 
     private void Btn_Update_SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Update_SimpanActionPerformed
-        
+
         try {
             db.aksi("UPDATE barang SET nama_barang = '" + Field_Update_Nama_Barang.getText()
-                + "',jenis = '" + Field_Update_Kategori.getSelectedItem() + "',jumlah = '" + Field_Update_Jumlah.getText()
-                + "',harga_beli = '" + Field_Update_Harga_Beli.getText() + "',harga_jual = '" + Field_Update_Harga_Jual.getText() + "',tanggal = '" + Field_Update_Tanggal_Masuk.getDateFormatString()
-                + "',expired = '" + Field_Update_Kadaluwarsa.getDateFormatString() + "',satuan = '" + Field_Update_Satuan.getSelectedItem() + "',status = '" + Field_Update_Status.getSelectedItem()
-                + "',catatan = '" + Field_Update_Catatan.getText()
-                + "',id_distributor = '" + Field_Update_Kode_Distributor.getSelectedItem()
-                + "' WHERE id_barang = '" + Field_Update_Kode_Barang.getText() + "'");
-        model.setRowCount(0);
-        jTable3.setModel(model);
-        JOptionPane.showMessageDialog(null, "Data Berhasil Ter-Update!");
+                    + "',jenis = '" + Field_Update_Kategori.getSelectedItem() + "',jumlah = '" + Field_Update_Jumlah.getText()
+                    + "',harga_beli = '" + Field_Update_Harga_Beli.getText() + "',harga_jual = '" + Field_Update_Harga_Jual.getText() + "',tanggal = '" + Field_Update_Tanggal_Masuk.getDateFormatString()
+                    + "',expired = '" + Field_Update_Kadaluwarsa.getDateFormatString() + "',satuan = '" + Field_Update_Satuan.getSelectedItem() + "',status = '" + Field_Update_Status.getSelectedItem()
+                    + "',catatan = '" + Field_Update_Catatan.getText()
+                    + "',id_distributor = '" + Field_Update_Kode_Distributor.getSelectedItem()
+                    + "' WHERE id_barang = '" + Field_Update_Kode_Barang.getText() + "'");
+            model.setRowCount(0);
+            jTable3.setModel(model);
+            JOptionPane.showMessageDialog(null, "Data Berhasil Ter-Update!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data Gagal Terupdate!");
         }

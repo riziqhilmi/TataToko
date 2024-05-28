@@ -99,7 +99,6 @@ public class Transaksi extends javax.swing.JPanel {
                 }
             }
         });
-        
 
     }
 
@@ -232,7 +231,6 @@ public class Transaksi extends javax.swing.JPanel {
 
             txt_totalharga.setText(totalHargaText);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Isi Menggunakan Angka!");
             txt_totalharga.setText("Rp. 0");
         }
     }
@@ -375,6 +373,7 @@ public class Transaksi extends javax.swing.JPanel {
         String hargaClean = harga.replaceAll("[^\\d]", "");
         int hargaInt = Integer.parseInt(hargaClean);
         String jumlah = txt_jumlah3.getText();
+        int jumlahInt = Integer.parseInt(jumlah);
         String total = txt_totalharga.getText();
         String totalClean = total.replaceAll("[^\\d]", "");
         int totalInt = Integer.parseInt(totalClean);
@@ -384,13 +383,25 @@ public class Transaksi extends javax.swing.JPanel {
 
         try {
 
-            boolean stokCukup = kurangiStokBarang(id_b, Integer.parseInt(jumlah));
+            boolean stokCukup = kurangiStokBarang(id_b, jumlahInt);
 
             if (!stokCukup) {
                 return;
             }
 
-            db.aksi("INSERT INTO keranjang VALUES ('" + id_T + "','" + id_b + "','" + nama + "','" + tanggal + "','" + hargaInt + "','" + jumlah + "','" + totalInt + "')");
+            // Check if the item already exists in the keranjang
+            ResultSet rs = db.ambilData("SELECT jumlah, total FROM keranjang WHERE id_transaksi = '" + id_T + "' AND id_barang = '" + id_b + "'");
+            if (rs.next()) {
+                // Item exists, update the quantity and total price
+                int existingJumlah = rs.getInt("jumlah");
+                int existingTotal = rs.getInt("total");
+                int newJumlah = existingJumlah + jumlahInt;
+                int newTotal = existingTotal + totalInt;
+                db.aksi("UPDATE keranjang SET jumlah = '" + newJumlah + "', total = '" + newTotal + "' WHERE id_transaksi = '" + id_T + "' AND id_barang = '" + id_b + "'");
+            } else {
+                // Item does not exist, insert a new record
+                db.aksi("INSERT INTO keranjang VALUES ('" + id_T + "','" + id_b + "','" + nama + "','" + tanggal + "','" + hargaInt + "','" + jumlahInt + "','" + totalInt + "')");
+            }
 
             table.setRowCount(0);
             tb_keranjang.setModel(table);
@@ -407,6 +418,7 @@ public class Transaksi extends javax.swing.JPanel {
 
         TotalHarga();
         totalnya();
+
     }
 
     public void transaksi() {
@@ -447,7 +459,7 @@ public class Transaksi extends javax.swing.JPanel {
             }
             JOptionPane.showMessageDialog(null, "Data Gagal Ditambahkan: " + e.getMessage());
         }
-        
+
     }
 
     private void loadDetailTransaksi(String id_transaksi) {
@@ -1477,6 +1489,23 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void tb_keranjangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_keranjangMouseClicked
         // TODO add your handling code here:
+        int selectedRow = tb_keranjang.getSelectedRow();
+        String idBarang = String.valueOf(tb_keranjang.getValueAt(selectedRow, 0));
+         ResultSet rs = db.ambilData("SELECT * FROM keranjang WHERE id_transaksi = '" + idBarang + "'");
+        try {
+            if (rs.next()) {
+                // Menampilkan nilai merk di JTextField "FIeld_Informasi_Brand_Merk_Detail"
+                String idB = rs.getString("id_barang");
+                Field_Kode_Barang_Transaksi.setText(idB);}
+        } catch (SQLException ex) {
+            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Field_Kode_Barang_Transaksi.setText(String.valueOf(tb_keranjang.getValueAt(selectedRow, 0)));
+        Field_Keranjang_ID.setText(String.valueOf(tb_keranjang.getValueAt(selectedRow, 0)));
+        Field__Transaksi_Barang.setText(String.valueOf(tb_keranjang.getValueAt(selectedRow, 1)));
+        txt_harga2.setText(String.valueOf(tb_keranjang.getValueAt(selectedRow, 2)));
+        txt_jumlah3.setText(String.valueOf(tb_keranjang.getValueAt(selectedRow, 3)));
+        total();
     }//GEN-LAST:event_tb_keranjangMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1689,42 +1718,41 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void table_RiwayatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_RiwayatMouseClicked
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_table_RiwayatMouseClicked
 
     private void rSMaterialButtonRectangle5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle5ActionPerformed
         // TODO add your handling code here:
-         int Row = table_Riwayat.getSelectedRow();
-         String ID = (String) table_Riwayat.getValueAt(Row, 1);
+        int Row = table_Riwayat.getSelectedRow();
+        String ID = (String) table_Riwayat.getValueAt(Row, 1);
 
-            try {
-                // Load laporan Jasper
-                Class.forName(driver);
-                con = DriverManager.getConnection(url, user, pwd);
-                String file = "/Report/nota_r_1.jasper";
+        try {
+            // Load laporan Jasper
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, pwd);
+            String file = "/Report/nota_r_1.jasper";
 
-                // Buat parameter untuk laporan Jasper
-                
-                HashMap<String, Object> param = new HashMap<>();
-                
-                param.put("id_transaksi", new String(String.valueOf(table_Riwayat.getValueAt(Row, 1)))); // Set parameter id_transaksi dengan nilai yang dipilih dari tabel
-                param.put("kasir", Lb_Nama_Kasir.getText());
-                // Isi laporan Jasper dengan parameter
-                JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
-                
-                // Tampilkan laporan dalam JasperViewer
-                JasperViewer.viewReport(print, false);
-            } catch (JRException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-            } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
-             } catch (SQLException ex) {
-                 Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
-             }
-        
-    
+            // Buat parameter untuk laporan Jasper
+            HashMap<String, Object> param = new HashMap<>();
+
+            param.put("id_transaksi", new String(String.valueOf(table_Riwayat.getValueAt(Row, 1)))); // Set parameter id_transaksi dengan nilai yang dipilih dari tabel
+            param.put("kasir", Lb_Nama_Kasir.getText());
+            // Isi laporan Jasper dengan parameter
+            JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
+
+            // Tampilkan laporan dalam JasperViewer
+            JasperViewer.viewReport(print, false);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_rSMaterialButtonRectangle5ActionPerformed
 
     private void rSMaterialButtonRectangle6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonRectangle6ActionPerformed
