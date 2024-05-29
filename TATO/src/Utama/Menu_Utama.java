@@ -366,15 +366,15 @@ private void execute(String Akses) {
             Dasar.revalidate();
         }
     });
-    MenuItem LayHutang = new MenuItem(null, true, iconSubLayananHutang, "Hutang", new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Dasar.removeAll();
-            Dasar.add(new Hutang());
-            Dasar.repaint();
-            Dasar.revalidate();
-        }
-    });
+//    MenuItem LayHutang = new MenuItem(null, true, iconSubLayananHutang, "Hutang", new ActionListener() {
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            Dasar.removeAll();
+//            Dasar.add(new Hutang());
+//            Dasar.repaint();
+//            Dasar.revalidate();
+//        }
+//    });
     
     
     //Menu sub Karyawan
@@ -448,7 +448,7 @@ private void execute(String Akses) {
             Dasar.revalidate();
         }
     });
-    MenuItem menuLayanan = new MenuItem(iconLayanan, false, null, "Layanan", null, LayRetur, LayHutang);
+    MenuItem menuLayanan = new MenuItem(iconLayanan, false, null, "Layanan", null, LayRetur);
     MenuItem menuKaryawan = new MenuItem(iconKaryawan, false, null, "Karyawan", null, KarUser, KarAkses);
     MenuItem menuLaporan = new MenuItem(iconLaporan, false, null, "Laporan", null, LapMaster, LapTransaksi);
     
