@@ -241,7 +241,9 @@ public class Akses extends javax.swing.JPanel {
         Lb_Akses_Tanggal_Mulai2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Akses_Tanggal_Mulai2.setText("Tanggal Mulai :");
 
+        Btn_Akses_Update2.setBackground(new java.awt.Color(255, 0, 0));
         Btn_Akses_Update2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Btn_Akses_Update2.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Akses_Update2.setText("Hapus Data");
         Btn_Akses_Update2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,7 +251,9 @@ public class Akses extends javax.swing.JPanel {
             }
         });
 
+        Btn_Akses_Simpan2.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Akses_Simpan2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Btn_Akses_Simpan2.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Akses_Simpan2.setText("Simpan");
         Btn_Akses_Simpan2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

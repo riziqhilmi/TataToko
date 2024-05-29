@@ -137,7 +137,7 @@ public class Laporan_Master extends javax.swing.JPanel {
                         .addComponent(Lb_Laporan_Barang)))
                 .addGap(18, 18, 18)
                 .addComponent(pn_Konten_Laporan_Barang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pn_Laporan_BarangLayout.setVerticalGroup(
             pn_Laporan_BarangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +234,9 @@ public class Laporan_Master extends javax.swing.JPanel {
 
         pn_Konten_Laporan_Master.add(pn_Laporan_Distributor, "card2");
 
+        Btn_Laporan_Barang.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Laporan_Barang.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        Btn_Laporan_Barang.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Laporan_Barang.setText("Barang");
         Btn_Laporan_Barang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,7 +244,9 @@ public class Laporan_Master extends javax.swing.JPanel {
             }
         });
 
+        Btn_Laporan_Distributor.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Laporan_Distributor.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        Btn_Laporan_Distributor.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Laporan_Distributor.setText("Distributor");
         Btn_Laporan_Distributor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -279,14 +283,14 @@ public class Laporan_Master extends javax.swing.JPanel {
                     .addComponent(Btn_Laporan_Distributor, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pn_Konten_Laporan_Master, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_Laporan_Master, javax.swing.GroupLayout.DEFAULT_SIZE, 1666, Short.MAX_VALUE)
+            .addComponent(pn_Laporan_Master, javax.swing.GroupLayout.DEFAULT_SIZE, 1631, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

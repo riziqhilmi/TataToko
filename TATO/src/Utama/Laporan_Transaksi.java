@@ -70,7 +70,6 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
         pn_Konten_Pendapatan = new javax.swing.JPanel();
         Btn_Laporan_Penjualan = new javax.swing.JButton();
         Btn_Laporan_Pendapatan = new javax.swing.JButton();
-        Btn_Laporan_Retur = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1182, 686));
 
@@ -296,7 +295,9 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
 
         pn_Konten_Laporan_Transaksi.add(pn_Laporan_Pendapatan, "card2");
 
+        Btn_Laporan_Penjualan.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Laporan_Penjualan.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        Btn_Laporan_Penjualan.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Laporan_Penjualan.setText("Penjualan");
         Btn_Laporan_Penjualan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -304,19 +305,13 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
             }
         });
 
+        Btn_Laporan_Pendapatan.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Laporan_Pendapatan.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        Btn_Laporan_Pendapatan.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Laporan_Pendapatan.setText("Pendapatan");
         Btn_Laporan_Pendapatan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Btn_Laporan_PendapatanMouseClicked(evt);
-            }
-        });
-
-        Btn_Laporan_Retur.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        Btn_Laporan_Retur.setText("Retur");
-        Btn_Laporan_Retur.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Btn_Laporan_ReturMouseClicked(evt);
             }
         });
 
@@ -330,9 +325,7 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
                     .addGroup(pn_Laporan_TransaksiLayout.createSequentialGroup()
                         .addComponent(Btn_Laporan_Penjualan, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(Btn_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(Btn_Laporan_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Btn_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Lb_Laporan_Transasksi)
                     .addComponent(pn_Konten_Laporan_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 1630, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -347,8 +340,7 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
                     .addGroup(pn_Laporan_TransaksiLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(Btn_Laporan_Penjualan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(Btn_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Btn_Laporan_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Btn_Laporan_Pendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pn_Konten_Laporan_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(98, Short.MAX_VALUE))
@@ -387,16 +379,6 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
         pn_Konten_Laporan_Transaksi.repaint();
         pn_Konten_Laporan_Transaksi.revalidate();
     }//GEN-LAST:event_Btn_Laporan_PendapatanMouseClicked
-
-    private void Btn_Laporan_ReturMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_Laporan_ReturMouseClicked
-        pn_Konten_Laporan_Transaksi.removeAll();
-        pn_Konten_Laporan_Transaksi.repaint();
-        pn_Konten_Laporan_Transaksi.revalidate();
-
-        //pn_Konten_Laporan_Transaksi.add(pn_Laporan_Retur);
-        pn_Konten_Laporan_Transaksi.repaint();
-        pn_Konten_Laporan_Transaksi.revalidate();
-    }//GEN-LAST:event_Btn_Laporan_ReturMouseClicked
 
     private void Btn_Tambah_Laporan_PenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_Laporan_PenjualanActionPerformed
         try {
@@ -497,7 +479,6 @@ public class Laporan_Transaksi extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_Laporan_Pendapatan;
     private javax.swing.JButton Btn_Laporan_Penjualan;
-    private javax.swing.JButton Btn_Laporan_Retur;
     private javax.swing.JButton Btn_Tambah_Laporan_Pendapatan;
     private javax.swing.JButton Btn_Tambah_Laporan_Penjualan;
     private com.toedter.calendar.JDateChooser Field_Transaksi_Tanggal_Pendapatan_Akhir;

@@ -145,7 +145,9 @@ public class User extends javax.swing.JPanel {
         Lb_User.setFont(new java.awt.Font("SansSerif", 1, 36)); // NOI18N
         Lb_User.setText("User");
 
+        Btn_Daftar_User.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Daftar_User.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        Btn_Daftar_User.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Daftar_User.setText("Daftar User");
         Btn_Daftar_User.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -158,7 +160,9 @@ public class User extends javax.swing.JPanel {
             }
         });
 
+        Btn_Tambah_User.setBackground(new java.awt.Color(3, 0, 126));
         Btn_Tambah_User.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        Btn_Tambah_User.setForeground(new java.awt.Color(255, 255, 255));
         Btn_Tambah_User.setText("Tambah Daftar User");
         Btn_Tambah_User.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

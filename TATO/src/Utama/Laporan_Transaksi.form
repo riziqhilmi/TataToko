@@ -54,8 +54,6 @@
                           <Component id="Btn_Laporan_Penjualan" min="-2" pref="255" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="Btn_Laporan_Pendapatan" min="-2" pref="255" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="Btn_Laporan_Retur" min="-2" pref="255" max="-2" attributes="0"/>
                       </Group>
                       <Component id="Lb_Laporan_Transasksi" min="-2" max="-2" attributes="0"/>
                       <Component id="pn_Konten_Laporan_Transaksi" alignment="0" min="-2" pref="1630" max="-2" attributes="0"/>
@@ -76,7 +74,6 @@
                           <Component id="Btn_Laporan_Penjualan" max="32767" attributes="0"/>
                       </Group>
                       <Component id="Btn_Laporan_Pendapatan" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
-                      <Component id="Btn_Laporan_Retur" min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="pn_Konten_Laporan_Transaksi" min="-2" pref="729" max="-2" attributes="0"/>
@@ -458,8 +455,14 @@
         </Container>
         <Component class="javax.swing.JButton" name="Btn_Laporan_Penjualan">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="7e" green="0" red="3" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="20" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Penjualan"/>
           </Properties>
@@ -469,24 +472,19 @@
         </Component>
         <Component class="javax.swing.JButton" name="Btn_Laporan_Pendapatan">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="7e" green="0" red="3" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="20" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pendapatan"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Btn_Laporan_PendapatanMouseClicked"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="Btn_Laporan_Retur">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="20" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Retur"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Btn_Laporan_ReturMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
