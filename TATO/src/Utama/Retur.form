@@ -21,7 +21,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pn_Retur" alignment="0" max="32767" attributes="0"/>
+          <Component id="pn_Retur" alignment="0" pref="1200" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -50,7 +50,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="pn_Konten_Retur" pref="0" max="32767" attributes="0"/>
+                      <Component id="pn_Konten_Retur" pref="1144" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="Lb_Retur" min="-2" max="-2" attributes="0"/>
@@ -95,8 +95,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="Btn_Daftar_Retur">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="a9" green="0" red="3" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Daftar Retur"/>
           </Properties>
@@ -106,8 +112,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="Btn_Retur_Tambah">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="a9" green="0" red="3" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="16" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Tambah"/>
           </Properties>
@@ -134,40 +146,43 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="Lb_Daftar_Retur_Kata_Kunci" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="Lb_Daftar_Retur_Distributor" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="Lb_Daftar_Retur_Dari_Tanggal" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="Field_Daftar_Retur_Dari_Tanggal" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Field_Daftar_Retur_Distributor" alignment="0" pref="200" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="Lb_Daftar_Retur_Sampai_Tanggal" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="Field_Daftar_Retur_Sampai_Tanggal" min="-2" pref="200" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="Field_Daftar_Retur_Kata_Kunci" min="-2" pref="474" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="Btn_Daftar_Retur_Cari" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="283" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="442" max="32767" attributes="0"/>
+                          <Component id="jLabel6" min="-2" pref="135" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="567" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane1" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="Lb_Daftar_Retur_Dari_Tanggal" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Lb_Daftar_Retur_Kata_Kunci" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Lb_Daftar_Retur_Distributor" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="Field_Daftar_Retur_Distributor" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="Field_Daftar_Retur_Dari_Tanggal" min="-2" pref="200" max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <Component id="Lb_Daftar_Retur_Sampai_Tanggal" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="Field_Daftar_Retur_Sampai_Tanggal" min="-2" pref="200" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="Field_Daftar_Retur_Kata_Kunci" min="-2" pref="457" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="Btn_Daftar_Retur_Cari" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jLabel6" min="-2" pref="135" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="567" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -187,12 +202,12 @@
                               <Component id="Field_Daftar_Retur_Sampai_Tanggal" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="Lb_Daftar_Retur_Sampai_Tanggal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Field_Daftar_Retur_Distributor" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="Lb_Daftar_Retur_Distributor" alignment="3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" pref="33" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="232" max="-2" attributes="0"/>
@@ -375,32 +390,33 @@
                                           <Component id="Field_Retur_Tambah_Tanggal" min="-2" pref="148" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="Field_Cari_Tambah_Retur" min="-2" pref="278" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="Btn_Cari_Tambah_Retur" min="-2" pref="63" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                                           <Component id="Lb_Retur_Tambah_No_Transaksi2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Component id="Field_Retur_Tambah_Jumlah" min="-2" pref="196" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="Lb_Retur_Tambah" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="Field_Cari_Tambah_Retur" min="-2" pref="278" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="Btn_Cari_Tambah_Retur" min="-2" pref="63" max="-2" attributes="0"/>
+                                      </Group>
                                       <Component id="jScrollPane2" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                                                   <Component id="Btn_Tambah_Retur_Tambah_Baru" min="-2" pref="128" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                                  <Component id="Btn_Tambah_Retur_Cetak" min="-2" pref="150" max="-2" attributes="0"/>
                                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
@@ -410,32 +426,13 @@
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="jScrollPane3" min="-2" pref="334" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="1" attributes="0">
-                                                      <Component id="Lb_Retur_Tambah_Potongan" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="Lb_Retur_Tambah_Biaya_Lain" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                                                  <Component id="Lb_Retur_Tambah_Total" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                          <Component id="Lb_Retur_Tambah_Total" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="Field_Retur_Tambah_Biaya_Lain" pref="200" max="32767" attributes="0"/>
-                                              <Component id="Field_Retur_Tambah_Potongan" max="32767" attributes="0"/>
-                                              <Component id="Field_Retur_Tambah_Total" alignment="1" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="Field_Retur_Tambah_Total" min="-2" pref="200" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="Lb_Retur_Tambah" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -446,24 +443,15 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="Lb_Retur_Tambah" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="Lb_Retur_Tambah_Nama_Toko" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Field_Retur_Tambah_Nama_Toko" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="Lb_Retur_Tambah_Tanggal" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="Field_Retur_Tambah_Tanggal" min="-2" pref="30" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Field_Cari_Tambah_Retur" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="Btn_Cari_Tambah_Retur" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="Lb_Retur_Tambah_Nama_Toko" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Field_Retur_Tambah_Nama_Toko" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="Lb_Retur_Tambah_Tanggal" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Field_Retur_Tambah_Tanggal" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -476,49 +464,41 @@
                                       <Component id="Field_Retur_Tambah_Distributor" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Lb_Retur_Tambah_No_Transaksi1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="Field_Retur_Tambah_Nama" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                          <Component id="Field_Retur_Tambah_Jumlah" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                          <Component id="Field_Retur_Tambah_Jumlah" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                           <Component id="Lb_Retur_Tambah_No_Transaksi2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="Lb_Retur_Tambah_No_Transaksi1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                          <Component id="Field_Retur_Tambah_Nama" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="53" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Field_Cari_Tambah_Retur" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="Btn_Cari_Tambah_Retur" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="176" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Lb_Retur_Tambah_Biaya_Lain" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="Field_Retur_Tambah_Biaya_Lain" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Lb_Retur_Tambah_Potongan" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="Field_Retur_Tambah_Potongan" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="Lb_Retur_Tambah_Total" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                      <Component id="Field_Retur_Tambah_Total" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="Lb_Retur_Tambah_Keterangan" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="Btn_Tambah_Retur_Tambah_Baru" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
-                                          <Component id="Btn_Tambah_Retur_Cetak" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="Btn_Tambah_Retur_Tambah_Baru" min="-2" pref="44" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane3" min="-2" pref="145" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="Lb_Retur_Tambah_Total" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="Field_Retur_Tambah_Total" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -591,6 +571,9 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="Field_Retur_Tambah_Distributor">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
                         <StringItem index="0" value="--default--"/>
@@ -654,28 +637,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="Field_Retur_Tambah_Total">
                 </Component>
-                <Component class="javax.swing.JLabel" name="Lb_Retur_Tambah_Potongan">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="18" style="1"/>
-                    </Property>
-                    <Property name="horizontalAlignment" type="int" value="4"/>
-                    <Property name="text" type="java.lang.String" value="Potongan :"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="Field_Retur_Tambah_Potongan">
-                </Component>
-                <Component class="javax.swing.JLabel" name="Lb_Retur_Tambah_Biaya_Lain">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="18" style="1"/>
-                    </Property>
-                    <Property name="horizontalAlignment" type="int" value="4"/>
-                    <Property name="text" type="java.lang.String" value="Biaya Lain :"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="Field_Retur_Tambah_Biaya_Lain">
-                </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane3">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -705,24 +666,19 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="Btn_Tambah_Retur_Tambah_Baru">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a9" green="0" red="3" type="rgb"/>
+                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="16" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Tambah"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_Tambah_Retur_Tambah_BaruActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="Btn_Tambah_Retur_Cetak">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="16" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Cetak"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_Tambah_Retur_CetakActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Retur_Tambah_No_Transaksi1">
@@ -736,6 +692,9 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="Field_Retur_Tambah_Nama">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
                         <StringItem index="0" value="--default--"/>
@@ -752,10 +711,15 @@
                       <Font name="SansSerif" size="18" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
-                    <Property name="text" type="java.lang.String" value="Jumlah           :"/>
+                    <Property name="text" type="java.lang.String" value="Jumlah :"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="Field_Retur_Tambah_Jumlah">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="14" style="0"/>
+                    </Property>
+                  </Properties>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="Field_Retur_Tambah_Tanggal">
                   <Properties>

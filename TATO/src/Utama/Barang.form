@@ -85,7 +85,7 @@
                       <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                       <Component id="Lb_Tbl_Detail" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Component id="Tbl_Detail" pref="108" max="32767" attributes="0"/>
+                      <Component id="Tbl_Detail" pref="113" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -125,7 +125,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Btn_Barang_Detail" alignment="3" pref="75" max="32767" attributes="0"/>
+                              <Component id="Btn_Barang_Detail" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="Btn_Barang_Update" alignment="3" max="32767" attributes="0"/>
                               <Component id="Btn_Barang_Tambah" alignment="3" max="32767" attributes="0"/>
                           </Group>
@@ -146,7 +146,7 @@
                 <Component class="rojerusan.RSMaterialButtonRectangle" name="Btn_Barang_Detail">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="4" green="c0" red="ff" type="rgb"/>
+                      <Color blue="a9" green="0" red="3" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Detail"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -365,7 +365,7 @@
                       <Component id="Lb_Data_Barang_Tambah" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Scrl_Tambah_Barang" min="-2" pref="173" max="-2" attributes="0"/>
-                      <EmptySpace pref="98" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -684,7 +684,7 @@
                 <Component class="javax.swing.JTextField" name="Field_Tambah_Harga_Beli">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="18" style="1"/>
+                      <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -894,10 +894,7 @@
                 <Component class="rojerusan.RSMaterialButtonRectangle" name="Btn_Tambah_Simpan">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="e8" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="7e" green="0" red="3" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Simpan"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1072,35 +1069,46 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="Btn_Detail_Barang_Cetak_Barcode" min="-2" pref="184" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="Btn_Barang_Detail_Kembali" min="-2" pref="131" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="Btn_Barang_Detail_Kembali" min="-2" pref="131" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="pn_Informasi_Barang_Detail" max="32767" attributes="0"/>
                                       <Component id="Btn_Barang_Detail_Update" min="-2" pref="407" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="Lb_Informasi_Kode_Distributor_Detail" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lb_Informasi_Tanggal_Masuk_Detail" alignment="1" min="-2" pref="147" max="-2" attributes="0"/>
-                                      <Component id="Lb_Informasi_Barcode_Detail" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lb_Informasi_Status_Detail" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="Lb_Informasi_Harga_Beli_Detail" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="FIeld_Informasi_Harga_Beli_Detail" min="-2" pref="240" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="FIeld_Informasi_Status_Detail" max="32767" attributes="0"/>
-                                          <Component id="FIeld_Informasi_Barcode_Detail" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="FIeld_Informasi_Kode_Distributor_Detail" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="FIeld_Informasi_Tanggal_Masuk_Detail" alignment="1" min="-2" pref="240" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
+                                          <Component id="Lb_Informasi_Status_Detail" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="FIeld_Informasi_Status_Detail" min="-2" pref="240" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="Lb_Informasi_Tanggal_Masuk_Detail" min="-2" pref="147" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="FIeld_Informasi_Tanggal_Masuk_Detail" min="-2" pref="240" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="Lb_Informasi_Kode_Distributor_Detail" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="FIeld_Informasi_Kode_Distributor_Detail" min="-2" pref="240" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="Lb_Informasi_Barcode_Detail" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="FIeld_Informasi_Barcode_Detail" min="-2" pref="240" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="Lb_Informasi_Harga_Beli_Detail" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="FIeld_Informasi_Harga_Beli_Detail" min="-2" pref="240" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                                  <EmptySpace min="71" pref="71" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="Lb_Informasi_Catatan_Detail" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -1116,7 +1124,7 @@
                                       <Component id="FIeld_Informasi_Harga_Jual_Detail" max="32767" attributes="0"/>
                                       <Component id="FIeld_Informasi_Brand_Merk_Detail" max="32767" attributes="0"/>
                                       <Component id="FIeld_Informasi_Kategori_Detail" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="FIeld_Informasi_Satuan_Detail" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                                      <Component id="FIeld_Informasi_Satuan_Detail" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1134,17 +1142,12 @@
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="Lb_Informasi_Brand_Merk_Detail" max="32767" attributes="0"/>
-                                                      <Component id="FIeld_Informasi_Brand_Merk_Detail" pref="45" max="32767" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="3" attributes="0">
                                                       <Component id="Lb_Informasi_Kategori_Detail" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                                       <Component id="FIeld_Informasi_Kategori_Detail" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                                                      <Component id="FIeld_Informasi_Kode_Distributor_Detail" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                                                      <Component id="Lb_Informasi_Kode_Distributor_Detail" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -1167,40 +1170,37 @@
                                                       </Group>
                                                   </Group>
                                               </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="Lb_Informasi_Tanggal_Masuk_Detail" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                                          <Component id="FIeld_Informasi_Tanggal_Masuk_Detail" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Component id="Lb_Informasi_Brand_Merk_Detail" max="32767" attributes="0"/>
+                                                          <Component id="FIeld_Informasi_Brand_Merk_Detail" pref="45" max="32767" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="Lb_Informasi_Tanggal_Masuk_Detail" min="-2" pref="45" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                                  <Component id="Lb_Informasi_Kode_Distributor_Detail" min="-2" pref="45" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="FIeld_Informasi_Tanggal_Masuk_Detail" min="-2" pref="45" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                                  <Component id="FIeld_Informasi_Kode_Distributor_Detail" min="-2" pref="45" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="167" pref="167" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="FIeld_Informasi_Barcode_Detail" min="-2" pref="47" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                                          <Component id="FIeld_Informasi_Status_Detail" min="-2" pref="46" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                                          <Component id="FIeld_Informasi_Harga_Beli_Detail" min="-2" pref="45" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="Lb_Informasi_Barcode_Detail" min="-2" pref="47" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                                          <Component id="Lb_Informasi_Status_Detail" min="-2" pref="46" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                                          <Component id="Lb_Informasi_Harga_Beli_Detail" min="-2" pref="46" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                              </Group>
+                                          <EmptySpace min="166" pref="166" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="Lb_Informasi_Barcode_Detail" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                                              <Component id="FIeld_Informasi_Barcode_Detail" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="Lb_Informasi_Status_Detail" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                                              <Component id="FIeld_Informasi_Status_Detail" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="Lb_Informasi_Harga_Beli_Detail" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                                              <Component id="FIeld_Informasi_Harga_Beli_Detail" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                       </Group>
@@ -1214,10 +1214,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Btn_Detail_Barang_Cetak_Barcode" pref="58" max="32767" attributes="0"/>
-                              <Component id="Btn_Barang_Detail_Kembali" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="Btn_Barang_Detail_Kembali" min="-2" pref="58" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1260,11 +1257,16 @@
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Lb_Informasi_Nama_Barang" min="-2" max="-2" attributes="0"/>
-                                  <Component id="Lb_Informasi_Kode_Barang" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                      <Component id="Lb_Informasi_Kode_Barang" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="Lb_Informasi_Nama_Barang" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -1495,6 +1497,11 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="FIeld_Informasi_Harga_Jual_Detail">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Segoe UI" size="18" style="0"/>
+                    </Property>
+                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Informasi_Status_Detail">
                   <Properties>
@@ -1540,17 +1547,6 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="rojerusan.RSMaterialButtonRectangle" name="Btn_Detail_Barang_Cetak_Barcode">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="0" red="66" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Cetak Barcode"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="14" style="1"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -1561,6 +1557,9 @@
                     <Component class="javax.swing.JTextArea" name="FIeld_Informasi_Catatan_Detail">
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="16" style="0"/>
+                        </Property>
                         <Property name="rows" type="int" value="5"/>
                       </Properties>
                     </Component>
@@ -1854,8 +1853,8 @@
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="Btn_Update_Hapus" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
-                                              <Component id="Btn_Update_Kembali" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
+                                              <Component id="Btn_Update_Hapus" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
+                                              <Component id="Btn_Update_Kembali" alignment="3" min="-2" pref="53" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
@@ -1877,10 +1876,7 @@
                 <Component class="rojerusan.RSMaterialButtonRectangle" name="Btn_Update_Simpan">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="e8" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="a9" green="0" red="3" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Simpan"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1894,10 +1890,7 @@
                 <Component class="rojerusan.RSMaterialButtonRectangle" name="Btn_Update_Kembali">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="ca" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
+                      <Color blue="a9" green="0" red="3" type="rgb"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Kembali"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
