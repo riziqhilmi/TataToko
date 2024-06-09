@@ -332,7 +332,7 @@ public class Transaksi extends javax.swing.JPanel {
             if (rs.next()) {
                 stokSaatIni = rs.getInt("jumlah");
             }
-            
+
             int stokBaru = stokSaatIni - jumlah;
 
             if (stokBaru < 0) {
@@ -366,7 +366,6 @@ public class Transaksi extends javax.swing.JPanel {
         String tanggal = String.valueOf(date.format(tgl_transaksi.getDate()));
 
         try {
-
             boolean stokCukup = kurangiStokBarang(id_b, jumlahInt);
 
             if (!stokCukup) {
@@ -375,11 +374,8 @@ public class Transaksi extends javax.swing.JPanel {
 
             ResultSet rs = db.ambilData("SELECT jumlah, total FROM keranjang WHERE id_transaksi = '" + id_T + "' AND id_barang = '" + id_b + "'");
             if (rs.next()) {
-                int existingJumlah = rs.getInt("jumlah");
-                int existingTotal = rs.getInt("total");
-                int newJumlah = existingJumlah + jumlahInt;
-                int newTotal = existingTotal + totalInt;
-                db.aksi("UPDATE keranjang SET jumlah = '" + newJumlah + "', total = '" + newTotal + "' WHERE id_transaksi = '" + id_T + "' AND id_barang = '" + id_b + "'");
+                // Update hanya jumlah dan total yang baru dimasukkan
+                db.aksi("UPDATE keranjang SET jumlah = '" + jumlahInt + "', total = '" + totalInt + "' WHERE id_transaksi = '" + id_T + "' AND id_barang = '" + id_b + "'");
             } else {
                 db.aksi("INSERT INTO keranjang VALUES ('" + id_T + "','" + id_b + "','" + nama + "','" + tanggal + "','" + hargaInt + "','" + jumlahInt + "','" + totalInt + "')");
             }
@@ -399,27 +395,36 @@ public class Transaksi extends javax.swing.JPanel {
 
         TotalHarga();
         totalnya();
-
     }
 
     public void transaksi() {
         String id_t = Field__Transaksi_ID.getText();
         String id_b = Field_Kode_Barang_Transaksi.getText();
         String pelanggan = Field_Nama_Pelanggan.getText();
+
         String kembaliInt = txt_kembalian.getText();
         String kembaliC = kembaliInt.replaceAll("[^\\d]", "");
-        int kembali = Integer.parseInt(kembaliC);
+        int kembali = 0; // Nilai default untuk kembalian
+        if (!kembaliC.isEmpty()) {
+            kembali = Integer.parseInt(kembaliC);
+        }
+
         String total = Field_Total_Semua.getText();
         String totalClean = total.replaceAll("[^\\d]", "");
         int total_bayar = Integer.parseInt(totalClean);
 
         String bayarInt = txt_uang.getText();
-        String bayarC = bayarInt.replaceAll("[^\\d]","");
+        String bayarC = bayarInt.replaceAll("[^\\d]", "");
         int bayar = Integer.parseInt(bayarC);
         String metode = String.valueOf(Field_Metode.getSelectedItem());
 
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
         String tanggal = String.valueOf(date.format(tgl_transaksi.getDate()));
+
+        if (bayar < total_bayar) {
+            JOptionPane.showMessageDialog(null, "Uang tidak cukup.");
+            return;
+        }
 
         try {
             db.aksi("START TRANSACTION");
@@ -440,7 +445,8 @@ public class Transaksi extends javax.swing.JPanel {
             }
             JOptionPane.showMessageDialog(null, "Data Gagal Ditambahkan: " + e.getMessage());
         }
-
+        TotalHarga();
+        totalnya();
     }
 
     private void loadDetailTransaksi(String id_transaksi) {
@@ -830,11 +836,6 @@ public class Transaksi extends javax.swing.JPanel {
         Field_Total_Semua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 Field_Total_SemuaMouseReleased(evt);
-            }
-        });
-        Field_Total_Semua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Field_Total_SemuaActionPerformed(evt);
             }
         });
         Field_Total_Semua.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1432,6 +1433,7 @@ public class Transaksi extends javax.swing.JPanel {
     private void txt_uangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_uangKeyReleased
         // TODO add your handling code here:
         kembalian();
+
     }//GEN-LAST:event_txt_uangKeyReleased
 
     private void txt_uangKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_uangKeyTyped
@@ -1459,7 +1461,7 @@ public class Transaksi extends javax.swing.JPanel {
             param.put("id", Field__Transaksi_ID.getText());
             param.put("kasir", Lb_Nama_Kasir.getText());
             param.put("pelanggan", Field_Nama_Pelanggan.getText());
-            
+
             JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
             JasperViewer.viewReport(print, false);
 
@@ -1476,11 +1478,12 @@ public class Transaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tb_keranjang.getSelectedRow();
         String idBarang = String.valueOf(tb_keranjang.getValueAt(selectedRow, 0));
-         ResultSet rs = db.ambilData("SELECT * FROM keranjang WHERE id_transaksi = '" + idBarang + "'");
+        ResultSet rs = db.ambilData("SELECT * FROM keranjang WHERE id_transaksi = '" + idBarang + "'");
         try {
             if (rs.next()) {
-                 String idB = rs.getString("id_barang");
-                Field_Kode_Barang_Transaksi.setText(idB);}
+                String idB = rs.getString("id_barang");
+                Field_Kode_Barang_Transaksi.setText(idB);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Transaksi.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1490,6 +1493,7 @@ public class Transaksi extends javax.swing.JPanel {
         txt_harga2.setText(String.valueOf(tb_keranjang.getValueAt(selectedRow, 2)));
         txt_jumlah3.setText(String.valueOf(tb_keranjang.getValueAt(selectedRow, 3)));
         total();
+
     }//GEN-LAST:event_tb_keranjangMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -1502,10 +1506,6 @@ public class Transaksi extends javax.swing.JPanel {
     private void Field_Total_SemuaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Field_Total_SemuaMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_Field_Total_SemuaMouseReleased
-
-    private void Field_Total_SemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Total_SemuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Field_Total_SemuaActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -1592,7 +1592,7 @@ public class Transaksi extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println(e);
         } finally {
-             tampilData();
+            tampilData();
 
             txt_uang.setText(null);
             txt_kembalian.setText(null);
@@ -1775,6 +1775,7 @@ public class Transaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
         txt_uang.setText("Rp. ");
         autoInN();
+        TotalHarga();
 
     }//GEN-LAST:event_txt_uangMouseClicked
 
