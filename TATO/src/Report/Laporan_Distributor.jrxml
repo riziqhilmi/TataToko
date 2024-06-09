@@ -38,10 +38,6 @@
 	</background>
 	<title>
 		<band height="75" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="104" height="75" uuid="1d638774-33d3-4986-b660-0c1811fcae1c"/>
-				<imageExpression><![CDATA["D:\\acer\\GIT\\Dokumen git\\TATO\\TataToko\\TATO\\src\\Gambar\\Lg_TATO.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="104" y="0" width="173" height="29" uuid="e6c14557-7b5e-43dc-9397-90640ddcadbe"/>
 				<textElement>
