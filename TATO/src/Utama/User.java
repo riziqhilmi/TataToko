@@ -5,8 +5,10 @@
 package Utama;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ public class User extends javax.swing.JPanel {
     koneksi db = new koneksi();
     DefaultTableModel model = new DefaultTableModel();
 
+    
     /**
      * Creates new form Beranda
      */
@@ -34,6 +37,8 @@ public class User extends javax.swing.JPanel {
         getColumnD();
         getDataD();
         tanggal();
+        
+        
     }
     
     public void getColumnD() {
@@ -56,27 +61,68 @@ public class User extends javax.swing.JPanel {
 
     }
 
-    public void getDataD() {
-
-        ResultSet hasil = db.ambilData("SELECT * FROM pengguna");
-        try {
-            while (hasil.next()) {
-                model.addRow(new Object[]{hasil.getString("id_username"),
-                    hasil.getString("username"),hasil.getString("password"),hasil.getString("email"),
-                    hasil.getString("Nama_Lengkap"),
-                    hasil.getString("No_Identitas"), hasil.getString("Jenis_Kelamin"),
-                    hasil.getString("No_Telepon"), hasil.getString("Tanggal_Lahir"),
-                    hasil.getString("Status_Karyawan"),
-                    hasil.getString("Tanggal_Mulai"), hasil.getString("Gaji"),
-                    hasil.getString("No_Rekening"),hasil.getString("Alamat"),hasil.getString("akses")});
-            }
-            Tbl_Daftar_User.setModel(model);
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
     
+public void getDataD() { // tampil data
+    try {
+        model.setRowCount(0); // Clear the table model before adding new data
+
+        // Query to get all user data ordered by id_username
+        String query = "SELECT * FROM pengguna ORDER BY LPAD(id_username, 10, '0')";
+        ResultSet hasil = db.ambilData(query);
+
+        while (hasil.next()) {
+            model.addRow(new Object[]{
+                hasil.getString("id_username"),
+                hasil.getString("username"),
+                hasil.getString("password"),
+                hasil.getString("email"),
+                hasil.getString("Nama_Lengkap"),
+                hasil.getString("No_Identitas"),
+                hasil.getString("Jenis_Kelamin"),
+                hasil.getString("No_Telepon"),
+                hasil.getString("Tanggal_Lahir"),
+                hasil.getString("Status_Karyawan"),
+                hasil.getString("Tanggal_Mulai"),
+                hasil.getString("Gaji"),
+                hasil.getString("No_Rekening"),
+                hasil.getString("Alamat"),
+                hasil.getString("akses")
+            });
+        }
+
+        Tbl_Daftar_User.setModel(model);
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+}
+
+
+
+  
+  
+//    public void getDataD() { //tampil data
+//
+//        ResultSet hasil = db.ambilData("SELECT * FROM pengguna");
+//        try {
+//            while (hasil.next()) {
+//                model.addRow(new Object[]{hasil.getString("id_username"),
+//                    hasil.getString("username"),hasil.getString("password"),hasil.getString("email"),
+//                    hasil.getString("Nama_Lengkap"),
+//                    hasil.getString("No_Identitas"), hasil.getString("Jenis_Kelamin"),
+//                    hasil.getString("No_Telepon"), hasil.getString("Tanggal_Lahir"),
+//                    hasil.getString("Status_Karyawan"),
+//                    hasil.getString("Tanggal_Mulai"), hasil.getString("Gaji"),
+//                    hasil.getString("No_Rekening"),hasil.getString("Alamat"),hasil.getString("akses")});
+//            }
+//            Tbl_Daftar_User.setModel(model);
+//           
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//    
+    
+
     public void tanggal() {
         Date now = new Date();
         Field_Daftar_Tanggal_Mulai.setDateFormatString(driver);
@@ -596,40 +642,94 @@ public class User extends javax.swing.JPanel {
     }//GEN-LAST:event_Btn_Tambah_User_SimpanMouseClicked
 
     private void Btn_Tambah_User_SimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_User_SimpanActionPerformed
-        String id_username = Field_Tambah_User_ID.getText();
-        String username = Field_Tambah_User_Nama.getText();
-        String password = Field_Tambah_User_Password.getText();
-        String email = Field_Data_Karyawan_Email.getText();
-        String Nama_Lengkap = Field_Data_Karyawan_Nama_Lengkap.getText();
-        String No_Identitas = Field_Data_Karyawan_No_Identitas.getText();
-        String Jenis_Kelamin = String.valueOf(Field_Data_Karyawan_Jenis_Kelamin.getSelectedItem());
-        String No_Telepon = Field_Data_Karyawan_No_Telepon.getText();
-        
-        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-        String Tanggal_Lahir = date.format(Field_Daftar_Tanggal_Lahir.getDate());
-        String Tanggal_Mulai = date.format(Field_Daftar_Tanggal_Mulai.getDate());
-        String Gaji = Field_Data_Karyawan_Gaji.getText();
-        String No_Rekening = Field_Data_Karyawan_No_Rek.getText();
-        String Alamat = Field_Data_Karyawan_Alamat.getText();
+//        String id_username = Field_Tambah_User_ID.getText();
+//        String username = Field_Tambah_User_Nama.getText();
+//        String password = Field_Tambah_User_Password.getText();
+//        String email = Field_Data_Karyawan_Email.getText();
+//        String Nama_Lengkap = Field_Data_Karyawan_Nama_Lengkap.getText();
+//        String No_Identitas = Field_Data_Karyawan_No_Identitas.getText();
+//        String Jenis_Kelamin = String.valueOf(Field_Data_Karyawan_Jenis_Kelamin.getSelectedItem());
+//        String No_Telepon = Field_Data_Karyawan_No_Telepon.getText();
+//        
+//        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+//        String Tanggal_Lahir = date.format(Field_Daftar_Tanggal_Lahir.getDate());
+//        String Tanggal_Mulai = date.format(Field_Daftar_Tanggal_Mulai.getDate());
+//        String Gaji = Field_Data_Karyawan_Gaji.getText();
+//        String No_Rekening = Field_Data_Karyawan_No_Rek.getText();
+//        String Alamat = Field_Data_Karyawan_Alamat.getText();
+//
+//        String Akses = String.valueOf(FIeld_Tambah_User_Akses.getSelectedItem());
+//        String Status_Karyawan = String.valueOf(Field_Data_Karyawan_Status.getSelectedItem());
+//
+//
+//        db.aksi("INSERT INTO pengguna VALUES (NULL,'"+ username + "','" + password + "','" + email + "','" + Nama_Lengkap + "','" + No_Identitas + "','" + Jenis_Kelamin + "','" + No_Telepon + "','" + Tanggal_Lahir + "','" + Status_Karyawan + "','" + Tanggal_Mulai + "','" + Gaji + "','" + No_Rekening + "','" + Alamat + "','" + Akses + "')");
+//        model.setRowCount(0);
+//        Tbl_Daftar_User.setModel(model);
+//        JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan!","Berhasil" , HEIGHT);
+//        
+//        getDataD();
+//        
+//        pn_Konten_User.removeAll();
+//        pn_Konten_User.repaint();
+//        pn_Konten_User.revalidate();
+//        
+//        pn_Konten_User.add(pn_Daftar_User);
+//        pn_Konten_User.repaint();
+//        pn_Konten_User.revalidate();
+String id_username = Field_Tambah_User_ID.getText();
+    String username = Field_Tambah_User_Nama.getText();
+    String password = Field_Tambah_User_Password.getText();
+    String email = Field_Data_Karyawan_Email.getText();
+    String Nama_Lengkap = Field_Data_Karyawan_Nama_Lengkap.getText();
+    String No_Identitas = Field_Data_Karyawan_No_Identitas.getText();
+    String Jenis_Kelamin = String.valueOf(Field_Data_Karyawan_Jenis_Kelamin.getSelectedItem());
+    String No_Telepon = Field_Data_Karyawan_No_Telepon.getText();
+    
+    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+    String Tanggal_Lahir = date.format(Field_Daftar_Tanggal_Lahir.getDate());
+    String Tanggal_Mulai = date.format(Field_Daftar_Tanggal_Mulai.getDate());
+    String Gaji = Field_Data_Karyawan_Gaji.getText();
+    String No_Rekening = Field_Data_Karyawan_No_Rek.getText();
+    String Alamat = Field_Data_Karyawan_Alamat.getText();
 
-        String Akses = String.valueOf(FIeld_Tambah_User_Akses.getSelectedItem());
-        String Status_Karyawan = String.valueOf(Field_Data_Karyawan_Status.getSelectedItem());
+    String Akses = String.valueOf(FIeld_Tambah_User_Akses.getSelectedItem());
+    String Status_Karyawan = String.valueOf(Field_Data_Karyawan_Status.getSelectedItem());
 
+    // Cek apakah username sudah ada di database
+    boolean isUsernameExist = false;
+    try {
+        String query = "SELECT COUNT(*) FROM pengguna WHERE username = '" + username + "'";
+        ResultSet rs = db.ambilData(query);
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            if (count > 0) {
+                isUsernameExist = true;
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error checking username: " + e.getMessage());
+        return;
+    }
 
+    // Jika username sudah ada, tampilkan pesan kesalahan
+    if (isUsernameExist) {
+        JOptionPane.showMessageDialog(null, "Username Sudah Ada. Silakan Gunakan Username Lain.", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        // Jika username belum ada, lanjutkan untuk menambahkan data
         db.aksi("INSERT INTO pengguna VALUES (NULL,'"+ username + "','" + password + "','" + email + "','" + Nama_Lengkap + "','" + No_Identitas + "','" + Jenis_Kelamin + "','" + No_Telepon + "','" + Tanggal_Lahir + "','" + Status_Karyawan + "','" + Tanggal_Mulai + "','" + Gaji + "','" + No_Rekening + "','" + Alamat + "','" + Akses + "')");
         model.setRowCount(0);
         Tbl_Daftar_User.setModel(model);
-        JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan!","Berhasil" , HEIGHT);
-        
+        JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+
         getDataD();
-        
+
         pn_Konten_User.removeAll();
         pn_Konten_User.repaint();
         pn_Konten_User.revalidate();
-        
+
         pn_Konten_User.add(pn_Daftar_User);
         pn_Konten_User.repaint();
-        pn_Konten_User.revalidate();
+        pn_Konten_User.revalidate();}
     }//GEN-LAST:event_Btn_Tambah_User_SimpanActionPerformed
 
     private void Btn_Daftar_UserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Daftar_UserActionPerformed

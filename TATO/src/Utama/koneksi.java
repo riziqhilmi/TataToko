@@ -23,6 +23,7 @@ public class koneksi {
     private final String user = "root";
     private final String pwd = "";
     
+    
     public void koneksi() {
         try {
             Class.forName(driver);
@@ -31,6 +32,7 @@ public class koneksi {
         } catch (Exception e) {
             System.out.println("Error:\nKoneksi Data Gagal\n");
             e.printStackTrace();
+            
         }
     }
     
@@ -55,6 +57,8 @@ public class koneksi {
             e.printStackTrace();
         }
     }
+    
+    
     public static void main(String[] args) {
         koneksi db = new koneksi();
         db.koneksi();

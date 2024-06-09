@@ -6,8 +6,11 @@ package Utama;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,8 +19,15 @@ import javax.swing.table.DefaultTableModel;
  * @author acer
  */
 public class Akses extends javax.swing.JPanel {
+
     koneksi db = new koneksi();
     DefaultTableModel model = new DefaultTableModel();
+    Connection con;
+    private final String driver = "com.mysql.cj.jdbc.Driver";
+    private final String url = "jdbc:mysql://localhost:3306/tatatoko";
+    private final String user = "root";
+    private final String pwd = "";
+
     /**
      * Creates new form Beranda
      */
@@ -26,7 +36,7 @@ public class Akses extends javax.swing.JPanel {
         getColumnD();
         getDataD();
     }
-    
+
     public void getColumnD() {
         model.addColumn("ID");
         model.addColumn("Nama User");
@@ -53,36 +63,63 @@ public class Akses extends javax.swing.JPanel {
         try {
             while (hasil.next()) {
                 model.addRow(new Object[]{hasil.getString("id_username"),
-                    hasil.getString("username"),hasil.getString("password"),hasil.getString("email"),
+                    hasil.getString("username"), hasil.getString("password"), hasil.getString("email"),
                     hasil.getString("Nama_Lengkap"),
                     hasil.getString("No_Identitas"), hasil.getString("Jenis_Kelamin"),
                     hasil.getString("No_Telepon"), hasil.getString("Tanggal_Lahir"),
                     hasil.getString("Status_Karyawan"),
                     hasil.getString("Tanggal_Mulai"), hasil.getString("Gaji"),
-                    hasil.getString("No_Rekening"),hasil.getString("Alamat"),hasil.getString("akses")});
+                    hasil.getString("No_Rekening"), hasil.getString("Alamat"), hasil.getString("akses")});
             }
             Tbl_User.setModel(model);
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    
-    private void refresh(){
-        
-            Field_Akses_User_ID2.setText(null);
-            Field_Akses_Password2.setText(null);
-            Field_Tambah_Nama_User2.setText(null);
-            
-            Field_Akses_Nama_Lengkap2.setText(null);
-            Field_Akses_No_Identitas2.setText(null);
-            Field_Data_Karyawan_Jenis_Kelamin2.setText(null);
-            Field_Akses_No_Telepon2.setText(null);
-            Field_Akses_Tanggal_Lahir2.setText(null);
-            Field_Akses_Alamat2.setText(null);
-            Field_Akses_Tanggal_Mulai2.setText(null);
-            Field_Akses_Gaji2.setText(null);
-            Field_Akses_No_Rek2.setText(null);
+
+    private void refresh() {
+
+        Field_Akses_User_ID2.setText(null);
+        Field_Akses_Password2.setText(null);
+        Field_Tambah_Nama_User2.setText(null);
+
+        Field_Akses_Nama_Lengkap2.setText(null);
+        Field_Akses_No_Identitas2.setText(null);
+        Field_Data_Karyawan_Jenis_Kelamin2.setText(null);
+        Field_Akses_No_Telepon2.setText(null);
+        Field_Akses_Tanggal_Lahir2.setText(null);
+        Field_Akses_Alamat2.setText(null);
+        Field_Akses_Tanggal_Mulai2.setText(null);
+        Field_Akses_Gaji2.setText(null);
+        Field_Akses_No_Rek2.setText(null);
+    }
+
+    private void updateIDs() {
+        Connection db = koneksi.getConnection();
+        String selectQuery = "SELECT * FROM pengguna ORDER BY id_username";
+        String updateQuery = "UPDATE pengguna SET id_username = ? WHERE id_username = ?";
+
+        try {
+            Statement selectStmt = db.createStatement();
+            ResultSet rs = selectStmt.executeQuery(selectQuery);
+
+            int newId = 1;
+            while (rs.next()) {
+                int oldId = rs.getInt("id_username");
+
+                if (newId != oldId) {
+                    PreparedStatement updateStmt = db.prepareStatement(updateQuery);
+                    updateStmt.setInt(1, newId);
+                    updateStmt.setInt(2, oldId);
+                    updateStmt.executeUpdate();
+                }
+                newId++;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -538,95 +575,130 @@ public class Akses extends javax.swing.JPanel {
 
     private void Btn_Akses_Cari_User_ID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Cari_User_ID2ActionPerformed
         // TODO add your handling code here:
-            pn_Konten_Akses2.removeAll();
-            pn_Konten_Akses2.repaint();
-            pn_Konten_Akses2.revalidate();
+        pn_Konten_Akses2.removeAll();
+        pn_Konten_Akses2.repaint();
+        pn_Konten_Akses2.revalidate();
 
-            pn_Konten_Akses2.add(pn_User);
-            pn_Konten_Akses2.repaint();
-            pn_Konten_Akses2.revalidate();
+        pn_Konten_Akses2.add(pn_User);
+        pn_Konten_Akses2.repaint();
+        pn_Konten_Akses2.revalidate();
     }//GEN-LAST:event_Btn_Akses_Cari_User_ID2ActionPerformed
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         // TODO add your handling code here:
-            
-            
+
+
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void Tbl_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tbl_UserMouseClicked
         // TODO add your handling code here:
-            pn_Konten_Akses2.removeAll();
-            pn_Konten_Akses2.repaint();
-            pn_Konten_Akses2.revalidate();
+        pn_Konten_Akses2.removeAll();
+        pn_Konten_Akses2.repaint();
+        pn_Konten_Akses2.revalidate();
 
-            pn_Konten_Akses2.add(pn_Update_Akses2);
-            pn_Konten_Akses2.repaint();
-            pn_Konten_Akses2.revalidate();
-            int selectedRow = Tbl_User.getSelectedRow();
-            
-            Field_Akses_User_ID2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 0)));
-            Field_Akses_Password2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 2)));
-            Field_Tambah_Nama_User2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 1)));
-            Field_Akses_Hak_Akses2.setSelectedItem(String.valueOf(Tbl_User.getValueAt(selectedRow, 14)));
-            Field_Akses_Nama_Lengkap2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 4)));
-            Field_Akses_No_Identitas2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 5)));
-            Field_Data_Karyawan_Jenis_Kelamin2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 6)));
-            Field_Akses_No_Telepon2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 7)));
-            Field_Akses_Tanggal_Lahir2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 8)));
-            Field_Akses_Alamat2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 13)));
-            Field_Akses_Tanggal_Mulai2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 10)));
-            Field_Akses_Gaji2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 11)));
-            Field_Akses_No_Rek2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 12)));
-            Field_Akses_Status_Karyawan2.setSelectedItem(String.valueOf(Tbl_User.getValueAt(selectedRow, 9)));
-            
+        pn_Konten_Akses2.add(pn_Update_Akses2);
+        pn_Konten_Akses2.repaint();
+        pn_Konten_Akses2.revalidate();
+        int selectedRow = Tbl_User.getSelectedRow();
+
+        Field_Akses_User_ID2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 0)));
+        Field_Akses_Password2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 2)));
+        Field_Tambah_Nama_User2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 1)));
+        Field_Akses_Hak_Akses2.setSelectedItem(String.valueOf(Tbl_User.getValueAt(selectedRow, 14)));
+        Field_Akses_Nama_Lengkap2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 4)));
+        Field_Akses_No_Identitas2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 5)));
+        Field_Data_Karyawan_Jenis_Kelamin2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 6)));
+        Field_Akses_No_Telepon2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 7)));
+        Field_Akses_Tanggal_Lahir2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 8)));
+        Field_Akses_Alamat2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 13)));
+        Field_Akses_Tanggal_Mulai2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 10)));
+        Field_Akses_Gaji2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 11)));
+        Field_Akses_No_Rek2.setText(String.valueOf(Tbl_User.getValueAt(selectedRow, 12)));
+        Field_Akses_Status_Karyawan2.setSelectedItem(String.valueOf(Tbl_User.getValueAt(selectedRow, 9)));
+
 
     }//GEN-LAST:event_Tbl_UserMouseClicked
 
     private void Btn_Akses_Cari_Nama_User2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Cari_Nama_User2ActionPerformed
         // TODO add your handling code here:
         pn_Konten_Akses2.removeAll();
-            pn_Konten_Akses2.repaint();
-            pn_Konten_Akses2.revalidate();
+        pn_Konten_Akses2.repaint();
+        pn_Konten_Akses2.revalidate();
 
-            pn_Konten_Akses2.add(pn_User);
-            pn_Konten_Akses2.repaint();
-            pn_Konten_Akses2.revalidate();
+        pn_Konten_Akses2.add(pn_User);
+        pn_Konten_Akses2.repaint();
+        pn_Konten_Akses2.revalidate();
     }//GEN-LAST:event_Btn_Akses_Cari_Nama_User2ActionPerformed
 
     private void Btn_Akses_Simpan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Simpan2ActionPerformed
         // TODO add your handling code here:
         try {
             int Row = Tbl_User.getSelectedRow();
-        String ID = (String) Tbl_User.getValueAt(Row, 0);
-        db.aksi("UPDATE pengguna SET username = '"+Field_Tambah_Nama_User2.getText()+
-            "',password = '"+Field_Akses_Password2.getText()+"',Nama_Lengkap = '"+Field_Akses_Nama_Lengkap2.getText()+
-            "',No_Identitas = '"+Field_Akses_No_Identitas2.getText()+ "',Jenis_Kelamin = '"+Field_Data_Karyawan_Jenis_Kelamin2.getText()+
-            "',No_Telepon = '"+Field_Akses_No_Telepon2.getText()+"',Tanggal_Lahir = '"+Field_Akses_Tanggal_Lahir2.getText()+
-            "',Status_Karyawan = '"+Field_Akses_Status_Karyawan2.getSelectedItem()+
-            "',Tanggal_Mulai = '"+Field_Akses_Tanggal_Mulai2.getText()+"',Gaji = '"+Field_Akses_Gaji2.getText()+
-            "',No_Rekening = '"+Field_Akses_No_Rek2.getText()+"',Alamat = '"+Field_Akses_Alamat2.getText()+
-            "',akses = '"+Field_Akses_Hak_Akses2.getSelectedItem()+
-            "' WHERE id_username = '"+Field_Akses_User_ID2.getText()+"'");
-        model.setRowCount(0);
-        Tbl_User.setModel(model);
-        getDataD();
+            String ID = (String) Tbl_User.getValueAt(Row, 0);
+            db.aksi("UPDATE pengguna SET username = '" + Field_Tambah_Nama_User2.getText()
+                    + "',password = '" + Field_Akses_Password2.getText() + "',Nama_Lengkap = '" + Field_Akses_Nama_Lengkap2.getText()
+                    + "',No_Identitas = '" + Field_Akses_No_Identitas2.getText() + "',Jenis_Kelamin = '" + Field_Data_Karyawan_Jenis_Kelamin2.getText()
+                    + "',No_Telepon = '" + Field_Akses_No_Telepon2.getText() + "',Tanggal_Lahir = '" + Field_Akses_Tanggal_Lahir2.getText()
+                    + "',Status_Karyawan = '" + Field_Akses_Status_Karyawan2.getSelectedItem()
+                    + "',Tanggal_Mulai = '" + Field_Akses_Tanggal_Mulai2.getText() + "',Gaji = '" + Field_Akses_Gaji2.getText()
+                    + "',No_Rekening = '" + Field_Akses_No_Rek2.getText() + "',Alamat = '" + Field_Akses_Alamat2.getText()
+                    + "',akses = '" + Field_Akses_Hak_Akses2.getSelectedItem()
+                    + "' WHERE id_username = '" + Field_Akses_User_ID2.getText() + "'");
+            model.setRowCount(0);
+            Tbl_User.setModel(model);
+            getDataD();
             JOptionPane.showMessageDialog(null, "Pengguna Berhasil Ter-Update");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data Gagal Diubah !!");
         }
+        updateIDs(); // Pastikan ID selalu urut setelah update
         refresh();
+
+//        try {
+//            int Row = Tbl_User.getSelectedRow();
+//        String ID = (String) Tbl_User.getValueAt(Row, 0);
+//        db.aksi("UPDATE pengguna SET username = '"+Field_Tambah_Nama_User2.getText()+
+//            "',password = '"+Field_Akses_Password2.getText()+"',Nama_Lengkap = '"+Field_Akses_Nama_Lengkap2.getText()+
+//            "',No_Identitas = '"+Field_Akses_No_Identitas2.getText()+ "',Jenis_Kelamin = '"+Field_Data_Karyawan_Jenis_Kelamin2.getText()+
+//            "',No_Telepon = '"+Field_Akses_No_Telepon2.getText()+"',Tanggal_Lahir = '"+Field_Akses_Tanggal_Lahir2.getText()+
+//            "',Status_Karyawan = '"+Field_Akses_Status_Karyawan2.getSelectedItem()+
+//            "',Tanggal_Mulai = '"+Field_Akses_Tanggal_Mulai2.getText()+"',Gaji = '"+Field_Akses_Gaji2.getText()+
+//            "',No_Rekening = '"+Field_Akses_No_Rek2.getText()+"',Alamat = '"+Field_Akses_Alamat2.getText()+
+//            "',akses = '"+Field_Akses_Hak_Akses2.getSelectedItem()+
+//            "' WHERE id_username = '"+Field_Akses_User_ID2.getText()+"'");
+//        model.setRowCount(0);
+//        Tbl_User.setModel(model);
+//        getDataD();
+//            JOptionPane.showMessageDialog(null, "Pengguna Berhasil Ter-Update");
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Data Gagal Diubah !!");
+//        }
+//        refresh();
     }//GEN-LAST:event_Btn_Akses_Simpan2ActionPerformed
 
     private void Btn_Akses_Update2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Akses_Update2ActionPerformed
         // TODO add your handling code here:
+
         String ID = Field_Akses_User_ID2.getText();
         db.aksi("DELETE FROM pengguna WHERE id_username='" + ID + "'");
         model.setRowCount(0);
         Tbl_User.setModel(model);
-        getDataD();
         JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!!");
+        updateIDs(); // Pastikan ID selalu urut setelah penghapusan
+        getDataD();
         refresh();
-        
+//        String ID = Field_Akses_User_ID2.getText();
+//      
+//        db.aksi("DELETE FROM pengguna WHERE id_username='" + ID + "'");
+//        model.setRowCount(0);
+//        Tbl_User.setModel(model);
+//         // updateIDs();
+//        getDataD();
+//        
+//        JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus!!");
+//        
+//        refresh();
+//       
     }//GEN-LAST:event_Btn_Akses_Update2ActionPerformed
 
 
