@@ -157,48 +157,50 @@ public class Barang extends javax.swing.JPanel {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pwd);
 
-            // Query untuk mendapatkan nomor urut terbesar dari id_barang di tabel barang
-            String sqlquery = "SELECT MAX(RIGHT(id_barang, 4)) AS no_auto FROM barang";
-            PreparedStatement st = con.prepareStatement(sqlquery);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                String no_a, no_p;
-                no_a = Integer.toString(rs.getInt(1) + 1);
-                int p = no_a.length();
-                no_p = "";
-                for (int i = 1; i <= 4 - p; i++) {
-                    no_p = no_p + "0";
-                }
+            // Ambil kategori yang dipilih dari combobox
+            String selectedCategory = (String) Field_Tambah_Kategori.getSelectedItem();
+            String prefix = ""; // Inisialisasi awalan kode barang
 
-                // Ambil kategori yang dipilih dari combobox
-                String selectedCategory = (String) Field_Tambah_Kategori.getSelectedItem();
-                String prefix = ""; // Inisialisasi awalan kode barang
-
-                if (selectedCategory != null) {
-                    String categoryQuery = "SELECT kode_unik FROM kategori WHERE nama = ?";
-                    PreparedStatement categoryStmt = con.prepareStatement(categoryQuery);
-                    categoryStmt.setString(1, selectedCategory);
-                    ResultSet categoryRs = categoryStmt.executeQuery();
-                    if (categoryRs.next()) {
-                        prefix = categoryRs.getString("kode_unik");
-                        if (prefix.equals("")) {
-                            prefix = "";
-                        }
-                    } else {
-                        prefix = "D";
+            if (selectedCategory != null) {
+                String categoryQuery = "SELECT kode_unik FROM kategori WHERE nama = ?";
+                PreparedStatement categoryStmt = con.prepareStatement(categoryQuery);
+                categoryStmt.setString(1, selectedCategory);
+                ResultSet categoryRs = categoryStmt.executeQuery();
+                if (categoryRs.next()) {
+                    prefix = categoryRs.getString("kode_unik");
+                    if (prefix.equals("")) {
+                        prefix = "";
                     }
-                    categoryRs.close();
-                    categoryStmt.close();
-                }
-                if (prefix.isEmpty()) {
-                    Field_Tambah_Kode_Barang.setText(""); 
                 } else {
-                    Field_Tambah_Kode_Barang.setText(prefix + no_p + no_a);
+                    prefix = "D";
                 }
+                categoryRs.close();
+                categoryStmt.close();
             }
 
-            rs.close();
-            st.close();
+            if (!prefix.isEmpty()) {
+                // Query untuk mendapatkan nomor urut terbesar dari id_barang di tabel barang
+                String sqlquery = "SELECT MAX(RIGHT(id_barang, 4)) AS no_auto FROM barang WHERE id_barang LIKE ?";
+                PreparedStatement st = con.prepareStatement(sqlquery);
+                st.setString(1, prefix + "%");
+                ResultSet rs = st.executeQuery();
+                if (rs.next() && rs.getString("no_auto") != null) {
+                    String no_a, no_p;
+                    no_a = Integer.toString(rs.getInt(1) + 1);
+                    int p = no_a.length();
+                    no_p = "";
+                    for (int i = 1; i <= 4 - p; i++) {
+                        no_p = no_p + "0";
+                    }
+                    Field_Tambah_Kode_Barang.setText(prefix + no_p + no_a);
+                } else {
+                    Field_Tambah_Kode_Barang.setText(prefix + "0001"); // Jika tidak ada id_barang dengan prefix tersebut, mulai dari 0001
+                }
+                rs.close();
+                st.close();
+            } else {
+                Field_Tambah_Kode_Barang.setText("");
+            }
         } catch (Exception e) {
             Field_Tambah_Kode_Barang.setText("ST0001"); // Jika terjadi kesalahan, isi dengan kode default
             e.printStackTrace();

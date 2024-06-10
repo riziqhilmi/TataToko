@@ -420,6 +420,10 @@ public class Distributor extends javax.swing.JPanel {
         Lb_Tambah_Rekening_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Tambah_Rekening_Distributor.setText("No Rek  :");
 
+        Field_Tambah_Rekening_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        Field_Tambah_Bank_Distributor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
         Lb_Tambah_Bank_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Lb_Tambah_Bank_Distributor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         Lb_Tambah_Bank_Distributor.setText("Bank  :");
@@ -983,6 +987,7 @@ public class Distributor extends javax.swing.JPanel {
         pn_Konten_Distributor.repaint();
         pn_Konten_Distributor.revalidate();
         autoIn();
+        resetForm();
     }//GEN-LAST:event_Btn_Ctrl_Distributor_TambahActionPerformed
 
     private void Btn_Tambah_Kembali_DistributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Tambah_Kembali_DistributorActionPerformed
@@ -1193,7 +1198,7 @@ public class Distributor extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 private void resetForm() {
-        Field_Tambah_Kode_Distributor.setText("");
+        //Field_Tambah_Kode_Distributor.setText("");
         Field_Tambah_Nama_Distributor.setText("");
         Field_Tambah_Alamat_Distributor.setText("");
         Field_Tambah_Kota_Distributor.setText("");

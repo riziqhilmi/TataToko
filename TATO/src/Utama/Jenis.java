@@ -31,20 +31,20 @@ public class Jenis extends javax.swing.JPanel {
     public Jenis() {
         initComponents();
         
-        model.addColumn("No");
+        //model.addColumn("No");
         model.addColumn("Nama Kategori");
         model.addColumn("Kode Unik");
         model.addColumn("Status");
         Tbl_Daftar_Kategori.setModel(model);
         getData();
 
-        model2.addColumn("No");
+        //model2.addColumn("No");
         model2.addColumn("Nama Satuan");
         model2.addColumn("Status");
         Tbl_Daftar_Satuan.setModel(model2);
         getDataS();
         
-        model3.addColumn("No");
+        //model3.addColumn("No");
         model3.addColumn("Nama Status");
         model3.addColumn("Kategori");
         Tbl_Daftar_Status.setModel(model3);
@@ -55,7 +55,7 @@ public class Jenis extends javax.swing.JPanel {
         ResultSet hasil = db.ambilData("SELECT * FROM kategori");
         try {
             while(hasil.next()){
-                model.addRow(new Object[]{hasil.getString("no"),
+                model.addRow(new Object[]{
                 hasil.getString("nama"),
                 hasil.getString("kode_unik"),
                 hasil.getString("status"),});
@@ -70,7 +70,7 @@ public class Jenis extends javax.swing.JPanel {
         ResultSet hasil = db.ambilData("SELECT * FROM satuan");
         try {
             while(hasil.next()){
-                model2.addRow(new Object[]{hasil.getString("no"),
+                model2.addRow(new Object[]{
                 hasil.getString("nama"),
                 hasil.getString("status"),});
             }
@@ -84,7 +84,7 @@ public class Jenis extends javax.swing.JPanel {
         ResultSet hasil = db.ambilData("SELECT * FROM status");
         try {
             while(hasil.next()){
-                model3.addRow(new Object[]{hasil.getString("no"),
+                model3.addRow(new Object[]{
                 hasil.getString("nama"),
                 hasil.getString("kategori"),});
             }
@@ -116,7 +116,6 @@ public class Jenis extends javax.swing.JPanel {
         Field_Kategori_Kode_Unik = new javax.swing.JTextField();
         Lb_Aksi_Kategori_Nama_Kategori1 = new javax.swing.JLabel();
         Field_Kategori_Nama_Kategori = new javax.swing.JTextField();
-        Btn_Aksi_Cari_Nama_kategori1 = new javax.swing.JButton();
         Lb_Aksi_Kategori_Status1 = new javax.swing.JLabel();
         Field_Kategori_Status = new javax.swing.JComboBox<>();
         Btn_Kategori_Simpan = new rojerusan.RSMaterialButtonRectangle();
@@ -130,7 +129,6 @@ public class Jenis extends javax.swing.JPanel {
         Btn_Satuan_Cari = new javax.swing.JButton();
         Lb_Aksi_Satuan_Nama_Satuan1 = new javax.swing.JLabel();
         Field_Satuan_Nama_Satuan = new javax.swing.JTextField();
-        Btn_Aksi_Cari_Nama_Satuan1 = new javax.swing.JButton();
         Field_Satuan_Status = new javax.swing.JComboBox<>();
         Lb_Aksi_Satuan_Status1 = new javax.swing.JLabel();
         Btn_Satuan_Tambah = new rojerusan.RSMaterialButtonRectangle();
@@ -261,11 +259,6 @@ public class Jenis extends javax.swing.JPanel {
 
         Field_Kategori_Nama_Kategori.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        Btn_Aksi_Cari_Nama_kategori1.setBackground(new java.awt.Color(3, 0, 126));
-        Btn_Aksi_Cari_Nama_kategori1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Btn_Aksi_Cari_Nama_kategori1.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Aksi_Cari_Nama_kategori1.setText("Cari");
-
         Lb_Aksi_Kategori_Status1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         Lb_Aksi_Kategori_Status1.setText("Status");
 
@@ -308,9 +301,7 @@ public class Jenis extends javax.swing.JPanel {
                                     .addGap(447, 447, 447))
                                 .addGroup(pn_Tbl_Jenis_KategoriLayout.createSequentialGroup()
                                     .addComponent(Field_Kategori_Nama_Kategori)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Btn_Aksi_Cari_Nama_kategori1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(191, 191, 191)))
+                                    .addGap(262, 262, 262)))
                             .addGroup(pn_Tbl_Jenis_KategoriLayout.createSequentialGroup()
                                 .addGroup(pn_Tbl_Jenis_KategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Lb_Aksi_Kategori_Status1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -353,9 +344,7 @@ public class Jenis extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addComponent(Lb_Aksi_Kategori_Nama_Kategori1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Tbl_Jenis_KategoriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Field_Kategori_Nama_Kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Btn_Aksi_Cari_Nama_kategori1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Field_Kategori_Nama_Kategori, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Lb_Aksi_Kategori_Status1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -408,16 +397,6 @@ public class Jenis extends javax.swing.JPanel {
 
         Field_Satuan_Nama_Satuan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        Btn_Aksi_Cari_Nama_Satuan1.setBackground(new java.awt.Color(3, 0, 126));
-        Btn_Aksi_Cari_Nama_Satuan1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Btn_Aksi_Cari_Nama_Satuan1.setForeground(new java.awt.Color(255, 255, 255));
-        Btn_Aksi_Cari_Nama_Satuan1.setText("Cari");
-        Btn_Aksi_Cari_Nama_Satuan1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Btn_Aksi_Cari_Nama_Satuan1ActionPerformed(evt);
-            }
-        });
-
         Field_Satuan_Status.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Field_Satuan_Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Barang" }));
 
@@ -452,17 +431,14 @@ public class Jenis extends javax.swing.JPanel {
                     .addGroup(pn_Tbl_Jenis_SatuanLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(pn_Tbl_Jenis_SatuanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pn_Tbl_Jenis_SatuanLayout.createSequentialGroup()
-                                .addGroup(pn_Tbl_Jenis_SatuanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Lb_Aksi_Satuan_Status1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Field_Satuan_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Field_Satuan_Nama_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Lb_Aksi_Satuan_Nama_Satuan1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Btn_Aksi_Cari_Nama_Satuan1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pn_Tbl_Jenis_SatuanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Lb_Aksi_Satuan_Status1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Field_Satuan_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Field_Satuan_Nama_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Lb_Aksi_Satuan_Nama_Satuan1))
                             .addComponent(Btn_Satuan_Hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Btn_Satuan_Tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(189, 189, Short.MAX_VALUE)
+                        .addGap(259, 259, Short.MAX_VALUE)
                         .addGroup(pn_Tbl_Jenis_SatuanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pn_Tbl_Jenis_SatuanLayout.createSequentialGroup()
                                 .addComponent(Lb_Daftar_Satuan)
@@ -493,10 +469,8 @@ public class Jenis extends javax.swing.JPanel {
                         .addGap(9, 9, 9)
                         .addComponent(Lb_Aksi_Satuan_Nama_Satuan1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pn_Tbl_Jenis_SatuanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Field_Satuan_Nama_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Btn_Aksi_Cari_Nama_Satuan1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
+                        .addComponent(Field_Satuan_Nama_Satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
                         .addComponent(Lb_Aksi_Satuan_Status1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Field_Satuan_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -710,10 +684,6 @@ public class Jenis extends javax.swing.JPanel {
         pn_Konten_Jenis.revalidate();
     }//GEN-LAST:event_Btn_Menu_StatusActionPerformed
 
-    private void Btn_Aksi_Cari_Nama_Satuan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Aksi_Cari_Nama_Satuan1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Btn_Aksi_Cari_Nama_Satuan1ActionPerformed
-
     private void Btn_Satuan_TambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Satuan_TambahActionPerformed
        
        String nama = Field_Satuan_Nama_Satuan.getText();
@@ -734,7 +704,7 @@ public class Jenis extends javax.swing.JPanel {
     private void Btn_Satuan_HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Satuan_HapusActionPerformed
         int Row = Tbl_Daftar_Satuan.getSelectedRow();
         String ID = (String) Tbl_Daftar_Satuan.getValueAt(Row, 0);
-        db.aksi("DELETE FROM satuan WHERE no='"+ID+"'");
+        db.aksi("DELETE FROM satuan WHERE nama ='"+ID+"'");
         model2.setRowCount(0);
         Tbl_Daftar_Satuan.setModel(model2);
         getDataS();
@@ -759,8 +729,8 @@ public class Jenis extends javax.swing.JPanel {
 
     private void Btn_Kategori_HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Kategori_HapusActionPerformed
         int Row = Tbl_Daftar_Kategori.getSelectedRow();
-        String ID = (String) Tbl_Daftar_Kategori.getValueAt(Row, 0);
-        db.aksi("DELETE FROM kategori WHERE no='"+ID+"'");
+        String ID = (String) Tbl_Daftar_Kategori.getValueAt(Row, 1);
+        db.aksi("DELETE FROM kategori WHERE kode_unik='"+ID+"'");
         model.setRowCount(0);
         Tbl_Daftar_Kategori.setModel(model);
         getData();
@@ -786,7 +756,7 @@ public class Jenis extends javax.swing.JPanel {
     private void Btn_Status_HapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Status_HapusActionPerformed
         int Row = Tbl_Daftar_Status.getSelectedRow();
         String ID = (String) Tbl_Daftar_Status.getValueAt(Row, 0);
-        db.aksi("DELETE FROM status WHERE no='"+ID+"'");
+        db.aksi("DELETE FROM status WHERE nama ='"+ID+"'");
         model3.setRowCount(0);
         Tbl_Daftar_Status.setModel(model3);
         getDataSt();
@@ -798,8 +768,6 @@ public class Jenis extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Btn_Aksi_Cari_Nama_Satuan1;
-    private javax.swing.JButton Btn_Aksi_Cari_Nama_kategori1;
     private javax.swing.JButton Btn_Kategori_Cari;
     private rojerusan.RSMaterialButtonRectangle Btn_Kategori_Hapus;
     private rojerusan.RSMaterialButtonRectangle Btn_Kategori_Simpan;

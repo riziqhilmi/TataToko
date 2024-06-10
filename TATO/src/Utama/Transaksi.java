@@ -1446,7 +1446,13 @@ public class Transaksi extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-
+            String kembaliInt = txt_kembalian.getText();
+        String kembaliC = kembaliInt.replaceAll("[^\\d]", "");
+        int kembali = 0; 
+        if (kembaliInt.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Pastikan Uang Terpenuhi.");
+            return;
+        } else{
             String file = "/Report/nota.jasper";
 
             Class.forName(driver);
@@ -1464,7 +1470,7 @@ public class Transaksi extends javax.swing.JPanel {
 
             JasperPrint print = JasperFillManager.fillReport(getClass().getResourceAsStream(file), param, con);
             JasperViewer.viewReport(print, false);
-
+        }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | JRException e) {
             System.out.println(e);
         } catch (SQLException ex) {
@@ -1775,6 +1781,7 @@ public class Transaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
         txt_uang.setText("Rp. ");
         autoInN();
+        autoIn();
         TotalHarga();
 
     }//GEN-LAST:event_txt_uangMouseClicked

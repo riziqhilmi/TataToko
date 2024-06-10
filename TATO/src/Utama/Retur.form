@@ -147,14 +147,13 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="442" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel6" min="-2" pref="135" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="567" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jScrollPane1" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="Lb_Daftar_Retur_Dari_Tanggal" min="-2" max="-2" attributes="0"/>
@@ -163,26 +162,29 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="Field_Daftar_Retur_Distributor" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="Field_Daftar_Retur_Dari_Tanggal" min="-2" pref="200" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="Lb_Daftar_Retur_Sampai_Tanggal" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="Field_Daftar_Retur_Sampai_Tanggal" min="-2" pref="200" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Component id="Field_Daftar_Retur_Kata_Kunci" min="-2" pref="457" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="Field_Daftar_Retur_Kata_Kunci" min="-2" pref="457" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="Btn_Daftar_Retur_Cari" min="-2" max="-2" attributes="0"/>
                                       </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="Field_Daftar_Retur_Distributor" min="-2" pref="200" max="-2" attributes="0"/>
+                                              <Component id="Field_Dari_Tanggal" min="-2" pref="293" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="Lb_Daftar_Retur_Sampai_Tanggal" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Component id="Field_Sampai_Tanggal" min="-2" pref="291" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -195,14 +197,24 @@
                               <Component id="Field_Daftar_Retur_Kata_Kunci" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               <Component id="Btn_Daftar_Retur_Cari" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Field_Daftar_Retur_Dari_Tanggal" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="Lb_Daftar_Retur_Dari_Tanggal" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="Field_Daftar_Retur_Sampai_Tanggal" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="Lb_Daftar_Retur_Sampai_Tanggal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="Lb_Daftar_Retur_Dari_Tanggal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="Lb_Daftar_Retur_Sampai_Tanggal" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="Field_Sampai_Tanggal" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="Field_Dari_Tanggal" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Field_Daftar_Retur_Distributor" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="Lb_Daftar_Retur_Distributor" alignment="3" max="32767" attributes="0"/>
@@ -267,13 +279,6 @@
                     <Property name="text" type="java.lang.String" value="Dari Tanggal :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="Field_Daftar_Retur_Dari_Tanggal">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="16" style="0"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Daftar_Retur_Sampai_Tanggal">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -282,16 +287,6 @@
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="s/d"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="Field_Daftar_Retur_Sampai_Tanggal">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Segoe UI" size="16" style="0"/>
-                    </Property>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Field_Daftar_Retur_Sampai_TanggalActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="Lb_Daftar_Retur_Distributor">
                   <Properties>
@@ -328,6 +323,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Cari"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Btn_Daftar_Retur_CariActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
@@ -336,6 +334,20 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="Daftar Retur"/>
+                  </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="Field_Dari_Tanggal">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="18" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="Field_Sampai_Tanggal">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="18" style="1"/>
+                    </Property>
                   </Properties>
                 </Component>
               </SubComponents>
