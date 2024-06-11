@@ -456,7 +456,7 @@ private void execute(String Akses) {
     
     
     if(Akses.equals("Karyawan")){
-        addMenu(menuBeranda, menuKasir,  menuLayanan,  menuLaporan);
+        addMenu(menuBeranda, menuKasir,  menuLaporan);
     }else{
         addMenu(menuBeranda, menuMaster, menuKasir, menuLayanan, menuKaryawan, menuLaporan);
     }

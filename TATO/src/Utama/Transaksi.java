@@ -894,6 +894,11 @@ public class Transaksi extends javax.swing.JPanel {
         jLabel10.setText("ID Keranjang");
 
         txt_jumlah3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txt_jumlah3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_jumlah3MouseClicked(evt);
+            }
+        });
         txt_jumlah3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_jumlah3ActionPerformed(evt);
@@ -1773,6 +1778,8 @@ public class Transaksi extends javax.swing.JPanel {
                 return; // Keluar dari loop setelah menemukan baris yang sesuai
             }
         }
+        autoIn();
+        autoInN();
 
 
     }//GEN-LAST:event_Field_Cari_StokActionPerformed
@@ -1804,6 +1811,12 @@ public class Transaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_Field_Total_SemuaKeyReleased
+
+    private void txt_jumlah3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_jumlah3MouseClicked
+        // TODO add your handling code here:
+        autoIn();
+        autoInN();
+    }//GEN-LAST:event_txt_jumlah3MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

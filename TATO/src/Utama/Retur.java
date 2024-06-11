@@ -337,8 +337,6 @@ public class Retur extends javax.swing.JPanel {
         Field_Retur_Tambah_Nama_Toko = new javax.swing.JTextField();
         Field_Cari_Tambah_Retur = new javax.swing.JTextField();
         Btn_Cari_Tambah_Retur = new javax.swing.JButton();
-        Lb_Retur_Tambah_Total = new javax.swing.JLabel();
-        Field_Retur_Tambah_Total = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         Field_Retur_Tambah_Keterangan = new javax.swing.JTextArea();
         Lb_Retur_Tambah_Keterangan = new javax.swing.JLabel();
@@ -480,9 +478,9 @@ public class Retur extends javax.swing.JPanel {
                 .addGroup(pn_Daftar_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pn_Daftar_ReturLayout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addGroup(pn_Daftar_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Lb_Daftar_Retur_Dari_Tanggal)
-                            .addComponent(Lb_Daftar_Retur_Sampai_Tanggal))
+                        .addGroup(pn_Daftar_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Lb_Daftar_Retur_Sampai_Tanggal, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Lb_Daftar_Retur_Dari_Tanggal))
                         .addGap(35, 35, 35))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_Daftar_ReturLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
@@ -561,10 +559,6 @@ public class Retur extends javax.swing.JPanel {
                 Btn_Cari_Tambah_ReturActionPerformed(evt);
             }
         });
-
-        Lb_Retur_Tambah_Total.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        Lb_Retur_Tambah_Total.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        Lb_Retur_Tambah_Total.setText("Total Akhir :");
 
         Field_Retur_Tambah_Keterangan.setColumns(20);
         Field_Retur_Tambah_Keterangan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -664,10 +658,7 @@ public class Retur extends javax.swing.JPanel {
                                         .addComponent(Lb_Retur_Tambah_Keterangan)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(118, 118, 118)
-                                .addComponent(Lb_Retur_Tambah_Total)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Field_Retur_Tambah_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(433, 433, 433)))
                         .addGap(43, 43, 43))))
         );
         pn_Tambah_ReturLayout.setVerticalGroup(
@@ -706,16 +697,12 @@ public class Retur extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
-                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
-                            .addComponent(Lb_Retur_Tambah_Keterangan)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Btn_Tambah_Retur_Tambah_Baru, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Lb_Retur_Tambah_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Field_Retur_Tambah_Total, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(pn_Tambah_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pn_Tambah_ReturLayout.createSequentialGroup()
+                        .addComponent(Lb_Retur_Tambah_Keterangan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Btn_Tambah_Retur_Tambah_Baru, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(88, 88, 88))
         );
 
@@ -728,7 +715,7 @@ public class Retur extends javax.swing.JPanel {
             .addGroup(pn_ReturLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pn_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pn_Konten_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 1144, Short.MAX_VALUE)
+                    .addComponent(pn_Konten_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
                     .addGroup(pn_ReturLayout.createSequentialGroup()
                         .addGroup(pn_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Lb_Retur)
@@ -825,7 +812,6 @@ public class Retur extends javax.swing.JPanel {
     private javax.swing.JTextField Field_Retur_Tambah_Nama_Toko;
     private javax.swing.JTextField Field_Retur_Tambah_No_Transaksi;
     private com.toedter.calendar.JDateChooser Field_Retur_Tambah_Tanggal;
-    private javax.swing.JTextField Field_Retur_Tambah_Total;
     private com.toedter.calendar.JDateChooser Field_Sampai_Tanggal;
     private javax.swing.JLabel Lb_Daftar_Retur_Dari_Tanggal;
     private javax.swing.JLabel Lb_Daftar_Retur_Distributor;
@@ -840,7 +826,6 @@ public class Retur extends javax.swing.JPanel {
     private javax.swing.JLabel Lb_Retur_Tambah_No_Transaksi1;
     private javax.swing.JLabel Lb_Retur_Tambah_No_Transaksi2;
     private javax.swing.JLabel Lb_Retur_Tambah_Tanggal;
-    private javax.swing.JLabel Lb_Retur_Tambah_Total;
     private javax.swing.JTable Tbl_Daftar_Retur;
     private javax.swing.JTable Tbl_Tambah_Retur;
     private javax.swing.JLabel jLabel6;
