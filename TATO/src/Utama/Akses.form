@@ -171,7 +171,7 @@
                                       <Component id="Field_Akses_Nama_Lengkap2" pref="200" max="32767" attributes="0"/>
                                       <Component id="Field_Data_Karyawan_Jenis_Kelamin2" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="238" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="Lb_Akses_Tanggal_Mulai2" min="-2" max="-2" attributes="0"/>
                                       <Component id="Lb_Akses_Gaji2" min="-2" max="-2" attributes="0"/>
@@ -680,6 +680,9 @@
                               </Table>
                             </Property>
                             <Property name="rowHeight" type="int" value="35"/>
+                            <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="cc" green="0" red="0" type="rgb"/>
+                            </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Tbl_UserMouseClicked"/>

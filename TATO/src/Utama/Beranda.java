@@ -928,6 +928,7 @@ public class Beranda extends javax.swing.JPanel {
             }
         ));
         Tbl_Beranda_Transaksi.setRowHeight(40);
+        Tbl_Beranda_Transaksi.setSelectionBackground(new java.awt.Color(0, 0, 204));
         jScrollPane9.setViewportView(Tbl_Beranda_Transaksi);
 
         Lb_Tbl_Data_Transaksi.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -1008,6 +1009,7 @@ public class Beranda extends javax.swing.JPanel {
             }
         ));
         Tbl_Beranda_Karyawan.setRowHeight(40);
+        Tbl_Beranda_Karyawan.setSelectionBackground(new java.awt.Color(0, 0, 204));
         Tbl_Beranda_Karyawan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Tbl_Beranda_KaryawanMouseClicked(evt);
@@ -1092,7 +1094,7 @@ public class Beranda extends javax.swing.JPanel {
                         .addComponent(pn_Card_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(66, 66, 66)
                         .addComponent(pn_Card_Karyawan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.PREFERRED_SIZE, 1582, Short.MAX_VALUE))
+                    .addComponent(pn_Konten_Tbl_Beranda, javax.swing.GroupLayout.DEFAULT_SIZE, 1582, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
         pn_Konten_BerandaLayout.setVerticalGroup(

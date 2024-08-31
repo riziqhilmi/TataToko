@@ -624,6 +624,7 @@ public class Barang extends javax.swing.JPanel {
             }
         });
         Tbl_Barang_Detail_Barang.setRowHeight(30);
+        Tbl_Barang_Detail_Barang.setSelectionBackground(new java.awt.Color(0, 0, 204));
         Tbl_Detail.setViewportView(Tbl_Barang_Detail_Barang);
 
         Lb_Tbl_Detail.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -696,6 +697,7 @@ public class Barang extends javax.swing.JPanel {
             }
         });
         Tbl_Barang_Tambah.setRowHeight(30);
+        Tbl_Barang_Tambah.setSelectionBackground(new java.awt.Color(0, 0, 204));
         Scrl_Tambah_Barang.setViewportView(Tbl_Barang_Tambah);
 
         pn_Tambah_Barang.setPreferredSize(new java.awt.Dimension(1150, 683));
@@ -1641,6 +1643,7 @@ public class Barang extends javax.swing.JPanel {
             }
         });
         jTable3.setRowHeight(30);
+        jTable3.setSelectionBackground(new java.awt.Color(0, 0, 204));
         jScrollPane3.setViewportView(jTable3);
 
         Lb_Data_Barang_Update.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N

@@ -290,7 +290,7 @@ public class Distributor extends javax.swing.JPanel {
             }
         });
         Tbl_Daftar_Distributor.setRowHeight(35);
-        Tbl_Daftar_Distributor.setSelectionBackground(new java.awt.Color(3, 0, 126));
+        Tbl_Daftar_Distributor.setSelectionBackground(new java.awt.Color(0, 0, 204));
         jScrollPane1.setViewportView(Tbl_Daftar_Distributor);
 
         Lb_Daftar_Distributor.setBackground(new java.awt.Color(255, 255, 255));
@@ -763,6 +763,7 @@ public class Distributor extends javax.swing.JPanel {
             }
         });
         Tbl_Update_Distributor.setRowHeight(30);
+        Tbl_Update_Distributor.setSelectionBackground(new java.awt.Color(0, 0, 204));
         jScrollPane9.setViewportView(Tbl_Update_Distributor);
 
         Lb_Update_Bergabung_Distributor.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N

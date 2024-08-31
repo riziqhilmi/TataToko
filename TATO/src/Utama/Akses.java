@@ -361,7 +361,7 @@ public class Akses extends javax.swing.JPanel {
                             .addComponent(Field_Akses_No_Telepon2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(Field_Akses_Nama_Lengkap2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(Field_Data_Karyawan_Jenis_Kelamin2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pn_Update_Akses2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Lb_Akses_Tanggal_Mulai2)
                             .addComponent(Lb_Akses_Gaji2)
@@ -478,6 +478,7 @@ public class Akses extends javax.swing.JPanel {
             }
         ));
         Tbl_User.setRowHeight(35);
+        Tbl_User.setSelectionBackground(new java.awt.Color(0, 0, 204));
         Tbl_User.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Tbl_UserMouseClicked(evt);
@@ -545,7 +546,7 @@ public class Akses extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pn_Akses2, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+                .addComponent(pn_Akses2, javax.swing.GroupLayout.PREFERRED_SIZE, 830, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

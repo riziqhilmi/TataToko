@@ -67,6 +67,10 @@ WHERE tgl_transaksi BETWEEN $P{daritanggal} AND $P{sampaitanggal}]]>
 				</textElement>
 				<text><![CDATA[Jl. Moh. Yamin, Karang Anyar, Tegal Besar]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="104" height="76" uuid="e87cfccd-2125-405b-82f7-5a6741f0f52d"/>
+				<imageExpression><![CDATA["D:\\project\\elburung.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

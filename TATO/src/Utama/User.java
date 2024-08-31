@@ -242,6 +242,7 @@ public void getDataD() { // tampil data
             }
         });
         Tbl_Daftar_User.setRowHeight(30);
+        Tbl_Daftar_User.setSelectionBackground(new java.awt.Color(0, 0, 204));
         jScrollPane1.setViewportView(Tbl_Daftar_User);
         if (Tbl_Daftar_User.getColumnModel().getColumnCount() > 0) {
             Tbl_Daftar_User.getColumnModel().getColumn(1).setResizable(false);

@@ -392,6 +392,7 @@ public class Retur extends javax.swing.JPanel {
             }
         ));
         Tbl_Daftar_Retur.setRowHeight(40);
+        Tbl_Daftar_Retur.setSelectionBackground(new java.awt.Color(0, 0, 204));
         jScrollPane1.setViewportView(Tbl_Daftar_Retur);
 
         Lb_Daftar_Retur_Kata_Kunci.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -515,6 +516,7 @@ public class Retur extends javax.swing.JPanel {
             }
         ));
         Tbl_Tambah_Retur.setRowHeight(35);
+        Tbl_Tambah_Retur.setSelectionBackground(new java.awt.Color(0, 0, 204));
         jScrollPane2.setViewportView(Tbl_Tambah_Retur);
 
         Lb_Retur_Tambah.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -715,7 +717,7 @@ public class Retur extends javax.swing.JPanel {
             .addGroup(pn_ReturLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(pn_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pn_Konten_Retur, javax.swing.GroupLayout.DEFAULT_SIZE, 1144, Short.MAX_VALUE)
+                    .addComponent(pn_Konten_Retur, javax.swing.GroupLayout.PREFERRED_SIZE, 1144, Short.MAX_VALUE)
                     .addGroup(pn_ReturLayout.createSequentialGroup()
                         .addGroup(pn_ReturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Lb_Retur)
